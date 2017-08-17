@@ -1,0 +1,72 @@
+Arguments: 
+  /home/paul/.nvm/versions/node/v8.0.0/bin/node /usr/share/yarn/bin/yarn.js
+
+PATH: 
+  /home/paul/.nvm/versions/node/v8.0.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Windows/System32:/mnt/c/Windows:/mnt/c/Windows/System32/wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:/mnt/d/xampp/php:/mnt/c/ProgramData/ComposerSetup/bin:/mnt/d/Program Files/Git/cmd:/mnt/c/Users/alex6/AppData/Local/Microsoft/WindowsApps:/mnt/c/Program Files (x86)/Microsoft VS Code/bin:/mnt/c/Users/alex6/AppData/Roaming/nvm:/mnt/c/Users/alex6/AppData/Roaming/nvm/v8.1.0
+
+Yarn version: 
+  0.27.5
+
+Node version: 
+  8.0.0
+
+Platform: 
+  linux x64
+
+npm manifest: 
+  {
+    "name": "digit",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "engines": {
+      "node": "8.1.4",
+      "npm": "5.0.3"
+    },
+    "scripts": {
+      "server": "nodemon index.js"
+    },
+    "author": "Paul",
+    "license": "ISC",
+    "dependencies": {
+      "body-parser": "^1.17.2",
+      "concurrently": "^3.5.0",
+      "cookie-session": "^2.0.0-beta.2",
+      "express": "^4.15.3",
+      "localtunnel": "^1.8.3",
+      "lodash": "^4.17.4",
+      "mongoose": "^4.11.4",
+      "nodemon": "^1.11.0",
+      "passport": "^0.3.2",
+      "passport-google-oauth20": "^1.0.0",
+      "path-parser": "^2.0.2",
+      "redux-form": "^7.0.3",
+      "sendgrid": "^5.2.0",
+      "stripe": "^4.23.1"
+    },
+    "devDependencies": {
+      "babel-eslint": "7.2.3",
+      "eslint": "3.19.0",
+      "eslint-config-react-app": "^1.0.5",
+      "eslint-plugin-flowtype": "2.33.0",
+      "eslint-plugin-import": "2.2.0",
+      "eslint-plugin-jsx-a11y": "5.0.1",
+      "eslint-plugin-react": "7.0.1",
+      "eslint-watch": "^3.1.2"
+    
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  SyntaxError: /mnt/d/WorkSpace/digit/package.json: Unexpected end of JSON input
+      at JSON.parse (<anonymous>)
+      at /usr/share/yarn/lib/yarn-cli.js:747:57
+      at Generator.next (<anonymous>)
+      at step (/usr/share/yarn/lib/yarn-cli.js:91:30)
+      at /usr/share/yarn/lib/yarn-cli.js:102:13
+      at <anonymous>

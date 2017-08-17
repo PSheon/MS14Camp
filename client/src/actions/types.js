@@ -1,0 +1,1 @@
+export const SET_SECRET = 'set_secret';
