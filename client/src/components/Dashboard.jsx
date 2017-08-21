@@ -39,6 +39,9 @@ class Dashboard extends Component {
           subtitle="如果你看到這行文字代表身分已授權."
           />
 
+          
+
+
           {this.props.secretData && <CardText style={{ fontSize: '16px', color: 'green' }}>{this.props.secretData}</CardText>}
           {this.props.room && <CardText style={{ fontSize: '16px', color: 'green' }}>{this.props.room}</CardText>}
         </Card>
