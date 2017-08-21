@@ -14,9 +14,7 @@ const app = express();
 // Socket.io
 var server = http.createServer(app);
 var io = socketIO(server);
-io.on('connection', (socket) => {
-  console.log('user connected');
-});
+require('./services/socket/socket')(io);
 
 // Express middleware
 app.use(express.static('./static/'));

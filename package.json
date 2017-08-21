@@ -9,10 +9,9 @@
   },
   "scripts": {
     "server": "nodemon index.js",
-    "client": "npm run start --prefix client",
-    "dev": "concurrently \"yarn server\" \"yarn client\"",
-    "start": "nodemon --use-strict index.js",
-    "bundle": "webpack"
+    "bundle": "webpack",
+    "dev": "concurrently \"yarn server\" \"yarn bundle\"",
+    "start": "nodemon --use-strict index.js"
   },
   "author": "Paul",
   "license": "ISC",
@@ -30,11 +29,13 @@
     "react-dom": "^15.4.1",
     "react-redux": "^5.0.6",
     "react-router": "^3.0.0",
+    "react-simple-chatbot": "^0.2.4",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.7.2",
     "redux-form": "^7.0.3",
     "redux-thunk": "^2.2.0",
     "socket.io": "^2.0.3",
+    "styled-components": "^2.1.2",
     "validator": "^6.2.0"
   },
   "devDependencies": {

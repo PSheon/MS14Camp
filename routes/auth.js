@@ -18,21 +18,21 @@ function validateSignupForm(payload) {
 
   if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {
     isFormValid = false;
-    errors.email = 'Please provide a correct email address.';
+    errors.email = '請輸入正確的信箱.';
   }
 
   if (!payload || typeof payload.password !== 'string' || payload.password.trim().length < 5) {
     isFormValid = false;
-    errors.password = 'Password must have at least 6 characters.';
+    errors.password = '密碼長度需要至少6位.';
   }
 
   if (!payload || typeof payload.name !== 'string' || payload.name.trim().length === 0) {
     isFormValid = false;
-    errors.name = 'Please provide your name.';
+    errors.name = '請輸入名字.';
   }
 
   if (!isFormValid) {
-    message = 'Check the form for errors.';
+    message = '請修正錯誤.';
   }
 
   return {
@@ -56,16 +56,16 @@ function validateLoginForm(payload) {
 
   if (!payload || typeof payload.email !== 'string' || payload.email.trim().length === 0) {
     isFormValid = false;
-    errors.email = 'Please provide your email address.';
+    errors.email = '請輸入正確的信箱.';
   }
 
   if (!payload || typeof payload.password !== 'string' || payload.password.trim().length === 0) {
     isFormValid = false;
-    errors.password = 'Please provide your password.';
+    errors.password = '請輸入密碼.';
   }
 
   if (!isFormValid) {
-    message = 'Check the form for errors.';
+    message = '請修正錯誤.';
   }
 
   return {
@@ -93,22 +93,22 @@ router.post('/signup', (req, res, next) => {
         // the 409 HTTP status code is for conflict error
         return res.status(409).json({
           success: false,
-          message: 'Check the form for errors.',
+          message: '請修正錯誤.',
           errors: {
-            email: 'This email is already taken.'
+            email: '這個信箱已經被註冊過了.'
           }
         });
       }
 
       return res.status(400).json({
         success: false,
-        message: 'Could not process the form.'
+        message: '如果看到我，請告訴 Paul (errorcode: me400).'
       });
     }
 
     return res.status(200).json({
       success: true,
-      message: 'You have successfully signed up! Now you should be able to log in.'
+      message: '創建成功！可以登入囉~'
     });
   })(req, res, next);
 });
@@ -135,14 +135,14 @@ router.post('/login', (req, res, next) => {
 
       return res.status(400).json({
         success: false,
-        message: 'Could not process the form.'
+        message: '如果看到我，請告訴 Paul (errorcode: ll400).'
       });
     }
 
 
     return res.json({
       success: true,
-      message: 'You have successfully logged in!',
+      message: '成功登入！',
       token,
       user: userData
     });

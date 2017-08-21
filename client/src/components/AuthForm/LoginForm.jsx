@@ -14,14 +14,14 @@ const LoginForm = ({
 }) => (
     <Card className="container">
       <form action="/" onSubmit={onSubmit}>
-        <h2 className="card-heading">Login</h2>
+        <h2 className="card-heading">登入</h2>
 
         {successMessage && <p className="success-message">{successMessage}</p>}
         {errors.summary && <p className="error-message">{errors.summary}</p>}
 
         <div className="field-line">
           <TextField
-            floatingLabelText="Email"
+            floatingLabelText="信箱"
             name="email"
             errorText={errors.email}
             onChange={onChange}
@@ -31,7 +31,7 @@ const LoginForm = ({
 
         <div className="field-line">
           <TextField
-            floatingLabelText="Password"
+            floatingLabelText="密碼"
             type="password"
             name="password"
             onChange={onChange}
@@ -41,10 +41,10 @@ const LoginForm = ({
         </div>
 
         <div className="button-line">
-          <RaisedButton type="submit" label="Log in" primary />
+          <RaisedButton type="submit" label="登入" primary />
         </div>
 
-        <CardText>Don't have an account? <Link to={'/signup'}>Create one</Link>.</CardText>
+        <CardText>還沒有帳號？ <Link to={'/signup'}>創建一個</Link>.</CardText>
       </form>
     </Card>
   );

@@ -13,13 +13,13 @@ const SignUpForm = ({
 }) => (
     <Card className="container">
       <form action="/" onSubmit={onSubmit}>
-        <h2 className="card-heading">Sign Up</h2>
+        <h2 className="card-heading">創建</h2>
 
         {errors.summary && <p className="error-message">{errors.summary}</p>}
 
         <div className="field-line">
           <TextField
-            floatingLabelText="Name"
+            floatingLabelText="名字"
             name="name"
             errorText={errors.name}
             onChange={onChange}
@@ -29,7 +29,7 @@ const SignUpForm = ({
 
         <div className="field-line">
           <TextField
-            floatingLabelText="Email"
+            floatingLabelText="信箱"
             name="email"
             errorText={errors.email}
             onChange={onChange}
@@ -39,7 +39,7 @@ const SignUpForm = ({
 
         <div className="field-line">
           <TextField
-            floatingLabelText="Password"
+            floatingLabelText="密碼"
             type="password"
             name="password"
             onChange={onChange}
@@ -49,10 +49,10 @@ const SignUpForm = ({
         </div>
 
         <div className="button-line">
-          <RaisedButton type="submit" label="Create New Account" primary />
+          <RaisedButton type="submit" label="創建帳號" primary />
         </div>
 
-        <CardText>Already have an account? <Link to={'/login'}>Log in</Link></CardText>
+        <CardText>已經有帳號了？ <Link to={'/login'}>登入</Link></CardText>
       </form>
     </Card>
   );

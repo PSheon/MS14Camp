@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+<head lang="zh-TW">
+
+  <!-- META -->
   <meta charset="utf-8">
-  <title>React Chat App</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="pauljiang61020@gmail.com">
+
+  <!-- TITLE -->
+  <title>微軟 14 領袖營</title>
+
+  <!-- LINK -->
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
   <div id="react-app"></div>
 
-  <!-- <script src="/socket.io/socket.io.js"></script> -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var $socket = io();
+  </script>
   <script src="/js/bundle.js"></script>
 </body>
 
