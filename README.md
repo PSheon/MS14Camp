@@ -21,8 +21,6 @@ socket events 放在 /services/socket/socket.js
 
 ```
 npm install  or  yarn
-
-npm install -g concurrently
 ```
 
 2. 執行
@@ -32,3 +30,13 @@ npm run start  or  yarn start
 ```
 
 3. `http://localhost:5000`
+
+
+4. 開發
+
+```bash
+npm install -g concurrently
+npm install --dev  or yarn --dev
+
+npm run dev  or yarn dev
+```
