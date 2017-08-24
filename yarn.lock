@@ -2627,9 +2627,9 @@ react-router@^3.0.0:
     prop-types "^15.5.6"
     warning "^3.0.0"
 
-react-simple-chatbot@^0.2.4:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/react-simple-chatbot/-/react-simple-chatbot-0.2.4.tgz#5863928abd2e9d8da42397289be0a0c5ebc89608"
+react-simple-chatbot@^0.2.5:
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/react-simple-chatbot/-/react-simple-chatbot-0.2.5.tgz#b498bcbec654e14d1c4d15bad441d5bb20375156"
   dependencies:
     circular-json "^0.3.1"
     lodash "^4.17.4"

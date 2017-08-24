@@ -12,8 +12,8 @@ require('./models').connect(keys.mongoURI);
 const app = express();
 
 // Socket.io
-var server = http.createServer(app);
-var io = socketIO(server);
+const server = http.createServer(app);
+const io = socketIO(server);
 require('./services/socket/socket')(io);
 
 // Express middleware

@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import SignUpForm from '../components/AuthForm/SignUpForm.jsx';
 
 
-class SignUpPage extends React.Component {
+class SignUpPage extends Component {
 
   /**
    * Class constructor.

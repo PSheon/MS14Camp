@@ -1,41 +1,57 @@
+/*
+ * 控制所有 NPC 的 Redux 元件
+ */
+
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import { ThemeProvider } from 'styled-components';
-import ChatBot from 'react-simple-chatbot';
 
-
-// Chat bot theme
-const theme = {
-  background: '#f5f8fb',
-  fontFamily: 'Helvetica Neue',
-  headerBgColor: '#6e48aa',
-  headerFontColor: '#fff',
-  botBubbleColor: '#6E48AA',
-  botFontColor: '#fff',
-  userBubbleColor: '#fff',
-  userFontColor: '#4a4a4a',
-};
-
-const steps = [
-  {
-    id: '1',
-    message: 'You can add custom components',
-  },
-];
+import ChatBotElder from './NPC/ChatBotElder.jsx';
+import ChatBotIsbs from './NPC/ChatBotIsbs.jsx';
+import ChatBotWard from './NPC/ChatBotWard.jsx';
+import ChatBotArch from './NPC/ChatBotArch.jsx';
+import ChatBotCortana from './NPC/ChatBotCortana.jsx';
+import ChatBotMystery from './NPC/ChatBotMystery.jsx';
+import ChatBotWendez from './NPC/ChatBotWendez.jsx';
+import ChatBotSeverus from './NPC/ChatBotSeverus.jsx';
+import ChatBotOfeisi from './NPC/ChatBotOfeisi.jsx';
 
 class ChatBotIcon extends Component {
+  renderChatBot() {
+    switch (this.props.npcName) {
+      case 'elder':
+        return <ChatBotElder />;
+      case 'isbs':
+        return <ChatBotIsbs />;
+      case 'ward':
+        return <ChatBotWard />;
+      case 'arch':
+        return <ChatBotArch />;
+      case 'cortana':
+        return <ChatBotCortana />;
+      case 'mystery':
+        return <ChatBotMystery />;
+      case 'wendez':
+        return <ChatBotWendez />;
+      case 'severus':
+        return <ChatBotSeverus />;
+      case 'ofeisi':
+        return <ChatBotOfeisi />;
+      default:
+        return <ChatBotElder />
+    }
+  }
+
   render() {
     return (
-      <ThemeProvider theme={theme}>
-        <ChatBot
-          headerTitle="微軟 NPC"
-          placeholder="說點什麼..."
-          floating={true}
-          steps={steps} 
-        />
-      </ThemeProvider>
-    )
-  }
+      <div>
+        {this.renderChatBot()}
+      </div>
+    );
+  };
+};
+
+function mapStateToProps({ npcName }) {
+  return { npcName };
 }
 
-export default ChatBotIcon;
+export default connect(mapStateToProps)(ChatBotIcon);

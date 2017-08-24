@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
@@ -6,7 +6,7 @@ import * as actions from '../actions';
 import Dashboard from '../components/Dashboard.jsx';
 
 
-class DashboardPage extends React.Component {
+class DashboardPage extends Component {
 
   /**
    * Class constructor.
@@ -39,6 +39,8 @@ class DashboardPage extends React.Component {
     // xhr.send();
     this.props.setSecret();
     this.props.getRoom();
+    this.props.setTeamProcess();
+    
   }
 
   /**
