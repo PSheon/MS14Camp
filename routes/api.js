@@ -3,7 +3,7 @@ const path = require('path');
 const csv = require('fast-csv');
 const fs = require('fs');
 const _ = require('lodash');
-const Team = require('../models/team');
+const Team = require('mongoose').model('Team');
 
 const router = new express.Router();
 
@@ -27,23 +27,6 @@ router.post('/teamprocess', (req, res) => {
     yellowProcess: 25
   });
 });
-
-
-router.post('/user', (req, res) => {
-  let csvStream = fs.createReadStream(path.resolve('./static/csv', 'internList.csv'));
-  var isFound = false;
-  csv.fromStream(csvStream, { headers: ['Id', 'name', 'email', 'pwd', 'isCap'] })
-    .on("data", (data) => {
-      if (data.name === req.body.name && !isFound) {
-        res.status(200).json(data);
-        isFound = !isFound;
-      }
-    }
-    ).on("end", () => {
-      if (!isFound) res.json({ err: 'user not found!' });
-    });
-});
-
 
 //useless
 router.get('/getmission/:id', (req, res) => {

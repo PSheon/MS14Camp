@@ -1,9 +1,14 @@
-import { GET_USER } from '../actions/types';
+import { SET_USER } from '../actions/types';
 
-export default function (state = null, action) {
+const initialState = {
+    name: '傻眼貓咪',
+    email: 'sayan@maomii.com'
+}
+
+export default function (state = initialState , action) {
     switch (action.type) {
-        case GET_USER:
-            return action.payload || '';
+        case SET_USER:
+            return action.payload;
         default:
             return state;
     }

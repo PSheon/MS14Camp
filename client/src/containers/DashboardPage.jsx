@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import * as actions from '../actions';
 
+import Auth from '../modules/Auth';
+import * as actions from '../actions';
 import Dashboard from '../components/Dashboard.jsx';
 
 
@@ -40,8 +41,7 @@ class DashboardPage extends Component {
     this.props.setSecret();
     this.props.getRoom();
     this.props.setTeamProcess();
-    this.props.getUser("謝奇君", 'password');
-    
+    this.props.setUser({ name: Auth.getUserNameFromCookie(), email: Auth.getUserEmailFromCookie() });
   }
 
   /**

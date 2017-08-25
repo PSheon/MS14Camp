@@ -11,4 +11,5 @@ module.exports.connect = (uri) => {
   });
 
   require('./User');
+  require('./Team');
 }

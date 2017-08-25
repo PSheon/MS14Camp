@@ -1,5 +1,29 @@
 class Auth {
 
+  static setUserNameToCookie(name) {
+    localStorage.setItem('ms_user_name', name);
+  }
+
+  static getUserNameFromCookie() {
+    return localStorage.getItem('ms_user_name')
+  }
+
+  static removeUserNameFromCookie() {
+    localStorage.removeItem('ms_user_name');
+  }
+
+  static setUserEmailToCookie(email) {
+    localStorage.setItem('ms_user_email', email);
+  }
+
+  static getUserEmailFromCookie() {
+    return localStorage.getItem('ms_user_email')
+  }
+
+  static removeUserEmailFromCookie() {
+    localStorage.removeItem('ms_user_email');
+  }
+
   /**
    * Authenticate a user. Save a token string in Local Storage
    *

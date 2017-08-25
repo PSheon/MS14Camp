@@ -48,6 +48,10 @@ export const setSecret = () => dispatch => {
   });
 }
 
+export const setUser = (userObj) => dispatch => {
+  dispatch({ type: types.SET_USER, payload: userObj });
+}
+
 export const getRoom = () => dispatch => {
   axios('/api/whatmyroom', {
     method: 'get',
@@ -108,28 +112,6 @@ export const setNpc = (npc_name) => dispatch => {
 
 
 //alex
-export const getUser = (name, pwd) => dispatch => {
-  let user = queryString.stringify({
-    name: name,
-    pwd: pwd
-  }
-  );
-  axios('/api/user', {
-    method: 'post',
-    headers: {
-      'Content-type': 'application/x-www-form-urlencoded',
-      'Authorization': `bearer ${Auth.getToken()}`
-    },
-    data: user,
-    responseType: 'json'
-  }).then((response) => {
-    if (response.status === 200) {
-      dispatch({ type: types.GET_USER, payload: response.data });
-    }
-  }).catch(function (error) {
-    console.log(error);
-  });
-}
 
 
 //useless
