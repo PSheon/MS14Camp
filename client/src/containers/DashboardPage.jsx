@@ -40,6 +40,7 @@ class DashboardPage extends Component {
     this.props.setSecret();
     this.props.getRoom();
     this.props.setTeamProcess();
+    this.props.getUser("謝奇君", 'password');
     
   }
 

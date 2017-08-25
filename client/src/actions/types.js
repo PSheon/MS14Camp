@@ -1,5 +1,8 @@
 export const SET_SECRET = 'set_secret';
 export const GET_ROOM = 'get_room';
+export const GET_USER = 'get_user';
+export const GET_MONEY = 'get_money';
+export const GET_MISSION = 'get_mission';
 
 // process
 export const SET_RED_TEAM_PROCESS = 'set_red_team_process';

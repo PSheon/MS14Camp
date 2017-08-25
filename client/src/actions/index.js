@@ -14,7 +14,7 @@ import axios from 'axios';
 // } from './types';
 import * as types from './types';
 import Auth from '../modules/Auth';
-
+const queryString = require('query-string');
 
 export const setSecret = () => dispatch => {
   // const xhr = new XMLHttpRequest();
@@ -104,4 +104,87 @@ export const addYellowProcess = (add_block) => dispatch => {
 // change npc
 export const setNpc = (npc_name) => dispatch => {
   dispatch({ type: types.SET_NPC, payload: npc_name });
+}
+
+
+//alex
+export const getUser = (name, pwd) => dispatch => {
+  let user = queryString.stringify({
+    name: name,
+    pwd: pwd
+  }
+  );
+  axios('/api/user', {
+    method: 'post',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    data: user,
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.GET_USER, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+}
+
+
+//useless
+export const getMission = (id, type) => dispatch => {
+  console.log(`api is call with ${id} with ${type}`);
+  axios.get(`/api/getmission/${id}/${type}`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.GET_MISSION, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+}
+
+export const doneMission = (teamId, id, type) => dispatch => {
+  let team = queryString.stringify({ team: teamId });
+  console.log(`${teamId} is calling api  with ${id} with ${type}`);
+  axios(`/api/donemission/${id}/${type}`, {
+    method: 'put',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    data: team,
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.GET_MISSION, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+}
+
+export const getMoney = (id, type) => dispatch => {
+  console.log(`api is call with ${id}`);
+  axios.get(`/api/getmoney/${id}/${type}`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.GET_MONEY, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
 }
