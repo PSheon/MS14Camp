@@ -11,8 +11,10 @@ import routes from './routes.js';
 
 import reducers from './reducers';
 
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
-
+//const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+//foe dev redux watcher
+const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const store = createStoreWithMiddleware(reducers, window.devToolsExtension ? window.devToolsExtension() : f => f);
 // remove tap delay, essential for MaterialUI to work properly
 injectTapEventPlugin();
 

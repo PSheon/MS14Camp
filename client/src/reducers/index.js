@@ -7,6 +7,9 @@ import greenMissionReducer from './missions/greenMissionReducer';
 import yellowMissionReducer from './missions/yellowMissionReducer';
 import npcReducer from './missions/npcReducer';
 import roomReducer from './roomReducer';
+import userReducer from './userReducer';
+import moneyReducer from './moneyReducer';
+import missionReducer from './missionReducer';
 
 export default combineReducers({
   redMission: redMissionReducer,
@@ -17,4 +20,7 @@ export default combineReducers({
   secretData: secretDataReducer,
   room: roomReducer,
   form: reduxForm,
+  money: moneyReducer,
+  user: userReducer,
+  mission: missionReducer
 });

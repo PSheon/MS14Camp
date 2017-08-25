@@ -16,7 +16,7 @@ module.exports = {
         include: path.join(__dirname, '/client/src'),
         loader: 'babel',
         query: {
-          presets: ["react", "es2015"]
+          presets: ["react", "es2015","babel-preset-stage-1"]
         }
       }
     ],
