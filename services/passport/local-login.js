@@ -3,7 +3,6 @@ const User = require('mongoose').model('User');
 const PassportLocalStrategy = require('passport-local').Strategy;
 const keys = require('../../config/keys');
 
-
 /**
  * Return the Passport Local Strategy object.
  */
@@ -23,7 +22,7 @@ module.exports = new PassportLocalStrategy({
     if (err) { return done(err); }
 
     if (!user) {
-      const error = new Error('Incorrect email or password');
+      const error = new Error('信箱或密碼打錯囉');
       error.name = 'IncorrectCredentialsError';
 
       return done(error);
@@ -34,7 +33,7 @@ module.exports = new PassportLocalStrategy({
       if (err) { return done(err); }
 
       if (!isMatch) {
-        const error = new Error('Incorrect email or password');
+        const error = new Error('信箱或密碼打錯囉');
         error.name = 'IncorrectCredentialsError';
 
         return done(error);

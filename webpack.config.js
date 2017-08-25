@@ -10,14 +10,16 @@ module.exports = {
   },
   module: {
 
-    loaders: [{
-      test: /\.jsx?$/,
-      include: path.join(__dirname, '/client/src'),
-      loader: 'babel',
-      query: {
-        presets: ["react", "es2015"]
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        include: path.join(__dirname, '/client/src'),
+        loader: 'babel',
+        query: {
+          presets: ["react", "es2015"]
+        }
       }
-    }],
+    ],
   },
 
   watch: true

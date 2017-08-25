@@ -1,4 +1,6 @@
-// 大長老 問候 TODO
+// TODO
+
+// 大長老 問候
 export const elder_greet = () => {
   let greet = ['你好啊', '歡迎回來', '有事情嗎？'];
   return greet[Math.floor((Math.random() * greet.length))];

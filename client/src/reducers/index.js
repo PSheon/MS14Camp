@@ -16,5 +16,5 @@ export default combineReducers({
   npcName: npcReducer,
   secretData: secretDataReducer,
   room: roomReducer,
-  form: reduxForm
+  form: reduxForm,
 });

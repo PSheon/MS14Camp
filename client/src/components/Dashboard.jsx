@@ -10,7 +10,6 @@ import RedMissionCard from './Mission/RedMissionCard.jsx';
 import BlueMissionCard from './Mission/BlueMissionCard.jsx';
 import YellowMissionCard from './Mission/YellowMissionCard.jsx';
 import GreenMissionCard from './Mission/GreenMissionCard.jsx';
-import UrgentMissionCard from './Mission/UrgentMissionCard.jsx';
 import ChatBotIcon from './ChatBot/ChatBotIcon.jsx';
 
 /*
@@ -107,8 +106,6 @@ class Dashboard extends Component {
             primary={true}
             onClick={this.handleClickOfeisi}
           />
-
-          <UrgentMissionCard />
           
           <RedMissionCard />
           <BlueMissionCard />
