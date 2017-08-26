@@ -28,26 +28,14 @@ router.post('/teamprocess', (req, res) => {
   });
 });
 
-//useless
-router.get('/getmission/:id', (req, res) => {
-  let csvStream = fs.createReadStream(path.resolve('./static/csv', 'missionList.csv'));
-  var isFound = false;
-  let reqId = req.params.id;
-  let reqType = req.params.type;
-
-  csv.fromStream(csvStream, { headers: ['mId', 'title', 'fromUs', 'ourDetail', 'fromBoss', 'bossDetail', 'bossDetail2', 'getItem', 'lostItem', 'success', 'failed', 'paid'] })
-    .on("data", (data) => {
-      if (data.mId === reqId && !isFound) {
-        res.status(200).json(_.omit(data, ['bossDetail2', 'getItem', 'lostItem', 'success', 'failed', 'paid']));
-        isFound = !isFound;
-      }
-    }
-    ).on("end", () => {
-      if (!isFound) res.json({ err: 'mission not found!' });
-    });
-
+//mission
+router.post('/querymission',(req,res)=>{
+  let teamId=req.body.team;
+  console.log(teamId);
+  Team.findOne({team:teamId},(err,team)=>{
+    res.status(200).json(team);
+  })
 });
-
 
 router.put('/donemission/:id/:type', (req, res) => {
   let csvStream = fs.createReadStream(path.resolve('./static/csv', 'missionList.csv'));
@@ -63,8 +51,10 @@ router.put('/donemission/:id/:type', (req, res) => {
       'mId', 'title', 'fromUs', 'ourDetail', 'fromBoss', 'bossDetail', 'bossDetail2', 'getItem', 'lostItem', 'success', 'failed', 'paid'
     ]
   }).on("data", (data) => {
+    
     if (data.mId === reqId && !isFound) {
-      Team.findOne({ team: 't01' }, (err, team) => {
+      console.log(data);
+      Team.findOne({ team:teamId}, (err, team) => {
         if (err) throw err;
         let temp = team.missions;
         if (team.team === teamId) {
@@ -78,7 +68,11 @@ router.put('/donemission/:id/:type', (req, res) => {
 
             if (existed === -1) {
               console.log('pushing.....');
-              temp.push({ mId: data.mId, isSuccess: true });
+              temp.push({ 
+                mId: data.mId, 
+                data: _.omit(data, ['mId']), 
+                isSuccess: true 
+              });
             } else {
               console.log('editing.....');
               temp[existed].isSuccess = true;
@@ -96,7 +90,11 @@ router.put('/donemission/:id/:type', (req, res) => {
             existed = _.findIndex(temp, { 'mId': data.mId });
 
             if (existed === -1) {
-              temp.push({ mId: data.mId, isSuccess: false });
+              temp.push({
+                 mId: data.mId,
+                 data:_.omit(data,['mId']),
+                 isSuccess: false
+              });
             } else {
               temp[existed].isSuccess = false;
             }
@@ -119,8 +117,8 @@ router.put('/donemission/:id/:type', (req, res) => {
       if (!isFound) res.json({ err: 'mission not found!' });
     });
 });
-//query mission from db
 
+//
 router.get('/god/init/:id', (req, res) => {
   let reqId = req.params.id;//teamId
   let reqLine = req.params.line;//Line 

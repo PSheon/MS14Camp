@@ -3,6 +3,7 @@ import HomePage from './components/HomePage.jsx';
 import DashboardPage from './containers/DashboardPage.jsx';
 import LoginPage from './containers/LoginPage.jsx';
 import SignUpPage from './containers/SignUpPage.jsx';
+import NpcPage from './containers/NpcPage.jsx';
 import Auth from './modules/Auth';
 
 
@@ -31,7 +32,6 @@ const routes = {
       path: '/signup',
       component: SignUpPage
     },
-
     {
       path: '/logout',
       onEnter: (nextState, replace) => {
@@ -42,7 +42,11 @@ const routes = {
         // change the current URL to /
         replace('/');
       }
-    }
+    },
+    {
+      path: '/npc',
+      component: NpcPage
+    },
 
   ]
 };

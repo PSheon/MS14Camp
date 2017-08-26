@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link, IndexLink } from 'react-router';
 import Auth from '../modules/Auth';
+import NavBar from './navbar';
 
 
 const Base = ({ children }) => (
@@ -12,6 +13,7 @@ const Base = ({ children }) => (
 
       {Auth.isUserAuthenticated() ? (
         <div className="top-bar-right">
+          <Link to="/Npc">任務頁</Link>
           <Link to="/logout">登出</Link>
         </div>
       ) : (
