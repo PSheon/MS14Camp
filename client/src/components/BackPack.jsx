@@ -28,11 +28,10 @@ class BackPack extends Component {
 
    
     handleScan = (data) => {
-        let msg = data.split(',');
         this.setState({
             result: data,
         })
-        this.props.doneMission('t01', msg[0], msg[1]);
+        this.props.doMoney('t01',data,'add');
     }
     handleError = (err) => {
         console.error(err)

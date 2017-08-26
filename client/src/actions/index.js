@@ -142,18 +142,20 @@ export const doneMission = (teamId, id, type) => dispatch => {
   });
 }
 
-export const getMoney = (id, type) => dispatch => {
-  console.log(`api is call with ${id}`);
-  axios.get(`/api/getmoney/${id}/${type}`, {
-    method: 'get',
+export const doMoney = (teamId, id, type) => dispatch => {
+  let mId= queryString.stringify({mId:id});
+  console.log(`${id}'s money ${mId} is ${type}ed by api `);
+  axios(`/api/money/${teamId}/${type}`, {
+    method: 'put',
     headers: {
       'Content-type': 'application/x-www-form-urlencoded',
       'Authorization': `bearer ${Auth.getToken()}`
     },
+    data: mId,
     responseType: 'json'
   }).then((response) => {
     if (response.status === 200) {
-      dispatch({ type: types.GET_MONEY, payload: response.data });
+      dispatch({ type: types.DO_MONEY, payload: response.data });
     }
   }).catch(function (error) {
     console.log(error);

@@ -106,15 +106,16 @@ router.put('/money/:id/:type', (req, res) => {
   let teamId = req.params.id;
   let reqType = req.params.type;
   let mId = req.body.mId;
-
+  console.log(mId);
       Money.findOne({ mSerial: mId }, (err,money) => {
         if (err) throw err;
-        console.log(money);
         if(money){
           let moneyTemp=0;
           Team.findOne({ team: teamId }, (err, team) => {
             if (err) throw err;
+            console.log(team);
             if (reqType === 'add'&&!money.isExpired) {
+              console.log(team.money);
               moneyTemp = team.money + money.amount;
             }else if(reqType === 'minus' && !money.isExpired){
               moneyTemp = team.money - money.amount;
@@ -126,7 +127,7 @@ router.put('/money/:id/:type', (req, res) => {
               if (err) throw err;
               Team.findOne({ team: teamId }, (err, team) => {
                 if (err) throw err;
-                Money.findOneAndUpdate({ mSerial: mId }, { isExpired: true }, (err, money) => {
+                Money.findOneAndUpdate({ mSerial: mId }, { isExpired: true }, (err, returnMoney) => {
                   if (err) throw err;
                 });
                 res.status(200).json(team);

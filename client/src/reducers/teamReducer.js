@@ -1,4 +1,4 @@
-import { GET_INFO,DONE_MISSION } from '../actions/types';
+import { GET_INFO,DONE_MISSION,DO_MONEY } from '../actions/types';
 
 export default function (state = null, action) {
     switch (action.type) {
@@ -6,6 +6,8 @@ export default function (state = null, action) {
             return action.payload||'';
         case DONE_MISSION:
             return { ...state.mission, ...action.payload };
+        case DO_MONEY:
+            return { ...state.money, ...action.payload};
         default:
             return state;
     }

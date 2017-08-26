@@ -58337,7 +58337,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.getMoney = exports.doneMission = exports.query = exports.setNpc = exports.addYellowProgress = exports.addGreenProgress = exports.addBlueProgress = exports.addRedProgress = exports.setTeamProgress = exports.getRoom = exports.setUser = exports.setSecret = undefined;
+	exports.doMoney = exports.doneMission = exports.query = exports.setNpc = exports.addYellowProgress = exports.addGreenProgress = exports.addBlueProgress = exports.addRedProgress = exports.setTeamProgress = exports.getRoom = exports.setUser = exports.setSecret = undefined;
 
 	var _axios = __webpack_require__(604);
 
@@ -58516,19 +58516,21 @@
 	  };
 	};
 
-	var getMoney = exports.getMoney = function getMoney(id, type) {
+	var doMoney = exports.doMoney = function doMoney(teamId, id, type) {
 	  return function (dispatch) {
-	    console.log('api is call with ' + id);
-	    _axios2.default.get('/api/getmoney/' + id + '/' + type, {
-	      method: 'get',
+	    var mId = queryString.stringify({ mId: id });
+	    console.log(id + '\'s money ' + mId + ' is ' + type + 'ed by api ');
+	    (0, _axios2.default)('/api/money/' + teamId + '/' + type, {
+	      method: 'put',
 	      headers: {
 	        'Content-type': 'application/x-www-form-urlencoded',
 	        'Authorization': 'bearer ' + _Auth2.default.getToken()
 	      },
+	      data: mId,
 	      responseType: 'json'
 	    }).then(function (response) {
 	      if (response.status === 200) {
-	        dispatch({ type: types.GET_MONEY, payload: response.data });
+	        dispatch({ type: types.DO_MONEY, payload: response.data });
 	      }
 	    }).catch(function (error) {
 	      console.log(error);
@@ -58550,6 +58552,7 @@
 	var GET_MONEY = exports.GET_MONEY = 'get_money';
 	var GET_INFO = exports.GET_INFO = 'get_info';
 	var DONE_MISSION = exports.DONE_MISSION = 'done_mission';
+	var DO_MONEY = exports.DO_MONEY = 'do_money';
 
 	// progress
 	var SET_RED_TEAM_PROGRESS = exports.SET_RED_TEAM_PROGRESS = 'set_red_team_progress';
@@ -91228,11 +91231,10 @@
 	        var _this = _possibleConstructorReturn(this, (BackPack.__proto__ || Object.getPrototypeOf(BackPack)).call(this, props));
 
 	        _this.handleScan = function (data) {
-	            var msg = data.split(',');
 	            _this.setState({
 	                result: data
 	            });
-	            _this.props.doneMission('t01', msg[0], msg[1]);
+	            _this.props.doMoney('t01', data, 'add');
 	        };
 
 	        _this.handleError = function (err) {
@@ -91345,6 +91347,8 @@
 	            return action.payload || '';
 	        case _types.DONE_MISSION:
 	            return _extends({}, state.mission, action.payload);
+	        case _types.DO_MONEY:
+	            return _extends({}, state.money, action.payload);
 	        default:
 	            return state;
 	    }
