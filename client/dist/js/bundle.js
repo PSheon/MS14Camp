@@ -37703,6 +37703,22 @@
 
 	var _locationOn2 = _interopRequireDefault(_locationOn);
 
+	var _home = __webpack_require__(1027);
+
+	var _home2 = _interopRequireDefault(_home);
+
+	var _settings = __webpack_require__(1028);
+
+	var _settings2 = _interopRequireDefault(_settings);
+
+	var _viewHeadline = __webpack_require__(1029);
+
+	var _viewHeadline2 = _interopRequireDefault(_viewHeadline);
+
+	var _shoppingBasket = __webpack_require__(1030);
+
+	var _shoppingBasket2 = _interopRequireDefault(_shoppingBasket);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37712,6 +37728,10 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var nearbyIcon = _react2.default.createElement(_locationOn2.default, null);
+	var home = _react2.default.createElement(_home2.default, null);
+	var setting = _react2.default.createElement(_settings2.default, null);
+	var headline = _react2.default.createElement(_viewHeadline2.default, null);
+	var basket = _react2.default.createElement(_shoppingBasket2.default, null);
 
 	var Base = function (_Component) {
 	  _inherits(Base, _Component);
@@ -37734,8 +37754,6 @@
 	  _createClass(Base, [{
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
-
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -37746,33 +37764,33 @@
 	          _react2.default.createElement(
 	            _BottomNavigation.BottomNavigation,
 	            { selectedIndex: this.state.selectedIndex },
-	            _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
-	              label: '\u8A08\u5206\u677F',
-	              icon: nearbyIcon,
-	              onClick: function onClick() {
-	                return _this2.select(0);
-	              }
-	            }),
-	            _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
-	              label: '\u4EFB\u52D9',
-	              icon: nearbyIcon,
-	              onClick: function onClick() {
-	                return _this2.select(1);
-	              }
-	            }),
-	            _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
-	              label: '\u80CC\u5305',
-	              icon: nearbyIcon,
-	              onClick: function onClick() {
-	                return _this2.select(2);
-	              }
-	            }),
+	            _react2.default.createElement(
+	              _reactRouter.IndexLink,
+	              { to: '/' },
+	              _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
+	                label: '\u9996\u9801',
+	                icon: home
+	              })
+	            ),
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/Npc' },
+	              _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
+	                label: '\u4EFB\u52D9',
+	                icon: headline
+	              })
+	            ),
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/backpack' },
+	              _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
+	                label: '\u80CC\u5305',
+	                icon: basket
+	              })
+	            ),
 	            _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
 	              label: '\u8A2D\u5B9A',
-	              icon: nearbyIcon,
-	              onClick: function onClick() {
-	                return _this2.select(2);
-	              }
+	              icon: setting
 	            })
 	          )
 	        ) : null
@@ -81545,16 +81563,16 @@
 	        _react2.default.createElement(
 	          'h5',
 	          null,
-	          '\u6B61\u8FCE\u56DE\u4F86\uFF01\u52C7\u6562\u7684\u9A0E\u58EB\uFF01'
+	          '\u6B61\u8FCE\u56DE\u4F86\uFF01\u52C7\u6562\u7684\u9A0E\u58EB\uFF01\uFF01'
 	        ),
 	        successMessage && _react2.default.createElement(
 	          'p',
-	          { className: 'success-message' },
+	          { className: 'success-message center-align' },
 	          successMessage
 	        ),
 	        errors.summary && _react2.default.createElement(
 	          'p',
-	          { className: 'error-message' },
+	          { className: 'error-message center-align' },
 	          errors.summary
 	        ),
 	        _react2.default.createElement(
@@ -91661,6 +91679,154 @@
 	CommunicationLocationOn.muiName = 'SvgIcon';
 
 	exports.default = CommunicationLocationOn;
+
+/***/ }),
+/* 1027 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _pure = __webpack_require__(472);
+
+	var _pure2 = _interopRequireDefault(_pure);
+
+	var _SvgIcon = __webpack_require__(481);
+
+	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ActionHome = function ActionHome(props) {
+	  return _react2.default.createElement(
+	    _SvgIcon2.default,
+	    props,
+	    _react2.default.createElement('path', { d: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z' })
+	  );
+	};
+	ActionHome = (0, _pure2.default)(ActionHome);
+	ActionHome.displayName = 'ActionHome';
+	ActionHome.muiName = 'SvgIcon';
+
+	exports.default = ActionHome;
+
+/***/ }),
+/* 1028 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _pure = __webpack_require__(472);
+
+	var _pure2 = _interopRequireDefault(_pure);
+
+	var _SvgIcon = __webpack_require__(481);
+
+	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ActionSettings = function ActionSettings(props) {
+	  return _react2.default.createElement(
+	    _SvgIcon2.default,
+	    props,
+	    _react2.default.createElement('path', { d: 'M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z' })
+	  );
+	};
+	ActionSettings = (0, _pure2.default)(ActionSettings);
+	ActionSettings.displayName = 'ActionSettings';
+	ActionSettings.muiName = 'SvgIcon';
+
+	exports.default = ActionSettings;
+
+/***/ }),
+/* 1029 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _pure = __webpack_require__(472);
+
+	var _pure2 = _interopRequireDefault(_pure);
+
+	var _SvgIcon = __webpack_require__(481);
+
+	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ActionViewHeadline = function ActionViewHeadline(props) {
+	  return _react2.default.createElement(
+	    _SvgIcon2.default,
+	    props,
+	    _react2.default.createElement('path', { d: 'M4 15h16v-2H4v2zm0 4h16v-2H4v2zm0-8h16V9H4v2zm0-6v2h16V5H4z' })
+	  );
+	};
+	ActionViewHeadline = (0, _pure2.default)(ActionViewHeadline);
+	ActionViewHeadline.displayName = 'ActionViewHeadline';
+	ActionViewHeadline.muiName = 'SvgIcon';
+
+	exports.default = ActionViewHeadline;
+
+/***/ }),
+/* 1030 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _pure = __webpack_require__(472);
+
+	var _pure2 = _interopRequireDefault(_pure);
+
+	var _SvgIcon = __webpack_require__(481);
+
+	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ActionShoppingBasket = function ActionShoppingBasket(props) {
+	  return _react2.default.createElement(
+	    _SvgIcon2.default,
+	    props,
+	    _react2.default.createElement('path', { d: 'M17.21 9l-4.38-6.56c-.19-.28-.51-.42-.83-.42-.32 0-.64.14-.83.43L6.79 9H2c-.55 0-1 .45-1 1 0 .09.01.18.04.27l2.54 9.27c.23.84 1 1.46 1.92 1.46h13c.92 0 1.69-.62 1.93-1.46l2.54-9.27L23 10c0-.55-.45-1-1-1h-4.79zM9 9l3-4.4L15 9H9zm3 8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z' })
+	  );
+	};
+	ActionShoppingBasket = (0, _pure2.default)(ActionShoppingBasket);
+	ActionShoppingBasket.displayName = 'ActionShoppingBasket';
+	ActionShoppingBasket.muiName = 'SvgIcon';
+
+	exports.default = ActionShoppingBasket;
 
 /***/ })
 /******/ ]);

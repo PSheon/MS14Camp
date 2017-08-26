@@ -6,7 +6,16 @@ import FontIcon from 'material-ui/FontIcon';
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
+import ActionHome from 'material-ui/svg-icons/action/home';
+import Settings from 'material-ui/svg-icons/action/settings';
+import Headline from 'material-ui/svg-icons/action/view-headline';
+import Basket from 'material-ui/svg-icons/action/shopping-basket';
 const nearbyIcon = <IconLocationOn />;
+const home = <ActionHome />;
+const setting = <Settings/>;
+const headline = <Headline />;
+const basket = <Basket />;
+
 
 class Base extends Component {
   constructor(props) {
@@ -42,25 +51,28 @@ class Base extends Component {
         {Auth.isUserAuthenticated()?(
           <Paper zDepth={1} style={{ position: 'fixed', bottom: 0, width: '100%' }}>
             <BottomNavigation selectedIndex={this.state.selectedIndex}>
+              <IndexLink to="/" >
               <BottomNavigationItem
-                label="計分板"
-                icon={nearbyIcon}
-                onClick={() => this.select(0)}
+                label="首頁"
+                icon={home}
               />
+              </IndexLink>
+              <Link to="/Npc">
               <BottomNavigationItem
                 label="任務"
-                icon={nearbyIcon}
-                onClick={() => this.select(1)}
+                icon={headline}
               />
+              </Link>
+              <Link to="/backpack">
               <BottomNavigationItem
                 label="背包"
-                icon={nearbyIcon}
-                onClick={() => this.select(2)}
+                icon={basket}
               />
+              </Link>
+
               <BottomNavigationItem
                 label="設定"
-                icon={nearbyIcon}
-                onClick={() => this.select(2)}
+                icon={setting}
               />
             </BottomNavigation>
           </Paper>

@@ -23,10 +23,10 @@ const LoginForm = ({
     <div className="background">
     <Card className="container">
         <form className="center-align" style={form} action="/" onSubmit={onSubmit}>
-        <h5>歡迎回來！勇敢的騎士！</h5>
+        <h5>歡迎回來！勇敢的騎士！！</h5>
 
-        {successMessage && <p className="success-message">{successMessage}</p>}
-        {errors.summary && <p className="error-message">{errors.summary}</p>}
+        {successMessage && <p className="success-message center-align">{successMessage}</p>}
+        {errors.summary && <p className="error-message center-align">{errors.summary}</p>}
 
         <div >
           <TextField
