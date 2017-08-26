@@ -4,6 +4,7 @@ const csv = require('fast-csv');
 const fs = require('fs');
 const _ = require('lodash');
 const Team = require('mongoose').model('Team');
+const Money = require('mongoose').model('Money');
 
 const router = new express.Router();
 
@@ -100,12 +101,49 @@ router.put('/donemission/:id/:type', (req, res) => {
     });
 });
 //money
+router.put('/money/:id/:type', (req, res) => {
+  let csvStream = fs.createReadStream(path.resolve('./static/csv', 'missionList.csv'));
+  let isFound = false;
+  let teamId = req.params.id;
+  let reqType = req.params.type;
+  let mId = req.body.mId;
 
+  csv.fromStream(csvStream, {
+    headers: ['mSerial', 'amount']
+  }).on("data", (data) => {
 
+    if (data.mSerial === mId && !isFound) {
+      Money.findOne({ mSerial: mId }, (err,money) => {
+        if (err) throw err;
+        if(!money.mSerial){
+          let money=0;
+          Team.findOne({ team: teamId }, (err, team) => {
+            if (err) throw err;
+            if (reqType === 'add') {
+              money = team.money + money.amount;
+            }else{
+              money = team.money - money.amount;
+            }
 
-//add
-
-//minus
+            Team.findOneAndUpdate({ team: teamId }, { money: money }, (err, team) => {
+              if (err) throw err;
+              Team.findOne({ team: teamId }, (err, team) => {
+                if (err) throw err;
+                res.status(200).json(team);
+              });
+            });
+          });
+        }else{
+          res.status(200).json({err:`想騙錢？`});
+        }
+      });
+      isFound = !isFound;
+    }
+  }
+    ).on("end", () => {
+      if (!isFound) res.json({ err: 'money not found!' });
+    });
+});
 
 
 //item
