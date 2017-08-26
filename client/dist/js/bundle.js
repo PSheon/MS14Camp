@@ -37699,10 +37699,6 @@
 
 	var _Paper2 = _interopRequireDefault(_Paper);
 
-	var _locationOn = __webpack_require__(1026);
-
-	var _locationOn2 = _interopRequireDefault(_locationOn);
-
 	var _home = __webpack_require__(1027);
 
 	var _home2 = _interopRequireDefault(_home);
@@ -37727,12 +37723,6 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var nearbyIcon = _react2.default.createElement(_locationOn2.default, null);
-	var home = _react2.default.createElement(_home2.default, null);
-	var setting = _react2.default.createElement(_settings2.default, null);
-	var headline = _react2.default.createElement(_viewHeadline2.default, null);
-	var basket = _react2.default.createElement(_shoppingBasket2.default, null);
-
 	var Base = function (_Component) {
 	  _inherits(Base, _Component);
 
@@ -37754,6 +37744,8 @@
 	  _createClass(Base, [{
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -37769,7 +37761,10 @@
 	              { to: '/' },
 	              _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
 	                label: '\u9996\u9801',
-	                icon: home
+	                icon: _react2.default.createElement(_home2.default, { color: this.state.selectedIndex === 0 ? '#00BCD4' : '#424242' }),
+	                onClick: function onClick() {
+	                  return _this2.select(0);
+	                }
 	              })
 	            ),
 	            _react2.default.createElement(
@@ -37777,7 +37772,10 @@
 	              { to: '/Npc' },
 	              _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
 	                label: '\u4EFB\u52D9',
-	                icon: headline
+	                icon: _react2.default.createElement(_viewHeadline2.default, { color: this.state.selectedIndex === 1 ? '#00BCD4' : '#424242' }),
+	                onClick: function onClick() {
+	                  return _this2.select(1);
+	                }
 	              })
 	            ),
 	            _react2.default.createElement(
@@ -37785,13 +37783,23 @@
 	              { to: '/backpack' },
 	              _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
 	                label: '\u80CC\u5305',
-	                icon: basket
+	                icon: _react2.default.createElement(_shoppingBasket2.default, { color: this.state.selectedIndex === 2 ? '#00BCD4' : '#424242' }),
+	                onClick: function onClick() {
+	                  return _this2.select(2);
+	                }
 	              })
 	            ),
-	            _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
-	              label: '\u8A2D\u5B9A',
-	              icon: setting
-	            })
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/backpack' },
+	              _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
+	                label: '\u8A2D\u5B9A',
+	                icon: _react2.default.createElement(_settings2.default, { color: this.state.selectedIndex === 3 ? '#00BCD4' : '#424242' }),
+	                onClick: function onClick() {
+	                  return _this2.select(3);
+	                }
+	              })
+	            )
 	          )
 	        ) : null
 	      );
@@ -91644,43 +91652,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 1026 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _pure = __webpack_require__(472);
-
-	var _pure2 = _interopRequireDefault(_pure);
-
-	var _SvgIcon = __webpack_require__(481);
-
-	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var CommunicationLocationOn = function CommunicationLocationOn(props) {
-	  return _react2.default.createElement(
-	    _SvgIcon2.default,
-	    props,
-	    _react2.default.createElement('path', { d: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z' })
-	  );
-	};
-	CommunicationLocationOn = (0, _pure2.default)(CommunicationLocationOn);
-	CommunicationLocationOn.displayName = 'CommunicationLocationOn';
-	CommunicationLocationOn.muiName = 'SvgIcon';
-
-	exports.default = CommunicationLocationOn;
-
-/***/ }),
+/* 1026 */,
 /* 1027 */
 /***/ (function(module, exports, __webpack_require__) {
 
