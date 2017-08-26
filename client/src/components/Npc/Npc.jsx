@@ -51,11 +51,11 @@ class Npc extends Component {
                     </div>:null}
 
                     {mission.data.getItem?
-                        <p>{mission.data.getItem}</p>:
+                        <p>獲得：{mission.data.getItem}</p>:
                         null
                     }
                     {mission.data.lostItem ?
-                        <p>{mission.data.lostItem}</p>:
+                        <p>失去：{mission.data.lostItem}</p>:
                         null
                     }
                     

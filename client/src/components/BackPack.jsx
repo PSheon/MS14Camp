@@ -53,8 +53,20 @@ class BackPack extends Component {
         if (this.props.team) {
             return (
                 <div>
-                    <p>{this.props.team.items==[]?'滿':'空'}</p>
+                    {this.props.team.items!==[]?
+                    this.props.team.items.map((item)=>{
+                        return(
+                            <div key={Math.random()}>
+                             <p>{item}</p>
+                            </div>
+                        )
+                    })
+                    :<p>空</p>}
                 </div>
+            );
+        }else{
+            return(
+                <p>空</p>
             );
         }
     }

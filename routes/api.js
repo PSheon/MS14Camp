@@ -74,10 +74,16 @@ router.put('/donemission/:id/:type', (req, res) => {
               temp[existed].isSuccess = true;
             }
             if (data.getItem) {
+              console.log(data.getItem);
               tempItem.push(data.getItem);
             }
             if (data.lostItem) {
-              let itemIndex = _.findIndex(team.items, `${data.lostItem}`);
+              let itemIndex = tempItem.indexOf(data.lostItem);
+              console.log(data.lostItem);
+              console.log(itemIndex);
+              if(itemIndex>-1){
+                tempItem.splice(itemIndex, 1);
+              }      
             }
             if (data.success) {
               let successMoney = parseInt(data.success);
@@ -102,7 +108,12 @@ router.put('/donemission/:id/:type', (req, res) => {
               tempItem.push(data.getItem);
             }
             if (data.lostItem) {
-              let itemIndex = _.findIndex(team.items, `${data.lostItem}`);
+              let itemIndex = tempItem.indexOf(data.lostItem);
+              console.log(data.lostItem);
+              console.log(itemIndex);
+              if (itemIndex > -1) {
+                tempItem.splice(itemIndex, 1);
+              }    
             }
             if (data.failed) {
               let failedMoney = parseInt(data.failed);
