@@ -15,7 +15,7 @@ class YellowMissionCard extends Component {
   }
 
   handleClick() {
-    this.props.addYellowProcess(1);
+    this.props.addYellowProgress(1);
   }
 
   render() {

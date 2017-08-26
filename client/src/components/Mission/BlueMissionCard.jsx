@@ -23,7 +23,7 @@ class BlueMissionCard extends Component {
   }
 
   handleClick() {
-    this.props.addBlueProcess(1);
+    this.props.addBlueProgress(1);
     
   }
 

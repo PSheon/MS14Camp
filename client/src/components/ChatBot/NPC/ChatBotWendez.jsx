@@ -29,11 +29,11 @@ class ChatBotWendez extends Component {
   constructor(props) {
     super(props);
 
-    this.handleAddProcess = this.handleAddProcess.bind(this);
+    this.handleAddProgress = this.handleAddProgress.bind(this);
   }
 
-  handleAddProcess(addNum) {
-    this.props.addBlueProcess(addNum)
+  handleAddProgress(addNum) {
+    this.props.addBlueProgress(addNum)
   }
 
   render() {
@@ -59,7 +59,7 @@ class ChatBotWendez extends Component {
             }, {
               id: '3',
               message: ({ previousValue, steps }) => {
-                { this.handleAddProcess(wendez_dialog(previousValue)[2]) }
+                { this.handleAddProgress(wendez_dialog(previousValue)[2]) }
                 return wendez_dialog(previousValue)[0];
               },
               trigger: '2'

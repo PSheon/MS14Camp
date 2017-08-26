@@ -1,17 +1,5 @@
 import axios from 'axios';
 
-// import {
-//   SET_SECRET,
-//   GET_ROOM,
-//   SET_RED_TEAM_PROCESS,
-//   SET_BLUE_TEAM_PROCESS,
-//   SET_GREEN_TEAM_PROCESS,
-//   SET_YELLOW_TEAM_PROCESS,
-//   ADD_RED_TEAM_PROCESS,
-//   ADD_BLUE_TEAM_PROCESS,
-//   ADD_GREEN_TEAM_PROCESS,
-//   ADD_YELLOW_TEAM_PROCESS
-// } from './types';
 import * as types from './types';
 import Auth from '../modules/Auth';
 const queryString = require('query-string');
@@ -69,8 +57,8 @@ export const getRoom = () => dispatch => {
   });
 }
 
-export const setTeamProcess = () => dispatch => {
-  axios('/api/teamprocess', {
+export const setTeamProgress = () => dispatch => {
+  axios('/api/teamprogress', {
     method: 'post',
     headers: {
       'Content-type': 'application/x-www-form-urlencoded',
@@ -79,30 +67,30 @@ export const setTeamProcess = () => dispatch => {
     responseType: 'json'
   }).then((response) => {
     if (response.status === 200) {
-      dispatch({ type: types.SET_RED_TEAM_PROCESS, payload: response.data.redProcess });
-      dispatch({ type: types.SET_BLUE_TEAM_PROCESS, payload: response.data.blueProcess });
-      dispatch({ type: types.SET_GREEN_TEAM_PROCESS, payload: response.data.greenProcess });
-      dispatch({ type: types.SET_YELLOW_TEAM_PROCESS, payload: response.data.yellowProcess });
+      dispatch({ type: types.SET_RED_TEAM_PROGRESS, payload: response.data.redProgress });
+      dispatch({ type: types.SET_BLUE_TEAM_PROGRESS, payload: response.data.blueProgress });
+      dispatch({ type: types.SET_GREEN_TEAM_PROGRESS, payload: response.data.greenProgress });
+      dispatch({ type: types.SET_YELLOW_TEAM_PROGRESS, payload: response.data.yellowProgress });
     }
   }).catch(function (error) {
     console.log(error);
   });
 }
 
-export const addRedProcess = (add_block) => dispatch => {
-  dispatch({ type: types.ADD_RED_TEAM_PROCESS, payload: add_block });
+export const addRedProgress = (add_block) => dispatch => {
+  dispatch({ type: types.ADD_RED_TEAM_PROGRESS, payload: add_block });
 }
 
-export const addBlueProcess = ( add_block ) => dispatch => {
-  dispatch({ type: types.ADD_BLUE_TEAM_PROCESS, payload: add_block });
+export const addBlueProgress = ( add_block ) => dispatch => {
+  dispatch({ type: types.ADD_BLUE_TEAM_PROGRESS, payload: add_block });
 }
 
-export const addGreenProcess = (add_block) => dispatch => {
-  dispatch({ type: types.ADD_GREEN_TEAM_PROCESS, payload: add_block });
+export const addGreenProgress = (add_block) => dispatch => {
+  dispatch({ type: types.ADD_GREEN_TEAM_PROGRESS, payload: add_block });
 }
 
-export const addYellowProcess = (add_block) => dispatch => {
-  dispatch({ type: types.ADD_YELLOW_TEAM_PROCESS, payload: add_block });
+export const addYellowProgress = (add_block) => dispatch => {
+  dispatch({ type: types.ADD_YELLOW_TEAM_PROGRESS, payload: add_block });
 }
 
 // change npc
