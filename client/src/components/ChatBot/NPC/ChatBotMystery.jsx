@@ -29,11 +29,11 @@ class ChatBotMystery extends Component {
   constructor(props) {
     super(props);
 
-    this.handleAddProcess = this.handleAddProcess.bind(this);
+    this.handleAddProgress = this.handleAddProgress.bind(this);
   }
 
-  handleAddProcess(addNum) {
-    this.props.addBlueProcess(addNum)
+  handleAddProgress(addNum) {
+    this.props.addBlueProgress(addNum)
   }
 
   render() {
@@ -59,7 +59,7 @@ class ChatBotMystery extends Component {
             }, {
               id: '3',
               message: ({ previousValue, steps }) => {
-                { this.handleAddProcess(mystery_dialog(previousValue)[2]) }
+                { this.handleAddProgress(mystery_dialog(previousValue)[2]) }
                 return mystery_dialog(previousValue)[0];
               },
               trigger: '2'

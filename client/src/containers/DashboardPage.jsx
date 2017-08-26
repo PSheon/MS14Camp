@@ -40,7 +40,7 @@ class DashboardPage extends Component {
     // xhr.send();
     this.props.setSecret();
     this.props.getRoom();
-    this.props.setTeamProcess();
+    this.props.setTeamProgress();
     this.props.setUser({ name: Auth.getUserNameFromCookie(), email: Auth.getUserEmailFromCookie() });
   }
 

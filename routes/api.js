@@ -19,12 +19,12 @@ router.get('/whatmyroom', (req, res) => {
   });
 });
 
-router.post('/teamprocess', (req, res) => {
+router.post('/teamprogress', (req, res) => {
   res.status(200).json({
-    redProcess: 10,
-    blueProcess: 35,
-    greenProcess: 90,
-    yellowProcess: 25
+    redProgress: 10,
+    blueProgress: 35,
+    greenProgress: 90,
+    yellowProgress: 25
   });
 });
 
