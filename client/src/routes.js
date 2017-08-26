@@ -4,6 +4,7 @@ import DashboardPage from './containers/DashboardPage.jsx';
 import LoginPage from './containers/LoginPage.jsx';
 import SignUpPage from './containers/SignUpPage.jsx';
 import NpcPage from './containers/NpcPage.jsx';
+import BackPackPage from './containers/BackpackPage.jsx';
 import Auth from './modules/Auth';
 
 
@@ -47,7 +48,10 @@ const routes = {
       path: '/npc',
       component: NpcPage
     },
-
+    {
+      path: '/backpack',
+      component: BackPackPage
+    },
   ]
 };
 

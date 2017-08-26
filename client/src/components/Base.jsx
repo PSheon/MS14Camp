@@ -14,11 +14,13 @@ const Base = ({ children }) => (
       {Auth.isUserAuthenticated() ? (
         <div className="top-bar-right">
           <Link to="/Npc">任務頁</Link>
+          <Link to="/backpack">背包</Link>
           <Link to="/logout">登出</Link>
         </div>
       ) : (
           <div className="top-bar-right">
             <Link to="/Npc">任務頁</Link>
+            <Link to="/backpack">背包</Link>
             <Link to="/login">登入</Link>
             <Link to="/signup">註冊</Link>
           </div>

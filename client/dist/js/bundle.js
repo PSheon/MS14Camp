@@ -37614,6 +37614,10 @@
 
 	var _NpcPage2 = _interopRequireDefault(_NpcPage);
 
+	var _BackpackPage = __webpack_require__(1030);
+
+	var _BackpackPage2 = _interopRequireDefault(_BackpackPage);
+
 	var _Auth = __webpack_require__(435);
 
 	var _Auth2 = _interopRequireDefault(_Auth);
@@ -37651,6 +37655,9 @@
 	  }, {
 	    path: '/npc',
 	    component: _NpcPage2.default
+	  }, {
+	    path: '/backpack',
+	    component: _BackpackPage2.default
 	  }]
 	};
 
@@ -37709,6 +37716,11 @@
 	        ),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
+	          { to: '/backpack' },
+	          '\u80CC\u5305'
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
 	          { to: '/logout' },
 	          '\u767B\u51FA'
 	        )
@@ -37719,6 +37731,11 @@
 	          _reactRouter.Link,
 	          { to: '/Npc' },
 	          '\u4EFB\u52D9\u9801'
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/backpack' },
+	          '\u80CC\u5305'
 	        ),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
@@ -90877,6 +90894,305 @@
 /* 1023 */,
 /* 1024 */,
 /* 1025 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(184);
+
+	var _reactQrReader = __webpack_require__(635);
+
+	var _reactQrReader2 = _interopRequireDefault(_reactQrReader);
+
+	var _FontIcon = __webpack_require__(468);
+
+	var _FontIcon2 = _interopRequireDefault(_FontIcon);
+
+	var _Paper = __webpack_require__(483);
+
+	var _Paper2 = _interopRequireDefault(_Paper);
+
+	var _Card = __webpack_require__(591);
+
+	var _LinearProgress = __webpack_require__(649);
+
+	var _LinearProgress2 = _interopRequireDefault(_LinearProgress);
+
+	var _RaisedButton = __webpack_require__(652);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
+	var _android = __webpack_require__(654);
+
+	var _android2 = _interopRequireDefault(_android);
+
+	var _actions = __webpack_require__(630);
+
+	var actions = _interopRequireWildcard(_actions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var dialog = {
+	    backgroundColor: 'rgba(0,0,0,0.7)',
+	    color: 'white'
+	};
+
+	var Npc = function (_Component) {
+	    _inherits(Npc, _Component);
+
+	    function Npc(props) {
+	        _classCallCheck(this, Npc);
+
+	        var _this = _possibleConstructorReturn(this, (Npc.__proto__ || Object.getPrototypeOf(Npc)).call(this, props));
+
+	        _this.renderMission = function () {
+	            if (_this.props.mission) {
+	                var missionList = _this.props.mission.missions;
+	                console.log(typeof missionList === 'undefined' ? 'undefined' : _typeof(missionList));
+
+	                return missionList.map(function (mission) {
+	                    return _react2.default.createElement(
+	                        'div',
+	                        { key: mission.mId },
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            mission.data.title
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'right-align' },
+	                            _react2.default.createElement(
+	                                'p',
+	                                null,
+	                                mission.data.fromUs
+	                            ),
+	                            _react2.default.createElement(
+	                                'p',
+	                                { style: dialog },
+	                                mission.data.ourDetail
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'right-left' },
+	                            _react2.default.createElement(
+	                                'p',
+	                                null,
+	                                mission.data.fromBoss
+	                            ),
+	                            _react2.default.createElement(
+	                                'p',
+	                                { style: dialog },
+	                                mission.data.bossDetail
+	                            )
+	                        ),
+	                        mission.data.bossDetail2 ? _react2.default.createElement(
+	                            'div',
+	                            { className: 'right-left' },
+	                            _react2.default.createElement(
+	                                'p',
+	                                null,
+	                                mission.data.fromBoss
+	                            ),
+	                            _react2.default.createElement(
+	                                'p',
+	                                { style: dialog },
+	                                mission.data.bossDetail2
+	                            )
+	                        ) : null,
+	                        mission.data.getItem ? _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            mission.data.getItem
+	                        ) : null,
+	                        mission.data.lostItem ? _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            mission.data.lostItem
+	                        ) : null
+	                    );
+	                });
+	            }
+	        };
+
+	        _this.handleScan = function (data) {
+	            var msg = data.split(',');
+	            _this.setState({
+	                result: data
+	            });
+	            _this.props.doneMission('t01', msg[0], msg[1]);
+	        };
+
+	        _this.handleError = function (err) {
+	            console.error(err);
+	        };
+
+	        _this.openImageDialog = function () {
+	            _this.refs.qrReader1.openImageDialog();
+	        };
+
+	        _this.select = function (index) {
+	            return _this.setState({ selectedIndex: index });
+	        };
+
+	        _this.state = {
+	            completed: 20,
+	            delay: 100,
+	            result: 'No fucking result',
+	            selectedIndex: 0
+	        };
+	        return _this;
+	    }
+
+	    _createClass(Npc, [{
+	        key: 'render',
+	        value: function render() {
+	            var previewStyle = {
+	                height: 240,
+	                width: 320
+	            };
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'container' },
+	                    this.renderMission(),
+	                    _react2.default.createElement(_reactQrReader2.default, {
+	                        ref: 'qrReader1',
+	                        delay: this.state.delay,
+	                        style: previewStyle,
+	                        onError: this.handleError,
+	                        onScan: this.handleScan,
+	                        legacyMode: true
+	                    }),
+	                    _react2.default.createElement('input', { type: 'button', value: 'Submit QR Code', onClick: this.openImageDialog }),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        this.state.result
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Npc;
+	}(_react.Component);
+
+	function mapStateToProps(_ref) {
+	    var mission = _ref.mission;
+
+	    return { mission: mission };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, actions)(Npc);
+
+/***/ }),
+/* 1026 */,
+/* 1027 */,
+/* 1028 */,
+/* 1029 */,
+/* 1030 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(604);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _reactRedux = __webpack_require__(184);
+
+	var _Auth = __webpack_require__(435);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	var _actions = __webpack_require__(630);
+
+	var actions = _interopRequireWildcard(_actions);
+
+	var _Backpack = __webpack_require__(1031);
+
+	var _Backpack2 = _interopRequireDefault(_Backpack);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var BackPackPage = function (_Component) {
+	    _inherits(BackPackPage, _Component);
+
+	    function BackPackPage() {
+	        _classCallCheck(this, BackPackPage);
+
+	        return _possibleConstructorReturn(this, (BackPackPage.__proto__ || Object.getPrototypeOf(BackPackPage)).apply(this, arguments));
+	    }
+
+	    _createClass(BackPackPage, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.props.setSecret();
+	            this.props.getRoom();
+	            this.props.getMission('t01');
+	            this.props.setUser({ name: _Auth2.default.getUserNameFromCookie(), email: _Auth2.default.getUserEmailFromCookie() });
+	            //get money
+	            //set money add minus
+	            //get item
+	            //set item add minus
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            return _react2.default.createElement(_Backpack2.default, null);
+	        }
+	    }]);
+
+	    return BackPackPage;
+	}(_react.Component);
+
+	exports.default = (0, _reactRedux.connect)(null, actions)(BackPackPage);
+
+/***/ }),
+/* 1031 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
