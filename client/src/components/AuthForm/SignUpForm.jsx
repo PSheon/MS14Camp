@@ -5,19 +5,29 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
 
+const form ={
+  backgroundColor:'white',
+  paddingTop: '10px',
+  paddingBottom:'10px'
+}
+const bottomText={
+  width:'100%'
+}
 const SignUpForm = ({
   onSubmit,
   onChange,
   errors,
   user,
 }) => (
-    <Card className="container">
-      <form action="/" onSubmit={onSubmit}>
-        <h2 className="card-heading">創建</h2>
+    <div className="background">
 
+        
+        <Card className="container" style={{ paddingTop: '10px' }}>
+          
+        <form className="center-align" style={form} action="/" onSubmit={onSubmit}>
         {errors.summary && <p className="error-message">{errors.summary}</p>}
-
-        <div className="field-line">
+        <h5>馬上加入騎士團的行列吧！</h5>
+        <div>
           <TextField
             floatingLabelText="名字"
             name="name"
@@ -27,7 +37,7 @@ const SignUpForm = ({
           />
         </div>
 
-        <div className="field-line">
+        <div>
           <TextField
             floatingLabelText="信箱"
             name="email"
@@ -37,7 +47,7 @@ const SignUpForm = ({
           />
         </div>
 
-        <div className="field-line">
+        <div>
           <TextField
             floatingLabelText="密碼"
             type="password"
@@ -48,13 +58,13 @@ const SignUpForm = ({
           />
         </div>
 
-        <div className="button-line">
-          <RaisedButton type="submit" label="創建帳號" primary />
+        <div className="center-align">
+          <RaisedButton type="submit" label="註冊" primary />
         </div>
-
-        <CardText>已經有帳號了？ <Link to={'/login'}>登入</Link></CardText>
+        <p style={bottomText} className="center-align">已經有帳號了？ <Link to={'/login'}>登入</Link></p>
       </form>
-    </Card>
+      </Card>
+  </div>
   );
 
 SignUpForm.propTypes = {

@@ -37633,7 +37633,7 @@
 	      if (_Auth2.default.isUserAuthenticated()) {
 	        callback(null, _DashboardPage2.default);
 	      } else {
-	        callback(null, _HomePage2.default);
+	        callback(null, _SignUpPage2.default);
 	      }
 	    }
 	  }, {
@@ -37673,6 +37673,8 @@
 	  value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -37687,71 +37689,99 @@
 
 	var _navbar2 = _interopRequireDefault(_navbar);
 
+	var _FontIcon = __webpack_require__(468);
+
+	var _FontIcon2 = _interopRequireDefault(_FontIcon);
+
+	var _BottomNavigation = __webpack_require__(1023);
+
+	var _Paper = __webpack_require__(483);
+
+	var _Paper2 = _interopRequireDefault(_Paper);
+
+	var _locationOn = __webpack_require__(1026);
+
+	var _locationOn2 = _interopRequireDefault(_locationOn);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Base = function Base(_ref) {
-	  var children = _ref.children;
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'top-bar' },
-	      _react2.default.createElement(
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var nearbyIcon = _react2.default.createElement(_locationOn2.default, null);
+
+	var Base = function (_Component) {
+	  _inherits(Base, _Component);
+
+	  function Base(props) {
+	    _classCallCheck(this, Base);
+
+	    var _this = _possibleConstructorReturn(this, (Base.__proto__ || Object.getPrototypeOf(Base)).call(this, props));
+
+	    _this.select = function (index) {
+	      return _this.setState({ selectedIndex: index });
+	    };
+
+	    _this.state = {
+	      selectedIndex: 0
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Base, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      return _react2.default.createElement(
 	        'div',
-	        { className: 'top-bar-left' },
-	        _react2.default.createElement(
-	          _reactRouter.IndexLink,
-	          { to: '/' },
-	          '\u5FAE\u8EDF 14 \u9818\u8896\u71DF'
-	        )
-	      ),
-	      _Auth2.default.isUserAuthenticated() ? _react2.default.createElement(
-	        'div',
-	        { className: 'top-bar-right' },
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/Npc' },
-	          '\u4EFB\u52D9\u9801'
-	        ),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/backpack' },
-	          '\u80CC\u5305'
-	        ),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/logout' },
-	          '\u767B\u51FA'
-	        )
-	      ) : _react2.default.createElement(
-	        'div',
-	        { className: 'top-bar-right' },
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/Npc' },
-	          '\u4EFB\u52D9\u9801'
-	        ),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/backpack' },
-	          '\u80CC\u5305'
-	        ),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/login' },
-	          '\u767B\u5165'
-	        ),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/signup' },
-	          '\u8A3B\u518A'
-	        )
-	      )
-	    ),
-	    children
-	  );
-	};
+	        null,
+	        this.props.children,
+	        _Auth2.default.isUserAuthenticated() ? _react2.default.createElement(
+	          _Paper2.default,
+	          { zDepth: 1, style: { position: 'fixed', bottom: 0, width: '100%' } },
+	          _react2.default.createElement(
+	            _BottomNavigation.BottomNavigation,
+	            { selectedIndex: this.state.selectedIndex },
+	            _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
+	              label: '\u8A08\u5206\u677F',
+	              icon: nearbyIcon,
+	              onClick: function onClick() {
+	                return _this2.select(0);
+	              }
+	            }),
+	            _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
+	              label: '\u4EFB\u52D9',
+	              icon: nearbyIcon,
+	              onClick: function onClick() {
+	                return _this2.select(1);
+	              }
+	            }),
+	            _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
+	              label: '\u80CC\u5305',
+	              icon: nearbyIcon,
+	              onClick: function onClick() {
+	                return _this2.select(2);
+	              }
+	            }),
+	            _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
+	              label: '\u8A2D\u5B9A',
+	              icon: nearbyIcon,
+	              onClick: function onClick() {
+	                return _this2.select(2);
+	              }
+	            })
+	          )
+	        ) : null
+	      );
+	    }
+	  }]);
+
+	  return Base;
+	}(_react.Component);
 
 	Base.propTypes = {
 	  children: _react.PropTypes.object.isRequired
@@ -37910,15 +37940,15 @@
 
 	var drawer = {
 	    width: '0',
-	    height: '100vh',
+	    height: '100%',
 	    position: 'absolute',
 	    top: '0',
 	    zIndex: '1112'
 	};
 
 	var overlay = {
-	    width: '100vw',
-	    height: '100vh',
+	    width: '100%',
+	    height: '100%',
 	    position: 'absolute',
 	    backgroundColor: 'rgba(0,0,0,0.7)',
 	    top: '0',
@@ -37935,7 +37965,6 @@
 
 	        _this._handleLinkClicked = function () {
 	            _this.setState({ hideMenu: true });
-	            console.log(123);
 	        };
 
 	        _this._handleOnPress = function () {
@@ -59050,40 +59079,12 @@
 	            title: '\u8A18\u5206\u677F',
 	            subtitle: '\u5982\u679C\u4F60\u770B\u5230\u9019\u884C\u6587\u5B57\u4EE3\u8868\u8EAB\u5206\u5DF2\u6388\u6B0A.'
 	          }),
-	          _react2.default.createElement(_NPCCard2.default, null),
 	          _react2.default.createElement(_MissionBroadcast2.default, null),
 	          _react2.default.createElement(_RedMissionCard2.default, null),
 	          _react2.default.createElement(_BlueMissionCard2.default, null),
 	          _react2.default.createElement(_YellowMissionCard2.default, null),
-	          _react2.default.createElement(_GreenMissionCard2.default, null),
-	          this.renderUser(),
-	          _react2.default.createElement(_reactQrReader2.default, {
-	            ref: 'qrReader1',
-	            delay: this.state.delay,
-	            style: previewStyle,
-	            onError: this.handleError,
-	            onScan: this.handleScan,
-	            legacyMode: true
-	          }),
-	          _react2.default.createElement('input', { type: 'button', value: 'Submit QR Code', onClick: this.openImageDialog }),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            this.state.result
-	          ),
-	          this.renderMission(),
-	          this.props.secretData && _react2.default.createElement(
-	            _Card.CardText,
-	            { style: { fontSize: '16px', color: 'green' } },
-	            this.props.secretData
-	          ),
-	          this.props.room && _react2.default.createElement(
-	            _Card.CardText,
-	            { style: { fontSize: '16px', color: 'green' } },
-	            this.props.room
-	          )
-	        ),
-	        _react2.default.createElement(_ChatBotIcon2.default, null)
+	          _react2.default.createElement(_GreenMissionCard2.default, null)
+	        )
 	      );
 	    }
 	  }]);
@@ -81518,6 +81519,14 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var form = {
+	  backgroundColor: 'white',
+	  paddingTop: '10px',
+	  paddingBottom: '10px'
+	};
+	var bottomText = {
+	  width: '100%'
+	};
 	var LoginForm = function LoginForm(_ref) {
 	  var onSubmit = _ref.onSubmit,
 	      onChange = _ref.onChange,
@@ -81525,64 +81534,68 @@
 	      successMessage = _ref.successMessage,
 	      user = _ref.user;
 	  return _react2.default.createElement(
-	    _Card.Card,
-	    { className: 'container' },
+	    'div',
+	    { className: 'background' },
 	    _react2.default.createElement(
-	      'form',
-	      { action: '/', onSubmit: onSubmit },
+	      _Card.Card,
+	      { className: 'container' },
 	      _react2.default.createElement(
-	        'h2',
-	        { className: 'card-heading' },
-	        '\u767B\u5165'
-	      ),
-	      successMessage && _react2.default.createElement(
-	        'p',
-	        { className: 'success-message' },
-	        successMessage
-	      ),
-	      errors.summary && _react2.default.createElement(
-	        'p',
-	        { className: 'error-message' },
-	        errors.summary
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'field-line' },
-	        _react2.default.createElement(_TextField2.default, {
-	          floatingLabelText: '\u4FE1\u7BB1',
-	          name: 'email',
-	          errorText: errors.email,
-	          onChange: onChange,
-	          value: user.email
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'field-line' },
-	        _react2.default.createElement(_TextField2.default, {
-	          floatingLabelText: '\u5BC6\u78BC',
-	          type: 'password',
-	          name: 'password',
-	          onChange: onChange,
-	          errorText: errors.password,
-	          value: user.password
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'button-line' },
-	        _react2.default.createElement(_RaisedButton2.default, { type: 'submit', label: '\u767B\u5165', primary: true })
-	      ),
-	      _react2.default.createElement(
-	        _Card.CardText,
-	        null,
-	        '\u9084\u6C92\u6709\u5E33\u865F\uFF1F ',
+	        'form',
+	        { className: 'center-align', style: form, action: '/', onSubmit: onSubmit },
 	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/signup' },
-	          '\u5275\u5EFA\u4E00\u500B'
+	          'h5',
+	          null,
+	          '\u6B61\u8FCE\u56DE\u4F86\uFF01\u52C7\u6562\u7684\u9A0E\u58EB\uFF01'
 	        ),
-	        '.'
+	        successMessage && _react2.default.createElement(
+	          'p',
+	          { className: 'success-message' },
+	          successMessage
+	        ),
+	        errors.summary && _react2.default.createElement(
+	          'p',
+	          { className: 'error-message' },
+	          errors.summary
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(_TextField2.default, {
+	            floatingLabelText: '\u4FE1\u7BB1',
+	            name: 'email',
+	            errorText: errors.email,
+	            onChange: onChange,
+	            value: user.email
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(_TextField2.default, {
+	            floatingLabelText: '\u5BC6\u78BC',
+	            type: 'password',
+	            name: 'password',
+	            onChange: onChange,
+	            errorText: errors.password,
+	            value: user.password
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(_RaisedButton2.default, { type: 'submit', label: '\u767B\u5165', primary: true })
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { style: bottomText, className: 'center-align' },
+	          '\u9084\u6C92\u6709\u5E33\u865F\uFF1F ',
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/signup' },
+	            '\u5275\u5EFA\u4E00\u500B'
+	          ),
+	          '.'
+	        )
 	      )
 	    )
 	  );
@@ -82962,74 +82975,86 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var form = {
+	  backgroundColor: 'white',
+	  paddingTop: '10px',
+	  paddingBottom: '10px'
+	};
+	var bottomText = {
+	  width: '100%'
+	};
 	var SignUpForm = function SignUpForm(_ref) {
 	  var onSubmit = _ref.onSubmit,
 	      onChange = _ref.onChange,
 	      errors = _ref.errors,
 	      user = _ref.user;
 	  return _react2.default.createElement(
-	    _Card.Card,
-	    { className: 'container' },
+	    'div',
+	    { className: 'background' },
 	    _react2.default.createElement(
-	      'form',
-	      { action: '/', onSubmit: onSubmit },
+	      _Card.Card,
+	      { className: 'container', style: { paddingTop: '10px' } },
 	      _react2.default.createElement(
-	        'h2',
-	        { className: 'card-heading' },
-	        '\u5275\u5EFA'
-	      ),
-	      errors.summary && _react2.default.createElement(
-	        'p',
-	        { className: 'error-message' },
-	        errors.summary
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'field-line' },
-	        _react2.default.createElement(_TextField2.default, {
-	          floatingLabelText: '\u540D\u5B57',
-	          name: 'name',
-	          errorText: errors.name,
-	          onChange: onChange,
-	          value: user.name
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'field-line' },
-	        _react2.default.createElement(_TextField2.default, {
-	          floatingLabelText: '\u4FE1\u7BB1',
-	          name: 'email',
-	          errorText: errors.email,
-	          onChange: onChange,
-	          value: user.email
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'field-line' },
-	        _react2.default.createElement(_TextField2.default, {
-	          floatingLabelText: '\u5BC6\u78BC',
-	          type: 'password',
-	          name: 'password',
-	          onChange: onChange,
-	          errorText: errors.password,
-	          value: user.password
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'button-line' },
-	        _react2.default.createElement(_RaisedButton2.default, { type: 'submit', label: '\u5275\u5EFA\u5E33\u865F', primary: true })
-	      ),
-	      _react2.default.createElement(
-	        _Card.CardText,
-	        null,
-	        '\u5DF2\u7D93\u6709\u5E33\u865F\u4E86\uFF1F ',
+	        'form',
+	        { className: 'center-align', style: form, action: '/', onSubmit: onSubmit },
+	        errors.summary && _react2.default.createElement(
+	          'p',
+	          { className: 'error-message' },
+	          errors.summary
+	        ),
 	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/login' },
-	          '\u767B\u5165'
+	          'h5',
+	          null,
+	          '\u99AC\u4E0A\u52A0\u5165\u9A0E\u58EB\u5718\u7684\u884C\u5217\u5427\uFF01'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(_TextField2.default, {
+	            floatingLabelText: '\u540D\u5B57',
+	            name: 'name',
+	            errorText: errors.name,
+	            onChange: onChange,
+	            value: user.name
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(_TextField2.default, {
+	            floatingLabelText: '\u4FE1\u7BB1',
+	            name: 'email',
+	            errorText: errors.email,
+	            onChange: onChange,
+	            value: user.email
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(_TextField2.default, {
+	            floatingLabelText: '\u5BC6\u78BC',
+	            type: 'password',
+	            name: 'password',
+	            onChange: onChange,
+	            errorText: errors.password,
+	            value: user.password
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'center-align' },
+	          _react2.default.createElement(_RaisedButton2.default, { type: 'submit', label: '\u8A3B\u518A', primary: true })
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { style: bottomText, className: 'center-align' },
+	          '\u5DF2\u7D93\u6709\u5E33\u865F\u4E86\uFF1F ',
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/login' },
+	            '\u767B\u5165'
+	          )
 	        )
 	      )
 	    )
@@ -91363,6 +91388,279 @@
 	};
 
 	var _types = __webpack_require__(631);
+
+/***/ }),
+/* 1023 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = exports.BottomNavigationItem = exports.BottomNavigation = undefined;
+
+	var _BottomNavigation2 = __webpack_require__(1024);
+
+	var _BottomNavigation3 = _interopRequireDefault(_BottomNavigation2);
+
+	var _BottomNavigationItem2 = __webpack_require__(1025);
+
+	var _BottomNavigationItem3 = _interopRequireDefault(_BottomNavigationItem2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.BottomNavigation = _BottomNavigation3.default;
+	exports.BottomNavigationItem = _BottomNavigationItem3.default;
+	exports.default = _BottomNavigation3.default;
+
+/***/ }),
+/* 1024 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends2 = __webpack_require__(439);
+
+	var _extends3 = _interopRequireDefault(_extends2);
+
+	var _objectWithoutProperties2 = __webpack_require__(444);
+
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+	var _simpleAssign = __webpack_require__(445);
+
+	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function getStyles(props, context) {
+	  var bottomNavigation = context.muiTheme.bottomNavigation;
+
+
+	  var styles = {
+	    root: {
+	      position: 'relative',
+	      width: '100%',
+	      display: 'flex',
+	      justifyContent: 'center',
+	      backgroundColor: bottomNavigation.backgroundColor,
+	      height: bottomNavigation.height
+	    },
+	    item: {
+	      flex: '1'
+	    }
+	  };
+
+	  return styles;
+	}
+
+	var BottomNavigation = function BottomNavigation(props, context) {
+	  var children = props.children,
+	      style = props.style,
+	      selectedIndex = props.selectedIndex,
+	      other = (0, _objectWithoutProperties3.default)(props, ['children', 'style', 'selectedIndex']);
+	  var prepareStyles = context.muiTheme.prepareStyles;
+
+	  var styles = getStyles(props, context);
+
+	  var preparedChildren = _react.Children.map(children, function (child, index) {
+	    return (0, _react.cloneElement)(child, {
+	      style: (0, _simpleAssign2.default)({}, styles.item, child.props.style),
+	      selected: index === selectedIndex
+	    });
+	  });
+
+	  return _react2.default.createElement(
+	    'div',
+	    (0, _extends3.default)({}, other, { style: prepareStyles((0, _simpleAssign2.default)({}, styles.root, style)) }),
+	    preparedChildren
+	  );
+	};
+
+	process.env.NODE_ENV !== "production" ? BottomNavigation.propTypes = {
+	  /**
+	   * The `BottomNavigationItem`s to populate the element with.
+	   */
+	  children: _react.PropTypes.node,
+	  /**
+	   * The index of the currently selected navigation item.
+	   */
+	  selectedIndex: _react.PropTypes.number,
+	  /**
+	   * @ignore
+	   * Override the inline-styles of the root element.
+	   */
+	  style: _react.PropTypes.object
+	} : void 0;
+
+	BottomNavigation.contextTypes = {
+	  muiTheme: _react.PropTypes.object.isRequired
+	};
+
+	exports.default = BottomNavigation;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+/* 1025 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends2 = __webpack_require__(439);
+
+	var _extends3 = _interopRequireDefault(_extends2);
+
+	var _objectWithoutProperties2 = __webpack_require__(444);
+
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+	var _simpleAssign = __webpack_require__(445);
+
+	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _EnhancedButton = __webpack_require__(450);
+
+	var _EnhancedButton2 = _interopRequireDefault(_EnhancedButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function getStyles(props, context) {
+	  var selected = props.selected;
+	  var bottomNavigation = context.muiTheme.bottomNavigation;
+
+
+	  var color = selected ? bottomNavigation.selectedColor : bottomNavigation.unselectedColor;
+
+	  var styles = {
+	    root: {
+	      transition: 'padding-top 0.3s',
+	      paddingTop: selected ? 6 : 8,
+	      paddingBottom: 10,
+	      paddingLeft: 12,
+	      paddingRight: 12,
+	      minWidth: 80,
+	      maxWidth: 168
+	    },
+	    label: {
+	      fontSize: selected ? bottomNavigation.selectedFontSize : bottomNavigation.unselectedFontSize,
+	      transition: 'color 0.3s, font-size 0.3s',
+	      color: color
+	    },
+	    icon: {
+	      display: 'block',
+	      /**
+	       * Used to ensure SVG icons are centered
+	       */
+	      width: '100%'
+	    },
+	    iconColor: color
+	  };
+
+	  return styles;
+	}
+
+	var BottomNavigationItem = function BottomNavigationItem(props, context) {
+	  var label = props.label,
+	      icon = props.icon,
+	      style = props.style,
+	      other = (0, _objectWithoutProperties3.default)(props, ['label', 'icon', 'style']);
+	  var prepareStyles = context.muiTheme.prepareStyles;
+
+	  var styles = getStyles(props, context);
+
+	  var styledIcon = (0, _react.cloneElement)(icon, {
+	    style: (0, _simpleAssign2.default)({}, styles.icon, icon.props.style),
+	    color: icon.props.color || styles.iconColor
+	  });
+
+	  return _react2.default.createElement(
+	    _EnhancedButton2.default,
+	    (0, _extends3.default)({}, other, { style: (0, _simpleAssign2.default)({}, styles.root, style) }),
+	    styledIcon,
+	    _react2.default.createElement(
+	      'div',
+	      { style: prepareStyles(styles.label) },
+	      label
+	    )
+	  );
+	};
+
+	process.env.NODE_ENV !== "production" ? BottomNavigationItem.propTypes = {
+	  /**
+	   * Set the icon representing the view for this item.
+	   */
+	  icon: _react.PropTypes.node,
+	  /**
+	   * Set the label describing the view for this item.
+	   */
+	  label: _react.PropTypes.node,
+	  /**
+	   * @ignore
+	   * Override the inline-styles of the root element.
+	   */
+	  style: _react.PropTypes.object
+	} : void 0;
+
+	BottomNavigationItem.contextTypes = {
+	  muiTheme: _react.PropTypes.object.isRequired
+	};
+
+	exports.default = BottomNavigationItem;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+/* 1026 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _pure = __webpack_require__(472);
+
+	var _pure2 = _interopRequireDefault(_pure);
+
+	var _SvgIcon = __webpack_require__(481);
+
+	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var CommunicationLocationOn = function CommunicationLocationOn(props) {
+	  return _react2.default.createElement(
+	    _SvgIcon2.default,
+	    props,
+	    _react2.default.createElement('path', { d: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z' })
+	  );
+	};
+	CommunicationLocationOn = (0, _pure2.default)(CommunicationLocationOn);
+	CommunicationLocationOn.displayName = 'CommunicationLocationOn';
+	CommunicationLocationOn.muiName = 'SvgIcon';
+
+	exports.default = CommunicationLocationOn;
 
 /***/ })
 /******/ ]);

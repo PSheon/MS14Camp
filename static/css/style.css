@@ -63,3 +63,31 @@ a:hover {
   padding: 0 16px;
   color: green;
 }
+
+
+
+
+
+
+
+
+@media(max-width:768px){
+    .background{
+    background-image:url('../imgs/background_landing_xs.png');
+    height:100vh;
+    padding-top:15px;
+    background-position:bottom center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+@media(max-width:992px){
+  
+}
+@media(min-width:992px){
+
+}
+@media(min-width:1200px){
+
+}

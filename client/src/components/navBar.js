@@ -9,15 +9,15 @@ import Auth from '../modules/Auth';
 
 const drawer = {
     width: '0',
-    height: '100vh',
+    height: '100%',
     position: 'absolute',
     top: '0',
     zIndex: '1112'
 };
 
 const overlay = {
-    width: '100vw',
-    height: '100vh',
+    width: '100%',
+    height: '100%',
     position: 'absolute',
     backgroundColor: 'rgba(0,0,0,0.7)',
     top: '0',
@@ -33,7 +33,7 @@ export default class Drawer extends Component {
     }
     _handleLinkClicked = () => {
         this.setState({ hideMenu: true });
-        console.log(123);
+        
     }
     _handleOnPress = () => {
         this.setState({ hideMenu: !this.state.hideMenu });

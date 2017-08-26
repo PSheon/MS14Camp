@@ -76,35 +76,16 @@ class Dashboard extends Component {
             title="記分板"
             subtitle="如果你看到這行文字代表身分已授權."
           />
-          
-          <NPCCard />
-
+          {/*<NPCCard />*/}
           <MissionBroadcast />
 
           <RedMissionCard />
           <BlueMissionCard />
           <YellowMissionCard />
           <GreenMissionCard />
-          {this.renderUser()}
-
-          <QrReader
-            ref="qrReader1"
-            delay={this.state.delay}
-            style={previewStyle}
-            onError={this.handleError}
-            onScan={this.handleScan}
-            legacyMode
-          />
-          <input type="button" value="Submit QR Code" onClick={this.openImageDialog} />
-          <p>{this.state.result}</p>
-          {this.renderMission()}
-          
-          {this.props.secretData && <CardText style={{ fontSize: '16px', color: 'green' }}>{this.props.secretData}</CardText>}
-          {this.props.room && <CardText style={{ fontSize: '16px', color: 'green' }}>{this.props.room}</CardText>}
-          
-
+          {/*this.props.secretData && <CardText style={{ fontSize: '16px', color: 'green' }}>{this.props.secretData}</CardText>*/}
+          {/*this.props.room && <CardText style={{ fontSize: '16px', color: 'green' }}>{this.props.room}</CardText>*/}
         </Card>
-        <ChatBotIcon />
       </div>
     )
   }
