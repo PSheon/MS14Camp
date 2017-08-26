@@ -44,7 +44,7 @@ router.put('/donemission/:id/:type', (req, res) => {
   let reqId = req.params.id;
   let reqType = req.params.type;
   let teamId = req.body.team;
-
+  //加入前一個任務的檢查
 
   csv.fromStream(csvStream, {
     headers: [
@@ -65,7 +65,6 @@ router.put('/donemission/:id/:type', (req, res) => {
         switch (reqType) {
           case 'success':
             existed = _.findIndex(temp, { 'mId': data.mId });
-
             if (existed === -1) {
               console.log('pushing.....');
               temp.push({ 

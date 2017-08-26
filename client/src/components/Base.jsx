@@ -18,16 +18,16 @@ const Base = ({ children }) => (
         </div>
       ) : (
           <div className="top-bar-right">
+            <Link to="/Npc">任務頁</Link>
             <Link to="/login">登入</Link>
             <Link to="/signup">註冊</Link>
           </div>
         )}
 
     </div>
-
+   
     { /* child component will be rendered here */}
     {children}
-
   </div>
 );
 

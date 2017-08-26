@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import Auth from '../modules/Auth';
 import * as actions from '../actions';
-import Npc from '../components/Npc.jsx';
+import Npc from '../components/Npc/Npc.jsx';
 
 
 class NpcPage extends Component {
@@ -12,7 +12,6 @@ class NpcPage extends Component {
         this.props.setSecret();
         this.props.getRoom();
         this.props.getMission('t01');
-        this.props.setTeamProcess();
         this.props.setUser({ name: Auth.getUserNameFromCookie(), email: Auth.getUserEmailFromCookie() });
     }
     render() {

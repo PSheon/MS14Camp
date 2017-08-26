@@ -1,11 +1,19 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import QrReader from 'react-qr-reader';
+import FontIcon from 'material-ui/FontIcon';
+import Paper from 'material-ui/Paper';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
 import LinearProgress from 'material-ui/LinearProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
-import * as actions from '../actions';
+
+import * as actions from '../../actions';
+
+const dialog={
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    color:'white'
+}
 
 
 class Npc extends Component {
@@ -15,6 +23,7 @@ class Npc extends Component {
             completed: 20,
             delay: 100,
             result: 'No fucking result',
+            selectedIndex: 0,
         };
     }
 
@@ -26,8 +35,32 @@ class Npc extends Component {
             return missionList.map((mission) => {
                 return (
                     <div key={mission.mId}>
-                    <h1>{mission.data.title}</h1>
-                    <p>{mission.data.fromUs}:{mission.data.ourDetail}</p>
+                    <p>{mission.data.title}</p>
+                    <div className="right-align" >
+                        <p>{mission.data.fromUs}</p>
+                        <p style={dialog}>{mission.data.ourDetail}</p>
+                    </div>
+
+                    <div className="right-left">
+                        <p>{mission.data.fromBoss}</p>
+                        <p style={dialog}>{mission.data.bossDetail}</p>
+                    </div>
+
+                    {mission.data.bossDetail2 ?
+                     <div className="right-left">
+                        <p>{mission.data.fromBoss}</p>
+                        <p style={dialog}>{mission.data.bossDetail2}</p>
+                    </div>:null}
+
+                    {mission.data.getItem?
+                        <p>{mission.data.getItem}</p>:
+                        null
+                    }
+                    {mission.data.lostItem ?
+                        <p>{mission.data.lostItem}</p>:
+                        null
+                    }
+                    
                     </div>
                 );
             });
@@ -48,6 +81,9 @@ class Npc extends Component {
         this.refs.qrReader1.openImageDialog()
     }
 
+    select = (index) => this.setState({ selectedIndex: index });
+
+
     render() {
         const previewStyle = {
             height: 240,
@@ -55,19 +91,19 @@ class Npc extends Component {
         }
         return (
             <div>
-                <Card className="container">
-                    {this.renderMission()}
-                    <QrReader
+                <div className='container'>
+                {this.renderMission()}
+                <QrReader
                         ref="qrReader1"
                         delay={this.state.delay}
                         style={previewStyle}
                         onError={this.handleError}
                         onScan={this.handleScan}
                         legacyMode
-                    />
-                    <input type="button" value="Submit QR Code" onClick={this.openImageDialog} />
-                    <p>{this.state.result}</p>
-                </Card>
+                />
+                <input type="button" value="Submit QR Code" onClick={this.openImageDialog} />
+                <p>{this.state.result}</p>
+                </div>
             </div>
         )
     }
