@@ -91267,7 +91267,7 @@
 	                    _react2.default.createElement(
 	                        'p',
 	                        null,
-	                        _this.props.team.items ? '滿' : '空'
+	                        _this.props.team.items == [] ? '滿' : '空'
 	                    )
 	                );
 	            }

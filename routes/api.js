@@ -57,10 +57,11 @@ router.put('/donemission/:id/:type', (req, res) => {
       Team.findOne({ team:teamId}, (err, team) => {
         if (err) throw err;
         let temp = team.missions;
+        let tempMoney=team.money;
+        let tempItem=team.items;
         existed = _.findIndex(temp, { 'mId': data.mId });
         switch (reqType) {
           case 'success':
-            
             if (existed === -1) {
               console.log('pushing.....');
               temp.push({ 
@@ -71,6 +72,20 @@ router.put('/donemission/:id/:type', (req, res) => {
             } else {
               console.log('editing.....');
               temp[existed].isSuccess = true;
+            }
+            if (data.getItem) {
+              tempItem.push(data.getItem);
+            }
+            if (data.lostItem) {
+              let itemIndex = _.findIndex(team.items, `${data.lostItem}`);
+            }
+            if (data.success) {
+              let successMoney = parseInt(data.success);
+              tempMoney += successMoney ;
+            }
+            if (data.paid){
+              let PaidMoney = parseInt(data.paid);
+              tempMoney -= PaidMoney ;
             }
             break;
           case 'failed':
@@ -83,9 +98,23 @@ router.put('/donemission/:id/:type', (req, res) => {
             } else {
               temp[existed].isSuccess = false;
             }
+            if (data.getItem) {
+              tempItem.push(data.getItem);
+            }
+            if (data.lostItem) {
+              let itemIndex = _.findIndex(team.items, `${data.lostItem}`);
+            }
+            if (data.failed) {
+              let failedMoney = parseInt(data.failed);
+              tempMoney += failedMoney;
+            }
+            if (data.paid) {
+              let PaidMoney = parseInt(data.paid);
+              tempMoney -= PaidMoney;
+            }
             break;
         }
-        Team.findOneAndUpdate({ team: teamId }, { missions: temp }, (err, team) => {
+        Team.findOneAndUpdate({ team: teamId }, { missions: temp,items:tempItem,money:tempMoney}, (err, team) => {
           if (err) throw err;
           Team.findOne({ team: teamId }, (err, team) => {
             if (err) throw err;

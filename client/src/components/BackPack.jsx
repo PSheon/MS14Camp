@@ -53,7 +53,7 @@ class BackPack extends Component {
         if (this.props.team) {
             return (
                 <div>
-                    <p>{this.props.team.items?'滿':'空'}</p>
+                    <p>{this.props.team.items==[]?'滿':'空'}</p>
                 </div>
             );
         }
