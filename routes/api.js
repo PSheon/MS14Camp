@@ -102,33 +102,33 @@ router.put('/donemission/:id/:type', (req, res) => {
 });
 //money
 router.put('/money/:id/:type', (req, res) => {
-  let csvStream = fs.createReadStream(path.resolve('./static/csv', 'missionList.csv'));
-  let isFound = false;
+
   let teamId = req.params.id;
   let reqType = req.params.type;
   let mId = req.body.mId;
 
-  csv.fromStream(csvStream, {
-    headers: ['mSerial', 'amount']
-  }).on("data", (data) => {
-
-    if (data.mSerial === mId && !isFound) {
       Money.findOne({ mSerial: mId }, (err,money) => {
         if (err) throw err;
-        if(!money.mSerial){
-          let money=0;
+        console.log(money);
+        if(money){
+          let moneyTemp=0;
           Team.findOne({ team: teamId }, (err, team) => {
             if (err) throw err;
-            if (reqType === 'add') {
-              money = team.money + money.amount;
+            if (reqType === 'add'&&!money.isExpired) {
+              moneyTemp = team.money + money.amount;
+            }else if(reqType === 'minus' && !money.isExpired){
+              moneyTemp = team.money - money.amount;
             }else{
-              money = team.money - money.amount;
+              moneyTemp=team.money;
             }
 
-            Team.findOneAndUpdate({ team: teamId }, { money: money }, (err, team) => {
+            Team.findOneAndUpdate({ team: teamId }, { money: moneyTemp }, (err, team) => {
               if (err) throw err;
               Team.findOne({ team: teamId }, (err, team) => {
                 if (err) throw err;
+                Money.findOneAndUpdate({ mSerial: mId }, { isExpired: true }, (err, money) => {
+                  if (err) throw err;
+                });
                 res.status(200).json(team);
               });
             });
@@ -137,12 +137,6 @@ router.put('/money/:id/:type', (req, res) => {
           res.status(200).json({err:`想騙錢？`});
         }
       });
-      isFound = !isFound;
-    }
-  }
-    ).on("end", () => {
-      if (!isFound) res.json({ err: 'money not found!' });
-    });
 });
 
 
@@ -182,6 +176,45 @@ router.get('/god/init/:id', (req, res) => {
         });
       });
     });
+});
+//add all
+router.get('/godm/init', (req, res) => {
+  let counter=0;
+  let csvStream = fs.createReadStream(path.resolve('./static/csv', 'money.csv'));
+  csv.fromStream(csvStream, { headers: ['mSerial', 'amount'] })
+    .on("data", (data) => {
+      counter++
+      let money=new Money({
+         mSerial:data.mSerial,
+         amount:data.amount,
+         isExpired:false
+      });
+      money.save((err) => {
+        if (err) throw err;
+      });
+      console.log(counter);
+    }).on("end", () => {
+      Money.find({}, (err, money) => {
+        if (err) throw err;
+        let len=money.length;
+        console.log(len)
+        res.status(200).json(money);
+      });
+    });    
+});
+//get all
+router.get('/godm/query', (req, res) => {
+  Money.find({}, (err, money) => {
+    if (err) throw err;
+    res.status(200).json(money);
+  });
+});
+//clearAll
+router.get('/godm/delete', (req, res) => {
+  Money.remove({}, (err, money) => {
+    if (err) throw err;
+    res.status(200).json(money);
+  });
 });
 
 module.exports = router;
