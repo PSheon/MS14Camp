@@ -11,7 +11,7 @@ class NpcPage extends Component {
     componentDidMount() {
         this.props.setSecret();
         this.props.getRoom();
-        this.props.getMission('t01');
+        this.props.query('t01');
         this.props.setUser({ name: Auth.getUserNameFromCookie(), email: Auth.getUserEmailFromCookie() });
     }
     render() {

@@ -102,11 +102,10 @@ export const setNpc = (npc_name) => dispatch => {
 //alex
 
 
-//useless
-export const getMission = (teamId) => dispatch => {
+export const query = (teamId) => dispatch => {
   console.log(`api is call with ${teamId}`);
   let team = queryString.stringify({ team: teamId });
-  axios(`/api/querymission`, {
+  axios(`/api/query`, {
     method: 'post',
     headers: {
       'Content-type': 'application/x-www-form-urlencoded',
@@ -116,7 +115,7 @@ export const getMission = (teamId) => dispatch => {
     responseType: 'json'
   }).then((response) => {
     if (response.status === 200) {
-      dispatch({ type: types.GET_MISSION, payload: response.data });
+      dispatch({ type: types.GET_INFO, payload: response.data });
     }
   }).catch(function (error) {
     console.log(error);

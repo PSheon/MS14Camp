@@ -41,6 +41,7 @@ class DashboardPage extends Component {
     this.props.setSecret();
     this.props.getRoom();
     this.props.setTeamProgress();
+    this.props.query('t01');
     this.props.setUser({ name: Auth.getUserNameFromCookie(), email: Auth.getUserEmailFromCookie() });
   }
 

@@ -1,7 +1,7 @@
 export const SET_SECRET = 'set_secret';
 export const GET_ROOM = 'get_room';
 export const GET_MONEY = 'get_money';
-export const GET_MISSION = 'get_mission';
+export const GET_INFO = 'get_info';
 export const DONE_MISSION = 'done_mission';
 
 // progress

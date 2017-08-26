@@ -111,8 +111,8 @@ class Dashboard extends Component {
 }
 
 
-function mapStateToProps({ secretData, room, user, mission }) {
-  return { secretData, room, user, mission};
+function mapStateToProps({ secretData, room, user,team }) {
+  return { secretData, room, user, team};
 }
 
 export default connect(mapStateToProps, actions)(Dashboard);

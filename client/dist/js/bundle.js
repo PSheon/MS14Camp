@@ -56778,6 +56778,7 @@
 	      this.props.setSecret();
 	      this.props.getRoom();
 	      this.props.setTeamProgress();
+	      this.props.query('t01');
 	      this.props.setUser({ name: _Auth2.default.getUserNameFromCookie(), email: _Auth2.default.getUserEmailFromCookie() });
 	    }
 
@@ -58336,7 +58337,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.getMoney = exports.doneMission = exports.getMission = exports.setNpc = exports.addYellowProgress = exports.addGreenProgress = exports.addBlueProgress = exports.addRedProgress = exports.setTeamProgress = exports.getRoom = exports.setUser = exports.setSecret = undefined;
+	exports.getMoney = exports.doneMission = exports.query = exports.setNpc = exports.addYellowProgress = exports.addGreenProgress = exports.addBlueProgress = exports.addRedProgress = exports.setTeamProgress = exports.getRoom = exports.setUser = exports.setSecret = undefined;
 
 	var _axios = __webpack_require__(604);
 
@@ -58471,12 +58472,11 @@
 	//alex
 
 
-	//useless
-	var getMission = exports.getMission = function getMission(teamId) {
+	var query = exports.query = function query(teamId) {
 	  return function (dispatch) {
 	    console.log('api is call with ' + teamId);
 	    var team = queryString.stringify({ team: teamId });
-	    (0, _axios2.default)('/api/querymission', {
+	    (0, _axios2.default)('/api/query', {
 	      method: 'post',
 	      headers: {
 	        'Content-type': 'application/x-www-form-urlencoded',
@@ -58486,7 +58486,7 @@
 	      responseType: 'json'
 	    }).then(function (response) {
 	      if (response.status === 200) {
-	        dispatch({ type: types.GET_MISSION, payload: response.data });
+	        dispatch({ type: types.GET_INFO, payload: response.data });
 	      }
 	    }).catch(function (error) {
 	      console.log(error);
@@ -58548,7 +58548,7 @@
 	var SET_SECRET = exports.SET_SECRET = 'set_secret';
 	var GET_ROOM = exports.GET_ROOM = 'get_room';
 	var GET_MONEY = exports.GET_MONEY = 'get_money';
-	var GET_MISSION = exports.GET_MISSION = 'get_mission';
+	var GET_INFO = exports.GET_INFO = 'get_info';
 	var DONE_MISSION = exports.DONE_MISSION = 'done_mission';
 
 	// progress
@@ -59092,9 +59092,9 @@
 	  var secretData = _ref.secretData,
 	      room = _ref.room,
 	      user = _ref.user,
-	      mission = _ref.mission;
+	      team = _ref.team;
 
-	  return { secretData: secretData, room: room, user: user, mission: mission };
+	  return { secretData: secretData, room: room, user: user, team: team };
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, actions)(Dashboard);
@@ -83100,7 +83100,7 @@
 	        value: function componentDidMount() {
 	            this.props.setSecret();
 	            this.props.getRoom();
-	            this.props.getMission('t01');
+	            this.props.query('t01');
 	            this.props.setUser({ name: _Auth2.default.getUserNameFromCookie(), email: _Auth2.default.getUserEmailFromCookie() });
 	        }
 	    }, {
@@ -91136,7 +91136,7 @@
 	        value: function componentDidMount() {
 	            this.props.setSecret();
 	            this.props.getRoom();
-	            this.props.getMission('t01');
+	            this.props.query('t01');
 	            this.props.setUser({ name: _Auth2.default.getUserNameFromCookie(), email: _Auth2.default.getUserEmailFromCookie() });
 	            //get money
 	            //set money add minus
@@ -91341,10 +91341,10 @@
 	    var action = arguments[1];
 
 	    switch (action.type) {
-	        case _types.GET_MISSION:
+	        case _types.GET_INFO:
 	            return action.payload || '';
 	        case _types.DONE_MISSION:
-	            return _extends({}, state, action.payload);
+	            return _extends({}, state.mission, action.payload);
 	        default:
 	            return state;
 	    }
