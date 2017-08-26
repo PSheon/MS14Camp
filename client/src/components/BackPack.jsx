@@ -16,57 +16,17 @@ const dialog = {
 }
 
 
-class Npc extends Component {
+class BackPack extends Component {
     constructor(props) {
         super(props);
         this.state = {
             completed: 20,
             delay: 100,
             result: 'No fucking result',
-            selectedIndex: 0,
         };
     }
 
-    renderMission = () => {
-        if (this.props.mission) {
-            let missionList = this.props.mission.missions;
-            console.log(typeof missionList);
-
-            return missionList.map((mission) => {
-                return (
-                    <div key={mission.mId}>
-                        <p>{mission.data.title}</p>
-                        <div className="right-align" >
-                            <p>{mission.data.fromUs}</p>
-                            <p style={dialog}>{mission.data.ourDetail}</p>
-                        </div>
-
-                        <div className="right-left">
-                            <p>{mission.data.fromBoss}</p>
-                            <p style={dialog}>{mission.data.bossDetail}</p>
-                        </div>
-
-                        {mission.data.bossDetail2 ?
-                            <div className="right-left">
-                                <p>{mission.data.fromBoss}</p>
-                                <p style={dialog}>{mission.data.bossDetail2}</p>
-                            </div> : null}
-
-                        {mission.data.getItem ?
-                            <p>{mission.data.getItem}</p> :
-                            null
-                        }
-                        {mission.data.lostItem ?
-                            <p>{mission.data.lostItem}</p> :
-                            null
-                        }
-
-                    </div>
-                );
-            });
-
-        }
-    }
+   
     handleScan = (data) => {
         let msg = data.split(',');
         this.setState({
@@ -80,10 +40,25 @@ class Npc extends Component {
     openImageDialog = () => {
         this.refs.qrReader1.openImageDialog()
     }
+    renderMoney=()=>{
+        if(this.props.team){
+            return(
+                <div>
+                    <p>{this.props.team.money}</p>
+                </div>
+            );
+        }
+    }
 
-    select = (index) => this.setState({ selectedIndex: index });
-
-
+    renderItem = () => {
+        if (this.props.team) {
+            return (
+                <div>
+                    <p>{this.props.team.items?'滿':'空'}</p>
+                </div>
+            );
+        }
+    }
     render() {
         const previewStyle = {
             height: 240,
@@ -92,7 +67,8 @@ class Npc extends Component {
         return (
             <div>
                 <div className='container'>
-                    {this.renderMission()}
+                    {this.renderMoney()}
+                    {this.renderItem()}
                     <QrReader
                         ref="qrReader1"
                         delay={this.state.delay}
@@ -110,8 +86,8 @@ class Npc extends Component {
 }
 
 
-function mapStateToProps({ mission }) {
-    return { mission };
+function mapStateToProps({ team }) {
+    return { team };
 }
 
-export default connect(mapStateToProps, actions)(Npc);
+export default connect(mapStateToProps, actions)(BackPack);

@@ -83167,9 +83167,9 @@
 
 	var _moneyReducer2 = _interopRequireDefault(_moneyReducer);
 
-	var _missionReducer = __webpack_require__(1020);
+	var _teamReducer = __webpack_require__(1032);
 
-	var _missionReducer2 = _interopRequireDefault(_missionReducer);
+	var _teamReducer2 = _interopRequireDefault(_teamReducer);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -83184,7 +83184,7 @@
 	  form: _reduxForm.reducer,
 	  money: _moneyReducer2.default,
 	  user: _userReducer2.default,
-	  mission: _missionReducer2.default
+	  team: _teamReducer2.default
 	});
 
 /***/ }),
@@ -90861,34 +90861,7 @@
 	var _types = __webpack_require__(631);
 
 /***/ }),
-/* 1020 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	exports.default = function () {
-	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-	    var action = arguments[1];
-
-	    switch (action.type) {
-	        case _types.GET_MISSION:
-	            return action.payload || '';
-	        case _types.DONE_MISSION:
-	            return _extends({}, state, action.payload);
-	        default:
-	            return state;
-	    }
-	};
-
-	var _types = __webpack_require__(631);
-
-/***/ }),
+/* 1020 */,
 /* 1021 */,
 /* 1022 */,
 /* 1023 */,
@@ -90901,8 +90874,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -90966,9 +90937,8 @@
 	        var _this = _possibleConstructorReturn(this, (Npc.__proto__ || Object.getPrototypeOf(Npc)).call(this, props));
 
 	        _this.renderMission = function () {
-	            if (_this.props.mission) {
-	                var missionList = _this.props.mission.missions;
-	                console.log(typeof missionList === 'undefined' ? 'undefined' : _typeof(missionList));
+	            if (_this.props.team) {
+	                var missionList = _this.props.team.missions;
 
 	                return missionList.map(function (mission) {
 	                    return _react2.default.createElement(
@@ -91052,15 +91022,10 @@
 	            _this.refs.qrReader1.openImageDialog();
 	        };
 
-	        _this.select = function (index) {
-	            return _this.setState({ selectedIndex: index });
-	        };
-
 	        _this.state = {
 	            completed: 20,
 	            delay: 100,
-	            result: 'No fucking result',
-	            selectedIndex: 0
+	            result: 'No fucking result'
 	        };
 	        return _this;
 	    }
@@ -91102,9 +91067,9 @@
 	}(_react.Component);
 
 	function mapStateToProps(_ref) {
-	    var mission = _ref.mission;
+	    var team = _ref.team;
 
-	    return { mission: mission };
+	    return { team: team };
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, actions)(Npc);
@@ -91201,8 +91166,6 @@
 	    value: true
 	});
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
@@ -91256,84 +91219,13 @@
 	    color: 'white'
 	};
 
-	var Npc = function (_Component) {
-	    _inherits(Npc, _Component);
+	var BackPack = function (_Component) {
+	    _inherits(BackPack, _Component);
 
-	    function Npc(props) {
-	        _classCallCheck(this, Npc);
+	    function BackPack(props) {
+	        _classCallCheck(this, BackPack);
 
-	        var _this = _possibleConstructorReturn(this, (Npc.__proto__ || Object.getPrototypeOf(Npc)).call(this, props));
-
-	        _this.renderMission = function () {
-	            if (_this.props.mission) {
-	                var missionList = _this.props.mission.missions;
-	                console.log(typeof missionList === 'undefined' ? 'undefined' : _typeof(missionList));
-
-	                return missionList.map(function (mission) {
-	                    return _react2.default.createElement(
-	                        'div',
-	                        { key: mission.mId },
-	                        _react2.default.createElement(
-	                            'p',
-	                            null,
-	                            mission.data.title
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'right-align' },
-	                            _react2.default.createElement(
-	                                'p',
-	                                null,
-	                                mission.data.fromUs
-	                            ),
-	                            _react2.default.createElement(
-	                                'p',
-	                                { style: dialog },
-	                                mission.data.ourDetail
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'right-left' },
-	                            _react2.default.createElement(
-	                                'p',
-	                                null,
-	                                mission.data.fromBoss
-	                            ),
-	                            _react2.default.createElement(
-	                                'p',
-	                                { style: dialog },
-	                                mission.data.bossDetail
-	                            )
-	                        ),
-	                        mission.data.bossDetail2 ? _react2.default.createElement(
-	                            'div',
-	                            { className: 'right-left' },
-	                            _react2.default.createElement(
-	                                'p',
-	                                null,
-	                                mission.data.fromBoss
-	                            ),
-	                            _react2.default.createElement(
-	                                'p',
-	                                { style: dialog },
-	                                mission.data.bossDetail2
-	                            )
-	                        ) : null,
-	                        mission.data.getItem ? _react2.default.createElement(
-	                            'p',
-	                            null,
-	                            mission.data.getItem
-	                        ) : null,
-	                        mission.data.lostItem ? _react2.default.createElement(
-	                            'p',
-	                            null,
-	                            mission.data.lostItem
-	                        ) : null
-	                    );
-	                });
-	            }
-	        };
+	        var _this = _possibleConstructorReturn(this, (BackPack.__proto__ || Object.getPrototypeOf(BackPack)).call(this, props));
 
 	        _this.handleScan = function (data) {
 	            var msg = data.split(',');
@@ -91351,20 +91243,43 @@
 	            _this.refs.qrReader1.openImageDialog();
 	        };
 
-	        _this.select = function (index) {
-	            return _this.setState({ selectedIndex: index });
+	        _this.renderMoney = function () {
+	            if (_this.props.team) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        _this.props.team.money
+	                    )
+	                );
+	            }
+	        };
+
+	        _this.renderItem = function () {
+	            if (_this.props.team) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        _this.props.team.items ? '滿' : '空'
+	                    )
+	                );
+	            }
 	        };
 
 	        _this.state = {
 	            completed: 20,
 	            delay: 100,
-	            result: 'No fucking result',
-	            selectedIndex: 0
+	            result: 'No fucking result'
 	        };
 	        return _this;
 	    }
 
-	    _createClass(Npc, [{
+	    _createClass(BackPack, [{
 	        key: 'render',
 	        value: function render() {
 	            var previewStyle = {
@@ -91377,7 +91292,8 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'container' },
-	                    this.renderMission(),
+	                    this.renderMoney(),
+	                    this.renderItem(),
 	                    _react2.default.createElement(_reactQrReader2.default, {
 	                        ref: 'qrReader1',
 	                        delay: this.state.delay,
@@ -91397,16 +91313,44 @@
 	        }
 	    }]);
 
-	    return Npc;
+	    return BackPack;
 	}(_react.Component);
 
 	function mapStateToProps(_ref) {
-	    var mission = _ref.mission;
+	    var team = _ref.team;
 
-	    return { mission: mission };
+	    return { team: team };
 	}
 
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, actions)(Npc);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, actions)(BackPack);
+
+/***/ }),
+/* 1032 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.default = function () {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+	    var action = arguments[1];
+
+	    switch (action.type) {
+	        case _types.GET_MISSION:
+	            return action.payload || '';
+	        case _types.DONE_MISSION:
+	            return _extends({}, state, action.payload);
+	        default:
+	            return state;
+	    }
+	};
+
+	var _types = __webpack_require__(631);
 
 /***/ })
 /******/ ]);

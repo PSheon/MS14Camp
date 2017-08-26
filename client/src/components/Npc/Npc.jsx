@@ -22,16 +22,14 @@ class Npc extends Component {
         this.state = {
             completed: 20,
             delay: 100,
-            result: 'No fucking result',
-            selectedIndex: 0,
+            result: 'No fucking result'
         };
     }
 
     renderMission=()=> {
-        if (this.props.mission) {
-            let missionList=this.props.mission.missions;
-            console.log(typeof missionList);
-
+        if (this.props.team) {
+            let missionList=this.props.team.missions;
+            
             return missionList.map((mission) => {
                 return (
                     <div key={mission.mId}>
@@ -81,7 +79,7 @@ class Npc extends Component {
         this.refs.qrReader1.openImageDialog()
     }
 
-    select = (index) => this.setState({ selectedIndex: index });
+
 
 
     render() {
@@ -110,8 +108,8 @@ class Npc extends Component {
 }
 
 
-function mapStateToProps({ mission }) {
-    return { mission };
+function mapStateToProps({ team }) {
+    return { team };
 }
 
 export default connect(mapStateToProps, actions)(Npc);

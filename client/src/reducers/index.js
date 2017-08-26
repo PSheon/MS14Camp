@@ -9,7 +9,7 @@ import npcReducer from './missions/npcReducer';
 import roomReducer from './roomReducer';
 import userReducer from './userReducer';
 import moneyReducer from './moneyReducer';
-import missionReducer from './missionReducer';
+import teamReducer from './teamReducer';
 
 export default combineReducers({
   redMission: redMissionReducer,
@@ -22,5 +22,5 @@ export default combineReducers({
   form: reduxForm,
   money: moneyReducer,
   user: userReducer,
-  mission: missionReducer
+  team: teamReducer
 });
