@@ -62,9 +62,15 @@ class BackPack extends Component {
             );
         }else{
            return(
-               <div>
-                   <p>正在努力載入金額中</p>
-               </div>
+               <Chip
+                   labelStyle={{
+                       width: '100%',
+                       textAlign: 'right',
+                       paddingRight: '15px'
+                   }}
+                   style={money}>
+                   正在努力載入金額中
+                </Chip>
            );
         }
     }
@@ -76,8 +82,19 @@ class BackPack extends Component {
                     {this.props.team.items!==[]?
                     this.props.team.items.map((item)=>{
                         return(
-                            <div style={{border:'1px solid black'}} className="col s3" key={Math.random()}>
-                             <p>{item}</p>
+                            <div 
+                                style={{ padding: '2px', position: 'relative'}} 
+                                className="col s3" key={Math.random()}>
+                                <img 
+                                    style={{ width: '100%', height: 'auto'}}
+                                src={item.getItemUrl} />
+                                <p style={{
+                                    position: 'absolute',
+                                    color: 'white',
+                                    bottom: '-6px',
+                                    right: '2px',
+                                    backgroundColor: 'rgba(0,0,0,0.5)'
+                                }}>{item}</p>
                             </div>
                         )
                     })
@@ -129,7 +146,8 @@ class BackPack extends Component {
                                         backgroundImage:'none',
                                         borderStyle:'none',
                                         lineHeight:'45px',
-                                        paddingLeft:'15px'
+                                        paddingRight:0,
+                                        paddingLeft:'10px'
                                     }}
                                     type="button"
                                     value="加值金錢"

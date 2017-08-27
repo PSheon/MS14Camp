@@ -48,11 +48,12 @@ router.put('/donemission/:id/:type', (req, res) => {
 
   csv.fromStream(csvStream, {
     headers: [
-      'mId', 'title', 'fromUs', 'ourDetail', 'fromBoss', 'bossDetail', 'bossDetail2', 'getItem', 'lostItem', 'success', 'failed', 'paid'
+      'mId', 'title', 'fromUs', 'ourDetail', 'fromBoss', 'bossDetail', 'bossDetail2', 'getItem', 'lostItem', 'success', 'failed', 'paid','getItemUrl'
     ]
   }).on("data", (data) => {
     
     if (data.mId === reqId && !isFound) {
+      console.log(data);
       Team.findOne({ team:teamId}, (err, team) => {
         if (err) throw err;
         let temp = team.missions;
@@ -71,7 +72,7 @@ router.put('/donemission/:id/:type', (req, res) => {
               temp[existed].isSuccess = true;
             }
             if (data.getItem) {
-              tempItem.push(data.getItem);
+              tempItem.push({item:data.getItem,url:data.getItemUrl});
             }
             if (data.lostItem) {
               let itemIndex = tempItem.indexOf(data.lostItem);

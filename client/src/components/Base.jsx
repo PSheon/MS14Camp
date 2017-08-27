@@ -27,17 +27,25 @@ class Base extends Component {
   render(){
     return (
       <div>
-        <div className="navbar-fixed">
-          <nav>
-            <div className="nav-wrapper">
-              <a className="brand-logo center">{ this.props.user.name + ' ~ ' + this.state.selectedName }</a>
-            </div>
-          </nav>
-        </div>
+        {Auth.isUserAuthenticated() ?(
+          <div className="navbar-fixed">
+            <nav>
+              <div className="nav-wrapper">
+                <a style={{
+                  marginLeft:'15px',
+                  fontSize:'16px',
+                  fontWeight:'normal'
+                }}>{this.state.selectedName}</a>
+              </div>
+            </nav>
+          </div>
+        ):null}
+      
         { /* child component will be rendered here */}
         {this.props.children}
-        <footer style={{ minHeight: '10vh' }}>     
-        </footer>
+        {Auth.isUserAuthenticated() ? (
+          <footer style={{ minHeight: '10vh' }}>
+        </footer>):null}
 
         {Auth.isUserAuthenticated()?(
           <Paper zDepth={1} style={{ position: 'fixed', bottom: 0, width: '100%' }}>

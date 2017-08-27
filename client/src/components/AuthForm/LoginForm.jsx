@@ -6,14 +6,13 @@ import TextField from 'material-ui/TextField';
 
 
 const form = {
-  backgroundColor: 'rgba(255,255,255,0.3)',
+  backgroundColor: 'rgba(255,255,255,0)',
   borderRadius: '4px',
-  padding: '10px',
-  boxShadow: '0px 10px 20px rgba(0,0,0,0.5)'
-  
+  padding: '10px' 
 }
 const bottomText = {
-  width: '100%'
+  width: '100%',
+  
 }
 const LoginForm = ({
   onSubmit,
@@ -34,9 +33,9 @@ const LoginForm = ({
             <TextField
               floatingLabelText="信箱"
               name="email"
-                errorText={errors.email}
-                onChange={onChange}
-                value={user.email}
+              errorText={errors.email}
+              onChange={onChange}
+              value={user.email}
               />
             </div>
 
@@ -55,7 +54,7 @@ const LoginForm = ({
               <RaisedButton type="submit" label="登入" primary />
             </div>
 
-            <p style={bottomText} className="center-align">還沒有帳號？ <Link to={'/signup'}>創建一個</Link>.</p>
+            <p style={bottomText} className="center-align">還沒有帳號？ <Link to={'/signup'} style={{textDecoration:'underline'}}>創建一個</Link>.</p>
           </form>
         </div>
         <img src='https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/dinosaur.png' style={style.dinosaur} />
@@ -82,7 +81,7 @@ const style = {
     width: '100vw',
     position: 'absolute',
     right: '50%',
-    bottom: '0',
+    bottom: 0,
     transform: 'translate(50%, 0%)',
     verticalAlign: 'middle',
   }
