@@ -6,9 +6,10 @@ import TextField from 'material-ui/TextField';
 
 
 const form ={
-  backgroundColor:'white',
-  paddingTop: '10px',
-  paddingBottom:'10px'
+  backgroundColor: 'rgba(255,255,255,0.3)',
+  borderRadius: '4px',
+  padding: '10px',
+  boxShadow: '0px 10px 20px rgba(0,0,0,0.5)'
 }
 const bottomText={
   width:'100%'
@@ -19,54 +20,77 @@ const SignUpForm = ({
   errors,
   user,
 }) => (
-    <div className="background">
+      <div style={style.wrapper}>
+        <div style={style.container}>  
+            <form className="center-align" style={form} action="/" onSubmit={onSubmit}>
+              {errors.summary && <p className="error-message">{errors.summary}</p>}
+              <h5>馬上加入騎士團的行列吧！</h5>
+              <div>
+                <TextField
+                  floatingLabelText="名字"
+                  name="name"
+                  errorText={errors.name}
+                  onChange={onChange}
+                  value={user.name}
+                />
+              </div>
 
-        
-        <Card className="container" style={{ paddingTop: '10px' }}>
-          
-        <form className="center-align" style={form} action="/" onSubmit={onSubmit}>
-        {errors.summary && <p className="error-message">{errors.summary}</p>}
-        <h5>馬上加入騎士團的行列吧！</h5>
-        <div>
-          <TextField
-            floatingLabelText="名字"
-            name="name"
-            errorText={errors.name}
-            onChange={onChange}
-            value={user.name}
-          />
-        </div>
+              <div>
+                <TextField
+                  floatingLabelText="信箱"
+                  name="email"
+                  errorText={errors.email}
+                  onChange={onChange}
+                  value={user.email}
+                />
+              </div>
 
-        <div>
-          <TextField
-            floatingLabelText="信箱"
-            name="email"
-            errorText={errors.email}
-            onChange={onChange}
-            value={user.email}
-          />
-        </div>
+              <div>
+                <TextField
+                  floatingLabelText="密碼"
+                  type="password"
+                  name="password"
+                  onChange={onChange}
+                  errorText={errors.password}
+                  value={user.password}
+                />
+              </div>
 
-        <div>
-          <TextField
-            floatingLabelText="密碼"
-            type="password"
-            name="password"
-            onChange={onChange}
-            errorText={errors.password}
-            value={user.password}
-          />
+              <div className="center-align">
+                <RaisedButton type="submit" label="註冊" primary />
+              </div>
+              <p style={bottomText} className="center-align">已經有帳號了？ <Link to={'/login'}>登入</Link></p>
+            </form>
         </div>
-
-        <div className="center-align">
-          <RaisedButton type="submit" label="註冊" primary />
-        </div>
-        <p style={bottomText} className="center-align">已經有帳號了？ <Link to={'/login'}>登入</Link></p>
-      </form>
-      </Card>
-  </div>
+        <img src='https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/Group%401x.png' style={style.rocket} />
+      </div>
   );
-
+const style = {
+  wrapper: {
+    backgroundColor:'#ff949d',
+    height: '100vh',
+    width: '100vw',
+    display: 'flex',
+    flexDirection: "row",
+    justifyContent: 'center',//左右
+    alignItems: 'center',
+  },
+  container: {
+    textAlign: 'center',
+    position: 'relative',
+    bottom: '50px',
+    zIndex: '2'
+  },
+  rocket:{
+    height: '100vh*0.45',
+    width: '100vw',
+    position: 'absolute',
+    right: '50%',
+    bottom: '0',
+    transform: 'translate(50%, 0%)',
+    verticalAlign: 'middle',
+  }
+}
 SignUpForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,

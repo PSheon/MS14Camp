@@ -2796,9 +2796,9 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-"jsqr@git+https://github.com/JodusNodus/jsQR.git":
+"jsqr@https://github.com/JodusNodus/jsQR.git":
   version "0.2.2"
-  resolved "git+https://github.com/JodusNodus/jsQR.git#5ba1acefa1cbb9b2bc92b49f503f2674e2ec212b"
+  resolved "https://github.com/JodusNodus/jsQR.git#5ba1acefa1cbb9b2bc92b49f503f2674e2ec212b"
 
 jwa@^1.1.4:
   version "1.1.5"
