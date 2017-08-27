@@ -37773,7 +37773,7 @@
 	              _react2.default.createElement(
 	                'a',
 	                { className: 'brand-logo center' },
-	                this.props.user.name + ' ~ ' + this.state.selectedName
+	                this.props.user.name + '~' + this.state.selectedName
 	              )
 	            )
 	          )
@@ -92775,7 +92775,7 @@
 	var _types = __webpack_require__(652);
 
 	var initialState = {
-	    name: '傻眼貓咪',
+	    name: '勇者',
 	    email: 'sayan@maomii.com'
 	};
 

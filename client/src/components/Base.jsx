@@ -30,7 +30,7 @@ class Base extends Component {
         <div className="navbar-fixed">
           <nav>
             <div className="nav-wrapper">
-              <a className="brand-logo center">{ this.props.user.name + ' ~ ' + this.state.selectedName }</a>
+              <a className="brand-logo center">{ this.props.user.name + '~' + this.state.selectedName }</a>
             </div>
           </nav>
         </div>

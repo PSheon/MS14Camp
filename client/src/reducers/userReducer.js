@@ -1,7 +1,7 @@
 import { SET_USER } from '../actions/types';
 
 const initialState = {
-    name: '傻眼貓咪',
+    name: '勇者',
     email: 'sayan@maomii.com'
 }
 
