@@ -6,10 +6,7 @@ import LinearProgress from 'material-ui/LinearProgress';
 
 import * as actions from '../actions';
 import NPCCard from './ChatBot/NPCCard.jsx';
-import RedMissionCard from './Mission/RedMissionCard.jsx';
-import BlueMissionCard from './Mission/BlueMissionCard.jsx';
-import YellowMissionCard from './Mission/YellowMissionCard.jsx';
-import GreenMissionCard from './Mission/GreenMissionCard.jsx';
+import MissionCard from './Mission/MissionCard.jsx';
 import MissionBroadcast from './Mission/MissionBroadcast.jsx';
 import ChatBotIcon from './ChatBot/ChatBotIcon.jsx';
 
@@ -79,10 +76,7 @@ class Dashboard extends Component {
           {/*<NPCCard />*/}
           <MissionBroadcast />
 
-          <RedMissionCard />
-          <BlueMissionCard />
-          <YellowMissionCard />
-          <GreenMissionCard />
+          <MissionCard />
           {/*this.props.secretData && <CardText style={{ fontSize: '16px', color: 'green' }}>{this.props.secretData}</CardText>*/}
           {/*this.props.room && <CardText style={{ fontSize: '16px', color: 'green' }}>{this.props.room}</CardText>*/}
         </Card>

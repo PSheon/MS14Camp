@@ -1,7 +1,5 @@
 import React, { PropTypes,Component} from 'react';
 import { Link, IndexLink } from 'react-router';
-import Auth from '../modules/Auth';
-import NavBar from './navbar';
 import FontIcon from 'material-ui/FontIcon';
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
@@ -10,7 +8,8 @@ import Settings from 'material-ui/svg-icons/action/settings';
 import Headline from 'material-ui/svg-icons/action/view-headline';
 import Basket from 'material-ui/svg-icons/action/shopping-basket';
 
-
+import Auth from '../modules/Auth';
+import NavBar from './navBar.jsx';
 
 
 
@@ -25,26 +24,18 @@ class Base extends Component {
   render(){
     return (
       <div>
-        {/*<div className="top-bar">
-          <div className="top-bar-left">
-            <IndexLink to="/">微軟 14 領袖營</IndexLink>
-          </div>
-
-          {Auth.isUserAuthenticated() ? (
-            <div className="top-bar-right">
-              <Link to="/Npc">任務頁</Link>
-              <Link to="/backpack">背包</Link>
-              <Link to="/logout">登出</Link>
+        <div className="navbar-fixed">
+          <nav>
+            <div className="nav-wrapper">
+              <a className="brand-logo center">微軟14領袖營</a>
             </div>
-          ) : (
-              <div className="top-bar-right">
-                <Link to="/login">登入</Link>
-                <Link to="/signup">註冊</Link>
-              </div>
-            )}
-          </div>*/}
+          </nav>
+        </div>
         { /* child component will be rendered here */}
         {this.props.children}
+        <footer style={{ minHeight: '10vh' }}>     
+        </footer>
+
         {Auth.isUserAuthenticated()?(
           <Paper zDepth={1} style={{ position: 'fixed', bottom: 0, width: '100%' }}>
             <BottomNavigation selectedIndex={this.state.selectedIndex}>
@@ -69,7 +60,7 @@ class Base extends Component {
                 onClick={() => this.select(2)}
               />
               </Link>
-              <Link to="/backpack">
+              <Link to="/setting">
               <BottomNavigationItem
                 label="設定"
                 icon={<Settings color={this.state.selectedIndex === 3 ? '#00BCD4' : '#424242'} />}
