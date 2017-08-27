@@ -1,6 +1,9 @@
-body {
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+html,body {
   margin: 0;
   font-size: 16px;
+  font-family: 'Noto Sans TC', sans-serif;
 }
 
 a {
