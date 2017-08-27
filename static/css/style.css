@@ -1,6 +1,36 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+* {
+  font-family: 'Noto Sans TC', sans-serif !important;
+  font-weight: normal;
+}
+
+html,
 body {
+  height: 100vh;
+  margin: 0;
+  font-weight: bold;
+}
+
+
+
+input:not([type]):focus:not([readonly]),
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=url]:not(.browser-default):focus:not([readonly]) {
+  box-shadow: none;
+}
+
+
+
+
+
+/* @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+html,body {
   margin: 0;
   font-size: 16px;
+  font-family: 'Noto Sans TC', sans-serif;
 }
 
 a {
@@ -64,13 +94,6 @@ a:hover {
   color: green;
 }
 
-
-
-
-
-
-
-
 @media(max-width:768px){
     .background{
     background-image:url('../imgs/background_landing_xs.png');
@@ -90,4 +113,4 @@ a:hover {
 }
 @media(min-width:1200px){
 
-}
+} */

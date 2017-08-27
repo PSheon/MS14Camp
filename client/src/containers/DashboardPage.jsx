@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Auth from '../modules/Auth';
 import * as actions from '../actions';
 import Dashboard from '../components/Dashboard.jsx';
+import GetRoom from '../components/GetRoom.jsx';
 
 
 class DashboardPage extends Component {
@@ -32,7 +33,7 @@ class DashboardPage extends Component {
 
   render() {
     // return (<Dashboard secretData={this.props.dashboard} />);
-    return (<Dashboard />);
+    return (<GetRoom />);
   }
 
 }
