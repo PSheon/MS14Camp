@@ -99,13 +99,6 @@ class BackPack extends Component {
         }
         return (
             <div>
-                <Paper style={{
-                    margin:0,
-                    padding:'5px',
-                    paddingLeft:'10px'
-                }}>
-                    <h5>道具欄</h5>
-                </Paper>
                 <div 
                     style={{
                         marginTop:'10px'
@@ -130,8 +123,12 @@ class BackPack extends Component {
                             }}>
                             <div className="col s3">
                                 <input
+                                    class="waves-effect waves-teal btn-flat"
                                     style={{
-                                        lineHeight:'35px',
+                                        backgroundColor:'white',
+                                        backgroundImage:'none',
+                                        borderStyle:'none',
+                                        lineHeight:'45px',
                                         paddingLeft:'15px'
                                     }}
                                     type="button"
