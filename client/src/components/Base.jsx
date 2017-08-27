@@ -1,7 +1,6 @@
 import React, { PropTypes,Component} from 'react';
 import { Link, IndexLink } from 'react-router';
 import Auth from '../modules/Auth';
-import NavBar from './navbar';
 import FontIcon from 'material-ui/FontIcon';
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
@@ -69,7 +68,7 @@ class Base extends Component {
                 onClick={() => this.select(2)}
               />
               </Link>
-              <Link to="/backpack">
+              <Link to="/setting">
               <BottomNavigationItem
                 label="設定"
                 icon={<Settings color={this.state.selectedIndex === 3 ? '#00BCD4' : '#424242'} />}

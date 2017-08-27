@@ -32,7 +32,6 @@ router.post('/teamprogress', (req, res) => {
 //general query
 router.post('/query',(req,res)=>{
   let teamId=req.body.team;
-  console.log(teamId);
   Team.findOne({team:teamId},(err,team)=>{
     res.status(200).json(team);
   })
@@ -63,24 +62,19 @@ router.put('/donemission/:id/:type', (req, res) => {
         switch (reqType) {
           case 'success':
             if (existed === -1) {
-              console.log('pushing.....');
               temp.push({ 
                 mId: data.mId, 
                 data: _.omit(data, ['mId']), 
                 isSuccess: true 
               });
             } else {
-              console.log('editing.....');
               temp[existed].isSuccess = true;
             }
             if (data.getItem) {
-              console.log(data.getItem);
               tempItem.push(data.getItem);
             }
             if (data.lostItem) {
               let itemIndex = tempItem.indexOf(data.lostItem);
-              console.log(data.lostItem);
-              console.log(itemIndex);
               if(itemIndex>-1){
                 tempItem.splice(itemIndex, 1);
               }      
@@ -109,8 +103,6 @@ router.put('/donemission/:id/:type', (req, res) => {
             }
             if (data.lostItem) {
               let itemIndex = tempItem.indexOf(data.lostItem);
-              console.log(data.lostItem);
-              console.log(itemIndex);
               if (itemIndex > -1) {
                 tempItem.splice(itemIndex, 1);
               }    
@@ -153,9 +145,7 @@ router.put('/money/:id/:type', (req, res) => {
           let moneyTemp=0;
           Team.findOne({ team: teamId }, (err, team) => {
             if (err) throw err;
-            console.log(team);
             if (reqType === 'add'&&!money.isExpired) {
-              console.log(team.money);
               moneyTemp = team.money + money.amount;
             }else if(reqType === 'minus' && !money.isExpired){
               moneyTemp = team.money - money.amount;
@@ -179,14 +169,6 @@ router.put('/money/:id/:type', (req, res) => {
         }
       });
 });
-
-
-//item
-
-
-//add
-
-//minus
 
 //
 router.get('/god/init/:id', (req, res) => {
