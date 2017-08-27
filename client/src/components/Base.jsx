@@ -1,7 +1,6 @@
 import React, { PropTypes,Component} from 'react';
 import { Link, IndexLink } from 'react-router';
 
-import Auth from '../modules/Auth';
 import FontIcon from 'material-ui/FontIcon';
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';

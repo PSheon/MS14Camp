@@ -18,7 +18,7 @@ class BackPackPage extends Component {
     }
     render() {
 
-        return (<Backpack/>);
+        return (<Backpack />);
     }
 
 }

@@ -56,6 +56,7 @@ const routes = {
     {
       path: '/setting',
       component: SettingPage
+    }
   ]
 };
 
