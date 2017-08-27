@@ -84790,13 +84790,9 @@
 	    value: true
 	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(184);
 
 	var _reactRouter = __webpack_require__(379);
 
@@ -84808,152 +84804,49 @@
 
 	var _Paper2 = _interopRequireDefault(_Paper);
 
-	var _Card = __webpack_require__(598);
+	var _List = __webpack_require__(1036);
 
-	var _LinearProgress = __webpack_require__(656);
+	var _exitToApp = __webpack_require__(1043);
 
-	var _LinearProgress2 = _interopRequireDefault(_LinearProgress);
+	var _exitToApp2 = _interopRequireDefault(_exitToApp);
 
-	var _RaisedButton = __webpack_require__(659);
+	var _grade = __webpack_require__(1039);
 
-	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+	var _grade2 = _interopRequireDefault(_grade);
 
-	var _android = __webpack_require__(661);
+	var _Divider = __webpack_require__(492);
 
-	var _android2 = _interopRequireDefault(_android);
+	var _Divider2 = _interopRequireDefault(_Divider);
 
-	var _actions = __webpack_require__(637);
+	var _info = __webpack_require__(1042);
 
-	var actions = _interopRequireWildcard(_actions);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	var _info2 = _interopRequireDefault(_info);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var dialog = {
-	    backgroundColor: 'rgba(0,0,0,0.7)',
-	    color: 'white'
+	var Setting = function Setting() {
+	    return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	            'div',
+	            { className: 'container' },
+	            _react2.default.createElement(
+	                _List.List,
+	                null,
+	                _react2.default.createElement(_List.ListItem, { primaryText: '\u95DC\u65BC\u6211\u5011', leftIcon: _react2.default.createElement(_grade2.default, null) }),
+	                _react2.default.createElement(_Divider2.default, null),
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/logout' },
+	                    _react2.default.createElement(_List.ListItem, { primaryText: '\u767B\u51FA', leftIcon: _react2.default.createElement(_exitToApp2.default, null) })
+	                )
+	            )
+	        )
+	    );
 	};
 
-	var Setting = function (_Component) {
-	    _inherits(Setting, _Component);
-
-	    function Setting(props) {
-	        _classCallCheck(this, Setting);
-
-	        var _this = _possibleConstructorReturn(this, (Setting.__proto__ || Object.getPrototypeOf(Setting)).call(this, props));
-
-	        _this.handleScan = function (data) {
-	            _this.setState({
-	                result: data
-	            });
-	            _this.props.doMoney('t01', data, 'add');
-	        };
-
-	        _this.handleError = function (err) {
-	            console.error(err);
-	        };
-
-	        _this.openImageDialog = function () {
-	            _this.refs.qrReader1.openImageDialog();
-	        };
-
-	        _this.renderMoney = function () {
-	            if (_this.props.team) {
-	                return _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        _this.props.team.money
-	                    )
-	                );
-	            }
-	        };
-
-	        _this.renderItem = function () {
-	            if (_this.props.team) {
-	                return _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    _this.props.team.items !== [] ? _this.props.team.items.map(function (item) {
-	                        return _react2.default.createElement(
-	                            'div',
-	                            { key: Math.random() },
-	                            _react2.default.createElement(
-	                                'p',
-	                                null,
-	                                item
-	                            )
-	                        );
-	                    }) : _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        '\u7A7A'
-	                    )
-	                );
-	            } else {
-	                return _react2.default.createElement(
-	                    'p',
-	                    null,
-	                    '\u7A7A'
-	                );
-	            }
-	        };
-
-	        _this.state = {
-	            completed: 20,
-	            delay: 100,
-	            result: 'No fucking result'
-	        };
-	        return _this;
-	    }
-
-	    _createClass(Setting, [{
-	        key: 'render',
-	        value: function render() {
-	            var previewStyle = {
-	                height: 240,
-	                width: 320
-	            };
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'container' },
-	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/logout' },
-	                        '\u767B\u51FA'
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        null,
-	                        '\u95DC\u65BC\u6211\u5011'
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-
-	    return Setting;
-	}(_react.Component);
-
-	function mapStateToProps(_ref) {
-	    var team = _ref.team;
-
-	    return { team: team };
-	}
-
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, actions)(Setting);
+	exports.default = Setting;
 
 /***/ }),
 /* 910 */
@@ -92727,6 +92620,322 @@
 	};
 
 	var _types = __webpack_require__(638);
+
+/***/ }),
+/* 1036 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = exports.makeSelectable = exports.ListItem = exports.List = undefined;
+
+	var _List2 = __webpack_require__(497);
+
+	var _List3 = _interopRequireDefault(_List2);
+
+	var _ListItem2 = __webpack_require__(512);
+
+	var _ListItem3 = _interopRequireDefault(_ListItem2);
+
+	var _makeSelectable2 = __webpack_require__(1037);
+
+	var _makeSelectable3 = _interopRequireDefault(_makeSelectable2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.List = _List3.default;
+	exports.ListItem = _ListItem3.default;
+	exports.makeSelectable = _makeSelectable3.default;
+	exports.default = _List3.default;
+
+/***/ }),
+/* 1037 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.makeSelectable = undefined;
+
+	var _extends2 = __webpack_require__(437);
+
+	var _extends3 = _interopRequireDefault(_extends2);
+
+	var _objectWithoutProperties2 = __webpack_require__(442);
+
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+	var _getPrototypeOf = __webpack_require__(363);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(361);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(366);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(370);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(371);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _simpleAssign = __webpack_require__(443);
+
+	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _colorManipulator = __webpack_require__(287);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var makeSelectable = exports.makeSelectable = function makeSelectable(MyComponent) {
+	  var _class, _temp2;
+
+	  return _temp2 = _class = function (_Component) {
+	    (0, _inherits3.default)(_class, _Component);
+
+	    function _class() {
+	      var _ref;
+
+	      var _temp, _this, _ret;
+
+	      (0, _classCallCheck3.default)(this, _class);
+
+	      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	        args[_key] = arguments[_key];
+	      }
+
+	      return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = _class.__proto__ || (0, _getPrototypeOf2.default)(_class)).call.apply(_ref, [this].concat(args))), _this), _this.hasSelectedDescendant = function (previousValue, child) {
+	        if (_react2.default.isValidElement(child) && child.props.nestedItems && child.props.nestedItems.length > 0) {
+	          return child.props.nestedItems.reduce(_this.hasSelectedDescendant, previousValue);
+	        }
+	        return previousValue || _this.isChildSelected(child, _this.props);
+	      }, _this.handleItemTouchTap = function (event, item) {
+	        var itemValue = item.props.value;
+
+	        if (itemValue !== _this.props.value) {
+	          if (_this.props.onChange) {
+	            _this.props.onChange(event, itemValue);
+	          }
+	        }
+	      }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+	    }
+
+	    (0, _createClass3.default)(_class, [{
+	      key: 'extendChild',
+	      value: function extendChild(child, styles, selectedItemStyle) {
+	        var _this2 = this;
+
+	        if (child && child.type && child.type.muiName === 'ListItem') {
+	          var selected = this.isChildSelected(child, this.props);
+	          var selectedChildrenStyles = void 0;
+	          if (selected) {
+	            selectedChildrenStyles = (0, _simpleAssign2.default)({}, styles, selectedItemStyle);
+	          }
+
+	          var mergedChildrenStyles = (0, _simpleAssign2.default)({}, child.props.style, selectedChildrenStyles);
+
+	          this.keyIndex += 1;
+
+	          return _react2.default.cloneElement(child, {
+	            onTouchTap: function onTouchTap(event) {
+	              _this2.handleItemTouchTap(event, child);
+	              if (child.props.onTouchTap) {
+	                child.props.onTouchTap(event);
+	              }
+	            },
+	            key: this.keyIndex,
+	            style: mergedChildrenStyles,
+	            nestedItems: child.props.nestedItems.map(function (child) {
+	              return _this2.extendChild(child, styles, selectedItemStyle);
+	            }),
+	            initiallyOpen: this.isInitiallyOpen(child)
+	          });
+	        } else {
+	          return child;
+	        }
+	      }
+	    }, {
+	      key: 'isInitiallyOpen',
+	      value: function isInitiallyOpen(child) {
+	        if (child.props.initiallyOpen) {
+	          return child.props.initiallyOpen;
+	        }
+	        return this.hasSelectedDescendant(false, child);
+	      }
+	    }, {
+	      key: 'isChildSelected',
+	      value: function isChildSelected(child, props) {
+	        return props.value === child.props.value;
+	      }
+	    }, {
+	      key: 'render',
+	      value: function render() {
+	        var _this3 = this;
+
+	        var _props = this.props,
+	            children = _props.children,
+	            selectedItemStyle = _props.selectedItemStyle,
+	            other = (0, _objectWithoutProperties3.default)(_props, ['children', 'selectedItemStyle']);
+
+
+	        this.keyIndex = 0;
+	        var styles = {};
+
+	        if (!selectedItemStyle) {
+	          var textColor = this.context.muiTheme.baseTheme.palette.textColor;
+	          styles.backgroundColor = (0, _colorManipulator.fade)(textColor, 0.2);
+	        }
+
+	        return _react2.default.createElement(
+	          MyComponent,
+	          (0, _extends3.default)({}, other, this.state),
+	          _react.Children.map(children, function (child) {
+	            return _this3.extendChild(child, styles, selectedItemStyle);
+	          })
+	        );
+	      }
+	    }]);
+	    return _class;
+	  }(_react.Component), _class.propTypes = {
+	    children: _react.PropTypes.node,
+	    onChange: _react.PropTypes.func,
+	    selectedItemStyle: _react.PropTypes.object,
+	    value: _react.PropTypes.any
+	  }, _class.contextTypes = {
+	    muiTheme: _react.PropTypes.object.isRequired
+	  }, _temp2;
+	};
+
+	exports.default = makeSelectable;
+
+/***/ }),
+/* 1038 */,
+/* 1039 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _pure = __webpack_require__(470);
+
+	var _pure2 = _interopRequireDefault(_pure);
+
+	var _SvgIcon = __webpack_require__(479);
+
+	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ActionGrade = function ActionGrade(props) {
+	  return _react2.default.createElement(
+	    _SvgIcon2.default,
+	    props,
+	    _react2.default.createElement('path', { d: 'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z' })
+	  );
+	};
+	ActionGrade = (0, _pure2.default)(ActionGrade);
+	ActionGrade.displayName = 'ActionGrade';
+	ActionGrade.muiName = 'SvgIcon';
+
+	exports.default = ActionGrade;
+
+/***/ }),
+/* 1040 */,
+/* 1041 */,
+/* 1042 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _pure = __webpack_require__(470);
+
+	var _pure2 = _interopRequireDefault(_pure);
+
+	var _SvgIcon = __webpack_require__(479);
+
+	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ActionInfo = function ActionInfo(props) {
+	  return _react2.default.createElement(
+	    _SvgIcon2.default,
+	    props,
+	    _react2.default.createElement('path', { d: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z' })
+	  );
+	};
+	ActionInfo = (0, _pure2.default)(ActionInfo);
+	ActionInfo.displayName = 'ActionInfo';
+	ActionInfo.muiName = 'SvgIcon';
+
+	exports.default = ActionInfo;
+
+/***/ }),
+/* 1043 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _pure = __webpack_require__(470);
+
+	var _pure2 = _interopRequireDefault(_pure);
+
+	var _SvgIcon = __webpack_require__(479);
+
+	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ActionExitToApp = function ActionExitToApp(props) {
+	  return _react2.default.createElement(
+	    _SvgIcon2.default,
+	    props,
+	    _react2.default.createElement('path', { d: 'M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z' })
+	  );
+	};
+	ActionExitToApp = (0, _pure2.default)(ActionExitToApp);
+	ActionExitToApp.displayName = 'ActionExitToApp';
+	ActionExitToApp.muiName = 'SvgIcon';
+
+	exports.default = ActionExitToApp;
 
 /***/ })
 /******/ ]);
