@@ -21,19 +21,14 @@ class RedMissionCard extends Component {
   render() {
     return (
       <div className="col s12 m6">
-        <div className="card blue-grey darken-1">
+        <div className="card red lighten-3">
           <div className="card-content white-text">
             <span className="card-title">勃根地酒紅頭盔</span>
             <p>{"任務已經完成百分之" + this.props.redMission + "了"}</p>
           </div>
           <div className="card-action">
-            <LinearProgress mode="determinate" value={this.props.redMission}
-              style={{
-                width: '100%',
-                margin: '0 auto',
-                border: '2px solid #FF9800',
-                backgroundColor: '#D50000',
-              }}
+            <LinearProgress mode="determinate" value={this.props.redMission} 
+              color="#F44336"
             />
             <RaisedButton label="red" primary={true} onClick={this.handleClick} />
           </div>

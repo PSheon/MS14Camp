@@ -37690,6 +37690,8 @@
 
 	var _reactRouter = __webpack_require__(379);
 
+	var _reactRedux = __webpack_require__(184);
+
 	var _FontIcon = __webpack_require__(435);
 
 	var _FontIcon2 = _interopRequireDefault(_FontIcon);
@@ -37740,12 +37742,13 @@
 
 	    var _this = _possibleConstructorReturn(this, (Base.__proto__ || Object.getPrototypeOf(Base)).call(this, props));
 
-	    _this.select = function (index) {
-	      return _this.setState({ selectedIndex: index });
+	    _this.select = function (index, name) {
+	      return _this.setState({ selectedIndex: index, selectedName: name });
 	    };
 
 	    _this.state = {
-	      selectedIndex: 0
+	      selectedIndex: 0,
+	      selectedName: '首頁'
 	    };
 	    return _this;
 	  }
@@ -37770,7 +37773,7 @@
 	              _react2.default.createElement(
 	                'a',
 	                { className: 'brand-logo center' },
-	                '\u5FAE\u8EDF14\u9818\u8896\u71DF'
+	                this.props.user.name + ' ~ ' + this.state.selectedName
 	              )
 	            )
 	          )
@@ -37790,7 +37793,7 @@
 	                label: '\u9996\u9801',
 	                icon: _react2.default.createElement(_home2.default, { color: this.state.selectedIndex === 0 ? '#00BCD4' : '#424242' }),
 	                onClick: function onClick() {
-	                  return _this2.select(0);
+	                  return _this2.select(0, '首頁');
 	                }
 	              })
 	            ),
@@ -37801,7 +37804,7 @@
 	                label: '\u4EFB\u52D9',
 	                icon: _react2.default.createElement(_viewHeadline2.default, { color: this.state.selectedIndex === 1 ? '#00BCD4' : '#424242' }),
 	                onClick: function onClick() {
-	                  return _this2.select(1);
+	                  return _this2.select(1, '任務');
 	                }
 	              })
 	            ),
@@ -37812,7 +37815,7 @@
 	                label: '\u80CC\u5305',
 	                icon: _react2.default.createElement(_shoppingBasket2.default, { color: this.state.selectedIndex === 2 ? '#00BCD4' : '#424242' }),
 	                onClick: function onClick() {
-	                  return _this2.select(2);
+	                  return _this2.select(2, '背包');
 	                }
 	              })
 	            ),
@@ -37823,7 +37826,7 @@
 	                label: '\u8A2D\u5B9A',
 	                icon: _react2.default.createElement(_settings2.default, { color: this.state.selectedIndex === 3 ? '#00BCD4' : '#424242' }),
 	                onClick: function onClick() {
-	                  return _this2.select(3);
+	                  return _this2.select(3, '設定');
 	                }
 	              })
 	            )
@@ -37840,7 +37843,13 @@
 	  children: _react.PropTypes.object.isRequired
 	};
 
-	exports.default = Base;
+	function mapStateToProps(_ref) {
+	  var user = _ref.user;
+
+	  return { user: user };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Base);
 
 /***/ }),
 /* 435 */
@@ -64154,7 +64163,7 @@
 	        { className: 'col s12 m6' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'card blue-grey darken-1' },
+	          { className: 'card red lighten-3' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'card-content white-text' },
@@ -64173,12 +64182,7 @@
 	            'div',
 	            { className: 'card-action' },
 	            _react2.default.createElement(_LinearProgress2.default, { mode: 'determinate', value: this.props.redMission,
-	              style: {
-	                width: '100%',
-	                margin: '0 auto',
-	                border: '2px solid #FF9800',
-	                backgroundColor: '#D50000'
-	              }
+	              color: '#F44336'
 	            }),
 	            _react2.default.createElement(_RaisedButton2.default, { label: 'red', primary: true, onClick: this.handleClick })
 	          )
@@ -64278,7 +64282,7 @@
 	        { className: 'col s12 m6' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'card blue-grey darken-1' },
+	          { className: 'card blue lighten-3' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'card-content white-text' },
@@ -64297,12 +64301,7 @@
 	            'div',
 	            { className: 'card-action' },
 	            _react2.default.createElement(_LinearProgress2.default, { mode: 'determinate', value: this.props.blueMission,
-	              style: {
-	                width: '100%',
-	                margin: '0 auto',
-	                border: '2px solid #123123',
-	                backgroundColor: '#234234'
-	              }
+	              color: '#2196F3'
 	            }),
 	            _react2.default.createElement(_RaisedButton2.default, { label: 'blue', primary: true, onClick: this.handleClick })
 	          )
@@ -70778,7 +70777,7 @@
 	        { className: 'col s12 m6' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'card blue-grey darken-1' },
+	          { className: 'card yellow lighten-3' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'card-content white-text' },
@@ -70797,12 +70796,7 @@
 	            'div',
 	            { className: 'card-action' },
 	            _react2.default.createElement(_LinearProgress2.default, { mode: 'determinate', value: this.props.yellowMission,
-	              style: {
-	                width: '100%',
-	                margin: '0 auto',
-	                border: '2px solid #765432',
-	                backgrondColor: '#546789'
-	              }
+	              color: '#FFF176'
 	            }),
 	            _react2.default.createElement(_RaisedButton2.default, { label: 'yellow', primary: true, onClick: this.handleClick })
 	          )
@@ -70889,7 +70883,7 @@
 	        { className: 'col s12 m6' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'card blue-grey darken-1' },
+	          { className: 'card teal lighten-3' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'card-content white-text' },
@@ -70908,12 +70902,7 @@
 	            'div',
 	            { className: 'card-action' },
 	            _react2.default.createElement(_LinearProgress2.default, { mode: 'determinate', value: this.props.greenMission,
-	              style: {
-	                width: '100%',
-	                margin: '0 auto',
-	                border: '2px solid #987321',
-	                backgroundColor: '#987654'
-	              }
+	              color: '#43A047'
 	            }),
 	            _react2.default.createElement(_RaisedButton2.default, { label: 'green', primary: true, onClick: this.handleClick })
 	          )
