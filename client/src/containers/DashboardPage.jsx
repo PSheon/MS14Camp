@@ -8,21 +8,6 @@ import Dashboard from '../components/Dashboard.jsx';
 
 
 class DashboardPage extends Component {
-
-  /**
-   * Class constructor.
-   */
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //     secretData: ''
-  //   };
-  // }
-
-  /**
-   * This method will be executed after initial rendering.
-   */
   componentDidMount() {
     // const xhr = new XMLHttpRequest();
     // xhr.open('get', '/api/dashboard');
@@ -45,9 +30,6 @@ class DashboardPage extends Component {
     this.props.setUser({ name: Auth.getUserNameFromCookie(), email: Auth.getUserEmailFromCookie() });
   }
 
-  /**
-   * Render the component.
-   */
   render() {
     // return (<Dashboard secretData={this.props.dashboard} />);
     return (<Dashboard />);

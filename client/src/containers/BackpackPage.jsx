@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import Auth from '../modules/Auth';
 import * as actions from '../actions';
-import Backpack from '../components/Backpack.jsx';
+import Backpack from '../components/BackPack.jsx';
 
 
 class BackPackPage extends Component {
@@ -18,7 +18,7 @@ class BackPackPage extends Component {
     }
     render() {
 
-        return (<Backpack/>);
+        return (<Backpack />);
     }
 
 }

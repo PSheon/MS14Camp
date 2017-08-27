@@ -3,7 +3,7 @@ import Setting from '../components/Setting.jsx';
 
 
 const SettingPage =(props)=> {
-        return (<Setting />);
+  return (<Setting />);
 }
 
 export default SettingPage;
