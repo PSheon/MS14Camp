@@ -73,19 +73,18 @@ class lotsResultPage extends Component {
             <CardTitle title="蔡宗佑" subtitle="Room 1703" expandable={true} />
             <CardText expandable={true}>
               您的房間在第三棟，1703房寢室，你的室友如下：
-              
               <Chip
                 onRequestDelete={this.handleRequestDelete}
                 onClick={this.handleTouchTap}
                 style={styles.chip}
               >
-          <Avatar src="https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/寶哥.jpg" />
-          陳寶桁
-        </Chip>
+              <Avatar src="https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/寶哥.jpg" />
+                陳寶桁
+              </Chip>
             </CardText>
             <CardActions>
-              <FlatButton label="我想知道" onClick={this.handleExpand} />
-              <FlatButton label="我不想看" onClick={this.handleReduce} />
+              <FlatButton label="打開房卡" onClick={this.handleExpand} />
+              <FlatButton label="關閉房卡" onClick={this.handleReduce} />
             </CardActions>
           </Card>
         </MuiThemeProvider>
@@ -98,7 +97,7 @@ class lotsResultPage extends Component {
 const styles = {
   container: {
     width: '100vw',
-    height: 'calc(100vh - 64px)',
+    height: 'calc(100vh - 121px)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

@@ -7,6 +7,7 @@ import NpcPage from './containers/NpcPage.jsx';
 import BackPackPage from './containers/BackpackPage.jsx';
 import SettingPage from './containers/SettingPage.jsx';
 import Auth from './modules/Auth';
+import ShowRoom from './components/ShowRoom.jsx';
 
 
 const routes = {
@@ -56,6 +57,10 @@ const routes = {
     {
       path: '/setting',
       component: SettingPage
+    },
+    {
+      path: '/showroom',
+      component: ShowRoom
     }
   ]
 };

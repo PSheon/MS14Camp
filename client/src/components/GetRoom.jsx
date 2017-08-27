@@ -74,8 +74,9 @@ const lotsPickerPage = () => (
       cellHeight={180}
       style={styles.gridList}
     >
-      <Subheader>抽房間嘍！</Subheader>
+      <Subheader>請選擇一張房間卡！</Subheader>
       {tilesData.map((tile) => (
+        <Link to="/showroom">
         <GridTile
           key={tile.img}
           title={tile.title}
@@ -84,6 +85,7 @@ const lotsPickerPage = () => (
         >
           <img src={tile.img} />
         </GridTile>
+        </Link>
       ))}
     </GridList>
   </div>
