@@ -30,7 +30,7 @@ class Base extends Component {
         <div className="navbar-fixed">
           <nav>
             <div className="nav-wrapper">
-              <a className="brand-logo center">{Auth.isUserAuthenticated() ? ({ this.props.user.name + '~' + this.state.selectedName }) : '微軟 14 領袖營'}</a>
+              <a className="brand-logo center">{Auth.isUserAuthenticated() ? ( this.props.user.name + '~' + this.state.selectedName ) : '微軟 14 領袖營'}</a>
             </div>
           </nav>
         </div>

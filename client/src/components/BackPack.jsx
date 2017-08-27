@@ -94,7 +94,7 @@ class BackPack extends Component {
                                     bottom: '-6px',
                                     right: '2px',
                                     backgroundColor: 'rgba(0,0,0,0.5)'
-                                }}>{item}</p>
+                                }}>{item.item}</p>
                             </div>
                         )
                     })
