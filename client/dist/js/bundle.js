@@ -84162,7 +84162,7 @@
 	                                className: 'col s3', key: Math.random() },
 	                            _react2.default.createElement('img', {
 	                                style: { width: '100%', height: 'auto' },
-	                                src: item.getItemUrl }),
+	                                src: item.url }),
 	                            _react2.default.createElement(
 	                                'p',
 	                                { style: {
@@ -84170,9 +84170,10 @@
 	                                        color: 'white',
 	                                        bottom: '-6px',
 	                                        right: '2px',
+	                                        marginLeft: '5px',
 	                                        backgroundColor: 'rgba(0,0,0,0.5)'
 	                                    } },
-	                                item
+	                                item.item
 	                            )
 	                        );
 	                    }) : _react2.default.createElement(

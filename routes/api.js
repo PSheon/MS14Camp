@@ -75,7 +75,7 @@ router.put('/donemission/:id/:type', (req, res) => {
               tempItem.push({item:data.getItem,url:data.getItemUrl});
             }
             if (data.lostItem) {
-              let itemIndex = tempItem.indexOf(data.lostItem);
+              let itemIndex = _.findIndex(tempItem,{'item':data.lostItem});
               if(itemIndex>-1){
                 tempItem.splice(itemIndex, 1);
               }      
@@ -100,10 +100,10 @@ router.put('/donemission/:id/:type', (req, res) => {
               temp[existed].isSuccess = false;
             }
             if (data.getItem) {
-              tempItem.push(data.getItem);
+              tempItem.push({ item: data.getItem, url: data.getItemUrl });
             }
             if (data.lostItem) {
-              let itemIndex = tempItem.indexOf(data.lostItem);
+              let itemIndex = _.findIndex(tempItem, { 'item': data.lostItem });
               if (itemIndex > -1) {
                 tempItem.splice(itemIndex, 1);
               }    
