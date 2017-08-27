@@ -83792,8 +83792,41 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var dialog = {
-	    backgroundColor: 'rgba(0,0,0,0.7)',
-	    color: 'white'
+	    margin: '0px',
+	    borderRadius: '10px',
+	    padding: '10px',
+	    lineHeight: '1.7',
+	    fontWeight: '500'
+	};
+	var inputWrapper = {
+	    position: 'fixed',
+	    bottom: 0,
+	    left: 0,
+	    width: '100%'
+	};
+	var people = {
+	    margin: '5px',
+	    color: '#424242'
+	};
+	var fromUs = {
+	    backgroundColor: '#C5E1A5',
+	    color: '#424242',
+	    margin: '0px',
+	    borderRadius: '10px',
+	    padding: '10px',
+	    lineHeight: '1.7',
+	    fontWeight: 'normal',
+	    marginBottom: '15px'
+	};
+	var fromBoss = {
+	    backgroundColor: '#E0E0E0',
+	    color: '#424242',
+	    margin: '0px',
+	    borderRadius: '10px',
+	    padding: '10px',
+	    lineHeight: '1.7',
+	    fontWeight: 'normal',
+	    marginBottom: '15px'
 	};
 
 	var Npc = function (_Component) {
@@ -83813,21 +83846,16 @@
 	                        'div',
 	                        { key: mission.mId },
 	                        _react2.default.createElement(
-	                            'p',
-	                            null,
-	                            mission.data.title
-	                        ),
-	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'right-align' },
 	                            _react2.default.createElement(
 	                                'p',
-	                                null,
+	                                { style: people },
 	                                mission.data.fromUs
 	                            ),
 	                            _react2.default.createElement(
 	                                'p',
-	                                { style: dialog },
+	                                { style: fromUs },
 	                                mission.data.ourDetail
 	                            )
 	                        ),
@@ -83836,12 +83864,12 @@
 	                            { className: 'right-left' },
 	                            _react2.default.createElement(
 	                                'p',
-	                                null,
+	                                { style: people },
 	                                mission.data.fromBoss
 	                            ),
 	                            _react2.default.createElement(
 	                                'p',
-	                                { style: dialog },
+	                                { style: fromBoss },
 	                                mission.data.bossDetail
 	                            )
 	                        ),
@@ -83850,12 +83878,7 @@
 	                            { className: 'right-left' },
 	                            _react2.default.createElement(
 	                                'p',
-	                                null,
-	                                mission.data.fromBoss
-	                            ),
-	                            _react2.default.createElement(
-	                                'p',
-	                                { style: dialog },
+	                                { style: fromBoss },
 	                                mission.data.bossDetail2
 	                            )
 	                        ) : null,
@@ -83870,6 +83893,25 @@
 	                            null,
 	                            '\u5931\u53BB\uFF1A',
 	                            mission.data.lostItem
+	                        ) : null,
+	                        mission.isSuccess ? _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            '\u7372\u5F97\uFF1A',
+	                            mission.data.success
+	                        ) : _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            '\u7372\u5F97\uFF1A',
+	                            mission.data.failed,
+	                            '\u5143'
+	                        ),
+	                        mission.data.paid !== "0" ? _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            '\u4ED8\u51FA\uFF1A',
+	                            mission.data.paid,
+	                            '\u5143'
 	                        ) : null
 	                    );
 	                });
@@ -83904,8 +83946,10 @@
 	        key: 'render',
 	        value: function render() {
 	            var previewStyle = {
-	                height: 240,
-	                width: 320
+	                height: '1px',
+	                width: '1px',
+	                marginLeft: 'auto',
+	                marginRight: 'auto'
 	            };
 	            return _react2.default.createElement(
 	                'div',
@@ -83913,7 +83957,11 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'container' },
-	                    this.renderMission(),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { style: { paddingTop: '15px', paddingBottom: '40px' } },
+	                        this.renderMission()
+	                    ),
 	                    _react2.default.createElement(_reactQrReader2.default, {
 	                        ref: 'qrReader1',
 	                        delay: this.state.delay,
@@ -83922,11 +83970,34 @@
 	                        onScan: this.handleScan,
 	                        legacyMode: true
 	                    }),
-	                    _react2.default.createElement('input', { type: 'button', value: 'Submit QR Code', onClick: this.openImageDialog }),
 	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        this.state.result
+	                        _Paper2.default,
+	                        { style: inputWrapper },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'row',
+	                                style: {
+	                                    marginBottom: '55px',
+	                                    paddingTop: '5px',
+	                                    paddingBottom: '5px',
+	                                    lineHeight: '0'
+	                                } },
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'center-align' },
+	                                _react2.default.createElement('input', {
+	                                    className: 'waves-effect waves-teal btn-flat',
+	                                    style: {
+	                                        backgroundColor: 'white',
+	                                        backgroundImage: 'none',
+	                                        borderStyle: 'none'
+	                                    },
+	                                    type: 'button',
+	                                    value: '\u5132\u5B58\u9032\u5EA6',
+	                                    onClick: this.openImageDialog
+	                                })
+	                            )
+	                        )
 	                    )
 	                )
 	            );

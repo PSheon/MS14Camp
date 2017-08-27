@@ -65,7 +65,7 @@ router.put('/donemission/:id/:type', (req, res) => {
             if (existed === -1) {
               temp.push({ 
                 mId: data.mId, 
-                data: _.omit(data, ['mId']), 
+                data: _.omit(data, ['mId','failed']), 
                 isSuccess: true 
               });
             } else {
@@ -93,7 +93,7 @@ router.put('/donemission/:id/:type', (req, res) => {
             if (existed === -1) {
               temp.push({
                  mId: data.mId,
-                 data:_.omit(data,['mId']),
+                 data:_.omit(data,['mId','success']),
                  isSuccess: false
               });
             } else {
