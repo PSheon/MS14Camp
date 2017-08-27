@@ -123,7 +123,7 @@ class BackPack extends Component {
                             }}>
                             <div className="col s3">
                                 <input
-                                    class="waves-effect waves-teal btn-flat"
+                                    className="waves-effect waves-teal btn-flat"
                                     style={{
                                         backgroundColor:'white',
                                         backgroundImage:'none',
