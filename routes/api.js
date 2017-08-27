@@ -65,7 +65,7 @@ router.put('/donemission/:id/:type', (req, res) => {
             if (existed === -1) {
               temp.push({ 
                 mId: data.mId, 
-                data: _.omit(data, ['mId']), 
+                data: _.omit(data, ['mId','failed']), 
                 isSuccess: true 
               });
             } else {
@@ -75,7 +75,7 @@ router.put('/donemission/:id/:type', (req, res) => {
               tempItem.push({item:data.getItem,url:data.getItemUrl});
             }
             if (data.lostItem) {
-              let itemIndex = tempItem.indexOf(data.lostItem);
+              let itemIndex = _.findIndex(tempItem,{'item':data.lostItem});
               if(itemIndex>-1){
                 tempItem.splice(itemIndex, 1);
               }      
@@ -93,17 +93,17 @@ router.put('/donemission/:id/:type', (req, res) => {
             if (existed === -1) {
               temp.push({
                  mId: data.mId,
-                 data:_.omit(data,['mId']),
+                 data:_.omit(data,['mId','success']),
                  isSuccess: false
               });
             } else {
               temp[existed].isSuccess = false;
             }
             if (data.getItem) {
-              tempItem.push(data.getItem);
+              tempItem.push({ item: data.getItem, url: data.getItemUrl });
             }
             if (data.lostItem) {
-              let itemIndex = tempItem.indexOf(data.lostItem);
+              let itemIndex = _.findIndex(tempItem, { 'item': data.lostItem });
               if (itemIndex > -1) {
                 tempItem.splice(itemIndex, 1);
               }    

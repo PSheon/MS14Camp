@@ -81348,10 +81348,50 @@
 	var _initialiseProps = function _initialiseProps() {
 	  var _this5 = this;
 
+<<<<<<< HEAD
 	  this.handleClickAway = function (event) {
 	    if (event.defaultPrevented) {
 	      return;
 	    }
+=======
+	var dialog = {
+	    margin: '0px',
+	    borderRadius: '10px',
+	    padding: '10px',
+	    lineHeight: '1.7',
+	    fontWeight: '500'
+	};
+	var inputWrapper = {
+	    position: 'fixed',
+	    bottom: 0,
+	    left: 0,
+	    width: '100%'
+	};
+	var people = {
+	    margin: '5px',
+	    color: '#424242'
+	};
+	var fromUs = {
+	    backgroundColor: '#C5E1A5',
+	    color: '#424242',
+	    margin: '0px',
+	    borderRadius: '10px',
+	    padding: '10px',
+	    lineHeight: '1.7',
+	    fontWeight: 'normal',
+	    marginBottom: '15px'
+	};
+	var fromBoss = {
+	    backgroundColor: '#E0E0E0',
+	    color: '#424242',
+	    margin: '0px',
+	    borderRadius: '10px',
+	    padding: '10px',
+	    lineHeight: '1.7',
+	    fontWeight: 'normal',
+	    marginBottom: '15px'
+	};
+>>>>>>> f0692b6d3ad9a7d08c39029d500f64f2bf6043ab
 
 	    _this5.setFocusIndex(event, -1, false);
 	  };
@@ -81399,8 +81439,87 @@
 	        scrollHeight = scrollContainer.scrollHeight,
 	        clientHeight = scrollContainer.clientHeight;
 
+<<<<<<< HEAD
 	    var wheelDelta = event.deltaY;
 	    var isDeltaPositive = wheelDelta > 0;
+=======
+	                return missionList.map(function (mission) {
+	                    return _react2.default.createElement(
+	                        'div',
+	                        { key: mission.mId },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'right-align' },
+	                            _react2.default.createElement(
+	                                'p',
+	                                { style: people },
+	                                mission.data.fromUs
+	                            ),
+	                            _react2.default.createElement(
+	                                'p',
+	                                { style: fromUs },
+	                                mission.data.ourDetail
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'right-left' },
+	                            _react2.default.createElement(
+	                                'p',
+	                                { style: people },
+	                                mission.data.fromBoss
+	                            ),
+	                            _react2.default.createElement(
+	                                'p',
+	                                { style: fromBoss },
+	                                mission.data.bossDetail
+	                            )
+	                        ),
+	                        mission.data.bossDetail2 ? _react2.default.createElement(
+	                            'div',
+	                            { className: 'right-left' },
+	                            _react2.default.createElement(
+	                                'p',
+	                                { style: fromBoss },
+	                                mission.data.bossDetail2
+	                            )
+	                        ) : null,
+	                        mission.data.getItem ? _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            '\u7372\u5F97\uFF1A',
+	                            mission.data.getItem
+	                        ) : null,
+	                        mission.data.lostItem ? _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            '\u5931\u53BB\uFF1A',
+	                            mission.data.lostItem
+	                        ) : null,
+	                        mission.isSuccess ? _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            '\u7372\u5F97\uFF1A',
+	                            mission.data.success
+	                        ) : _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            '\u7372\u5F97\uFF1A',
+	                            mission.data.failed,
+	                            '\u5143'
+	                        ),
+	                        mission.data.paid !== "0" ? _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            '\u4ED8\u51FA\uFF1A',
+	                            mission.data.paid,
+	                            '\u5143'
+	                        ) : null
+	                    );
+	                });
+	            }
+	        };
+>>>>>>> f0692b6d3ad9a7d08c39029d500f64f2bf6043ab
 
 	    if (isDeltaPositive && wheelDelta > scrollHeight - clientHeight - scrollTop) {
 	      scrollContainer.scrollTop = scrollHeight;
@@ -81532,9 +81651,73 @@
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
+<<<<<<< HEAD
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+=======
+	    _createClass(Npc, [{
+	        key: 'render',
+	        value: function render() {
+	            var previewStyle = {
+	                height: '1px',
+	                width: '1px',
+	                marginLeft: 'auto',
+	                marginRight: 'auto'
+	            };
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'container' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { style: { paddingTop: '15px', paddingBottom: '40px' } },
+	                        this.renderMission()
+	                    ),
+	                    _react2.default.createElement(_reactQrReader2.default, {
+	                        ref: 'qrReader1',
+	                        delay: this.state.delay,
+	                        style: previewStyle,
+	                        onError: this.handleError,
+	                        onScan: this.handleScan,
+	                        legacyMode: true
+	                    }),
+	                    _react2.default.createElement(
+	                        _Paper2.default,
+	                        { style: inputWrapper },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'row',
+	                                style: {
+	                                    marginBottom: '55px',
+	                                    paddingTop: '5px',
+	                                    paddingBottom: '5px',
+	                                    lineHeight: '0'
+	                                } },
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'center-align' },
+	                                _react2.default.createElement('input', {
+	                                    className: 'waves-effect waves-teal btn-flat',
+	                                    style: {
+	                                        backgroundColor: 'white',
+	                                        backgroundImage: 'none',
+	                                        borderStyle: 'none'
+	                                    },
+	                                    type: 'button',
+	                                    value: '\u5132\u5B58\u9032\u5EA6',
+	                                    onClick: this.openImageDialog
+	                                })
+	                            )
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+>>>>>>> f0692b6d3ad9a7d08c39029d500f64f2bf6043ab
 
 	var _extends2 = __webpack_require__(438);
 
@@ -81755,7 +81938,51 @@
 
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
+<<<<<<< HEAD
 	var _createClass2 = __webpack_require__(366);
+=======
+	        _this.renderItem = function () {
+	            if (_this.props.team) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _this.props.team.items !== [] ? _this.props.team.items.map(function (item) {
+	                        return _react2.default.createElement(
+	                            'div',
+	                            {
+	                                style: { padding: '2px', position: 'relative' },
+	                                className: 'col s3', key: Math.random() },
+	                            _react2.default.createElement('img', {
+	                                style: { width: '100%', height: 'auto' },
+	                                src: item.url }),
+	                            _react2.default.createElement(
+	                                'p',
+	                                { style: {
+	                                        position: 'absolute',
+	                                        color: 'white',
+	                                        bottom: '-6px',
+	                                        right: '2px',
+	                                        marginLeft: '5px',
+	                                        backgroundColor: 'rgba(0,0,0,0.5)'
+	                                    } },
+	                                item.item
+	                            )
+	                        );
+	                    }) : _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        '\u7A7A'
+	                    )
+	                );
+	            } else {
+	                return _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    '\u6B63\u5728\u52AA\u529B\u8F09\u5165\u9053\u5177'
+	                );
+	            }
+	        };
+>>>>>>> f0692b6d3ad9a7d08c39029d500f64f2bf6043ab
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 

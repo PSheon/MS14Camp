@@ -87,12 +87,13 @@ class BackPack extends Component {
                                 className="col s3" key={Math.random()}>
                                 <img 
                                     style={{ width: '100%', height: 'auto'}}
-                                src={item.getItemUrl} />
+                                src={item.url} />
                                 <p style={{
                                     position: 'absolute',
                                     color: 'white',
                                     bottom: '-6px',
                                     right: '2px',
+                                    marginLeft:'5px',
                                     backgroundColor: 'rgba(0,0,0,0.5)'
                                 }}>{item.item}</p>
                             </div>

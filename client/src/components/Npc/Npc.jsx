@@ -11,8 +11,41 @@ import ActionAndroid from 'material-ui/svg-icons/action/android';
 import * as actions from '../../actions';
 
 const dialog={
-    backgroundColor: 'rgba(0,0,0,0.7)',
-    color:'white'
+    margin: '0px',
+    borderRadius: '10px',
+    padding: '10px',
+    lineHeight:'1.7',
+    fontWeight:'500'
+}
+const inputWrapper = {
+    position: 'fixed',
+    bottom: 0,
+    left: 0,
+    width: '100%'
+}
+const people={
+    margin:'5px',
+    color: '#424242'
+}
+const fromUs={
+    backgroundColor: '#C5E1A5',
+    color: '#424242',
+    margin: '0px',
+    borderRadius: '10px',
+    padding: '10px',
+    lineHeight: '1.7',
+    fontWeight: 'normal',
+    marginBottom:'15px'
+}
+const fromBoss = {
+    backgroundColor: '#E0E0E0',
+    color: '#424242',
+    margin: '0px',
+    borderRadius: '10px',
+    padding: '10px',
+    lineHeight: '1.7',
+    fontWeight: 'normal',
+    marginBottom: '15px'
 }
 
 
@@ -33,21 +66,19 @@ class Npc extends Component {
             return missionList.map((mission) => {
                 return (
                     <div key={mission.mId}>
-                    <p>{mission.data.title}</p>
                     <div className="right-align" >
-                        <p>{mission.data.fromUs}</p>
-                        <p style={dialog}>{mission.data.ourDetail}</p>
+                        <p style={people}>{mission.data.fromUs}</p>
+                        <p style={fromUs}>{mission.data.ourDetail}</p>
                     </div>
 
                     <div className="right-left">
-                        <p>{mission.data.fromBoss}</p>
-                        <p style={dialog}>{mission.data.bossDetail}</p>
+                        <p style={people}>{mission.data.fromBoss}</p>
+                        <p style={fromBoss}>{mission.data.bossDetail}</p>
                     </div>
 
                     {mission.data.bossDetail2 ?
                      <div className="right-left">
-                        <p>{mission.data.fromBoss}</p>
-                        <p style={dialog}>{mission.data.bossDetail2}</p>
+                        <p style={fromBoss}>{mission.data.bossDetail2}</p>
                     </div>:null}
 
                     {mission.data.getItem?
@@ -56,6 +87,13 @@ class Npc extends Component {
                     }
                     {mission.data.lostItem ?
                         <p>失去：{mission.data.lostItem}</p>:
+                        null
+                    }
+                    {mission.isSuccess?
+                        <p>獲得：{mission.data.success}</p> :<p>獲得：{mission.data.failed}元</p>
+                    }
+                    {mission.data.paid !== "0"?
+                        <p>付出：{mission.data.paid}元</p> :
                         null
                     }
                     
@@ -84,23 +122,50 @@ class Npc extends Component {
 
     render() {
         const previewStyle = {
-            height: 240,
-            width: 320,
+            height: '1px',
+            width: '1px',
+            marginLeft: 'auto',
+            marginRight: 'auto'
         }
         return (
             <div>
                 <div className='container'>
+                <div style={{ paddingTop: '15px', paddingBottom: '40px' }}>
                 {this.renderMission()}
+                </div>
+
+                {/*<p>{this.state.result}</p>*/}
                 <QrReader
-                        ref="qrReader1"
-                        delay={this.state.delay}
-                        style={previewStyle}
-                        onError={this.handleError}
-                        onScan={this.handleScan}
-                        legacyMode
+                    ref="qrReader1"
+                    delay={this.state.delay}
+                    style={previewStyle}
+                    onError={this.handleError}
+                    onScan={this.handleScan}
+                    legacyMode
                 />
-                <input type="button" value="Submit QR Code" onClick={this.openImageDialog} />
-                <p>{this.state.result}</p>
+                <Paper style={inputWrapper}>
+                    <div className="row"
+                        style={{
+                            marginBottom: '55px',
+                            paddingTop: '5px',
+                            paddingBottom: '5px',
+                            lineHeight: '0'
+                        }}>
+                        <div className="center-align">
+                            <input
+                                className="waves-effect waves-teal btn-flat"
+                                style={{
+                                    backgroundColor: 'white',
+                                    backgroundImage: 'none',
+                                    borderStyle: 'none',
+                                }}
+                                type="button"
+                                value="儲存進度"
+                                onClick={this.openImageDialog}
+                            />
+                        </div>
+                    </div>
+                </Paper>
                 </div>
             </div>
         )
