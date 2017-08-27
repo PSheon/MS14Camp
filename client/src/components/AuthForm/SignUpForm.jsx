@@ -6,10 +6,9 @@ import TextField from 'material-ui/TextField';
 
 
 const form ={
-  backgroundColor: 'rgba(255,255,255,0.3)',
+  backgroundColor: 'rgba(255,255,255,0)',
   borderRadius: '4px',
   padding: '10px',
-  boxShadow: '0px 10px 20px rgba(0,0,0,0.5)'
 }
 const bottomText={
   width:'100%'
@@ -59,7 +58,7 @@ const SignUpForm = ({
               <div className="center-align">
                 <RaisedButton type="submit" label="註冊" primary />
               </div>
-              <p style={bottomText} className="center-align">已經有帳號了？ <Link to={'/login'}>登入</Link></p>
+              <p style={bottomText} className="center-align">已經有帳號了？ <Link to={'/login'} style={{ textDecoration: 'underline' }}>登入</Link></p>
             </form>
         </div>
         <img src='https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/Group%401x.png' style={style.rocket} />

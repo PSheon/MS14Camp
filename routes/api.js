@@ -48,11 +48,12 @@ router.put('/donemission/:id/:type', (req, res) => {
 
   csv.fromStream(csvStream, {
     headers: [
-      'mId', 'title', 'fromUs', 'ourDetail', 'fromBoss', 'bossDetail', 'bossDetail2', 'getItem', 'lostItem', 'success', 'failed', 'paid'
+      'mId', 'title', 'fromUs', 'ourDetail', 'fromBoss', 'bossDetail', 'bossDetail2', 'getItem', 'lostItem', 'success', 'failed', 'paid','getItemUrl'
     ]
   }).on("data", (data) => {
     
     if (data.mId === reqId && !isFound) {
+      console.log(data);
       Team.findOne({ team:teamId}, (err, team) => {
         if (err) throw err;
         let temp = team.missions;
@@ -64,17 +65,17 @@ router.put('/donemission/:id/:type', (req, res) => {
             if (existed === -1) {
               temp.push({ 
                 mId: data.mId, 
-                data: _.omit(data, ['mId']), 
+                data: _.omit(data, ['mId','failed']), 
                 isSuccess: true 
               });
             } else {
               temp[existed].isSuccess = true;
             }
             if (data.getItem) {
-              tempItem.push(data.getItem);
+              tempItem.push({item:data.getItem,url:data.getItemUrl});
             }
             if (data.lostItem) {
-              let itemIndex = tempItem.indexOf(data.lostItem);
+              let itemIndex = _.findIndex(tempItem,{'item':data.lostItem});
               if(itemIndex>-1){
                 tempItem.splice(itemIndex, 1);
               }      
@@ -92,17 +93,17 @@ router.put('/donemission/:id/:type', (req, res) => {
             if (existed === -1) {
               temp.push({
                  mId: data.mId,
-                 data:_.omit(data,['mId']),
+                 data:_.omit(data,['mId','success']),
                  isSuccess: false
               });
             } else {
               temp[existed].isSuccess = false;
             }
             if (data.getItem) {
-              tempItem.push(data.getItem);
+              tempItem.push({ item: data.getItem, url: data.getItemUrl });
             }
             if (data.lostItem) {
-              let itemIndex = tempItem.indexOf(data.lostItem);
+              let itemIndex = _.findIndex(tempItem, { 'item': data.lostItem });
               if (itemIndex > -1) {
                 tempItem.splice(itemIndex, 1);
               }    
