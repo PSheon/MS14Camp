@@ -70824,8 +70824,6 @@
 	    _createClass(BackPackPage, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            this.props.setSecret();
-	            this.props.getRoom();
 	            this.props.query('t01');
 	            this.props.setUser({ name: _Auth2.default.getUserNameFromCookie(), email: _Auth2.default.getUserEmailFromCookie() });
 	            //get money
@@ -70904,9 +70902,11 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var dialog = {
-	    backgroundColor: 'rgba(0,0,0,0.7)',
-	    color: 'white'
+	var inputWrapper = {
+	    position: 'fixed',
+	    bottom: 0,
+	    left: 0,
+	    width: '100%'
 	};
 
 	var BackPack = function (_Component) {
@@ -70921,6 +70921,7 @@
 	            _this.setState({
 	                result: data
 	            });
+	            //如果不是ms開頭就給他錯誤
 	            _this.props.doMoney('t01', data, 'add');
 	        };
 
@@ -70940,7 +70941,18 @@
 	                    _react2.default.createElement(
 	                        'p',
 	                        null,
+	                        '\u76EE\u524D\u91D1\u984D\uFF1A',
 	                        _this.props.team.money
+	                    )
+	                );
+	            } else {
+	                return _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        '\u6B63\u5728\u52AA\u529B\u8F09\u5165\u91D1\u984D\u4E2D'
 	                    )
 	                );
 	            }
@@ -70950,11 +70962,11 @@
 	            if (_this.props.team) {
 	                return _react2.default.createElement(
 	                    'div',
-	                    null,
+	                    { className: 'row' },
 	                    _this.props.team.items !== [] ? _this.props.team.items.map(function (item) {
 	                        return _react2.default.createElement(
 	                            'div',
-	                            { key: Math.random() },
+	                            { style: { border: '1px solid black' }, className: 'col s3', key: Math.random() },
 	                            _react2.default.createElement(
 	                                'p',
 	                                null,
@@ -70971,7 +70983,7 @@
 	                return _react2.default.createElement(
 	                    'p',
 	                    null,
-	                    '\u7A7A'
+	                    '\u6B63\u5728\u52AA\u529B\u8F09\u5165\u9053\u5177'
 	                );
 	            }
 	        };
@@ -70979,7 +70991,8 @@
 	        _this.state = {
 	            completed: 20,
 	            delay: 100,
-	            result: 'No fucking result'
+	            result: null
+
 	        };
 	        return _this;
 	    }
@@ -70988,8 +71001,10 @@
 	        key: 'render',
 	        value: function render() {
 	            var previewStyle = {
-	                height: 240,
-	                width: 320
+	                height: '1px',
+	                width: '1px',
+	                marginLeft: 'auto',
+	                marginRight: 'auto'
 	            };
 	            return _react2.default.createElement(
 	                'div',
@@ -70997,7 +71012,11 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'container' },
-	                    this.renderMoney(),
+	                    _react2.default.createElement(
+	                        'h5',
+	                        null,
+	                        '\u9053\u5177\u6B04'
+	                    ),
 	                    this.renderItem(),
 	                    _react2.default.createElement(_reactQrReader2.default, {
 	                        ref: 'qrReader1',
@@ -71007,11 +71026,34 @@
 	                        onScan: this.handleScan,
 	                        legacyMode: true
 	                    }),
-	                    _react2.default.createElement('input', { type: 'button', value: 'Submit QR Code', onClick: this.openImageDialog }),
 	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        this.state.result
+	                        'div',
+	                        { style: inputWrapper },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'row',
+	                                style: {
+	                                    border: '1px solid black',
+	                                    marginBottom: '55px',
+	                                    paddingTop: '5px',
+	                                    paddingBottom: '5px',
+	                                    lineHeight: '0'
+	                                } },
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'col s6' },
+	                                _react2.default.createElement('input', {
+	                                    type: 'button',
+	                                    value: '\u6383\u63CFQR\u78BC',
+	                                    onClick: this.openImageDialog
+	                                })
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'col s6' },
+	                                this.renderMoney()
+	                            )
+	                        )
 	                    )
 	                )
 	            );
@@ -79194,76 +79236,24 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	        value: true
 	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _axios = __webpack_require__(604);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	var _reactRedux = __webpack_require__(184);
-
-	var _Auth = __webpack_require__(435);
-
-	var _Auth2 = _interopRequireDefault(_Auth);
-
-	var _actions = __webpack_require__(630);
-
-	var actions = _interopRequireWildcard(_actions);
-
 	var _Setting = __webpack_require__(1032);
 
 	var _Setting2 = _interopRequireDefault(_Setting);
 
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	var SettingPage = function SettingPage(props) {
+	        return _react2.default.createElement(_Setting2.default, null);
+	};
 
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var BackPackPage = function (_Component) {
-	    _inherits(BackPackPage, _Component);
-
-	    function BackPackPage() {
-	        _classCallCheck(this, BackPackPage);
-
-	        return _possibleConstructorReturn(this, (BackPackPage.__proto__ || Object.getPrototypeOf(BackPackPage)).apply(this, arguments));
-	    }
-
-	    _createClass(BackPackPage, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            this.props.setSecret();
-	            this.props.getRoom();
-	            this.props.query('t01');
-	            this.props.setUser({ name: _Auth2.default.getUserNameFromCookie(), email: _Auth2.default.getUserEmailFromCookie() });
-	            //get money
-	            //set money add minus
-	            //get item
-	            //set item add minus
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-
-	            return _react2.default.createElement(_Setting2.default, null);
-	        }
-	    }]);
-
-	    return BackPackPage;
-	}(_react.Component);
-
-	exports.default = (0, _reactRedux.connect)(null, actions)(BackPackPage);
+	exports.default = SettingPage;
 
 /***/ }),
 /* 1032 */

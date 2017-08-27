@@ -9,8 +9,6 @@ import Backpack from '../components/Backpack.jsx';
 
 class BackPackPage extends Component {
     componentDidMount() {
-        this.props.setSecret();
-        this.props.getRoom();
         this.props.query('t01');
         this.props.setUser({ name: Auth.getUserNameFromCookie(), email: Auth.getUserEmailFromCookie() });
         //get money
