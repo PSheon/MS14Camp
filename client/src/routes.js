@@ -4,8 +4,8 @@ import DashboardPage from './containers/DashboardPage.jsx';
 import LoginPage from './containers/LoginPage.jsx';
 import SignUpPage from './containers/SignUpPage.jsx';
 import NpcPage from './containers/NpcPage.jsx';
-import BackPackPage from './containers/BackPackPage.jsx';
-import Setting from './components/Setting.jsx';
+import BackPackPage from './containers/BackpackPage.jsx';
+import SettingPage from './containers/SettingPage.jsx';
 import Auth from './modules/Auth';
 
 
@@ -55,8 +55,7 @@ const routes = {
     },
     {
       path: '/setting',
-      component: Setting
-    },
+      component: SettingPage
   ]
 };
 

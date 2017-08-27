@@ -10,10 +10,14 @@ import ActionAndroid from 'material-ui/svg-icons/action/android';
 
 import * as actions from '../actions';
 
-const dialog = {
-    backgroundColor: 'rgba(0,0,0,0.7)',
-    color: 'white'
+
+const inputWrapper= {
+  position:'fixed',
+  bottom:0,
+  left: 0,
+  width: '100%'
 }
+
 
 
 class BackPack extends Component {
@@ -22,7 +26,8 @@ class BackPack extends Component {
         this.state = {
             completed: 20,
             delay: 100,
-            result: 'No fucking result',
+            result:null,
+
         };
     }
 
@@ -31,6 +36,7 @@ class BackPack extends Component {
         this.setState({
             result: data,
         })
+        //如果不是ms開頭就給他錯誤
         this.props.doMoney('t01',data,'add');
     }
     handleError = (err) => {
@@ -43,20 +49,26 @@ class BackPack extends Component {
         if(this.props.team){
             return(
                 <div>
-                    <p>{this.props.team.money}</p>
+                    <p>目前金額：{this.props.team.money}</p>
                 </div>
             );
+        }else{
+           return(
+               <div>
+                   <p>正在努力載入金額中</p>
+               </div>
+           );
         }
     }
 
     renderItem = () => {
         if (this.props.team) {
             return (
-                <div>
+                <div className="row">
                     {this.props.team.items!==[]?
                     this.props.team.items.map((item)=>{
                         return(
-                            <div key={Math.random()}>
+                            <div style={{border:'1px solid black'}} className="col s3" key={Math.random()}>
                              <p>{item}</p>
                             </div>
                         )
@@ -66,19 +78,21 @@ class BackPack extends Component {
             );
         }else{
             return(
-                <p>空</p>
+                <p>正在努力載入道具</p>
             );
         }
     }
     render() {
         const previewStyle = {
-            height: 240,
-            width: 320,
+            height: '1px',
+            width:'1px' ,
+            marginLeft:'auto',
+            marginRight:'auto'
         }
         return (
             <div>
                 <div className='container'>
-                    {this.renderMoney()}
+                    <h5>道具欄</h5>
                     {this.renderItem()}
                     <QrReader
                         ref="qrReader1"
@@ -88,8 +102,28 @@ class BackPack extends Component {
                         onScan={this.handleScan}
                         legacyMode
                     />
-                    <input type="button" value="Submit QR Code" onClick={this.openImageDialog} />
-                    <p>{this.state.result}</p>
+                    <div style={inputWrapper}>
+                        <div className="row" 
+                            style={{ 
+                                border:'1px solid black',
+                                marginBottom: '55px',
+                                paddingTop:'5px',
+                                paddingBottom:'5px',
+                                lineHeight:'0'
+                            }}>
+                            <div className="col s6">
+                                <input 
+                                    type="button" 
+                                    value="掃描QR碼" 
+                                    onClick={this.openImageDialog} 
+                                />
+                            </div>
+                            <div className="col s6">
+                                {this.renderMoney()}
+                            </div>
+                        </div>
+                    {/*this.state.result?<p>{this.state.result}</p>:null*/}
+                    </div>
                 </div>
             </div>
         )
