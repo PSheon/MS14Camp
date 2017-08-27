@@ -7,7 +7,7 @@ import { Card, CardTitle, CardText } from 'material-ui/Card';
 import LinearProgress from 'material-ui/LinearProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
-
+import Chip from 'material-ui/Chip';
 import * as actions from '../actions';
 
 
@@ -16,6 +16,9 @@ const inputWrapper= {
   bottom:0,
   left: 0,
   width: '100%'
+}
+const money={
+    width:'95%'
 }
 
 
@@ -27,7 +30,6 @@ class BackPack extends Component {
             completed: 20,
             delay: 100,
             result:null,
-
         };
     }
 
@@ -48,9 +50,15 @@ class BackPack extends Component {
     renderMoney=()=>{
         if(this.props.team){
             return(
-                <div>
-                    <p>目前金額：{this.props.team.money}</p>
-                </div>
+                <Chip 
+                    labelStyle={{
+                        width:'100%',
+                        textAlign:'right',
+                        paddingRight:'15px'
+                    }}
+                    style={money}>
+                    <strong>{this.props.team.money}</strong> 元
+                </Chip>
             );
         }else{
            return(
@@ -91,8 +99,18 @@ class BackPack extends Component {
         }
         return (
             <div>
-                <div className='container'>
+                <Paper style={{
+                    margin:0,
+                    padding:'5px',
+                    paddingLeft:'10px'
+                }}>
                     <h5>道具欄</h5>
+                </Paper>
+                <div 
+                    style={{
+                        marginTop:'10px'
+                    }}
+                    className='container'>
                     {this.renderItem()}
                     <QrReader
                         ref="qrReader1"
@@ -102,28 +120,36 @@ class BackPack extends Component {
                         onScan={this.handleScan}
                         legacyMode
                     />
-                    <div style={inputWrapper}>
-                        <div className="row" 
-                            style={{ 
-                                border:'1px solid black',
+                    <Paper style={inputWrapper}>
+                        <div className="row"
+                            style={{
                                 marginBottom: '55px',
-                                paddingTop:'5px',
-                                paddingBottom:'5px',
-                                lineHeight:'0'
+                                paddingTop: '5px',
+                                paddingBottom: '5px',
+                                lineHeight: '0'
                             }}>
-                            <div className="col s6">
-                                <input 
-                                    type="button" 
-                                    value="掃描QR碼" 
-                                    onClick={this.openImageDialog} 
+                            <div className="col s3">
+                                <input
+                                    style={{
+                                        lineHeight:'35px',
+                                        paddingLeft:'15px'
+                                    }}
+                                    type="button"
+                                    value="加值金錢"
+                                    onClick={this.openImageDialog}
                                 />
                             </div>
-                            <div className="col s6">
+                            <div
+                             className="col s9"
+                             style={{
+                                 padding:'5px'
+                             }}
+                            >
                                 {this.renderMoney()}
                             </div>
                         </div>
+                    </Paper>
                     {/*this.state.result?<p>{this.state.result}</p>:null*/}
-                    </div>
                 </div>
             </div>
         )
