@@ -60,66 +60,59 @@ router.put('/donemission/:id/:type', (req, res) => {
         let temp = team.missions;
         let tempMoney=team.money;
         let tempItem=team.items;
+        let prevId=data.mId.split('-');
+        let currentNum=prevId[1];
+        let prevDone=0;
+        prevId=`${prevId[0]}-${prevId[1]-1}`;
         existed = _.findIndex(temp, { 'mId': data.mId });
-        switch (reqType) {
-          case 'success':
-            if (existed === -1) {
-              temp.push({ 
-                mId: data.mId, 
-                data: _.omit(data, ['mId','failed']), 
-                isSuccess: true 
-              });
-            } else {
-              temp[existed].isSuccess = true;
-            }
-            if (data.getItem) {
-              tempItem.push({item:data.getItem,url:data.getItemUrl});
-            }
-            if (data.lostItem) {
-              let itemIndex = _.findIndex(tempItem,{'item':data.lostItem});
-              if(itemIndex>-1){
-                tempItem.splice(itemIndex, 1);
-              }      
-            }
-            if (data.success) {
-              let successMoney = parseInt(data.success);
-              tempMoney += successMoney ;
-            }
-            if (data.paid){
-              let PaidMoney = parseInt(data.paid);
-              tempMoney -= PaidMoney ;
-            }
-            break;
-          case 'failed':
-            if (existed === -1) {
+    
+        if(currentNum!=="1")prevDone = _.findIndex(temp,{mId:prevId});
+
+        if(existed===-1&&prevDone!==-1){
+          switch(reqType){
+            case 'success':
               temp.push({
-                 mId: data.mId,
-                 data:_.omit(data,['mId','success']),
-                 isSuccess: false
+                mId: data.mId,
+                data: _.omit(data, ['mId', 'failed']),
+                isSuccess: true
               });
-            } else {
-              temp[existed].isSuccess = false;
-            }
-            if (data.getItem) {
+              if (data.success) {
+                let successMoney = parseInt(data.success);
+                tempMoney += successMoney;
+              }
+              break;
+            case 'failed':
+              temp.push({
+                mId: data.mId,
+                data: _.omit(data, ['mId', 'success']),
+                isSuccess: false
+              });
+              if (data.failed) {
+                let failedMoney = parseInt(data.failed);
+                tempMoney += failedMoney;
+              }
+              break;
+          }
+
+          if (data.getItem) {
               tempItem.push({ item: data.getItem, url: data.getItemUrl });
-            }
-            if (data.lostItem) {
+          }
+          if (data.lostItem) {
               let itemIndex = _.findIndex(tempItem, { 'item': data.lostItem });
               if (itemIndex > -1) {
-                tempItem.splice(itemIndex, 1);
-              }    
-            }
-            if (data.failed) {
-              let failedMoney = parseInt(data.failed);
-              tempMoney += failedMoney;
-            }
-            if (data.paid) {
+                  tempItem.splice(itemIndex, 1);
+              }
+          }
+        
+         
+          if (data.paid) {
               let PaidMoney = parseInt(data.paid);
               tempMoney -= PaidMoney;
-            }
-            break;
+          }
+            
         }
-        Team.findOneAndUpdate({ team: teamId }, { missions: temp,items:tempItem,money:tempMoney}, (err, team) => {
+
+        Team.findOneAndUpdate({ team: teamId }, { missions:temp,items:tempItem,money:tempMoney}, (err, team) => {
           if (err) throw err;
           Team.findOne({ team: teamId }, (err, team) => {
             if (err) throw err;
