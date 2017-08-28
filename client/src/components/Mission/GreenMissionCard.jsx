@@ -23,10 +23,14 @@ class GreenMissionCard extends Component {
         <div className="card teal lighten-3">
           <div className="card-content white-text">
             <span className="card-title">翠綠寶劍</span>
-            <p>{"任務已經完成百分之" + this.props.greenMission + "了"}</p>
+            <p>{"任務已經完成百分之" + Math.floor(this.props.greenMission / 12 * 100) + "了"}</p>
           </div>
           <div className="card-action">
-            <LinearProgress mode="determinate" value={this.props.greenMission} 
+            <LinearProgress
+              min={0}
+              max={12}
+              mode="determinate"
+              value={this.props.greenMission}
               color="#43A047"
             />
             <RaisedButton label="green" primary onClick={this.handleClick} />

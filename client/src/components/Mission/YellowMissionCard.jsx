@@ -23,10 +23,14 @@ class YellowMissionCard extends Component {
         <div className="card yellow lighten-3">
           <div className="card-content white-text">
             <span className="card-title">象牙盾牌</span>
-            <p>{"任務已經完成百分之" + this.props.yellowMission + "了"}</p>
+            <p>{"任務已經完成百分之" + Math.floor(this.props.yellowMission / 9 * 100) + "了"}</p>
           </div>
           <div className="card-action">
-            <LinearProgress mode="determinate" value={this.props.yellowMission}
+            <LinearProgress
+              min={0}
+              max={9}
+              mode="determinate"
+              value={this.props.yellowMission}
               color="#FFF176"
             />
 

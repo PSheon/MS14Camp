@@ -24,10 +24,14 @@ class RedMissionCard extends Component {
         <div className="card red lighten-3">
           <div className="card-content white-text">
             <span className="card-title">勃根地酒紅頭盔</span>
-            <p>{"任務已經完成百分之" + this.props.redMission + "了"}</p>
+            <p>{"任務已經完成百分之" + Math.floor(this.props.redMission / 10 * 100) + "了"}</p>
           </div>
           <div className="card-action">
-            <LinearProgress mode="determinate" value={this.props.redMission} 
+            <LinearProgress
+              min={0}
+              max={10}
+              mode="determinate"
+              value={this.props.redMission}
               color="#F44336"
             />
             <RaisedButton label="red" primary={true} onClick={this.handleClick} />

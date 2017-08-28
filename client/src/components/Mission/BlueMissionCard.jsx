@@ -32,10 +32,14 @@ class BlueMissionCard extends Component {
         <div className="card blue lighten-3">
           <div className="card-content white-text">
               <span className="card-title">鈷藍盔甲</span>
-              <p>{"任務已經完成百分之" + this.props.blueMission + "了"}</p>
+              <p>{"任務已經完成百分之" + Math.floor(this.props.blueMission / 7 * 100) + "了"}</p>
           </div>
           <div className="card-action">
-            <LinearProgress mode="determinate" value={this.props.blueMission}
+            <LinearProgress
+              min={0}
+              max={7}
+              mode="determinate"
+              value={this.props.blueMission}
               color="#2196F3"
             />
             <RaisedButton label="blue" primary={true} onClick={this.handleClick} />

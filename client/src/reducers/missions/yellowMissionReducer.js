@@ -6,7 +6,7 @@ import { SET_YELLOW_TEAM_PROGRESS, ADD_YELLOW_TEAM_PROGRESS } from '../../action
 export default function (state = 0, action) {
   switch (action.type) {
     case SET_YELLOW_TEAM_PROGRESS:
-      return action.payload || '';
+      return action.payload || 0;
     case ADD_YELLOW_TEAM_PROGRESS:
       socket.emit('yellowProgress', { yellowProgress: state + action.payload });
       return state + action.payload;
