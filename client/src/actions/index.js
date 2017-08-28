@@ -94,9 +94,9 @@ export const addYellowProgress = (add_block) => dispatch => {
 }
 
 // change npc
-export const setNpc = (npc_name) => dispatch => {
-  dispatch({ type: types.SET_NPC, payload: npc_name });
-}
+// export const setNpc = (npc_name) => dispatch => {
+//   dispatch({ type: types.SET_NPC, payload: npc_name });
+// }
 
 
 //alex

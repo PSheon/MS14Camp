@@ -4,7 +4,6 @@ import QrReader from 'react-qr-reader';
 import FontIcon from 'material-ui/FontIcon';
 import Paper from 'material-ui/Paper';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
-import LinearProgress from 'material-ui/LinearProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 import Chip from 'material-ui/Chip';

@@ -37768,75 +37768,87 @@
 	        null,
 	        _Auth2.default.isUserAuthenticated() ? _react2.default.createElement(
 	          'div',
-	          { className: 'navbar-fixed' },
+	          null,
 	          _react2.default.createElement(
-	            'nav',
-	            null,
+	            'div',
+	            { className: 'navbar-fixed' },
 	            _react2.default.createElement(
-	              'div',
-	              { className: 'nav-wrapper' },
+	              'nav',
+	              null,
 	              _react2.default.createElement(
-	                'a',
-	                { className: 'brand-logo center' },
-	                this.props.user.name + '~' + this.state.selectedName
+	                'div',
+	                { className: 'nav-wrapper' },
+	                _react2.default.createElement(
+	                  'a',
+	                  { className: 'brand-logo center' },
+	                  this.props.user.name + '~' + this.state.selectedName
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'container' },
+	            this.props.children
+	          ),
+	          _react2.default.createElement('footer', { style: { minHeight: '10vh' } }),
+	          _react2.default.createElement(
+	            _Paper2.default,
+	            { zDepth: 1, style: { position: 'fixed', bottom: 0, width: '100%' } },
+	            _react2.default.createElement(
+	              _BottomNavigation.BottomNavigation,
+	              { selectedIndex: this.state.selectedIndex },
+	              _react2.default.createElement(
+	                _reactRouter.IndexLink,
+	                { to: '/' },
+	                _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
+	                  label: '\u9996\u9801',
+	                  icon: _react2.default.createElement(_home2.default, { color: this.state.selectedIndex === 0 ? '#00BCD4' : '#424242' }),
+	                  onClick: function onClick() {
+	                    return _this2.select(0, '首頁');
+	                  }
+	                })
+	              ),
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/Npc' },
+	                _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
+	                  label: '\u4EFB\u52D9',
+	                  icon: _react2.default.createElement(_viewHeadline2.default, { color: this.state.selectedIndex === 1 ? '#00BCD4' : '#424242' }),
+	                  onClick: function onClick() {
+	                    return _this2.select(1, '任務');
+	                  }
+	                })
+	              ),
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/backpack' },
+	                _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
+	                  label: '\u80CC\u5305',
+	                  icon: _react2.default.createElement(_shoppingBasket2.default, { color: this.state.selectedIndex === 2 ? '#00BCD4' : '#424242' }),
+	                  onClick: function onClick() {
+	                    return _this2.select(2, '背包');
+	                  }
+	                })
+	              ),
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/setting' },
+	                _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
+	                  label: '\u8A2D\u5B9A',
+	                  icon: _react2.default.createElement(_settings2.default, { color: this.state.selectedIndex === 3 ? '#00BCD4' : '#424242' }),
+	                  onClick: function onClick() {
+	                    return _this2.select(3, '設定');
+	                  }
+	                })
 	              )
 	            )
 	          )
-	        ) : null,
-	        this.props.children,
-	        _Auth2.default.isUserAuthenticated() ? _react2.default.createElement('footer', { style: { minHeight: '10vh' } }) : null,
-	        _Auth2.default.isUserAuthenticated() ? _react2.default.createElement(
-	          _Paper2.default,
-	          { zDepth: 1, style: { position: 'fixed', bottom: 0, width: '100%' } },
-	          _react2.default.createElement(
-	            _BottomNavigation.BottomNavigation,
-	            { selectedIndex: this.state.selectedIndex },
-	            _react2.default.createElement(
-	              _reactRouter.IndexLink,
-	              { to: '/' },
-	              _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
-	                label: '\u9996\u9801',
-	                icon: _react2.default.createElement(_home2.default, { color: this.state.selectedIndex === 0 ? '#00BCD4' : '#424242' }),
-	                onClick: function onClick() {
-	                  return _this2.select(0, '首頁');
-	                }
-	              })
-	            ),
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/Npc' },
-	              _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
-	                label: '\u4EFB\u52D9',
-	                icon: _react2.default.createElement(_viewHeadline2.default, { color: this.state.selectedIndex === 1 ? '#00BCD4' : '#424242' }),
-	                onClick: function onClick() {
-	                  return _this2.select(1, '任務');
-	                }
-	              })
-	            ),
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/backpack' },
-	              _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
-	                label: '\u80CC\u5305',
-	                icon: _react2.default.createElement(_shoppingBasket2.default, { color: this.state.selectedIndex === 2 ? '#00BCD4' : '#424242' }),
-	                onClick: function onClick() {
-	                  return _this2.select(2, '背包');
-	                }
-	              })
-	            ),
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/setting' },
-	              _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
-	                label: '\u8A2D\u5B9A',
-	                icon: _react2.default.createElement(_settings2.default, { color: this.state.selectedIndex === 3 ? '#00BCD4' : '#424242' }),
-	                onClick: function onClick() {
-	                  return _this2.select(3, '設定');
-	                }
-	              })
-	            )
-	          )
-	        ) : null
+	        ) : _react2.default.createElement(
+	          'div',
+	          null,
+	          this.props.children
+	        )
 	      );
 	    }
 	  }]);
@@ -57253,6 +57265,7 @@
 	    key: 'render',
 	    value: function render() {
 	      // return (<Dashboard secretData={this.props.dashboard} />);
+	      // TODO: add time filter
 	      return _react2.default.createElement(_Dashboard2.default, null);
 	    }
 	  }]);
@@ -58800,7 +58813,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.doMoney = exports.doneMission = exports.query = exports.setNpc = exports.addYellowProgress = exports.addGreenProgress = exports.addBlueProgress = exports.addRedProgress = exports.setTeamProgress = exports.getRoom = exports.setUser = exports.setSecret = undefined;
+	exports.doMoney = exports.doneMission = exports.query = exports.addYellowProgress = exports.addGreenProgress = exports.addBlueProgress = exports.addRedProgress = exports.setTeamProgress = exports.getRoom = exports.setUser = exports.setSecret = undefined;
 
 	var _axios = __webpack_require__(611);
 
@@ -58926,11 +58939,10 @@
 	};
 
 	// change npc
-	var setNpc = exports.setNpc = function setNpc(npc_name) {
-	  return function (dispatch) {
-	    dispatch({ type: types.SET_NPC, payload: npc_name });
-	  };
-	};
+	// export const setNpc = (npc_name) => dispatch => {
+	//   dispatch({ type: types.SET_NPC, payload: npc_name });
+	// }
+
 
 	//alex
 
@@ -59368,10 +59380,6 @@
 
 	var _Card = __webpack_require__(598);
 
-	var _LinearProgress = __webpack_require__(656);
-
-	var _LinearProgress2 = _interopRequireDefault(_LinearProgress);
-
 	var _actions = __webpack_require__(637);
 
 	var actions = _interopRequireWildcard(_actions);
@@ -59492,7 +59500,7 @@
 	        null,
 	        _react2.default.createElement(
 	          _Card.Card,
-	          { className: 'container' },
+	          null,
 	          _react2.default.createElement(_Card.CardTitle, {
 	            title: '\u8A18\u5206\u677F',
 	            subtitle: '\u5982\u679C\u4F60\u770B\u5230\u9019\u884C\u6587\u5B57\u4EE3\u8868\u8EAB\u5206\u5DF2\u6388\u6B0A.'
@@ -63980,13 +63988,17 @@
 	            _react2.default.createElement(
 	              'p',
 	              null,
-	              "任務已經完成百分之" + this.props.redMission + "了"
+	              "任務已經完成百分之" + Math.floor(this.props.redMission / 10 * 100) + "了"
 	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'card-action' },
-	            _react2.default.createElement(_LinearProgress2.default, { mode: 'determinate', value: this.props.redMission,
+	            _react2.default.createElement(_LinearProgress2.default, {
+	              min: 0,
+	              max: 10,
+	              mode: 'determinate',
+	              value: this.props.redMission,
 	              color: '#F44336'
 	            }),
 	            _react2.default.createElement(_RaisedButton2.default, { label: 'red', primary: true, onClick: this.handleClick })
@@ -64099,13 +64111,17 @@
 	            _react2.default.createElement(
 	              'p',
 	              null,
-	              "任務已經完成百分之" + this.props.blueMission + "了"
+	              "任務已經完成百分之" + Math.floor(this.props.blueMission / 7 * 100) + "了"
 	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'card-action' },
-	            _react2.default.createElement(_LinearProgress2.default, { mode: 'determinate', value: this.props.blueMission,
+	            _react2.default.createElement(_LinearProgress2.default, {
+	              min: 0,
+	              max: 7,
+	              mode: 'determinate',
+	              value: this.props.blueMission,
 	              color: '#2196F3'
 	            }),
 	            _react2.default.createElement(_RaisedButton2.default, { label: 'blue', primary: true, onClick: this.handleClick })
@@ -70594,13 +70610,17 @@
 	            _react2.default.createElement(
 	              'p',
 	              null,
-	              "任務已經完成百分之" + this.props.yellowMission + "了"
+	              "任務已經完成百分之" + Math.floor(this.props.yellowMission / 9 * 100) + "了"
 	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'card-action' },
-	            _react2.default.createElement(_LinearProgress2.default, { mode: 'determinate', value: this.props.yellowMission,
+	            _react2.default.createElement(_LinearProgress2.default, {
+	              min: 0,
+	              max: 9,
+	              mode: 'determinate',
+	              value: this.props.yellowMission,
 	              color: '#FFF176'
 	            }),
 	            _react2.default.createElement(_RaisedButton2.default, { label: 'yellow', primary: true, onClick: this.handleClick })
@@ -70700,13 +70720,17 @@
 	            _react2.default.createElement(
 	              'p',
 	              null,
-	              "任務已經完成百分之" + this.props.greenMission + "了"
+	              "任務已經完成百分之" + Math.floor(this.props.greenMission / 12 * 100) + "了"
 	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'card-action' },
-	            _react2.default.createElement(_LinearProgress2.default, { mode: 'determinate', value: this.props.greenMission,
+	            _react2.default.createElement(_LinearProgress2.default, {
+	              min: 0,
+	              max: 12,
+	              mode: 'determinate',
+	              value: this.props.greenMission,
 	              color: '#43A047'
 	            }),
 	            _react2.default.createElement(_RaisedButton2.default, { label: 'green', primary: true, onClick: this.handleClick })
@@ -70773,41 +70797,71 @@
 
 	    var _this = _possibleConstructorReturn(this, (MissionBroadcast.__proto__ || Object.getPrototypeOf(MissionBroadcast)).call(this, props));
 
+	    _this.handleActionTouchTap = function () {
+	      if (_this.refs.snackbar) {
+	        _this.setState({
+	          open: false
+	        });
+	      }
+	    };
+
+	    _this.handleRequestClose = function () {
+	      if (_this.refs.snackbar) {
+	        _this.setState({
+	          open: false
+	        });
+	      }
+	    };
+
 	    _this.state = {
+	      bgColor: '',
 	      message: '',
 	      open: false
 	    };
 
 	    socket.on('Broadcast', function (_ref) {
-	      var message = _ref.message;
+	      var message = _ref.message,
+	          team = _ref.team;
 
+	      var Color = '';
+	      switch (team) {
+	        case 'red':
+	          Color = '#F44336';break;
+	        case 'blue':
+	          Color = '#2196F3';break;
+	        case 'green':
+	          Color = '#43A047';break;
+	        case 'yellow':
+	          Color = '#FFF176';break;
+	      };
 	      _this.setState({
+	        bgColor: Color,
 	        message: message,
 	        open: true
 	      });
 	    });
 
+	    _this.handleActionTouchTap = _this.handleActionTouchTap.bind(_this);
 	    _this.handleRequestClose = _this.handleRequestClose.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(MissionBroadcast, [{
-	    key: 'handleRequestClose',
-	    value: function handleRequestClose() {
-	      this.setState({
-	        open: false
-	      });
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(_Snackbar2.default, {
+	          ref: 'snackbar',
+	          bodyStyle: {
+	            backgroundColor: this.state.bgColor
+	          },
 	          open: this.state.open,
 	          message: this.state.message,
 	          autoHideDuration: 4000,
+	          action: 'X',
+	          onActionTouchTap: this.handleActionTouchTap,
 	          onRequestClose: this.handleRequestClose
 	        })
 	      );
@@ -84808,10 +84862,6 @@
 
 	var _Card = __webpack_require__(598);
 
-	var _LinearProgress = __webpack_require__(656);
-
-	var _LinearProgress2 = _interopRequireDefault(_LinearProgress);
-
 	var _RaisedButton = __webpack_require__(659);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
@@ -94351,7 +94401,7 @@
 
 	  switch (action.type) {
 	    case _types.SET_RED_TEAM_PROGRESS:
-	      return action.payload || '';
+	      return action.payload || 0;
 	    case _types.ADD_RED_TEAM_PROGRESS:
 	      socket.emit('redProgress', { redProgress: state + action.payload });
 	      return state + action.payload;
@@ -94386,7 +94436,7 @@
 
 	  switch (action.type) {
 	    case _types.SET_BLUE_TEAM_PROGRESS:
-	      return action.payload || '';
+	      return action.payload || 0;
 	    case _types.ADD_BLUE_TEAM_PROGRESS:
 	      socket.emit('blueProgress', { blueProgress: state + action.payload });
 	      return state + action.payload;
@@ -94421,7 +94471,7 @@
 
 	  switch (action.type) {
 	    case _types.SET_GREEN_TEAM_PROGRESS:
-	      return action.payload || '';
+	      return action.payload || 0;
 	    case _types.ADD_GREEN_TEAM_PROGRESS:
 	      socket.emit('greenProgress', { greenProgress: state + action.payload });
 	      return state + action.payload;
@@ -94456,7 +94506,7 @@
 
 	  switch (action.type) {
 	    case _types.SET_YELLOW_TEAM_PROGRESS:
-	      return action.payload || '';
+	      return action.payload || 0;
 	    case _types.ADD_YELLOW_TEAM_PROGRESS:
 	      socket.emit('yellowProgress', { yellowProgress: state + action.payload });
 	      return state + action.payload;

@@ -22,10 +22,11 @@ router.get('/whatmyroom', (req, res) => {
 
 router.post('/teamprogress', (req, res) => {
   res.status(200).json({
-    redProgress: 10,
-    blueProgress: 35,
-    greenProgress: 90,
-    yellowProgress: 25
+    //  Total nums of mission => red: 10 , blue: 7 , green: 12 , yellow: 9
+    redProgress: parseInt(0),
+    blueProgress: parseInt(0),
+    greenProgress: parseInt(0),
+    yellowProgress: parseInt(0)
   });
 });
 

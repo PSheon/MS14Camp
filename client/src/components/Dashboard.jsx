@@ -2,7 +2,6 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import QrReader from 'react-qr-reader';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
-import LinearProgress from 'material-ui/LinearProgress';
 
 import * as actions from '../actions';
 import NPCCard from './ChatBot/NPCCard.jsx';
@@ -65,7 +64,7 @@ class Dashboard extends Component {
     }
     return (
       <div>
-        <Card className="container">
+        <Card>
           <CardTitle
             title="記分板"
             subtitle="如果你看到這行文字代表身分已授權."
