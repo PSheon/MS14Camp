@@ -24,7 +24,7 @@ const LoginForm = ({
     <div style={style.wrapper}>
       <div style={style.container}>
           <form className="center-align" style={form} action="/" onSubmit={onSubmit}>
-          <h5>歡迎回來勇敢的騎士！</h5>
+          <h5>歡迎回來阿勇敢的騎士！</h5>
 
           {successMessage && <p className="success-message center-align">{successMessage}</p>}
           {errors.summary && <p className="error-message center-align">{errors.summary}</p>}
@@ -54,7 +54,7 @@ const LoginForm = ({
               <RaisedButton type="submit" label="登入" primary />
             </div>
 
-            <p style={bottomText} className="center-align">還沒有帳號？ <Link to={'/signup'} style={{textDecoration:'underline'}}>創建一個</Link>.</p>
+            <p style={bottomText} className="center-align">還沒有帳號？ <Link to={'/signup'}>創建一個</Link>.</p>
           </form>
         </div>
         <img src='https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/dinosaur.png' style={style.dinosaur} />

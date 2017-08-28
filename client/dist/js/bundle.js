@@ -37777,12 +37777,8 @@
 	              { className: 'nav-wrapper' },
 	              _react2.default.createElement(
 	                'a',
-	                { style: {
-	                    marginLeft: '15px',
-	                    fontSize: '16px',
-	                    fontWeight: 'normal'
-	                  } },
-	                this.state.selectedName
+	                { className: 'brand-logo center' },
+	                this.props.user.name + '~' + this.state.selectedName
 	              )
 	            )
 	          )
@@ -59405,10 +59401,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	/*
-	 * 這頁還在開發中 別太在意這麼多 code
-	 */
 
 	var Dashboard = function (_Component) {
 	  _inherits(Dashboard, _Component);
@@ -82775,7 +82767,7 @@
 	        _react2.default.createElement(
 	          'h5',
 	          null,
-	          '\u6B61\u8FCE\u56DE\u4F86\u52C7\u6562\u7684\u9A0E\u58EB\uFF01'
+	          '\u6B61\u8FCE\u56DE\u4F86\u963F\u52C7\u6562\u7684\u9A0E\u58EB\uFF01'
 	        ),
 	        successMessage && _react2.default.createElement(
 	          'p',
@@ -82821,7 +82813,7 @@
 	          '\u9084\u6C92\u6709\u5E33\u865F\uFF1F ',
 	          _react2.default.createElement(
 	            _reactRouter.Link,
-	            { to: '/signup', style: { textDecoration: 'underline' } },
+	            { to: '/signup' },
 	            '\u5275\u5EFA\u4E00\u500B'
 	          ),
 	          '.'
@@ -84308,7 +84300,7 @@
 	          '\u5DF2\u7D93\u6709\u5E33\u865F\u4E86\uFF1F ',
 	          _react2.default.createElement(
 	            _reactRouter.Link,
-	            { to: '/login', style: { textDecoration: 'underline' } },
+	            { to: '/login' },
 	            '\u767B\u5165'
 	          )
 	        )
@@ -94564,7 +94556,7 @@
 	var _types = __webpack_require__(638);
 
 	var initialState = {
-	    name: '傻眼貓咪',
+	    name: '勇者',
 	    email: 'sayan@maomii.com'
 	};
 

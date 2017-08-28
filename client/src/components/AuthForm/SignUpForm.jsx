@@ -58,7 +58,7 @@ const SignUpForm = ({
               <div className="center-align">
                 <RaisedButton type="submit" label="註冊" primary />
               </div>
-              <p style={bottomText} className="center-align">已經有帳號了？ <Link to={'/login'} style={{ textDecoration: 'underline' }}>登入</Link></p>
+              <p style={bottomText} className="center-align">已經有帳號了？ <Link to={'/login'} >登入</Link></p>
             </form>
         </div>
         <img src='https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/Group%401x.png' style={style.rocket} />

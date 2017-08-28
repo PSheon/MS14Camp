@@ -27,20 +27,15 @@ class Base extends Component {
   render(){
     return (
       <div>
-        {Auth.isUserAuthenticated() ?(
-          <div className="navbar-fixed">
-            <nav>
-              <div className="nav-wrapper">
-                <a style={{
-                  marginLeft:'15px',
-                  fontSize:'16px',
-                  fontWeight:'normal'
-                }}>{this.state.selectedName}</a>
-              </div>
-            </nav>
-          </div>
-        ):null}
-      
+        {(Auth.isUserAuthenticated()) ? (
+        <div className= "navbar-fixed" >
+          <nav>
+            <div className="nav-wrapper">
+              <a className="brand-logo center">{this.props.user.name + '~' + this.state.selectedName}</a>
+            </div>
+          </nav>
+        </div>) : null}
+        
         { /* child component will be rendered here */}
         {this.props.children}
         {Auth.isUserAuthenticated() ? (

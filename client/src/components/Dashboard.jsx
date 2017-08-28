@@ -10,9 +10,6 @@ import MissionCard from './Mission/MissionCard.jsx';
 import MissionBroadcast from './Mission/MissionBroadcast.jsx';
 import ChatBotIcon from './ChatBot/ChatBotIcon.jsx';
 
-/*
- * 這頁還在開發中 別太在意這麼多 code
- */
 
 class Dashboard extends Component {
   constructor(props) {
