@@ -57253,7 +57253,7 @@
 	    key: 'render',
 	    value: function render() {
 	      // return (<Dashboard secretData={this.props.dashboard} />);
-	      return _react2.default.createElement(_GetRoom2.default, null);
+	      return _react2.default.createElement(_Dashboard2.default, null);
 	    }
 	  }]);
 

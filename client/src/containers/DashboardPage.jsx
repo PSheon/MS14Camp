@@ -33,7 +33,7 @@ class DashboardPage extends Component {
 
   render() {
     // return (<Dashboard secretData={this.props.dashboard} />);
-    return (<GetRoom />);
+    return (<Dashboard />);
   }
 
 }
