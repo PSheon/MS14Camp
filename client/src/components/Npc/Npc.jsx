@@ -55,7 +55,7 @@ class Npc extends Component {
         this.state = {
             completed: 20,
             delay: 100,
-            result: 'No fucking result'
+            result: 'No fuxxing result'
         };
     }
 
@@ -77,7 +77,7 @@ class Npc extends Component {
                     </div>
 
                     {mission.data.bossDetail2 ?
-                     <div className="right-left">
+                    <div className="right-left">
                         <p style={fromBoss}>{mission.data.bossDetail2}</p>
                     </div>:null}
 
@@ -90,10 +90,10 @@ class Npc extends Component {
                         null
                     }
                     {mission.isSuccess?
-                        <p>獲得：{mission.data.success}</p> :<p>獲得：{mission.data.failed}元</p>
+                        <p>獲得：{mission.data.success || 0}元</p> :<p>獲得：{mission.data.failed || 0}元</p>
                     }
                     {mission.data.paid !== "0"?
-                        <p>付出：{mission.data.paid}元</p> :
+                        <p>付出：{mission.data.paid || 0}元</p> :
                         null
                     }
                     

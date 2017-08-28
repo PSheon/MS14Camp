@@ -1,7 +1,6 @@
 import React, { PropTypes,Component} from 'react';
 import { Link, IndexLink } from 'react-router';
 import { connect } from 'react-redux';
-
 import FontIcon from 'material-ui/FontIcon';
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
@@ -10,6 +9,7 @@ import Settings from 'material-ui/svg-icons/action/settings';
 import Headline from 'material-ui/svg-icons/action/view-headline';
 import Basket from 'material-ui/svg-icons/action/shopping-basket';
 
+import MissionBroadcast from './Mission/MissionBroadcast.jsx';
 import Auth from '../modules/Auth';
 import NavBar from './navBar.jsx';
 
@@ -36,6 +36,8 @@ class Base extends Component {
             </div>
           </nav>
         </div>
+
+        <MissionBroadcast />
 
         <div className="container">
           {this.props.children}

@@ -135,6 +135,12 @@ export const doneMission = (teamId, id, type) => dispatch => {
     responseType: 'json'
   }).then((response) => {
     if (response.status === 200) {
+      switch(id[0]) {
+        case 'R': dispatch({ type: types.ADD_RED_TEAM_PROGRESS, payload: 0 }); break;
+        case 'B': dispatch({ type: types.ADD_BLUE_TEAM_PROGRESS, payload: 0 }); break;
+        case 'G': dispatch({ type: types.ADD_GREEN_TEAM_PROGRESS, payload: 0 }); break;
+        case 'Y': dispatch({ type: types.ADD_YELLOW_TEAM_PROGRESS, payload: 0 }); break;
+      }
       dispatch({ type: types.DONE_MISSION, payload: response.data });
     }
   }).catch(function (error) {

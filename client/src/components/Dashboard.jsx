@@ -6,7 +6,6 @@ import { Card, CardTitle, CardText } from 'material-ui/Card';
 import * as actions from '../actions';
 import NPCCard from './ChatBot/NPCCard.jsx';
 import MissionCard from './Mission/MissionCard.jsx';
-import MissionBroadcast from './Mission/MissionBroadcast.jsx';
 import ChatBotIcon from './ChatBot/ChatBotIcon.jsx';
 
 
@@ -20,6 +19,10 @@ class Dashboard extends Component {
     }; 
     this.handleScan = this.handleScan.bind(this);
     this.openImageDialog = this.openImageDialog.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.setTeamProgress();
   }
 
   renderUser() {
@@ -70,7 +73,7 @@ class Dashboard extends Component {
             subtitle="如果你看到這行文字代表身分已授權."
           />
           {/*<NPCCard />*/}
-          <MissionBroadcast />
+          
 
           <MissionCard />
           {/*this.props.secretData && <CardText style={{ fontSize: '16px', color: 'green' }}>{this.props.secretData}</CardText>*/}

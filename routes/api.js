@@ -8,6 +8,12 @@ const Money = require('mongoose').model('Money');
 
 const router = new express.Router();
 
+/*
+ * temp variables
+ */
+let redProgress = 0; let blueProgress = 0; let greenProgress = 0; let yellowProgress = 0;
+
+
 router.get('/dashboard', (req, res) => {
   res.status(200).json({
     message: "You're authorized to see this secret message."
@@ -21,12 +27,28 @@ router.get('/whatmyroom', (req, res) => {
 });
 
 router.post('/teamprogress', (req, res) => {
+  Team.find({ missions: { $elemMatch: { mId: /-/ } } }, (err, collections) => {
+    let tempRed = 0; let tempBlue = 0; let tempGreen = 0; let tempYellow = 0;
+    for (let collection of collections) {
+      let missions = collection.missions;
+
+      for (let mission of missions) {
+        switch(mission.mId[0]) {
+          case 'R': tempRed+=1; break;
+          case 'B': tempBlue+=1; break;
+          case 'G': tempGreen+=1; break;
+          case 'Y': tempYellow+=1; break;
+        }
+      }
+    }
+    redProgress = tempRed; blueProgress = tempBlue; greenProgress = tempGreen; yellowProgress = tempYellow;
+  })
   res.status(200).json({
     //  Total nums of mission => red: 10 , blue: 7 , green: 12 , yellow: 9
-    redProgress: parseInt(0),
-    blueProgress: parseInt(0),
-    greenProgress: parseInt(0),
-    yellowProgress: parseInt(0)
+    redProgress: parseInt(redProgress),
+    blueProgress: parseInt(blueProgress),
+    greenProgress: parseInt(greenProgress),
+    yellowProgress: parseInt(yellowProgress)
   });
 });
 
