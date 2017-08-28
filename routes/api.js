@@ -63,6 +63,7 @@ router.put('/donemission/:id/:type', (req, res) => {
         switch (reqType) {
           case 'success':
             if (existed === -1) {
+              //任務不存在
               temp.push({ 
                 mId: data.mId, 
                 data: _.omit(data, ['mId','failed']), 
