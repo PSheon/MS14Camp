@@ -60,6 +60,7 @@ class Npc extends Component {
     }
     
     componentDidMount() {
+        this.props.getUserDetail(this.props.user.email);
         this.props.query(this.props.user.teamId);
     }
 
@@ -111,12 +112,18 @@ class Npc extends Component {
         this.setState({
             result: data,
         });
-        console.log(data);
-        let valid = data.charAt(0);
-        if (valid !== 'M') {
-            let msg = data.split(',');
-            this.props.doneMission(this.props.user.teamId, msg[0], msg[1]);
+        
+        
+        if(data){
+            let valid = data.charAt(0);
+            if (valid !== 'M') {
+                let msg = data.split(',');
+                this.props.doneMission(this.props.user.teamId, msg[0], msg[1]);
+            }
+        }else{
+            alert(`invalid QR`);
         }
+      
     }
     handleError=(err)=> {
         console.error(err)

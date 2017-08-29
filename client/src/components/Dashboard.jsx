@@ -30,7 +30,6 @@ class Dashboard extends Component {
   }
   renderMission() {
     if (this.props.mission) {
-      console.log(this.props.mission)
       return (
         <div>
           <h1>{this.props.mission.mId}</h1>

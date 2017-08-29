@@ -85,7 +85,7 @@ router.put('/donemission/:id/:type', (req, res) => {
   }).on("data", (data) => {
     
     if (data.mId === reqId && !isFound) {
-      console.log(data);
+      
       Team.findOne({ team:teamId}, (err, team) => {
         if (err) throw err;
         let temp = team.missions;
@@ -164,7 +164,7 @@ router.put('/money/:id/:type', (req, res) => {
   let teamId = req.params.id;
   let reqType = req.params.type;
   let mId = req.body.mId;
-  // console.log(mId);
+  
       Money.findOne({ mSerial: mId }, (err,money) => {
         if (err) throw err;
         if(money){
@@ -200,7 +200,7 @@ router.put('/user/init', (req, res) => {
   let email=`<${req.body.email}>`;
   let csvStream = fs.createReadStream(path.resolve('./static/csv', 'internList.csv'));
   let updateData={}
-  console.log(email);
+ 
   csv.fromStream(csvStream, { headers: ['Id', 'name', 'email', 'gender', 'isGod'] })
     .on("data", (data) => {
       if (data.email === email) {
@@ -213,7 +213,7 @@ router.put('/user/init', (req, res) => {
       }
     }
     ).on("end", () => {
-      console.log(updateData);
+     
       User.findOneAndUpdate({ email:req.body.email},updateData,(err, user) => {
         if(err)throw err;
         User.findOne({ email: req.body.email}, (err, user1) => {
@@ -226,7 +226,7 @@ router.put('/user/init', (req, res) => {
 router.post('/user', (req, res) => {
   let email =req.body.email;
   User.findOne({email:email}, (err, user) => {
-    console.log(user);
+    
     if (err) throw err;
     res.status(200).json(user);
   });
@@ -299,12 +299,11 @@ router.get('/godm/init', (req, res) => {
       money.save((err) => {
         if (err) throw err;
       });
-      console.log(counter);
+      
     }).on("end", () => {
       Money.find({}, (err, money) => {
         if (err) throw err;
         let len=money.length;
-        console.log(len)
         res.status(200).json(money);
       });
     });    

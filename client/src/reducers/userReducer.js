@@ -15,10 +15,10 @@ export default function (state = initialState , action) {
         case SET_USER:
             return action.payload;
         case GET_USER:
-            console.log(action.payload);
+          
             return {...state,...action.payload};
         case INIT_USER:
-            console.log(action.payload);
+           
             return { ...state, ...action.payload };
         default:
             return state;

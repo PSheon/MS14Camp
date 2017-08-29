@@ -132,7 +132,6 @@ export const getUserDetail = (email) => dispatch => {
     responseType: 'json'
   }).then((response) => {
     if (response.status === 200) {
-      console.log(response.data)
       dispatch({ type: types.GET_USER, payload: response.data });
     }
   }).catch(function (error) {
@@ -142,7 +141,6 @@ export const getUserDetail = (email) => dispatch => {
 
 export const initUser = (email) => dispatch => {
   let emailData = queryString.stringify({ email: email });
-  console.log(email);
   axios(`/api/user/init`, {
     method: 'put',
     headers: {
@@ -161,7 +159,7 @@ export const initUser = (email) => dispatch => {
 }
 
 export const query = (teamId) => dispatch => {
-  console.log(`api is call with ${teamId}`);
+ 
   let team = queryString.stringify({ team: teamId });
   axios(`/api/query`, {
     method: 'post',
@@ -182,7 +180,7 @@ export const query = (teamId) => dispatch => {
 
 export const doneMission = (teamId, id, type) => dispatch => {
   let team = queryString.stringify({ team: teamId });
-  console.log(`${teamId} is calling api  with ${id} with ${type}`);
+
   axios(`/api/donemission/${id}/${type}`, {
     method: 'put',
     headers: {
@@ -212,7 +210,7 @@ export const doneMission = (teamId, id, type) => dispatch => {
 
 export const doMoney = (teamId, id, type) => dispatch => {
   let mId= queryString.stringify({mId:id});
-  console.log(`${id}'s money ${mId} is ${type}ed by api `);
+
   axios(`/api/money/${teamId}/${type}`, {
     method: 'put',
     headers: {

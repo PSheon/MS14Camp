@@ -66591,7 +66591,6 @@
 	      responseType: 'json'
 	    }).then(function (response) {
 	      if (response.status === 200) {
-	        console.log(response.data);
 	        dispatch({ type: types.GET_USER, payload: response.data });
 	      }
 	    }).catch(function (error) {
@@ -66603,7 +66602,6 @@
 	var initUser = exports.initUser = function initUser(email) {
 	  return function (dispatch) {
 	    var emailData = queryString.stringify({ email: email });
-	    console.log(email);
 	    (0, _axios2.default)('/api/user/init', {
 	      method: 'put',
 	      headers: {
@@ -66624,7 +66622,7 @@
 
 	var query = exports.query = function query(teamId) {
 	  return function (dispatch) {
-	    console.log('api is call with ' + teamId);
+
 	    var team = queryString.stringify({ team: teamId });
 	    (0, _axios2.default)('/api/query', {
 	      method: 'post',
@@ -66647,7 +66645,7 @@
 	var doneMission = exports.doneMission = function doneMission(teamId, id, type) {
 	  return function (dispatch) {
 	    var team = queryString.stringify({ team: teamId });
-	    console.log(teamId + ' is calling api  with ' + id + ' with ' + type);
+
 	    (0, _axios2.default)('/api/donemission/' + id + '/' + type, {
 	      method: 'put',
 	      headers: {
@@ -66683,7 +66681,7 @@
 	var doMoney = exports.doMoney = function doMoney(teamId, id, type) {
 	  return function (dispatch) {
 	    var mId = queryString.stringify({ mId: id });
-	    console.log(id + '\'s money ' + mId + ' is ' + type + 'ed by api ');
+
 	    (0, _axios2.default)('/api/money/' + teamId + '/' + type, {
 	      method: 'put',
 	      headers: {
@@ -67142,7 +67140,6 @@
 	    key: 'renderMission',
 	    value: function renderMission() {
 	      if (this.props.mission) {
-	        console.log(this.props.mission);
 	        return _react2.default.createElement(
 	          'div',
 	          null,
@@ -84808,11 +84805,15 @@
 	            _this.setState({
 	                result: data
 	            });
-	            console.log(data);
-	            var valid = data.charAt(0);
-	            if (valid !== 'M') {
-	                var msg = data.split(',');
-	                _this.props.doneMission(_this.props.user.teamId, msg[0], msg[1]);
+
+	            if (data) {
+	                var valid = data.charAt(0);
+	                if (valid !== 'M') {
+	                    var msg = data.split(',');
+	                    _this.props.doneMission(_this.props.user.teamId, msg[0], msg[1]);
+	                }
+	            } else {
+	                alert('invalid QR');
 	            }
 	        };
 
@@ -84835,6 +84836,7 @@
 	    _createClass(Npc, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
+	            this.props.getUserDetail(this.props.user.email);
 	            this.props.query(this.props.user.teamId);
 	        }
 	    }, {
@@ -85066,10 +85068,13 @@
 	                result: data
 	            });
 	            //如果不是ms開頭就給他錯誤
-	            console.log(data);
-	            var valid = data.charAt(0);
-	            if (valid === 'M') {
-	                _this.props.doMoney(_this.props.user.teamId, data, 'add');
+	            if (!data) {
+	                var valid = data.charAt(0);
+	                if (valid === 'M') {
+	                    _this.props.doMoney(_this.props.user.teamId, data, 'add');
+	                }
+	            } else {
+	                alert('invalid QR');
 	            }
 	        };
 
@@ -85167,6 +85172,7 @@
 	    _createClass(BackPack, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
+	            this.props.getUserDetail(this.props.user.email);
 	            this.props.query(this.props.user.teamId);
 	        }
 	    }, {
@@ -94778,10 +94784,10 @@
 	        case _types.SET_USER:
 	            return action.payload;
 	        case _types.GET_USER:
-	            console.log(action.payload);
+
 	            return _extends({}, state, action.payload);
 	        case _types.INIT_USER:
-	            console.log(action.payload);
+
 	            return _extends({}, state, action.payload);
 	        default:
 	            return state;
