@@ -59,19 +59,29 @@ class Dashboard extends Component {
   }
 
   render() {
-    const previewStyle = {
-      height: 240,
-      width: 320,
-    }
     return (
-      <div>
-          <h5>大會記分板</h5>
+      <div style={{
+        padding:'10%',
+        margin:'-10%',
+        'backgroundColor':'rgb(210, 243, 255)'
+      }}>
           {/*<NPCCard />*/}
           <MissionCard />
           {/*this.props.secretData && <CardText style={{ fontSize: '16px', color: 'green' }}>{this.props.secretData}</CardText>*/}
           {/*this.props.room && <CardText style={{ fontSize: '16px', color: 'green' }}>{this.props.room}</CardText>*/}
       </div>
     )
+  }
+}
+const style = {
+  dinosaur: {
+    height: '40vh',
+    width: '100vw',
+    position: 'absolute',
+    right: '50%',
+    bottom: 0,
+    transform: 'translate(50%, 0%)',
+    verticalAlign: 'middle',
   }
 }
 

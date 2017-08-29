@@ -67146,18 +67146,13 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var previewStyle = {
-	        height: 240,
-	        width: 320
-	      };
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'h5',
-	          null,
-	          '\u5927\u6703\u8A18\u5206\u677F'
-	        ),
+	        { style: {
+	            padding: '10%',
+	            margin: '-10%',
+	            'backgroundColor': 'rgb(210, 243, 255)'
+	          } },
 	        _react2.default.createElement(_MissionCard2.default, null)
 	      );
 	    }
@@ -67165,6 +67160,18 @@
 
 	  return Dashboard;
 	}(_react.Component);
+
+	var style = {
+	  dinosaur: {
+	    height: '40vh',
+	    width: '100vw',
+	    position: 'absolute',
+	    right: '50%',
+	    bottom: 0,
+	    transform: 'translate(50%, 0%)',
+	    verticalAlign: 'middle'
+	  }
+	};
 
 	function mapStateToProps(_ref) {
 	  var secretData = _ref.secretData,
@@ -71377,19 +71384,38 @@
 	        { className: 'col s12 m6' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'card red lighten-3' },
+	          { className: 'card  lighten-3' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'card-content white-text' },
+	            { className: 'card-content' },
 	            _react2.default.createElement(
-	              'span',
-	              { className: 'card-title' },
-	              '\u52C3\u6839\u5730\u9152\u7D05\u982D\u76D4'
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              "任務已經完成百分之" + Math.floor(this.props.redMission / 10 * 100) + "了"
+	              'div',
+	              { className: 'row', style: { margin: 0 } },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'card-title' },
+	                _react2.default.createElement('img', { style: { height: '25px', paddingRight: '15px', paddingTop: '5px' },
+	                  src: "https://firebasestorage.googleapis.com/v0/b/msseed14th.appspot.com/o/logo_helmet.svg?alt=media&token=6e85f8ed-1f6c-47bf-9dc2-5b9ab86f499e"
+	                }),
+	                '\u52C3\u6839\u5730\u9152\u7D05\u982D\u76D4'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'col s8 m8',
+	                  style: { padding: 0 } },
+	                '\u76EE\u524D\u9032\u5EA6'
+	              ),
+	              _react2.default.createElement(
+	                'h5',
+	                { className: 'col s4 m4',
+	                  style: {
+	                    margin: 0,
+	                    padding: 0,
+	                    color: '#ee6e73',
+	                    textAlign: 'right'
+	                  } },
+	                Math.floor(this.props.redMission / 10 * 100) + ' %'
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -71400,7 +71426,7 @@
 	              max: 10,
 	              mode: 'determinate',
 	              value: this.props.redMission,
-	              color: '#F44336'
+	              color: '#ee6e73'
 	            })
 	          )
 	        )
@@ -71749,19 +71775,38 @@
 	        { className: 'col s12 m6' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'card blue lighten-3' },
+	          { className: 'card lighten-3' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'card-content white-text' },
+	            { className: 'card-content' },
 	            _react2.default.createElement(
-	              'span',
-	              { className: 'card-title' },
-	              '\u9237\u85CD\u76D4\u7532'
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              "任務已經完成百分之" + Math.floor(this.props.blueMission / 7 * 100) + "了"
+	              'div',
+	              { className: 'row', style: { margin: 0 } },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'card-title' },
+	                _react2.default.createElement('img', { style: { height: '25px', paddingRight: '15px', paddingTop: '5px' },
+	                  src: "https://firebasestorage.googleapis.com/v0/b/msseed14th.appspot.com/o/logo_armor.svg?alt=media&token=ff52d988-940c-4604-b045-498ce363bf45"
+	                }),
+	                '\u9237\u85CD\u76D4\u7532'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'col s8 m8',
+	                  style: { padding: 0 } },
+	                '\u76EE\u524D\u9032\u5EA6'
+	              ),
+	              _react2.default.createElement(
+	                'h5',
+	                {
+	                  className: 'col s4 m4',
+	                  style: {
+	                    margin: 0,
+	                    padding: 0,
+	                    color: 'rgb(0, 188, 212)',
+	                    textAlign: 'right' } },
+	                Math.floor(this.props.blueMission / 7 * 100) + ' %'
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -71772,7 +71817,7 @@
 	              max: 7,
 	              mode: 'determinate',
 	              value: this.props.blueMission,
-	              color: '#2196F3'
+	              color: 'rgb(0, 188, 212)'
 	            })
 	          )
 	        )
@@ -71858,19 +71903,38 @@
 	        { className: 'col s12 m6' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'card yellow lighten-3' },
+	          { className: 'card lighten-3' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'card-content white-text' },
+	            { className: 'card-content' },
 	            _react2.default.createElement(
-	              'span',
-	              { className: 'card-title' },
-	              '\u8C61\u7259\u76FE\u724C'
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              "任務已經完成百分之" + Math.floor(this.props.yellowMission / 9 * 100) + "了"
+	              'div',
+	              { className: 'row', style: { margin: 0 } },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'card-title' },
+	                _react2.default.createElement('img', { style: { height: '25px', paddingRight: '15px', paddingTop: '5px' },
+	                  src: "https://firebasestorage.googleapis.com/v0/b/msseed14th.appspot.com/o/logo_shield.svg?alt=media&token=68b61170-d4ab-4ab2-bb02-15f18f3af120"
+	                }),
+	                '\u8C61\u7259\u76FE\u724C'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'col s8 m8',
+	                  style: { padding: 0 } },
+	                '\u76EE\u524D\u9032\u5EA6'
+	              ),
+	              _react2.default.createElement(
+	                'h5',
+	                { className: 'col s4 m4',
+	                  style: {
+	                    margin: 0,
+	                    padding: 0,
+	                    textAlign: 'right',
+	                    color: '#F9A825'
+	                  } },
+	                Math.floor(this.props.yellowMission / 9 * 100) + ' %'
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -71881,7 +71945,7 @@
 	              max: 9,
 	              mode: 'determinate',
 	              value: this.props.yellowMission,
-	              color: '#FFF176'
+	              color: '#F9A825'
 	            })
 	          )
 	        )
@@ -71967,19 +72031,38 @@
 	        { className: 'col s12 m6' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'card teal lighten-3' },
+	          { className: 'card lighten-3' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'card-content white-text' },
+	            { className: 'card-content' },
 	            _react2.default.createElement(
-	              'span',
-	              { className: 'card-title' },
-	              '\u7FE0\u7DA0\u5BF6\u528D'
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              "任務已經完成百分之" + Math.floor(this.props.greenMission / 12 * 100) + "了"
+	              'div',
+	              { className: 'row', style: { margin: 0 } },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'card-title' },
+	                _react2.default.createElement('img', { style: { height: '25px', paddingRight: '15px', paddingTop: '5px' },
+	                  src: "https://firebasestorage.googleapis.com/v0/b/msseed14th.appspot.com/o/logo_sword.svg?alt=media&token=fbd06ce5-09ec-4707-babd-3ae324224962"
+	                }),
+	                '\u7FE0\u7DA0\u5BF6\u528D'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'col s8 m8',
+	                  style: { padding: 0 } },
+	                '\u76EE\u524D\u9032\u5EA6'
+	              ),
+	              _react2.default.createElement(
+	                'h5',
+	                { className: 'col s4 m4',
+	                  style: {
+	                    margin: 0,
+	                    padding: 0,
+	                    textAlign: 'right',
+	                    color: '#7CB342'
+	                  } },
+	                Math.floor(this.props.greenMission / 12 * 100) + ' %'
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -71990,7 +72073,7 @@
 	              max: 12,
 	              mode: 'determinate',
 	              value: this.props.greenMission,
-	              color: '#43A047'
+	              color: '#7CB342'
 	            })
 	          )
 	        )

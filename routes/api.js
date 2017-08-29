@@ -83,7 +83,7 @@ router.put('/donemission/:id/:type', (req, res) => {
       'mId', 'title', 'fromUs', 'ourDetail', 'fromBoss', 'bossDetail', 'bossDetail2', 'getItem', 'lostItem', 'success', 'failed', 'paid','getItemUrl'
     ]
   }).on("data", (data) => {
-    
+    console.log(data);
     if (data.mId === reqId && !isFound) {
       // console.log(data);
       Team.findOne({ team:teamId}, (err, team) => {
