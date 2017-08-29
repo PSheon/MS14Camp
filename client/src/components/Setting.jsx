@@ -11,7 +11,7 @@ import ActionInfo from 'material-ui/svg-icons/action/info';
 
 const Setting=()=>(
             <div>
-                <div className='container'>
+                <div>
                     <List>
                         <ListItem primaryText="關於我們" leftIcon={<ActionGrade />} />
                         <Divider />

@@ -27,7 +27,7 @@ router.get('/whatmyroom', (req, res) => {
 });
 
 
-router.post('/initteamprogress', async (req, res) => {
+router.post('/initteamprogress', async(req, res) => {
   const collections = await Team.find();
   let missions = collections[0].missions;
   let tempRed = 0; let tempBlue = 0; let tempGreen = 0; let tempYellow = 0;

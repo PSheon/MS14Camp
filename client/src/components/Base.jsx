@@ -29,13 +29,17 @@ class Base extends Component {
       <div>
       {(Auth.isUserAuthenticated()) ? (
       <div>
-        <div className= "navbar-fixed" >
-          <nav>
-            <div className="nav-wrapper">
-              <a className="brand-logo center">{this.props.user.name + '~' + this.state.selectedName}</a>
-            </div>
-          </nav>
-        </div>
+        <div className="navbar-fixed">
+              <nav>
+                <div className="nav-wrapper">
+                  <a style={{
+                    marginLeft: '15px',
+                    fontSize: '16px',
+                    fontWeight: 'normal'
+                  }}>{this.state.selectedName}</a>
+                </div>
+              </nav>
+          </div>
 
         <MissionBroadcast />
 

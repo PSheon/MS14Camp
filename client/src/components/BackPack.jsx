@@ -120,7 +120,7 @@ class BackPack extends Component {
                     style={{
                         marginTop:'10px'
                     }}
-                    className='container'>
+                    >
                     {this.renderItem()}
                     <QrReader
                         ref="qrReader1"
