@@ -30,7 +30,6 @@ router.get('/whatmyroom', (req, res) => {
 router.post('/initteamprogress', async(req, res) => {
   const collections = await Team.find();
   let missions = collections[0].missions;
-  console.log(missions.length);
   let tempRed = 0; let tempBlue = 0; let tempGreen = 0; let tempYellow = 0;
   for (let mission of missions) {
     switch (mission.mId[0]) {
@@ -83,9 +82,9 @@ router.put('/donemission/:id/:type', (req, res) => {
       'mId', 'title', 'fromUs', 'ourDetail', 'fromBoss', 'bossDetail', 'bossDetail2', 'getItem', 'lostItem', 'success', 'failed', 'paid','getItemUrl'
     ]
   }).on("data", (data) => {
-    console.log(data);
+    
     if (data.mId === reqId && !isFound) {
-      // console.log(data);
+      console.log(data);
       Team.findOne({ team:teamId}, (err, team) => {
         if (err) throw err;
         let temp = team.missions;
