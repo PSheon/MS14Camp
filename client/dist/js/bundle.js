@@ -67154,14 +67154,11 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(
-	          _Card.Card,
+	          'h5',
 	          null,
-	          _react2.default.createElement(_Card.CardTitle, {
-	            title: '\u8A18\u5206\u677F',
-	            subtitle: '\u5982\u679C\u4F60\u770B\u5230\u9019\u884C\u6587\u5B57\u4EE3\u8868\u8EAB\u5206\u5DF2\u6388\u6B0A.'
-	          }),
-	          _react2.default.createElement(_MissionCard2.default, null)
-	        )
+	          '\u5927\u6703\u8A18\u5206\u677F'
+	        ),
+	        _react2.default.createElement(_MissionCard2.default, null)
 	      );
 	    }
 	  }]);
