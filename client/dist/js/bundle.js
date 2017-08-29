@@ -84705,11 +84705,17 @@
 	        };
 
 	        _this.handleScan = function (data) {
-	            var msg = data.split(',');
 	            _this.setState({
 	                result: data
 	            });
-	            _this.props.doneMission('t01', msg[0], msg[1]);
+	            console.log(data);
+	            var valid = data.charAt(0);
+	            if (valid !== 'M') {
+	                var msg = data.split(',');
+	                _this.props.doneMission('t01', msg[0], msg[1]);
+	            } else {
+	                console.log("拎阿罵卡好");
+	            }
 	        };
 
 	        _this.handleError = function (err) {
@@ -84958,7 +84964,13 @@
 	                result: data
 	            });
 	            //如果不是ms開頭就給他錯誤
-	            _this.props.doMoney('t01', data, 'add');
+	            console.log(data);
+	            var valid = data.charAt(0);
+	            if (valid === 'M') {
+	                _this.props.doMoney('t01', data, 'add');
+	            } else {
+	                console.log("拎阿罵卡好");
+	            }
 	        };
 
 	        _this.handleError = function (err) {

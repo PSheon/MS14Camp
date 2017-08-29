@@ -38,7 +38,13 @@ class BackPack extends Component {
             result: data,
         })
         //如果不是ms開頭就給他錯誤
-        this.props.doMoney('t01',data,'add');
+        console.log(data);
+        let valid =data.charAt(0);
+        if(valid==='M'){
+            this.props.doMoney('t01', data, 'add');
+        }else{
+            console.log("拎阿罵卡好");
+        }
     }
     handleError = (err) => {
         console.error(err)

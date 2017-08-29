@@ -104,11 +104,17 @@ class Npc extends Component {
         }
     }
     handleScan=(data)=> {
-        let msg = data.split(',');
         this.setState({
             result: data,
-        })
-        this.props.doneMission('t01', msg[0], msg[1]);
+        });
+        console.log(data);
+        let valid = data.charAt(0);
+        if (valid !== 'M') {
+            let msg = data.split(',');
+            this.props.doneMission('t01', msg[0], msg[1]);
+        } else {
+            console.log("拎阿罵卡好");
+        }
     }
     handleError=(err)=> {
         console.error(err)
