@@ -67164,7 +67164,7 @@
 	        { style: {
 	            padding: '10%',
 	            margin: '-10%',
-	            'backgroundColor': 'rgb(210, 243, 255)'
+	            'backgroundColor': '#e7e7e7'
 	          } },
 	        _react2.default.createElement(_MissionCard2.default, null)
 	      );

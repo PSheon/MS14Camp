@@ -45,7 +45,7 @@ class Dashboard extends Component {
       <div style={{
         padding:'10%',
         margin:'-10%',
-        'backgroundColor':'rgb(210, 243, 255)'
+        'backgroundColor':'#e7e7e7'
       }}>
           {/*<NPCCard />*/}
           <MissionCard />
