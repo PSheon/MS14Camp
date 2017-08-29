@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 const socket = io();
 
-import { SET_BLUE_TEAM_PROGRESS, ADD_BLUE_TEAM_PROGRESS } from '../../actions/types';
+import { SET_BLUE_TEAM_PROGRESS, ADD_BLUE_TEAM_PROGRESS, BROADCAST_BLUE_TEAM_PROGRESS } from '../../actions/types';
 
 export default function (state = 0, action) {
   switch (action.type) {
@@ -10,6 +10,9 @@ export default function (state = 0, action) {
     case ADD_BLUE_TEAM_PROGRESS:
       socket.emit('blueProgress', { blueProgress: state + action.payload });
       return state + action.payload;
+    case BROADCAST_BLUE_TEAM_PROGRESS:
+      socket.emit('blueProgress', { blueProgress: state + 1 });
+      return state;
     default:
       return state;
   }

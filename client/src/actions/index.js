@@ -57,6 +57,26 @@ export const getRoom = () => dispatch => {
   });
 }
 
+export const initTeamProgress = () => dispatch => {
+  axios('/api/initteamprogress', {
+    method: 'post',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.SET_RED_TEAM_PROGRESS, payload: response.data.redProgress });
+      dispatch({ type: types.SET_BLUE_TEAM_PROGRESS, payload: response.data.blueProgress });
+      dispatch({ type: types.SET_GREEN_TEAM_PROGRESS, payload: response.data.greenProgress });
+      dispatch({ type: types.SET_YELLOW_TEAM_PROGRESS, payload: response.data.yellowProgress });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+}
+
 export const setTeamProgress = () => dispatch => {
   axios('/api/teamprogress', {
     method: 'post',
@@ -135,14 +155,18 @@ export const doneMission = (teamId, id, type) => dispatch => {
     responseType: 'json'
   }).then((response) => {
     if (response.status === 200) {
-      switch(id[0]) {
-        case 'R': dispatch({ type: types.ADD_RED_TEAM_PROGRESS, payload: 0 }); break;
-        case 'B': dispatch({ type: types.ADD_BLUE_TEAM_PROGRESS, payload: 0 }); break;
-        case 'G': dispatch({ type: types.ADD_GREEN_TEAM_PROGRESS, payload: 0 }); break;
-        case 'Y': dispatch({ type: types.ADD_YELLOW_TEAM_PROGRESS, payload: 0 }); break;
+      dispatch({ type: types.DONE_MISSION, payload: response.data.team });
+      if (response.data.isNew) {
+        switch (id[0]) {
+          case 'R': dispatch({ type: types.BROADCAST_RED_TEAM_PROGRESS, payload: null }); break;
+          case 'B': dispatch({ type: types.BROADCAST_BLUE_TEAM_PROGRESS, payload: null }); break;
+          case 'G': dispatch({ type: types.BROADCAST_GREEN_TEAM_PROGRESS, payload: null }); break;
+          case 'Y': dispatch({ type: types.BROADCAST_YELLOW_TEAM_PROGRESS, payload: null }); break;
+        }
+      } else {
+        alert('Nooooooo~')
       }
-      dispatch({ type: types.DONE_MISSION, payload: response.data });
-    }
+    } 
   }).catch(function (error) {
     console.log(error);
   });

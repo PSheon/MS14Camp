@@ -20,11 +20,9 @@ class Dashboard extends Component {
     this.handleScan = this.handleScan.bind(this);
     this.openImageDialog = this.openImageDialog.bind(this);
   }
-
   componentDidMount() {
     this.props.setTeamProgress();
   }
-
   renderUser() {
     if (this.props.user) {
       return (

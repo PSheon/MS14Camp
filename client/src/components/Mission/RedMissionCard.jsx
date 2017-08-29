@@ -34,7 +34,6 @@ class RedMissionCard extends Component {
               value={this.props.redMission}
               color="#F44336"
             />
-            <RaisedButton label="red" primary={true} onClick={this.handleClick} />
           </div>
         </div>
       </div>

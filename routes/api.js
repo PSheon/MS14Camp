@@ -26,23 +26,31 @@ router.get('/whatmyroom', (req, res) => {
   });
 });
 
-router.post('/teamprogress', (req, res) => {
-  Team.find({ missions: { $elemMatch: { mId: /-/ } } }, (err, collections) => {
-    let tempRed = 0; let tempBlue = 0; let tempGreen = 0; let tempYellow = 0;
-    for (let collection of collections) {
-      let missions = collection.missions;
 
-      for (let mission of missions) {
-        switch(mission.mId[0]) {
-          case 'R': tempRed+=1; break;
-          case 'B': tempBlue+=1; break;
-          case 'G': tempGreen+=1; break;
-          case 'Y': tempYellow+=1; break;
-        }
-      }
+router.post('/initteamprogress', async (req, res) => {
+  const collections = await Team.find();
+  let missions = collections[0].missions;
+  let tempRed = 0; let tempBlue = 0; let tempGreen = 0; let tempYellow = 0;
+  for (let mission of missions) {
+    switch (mission.mId[0]) {
+      case 'R': tempRed += 1; break;
+      case 'B': tempBlue += 1; break;
+      case 'G': tempGreen += 1; break;
+      case 'Y': tempYellow += 1; break;
     }
-    redProgress = tempRed; blueProgress = tempBlue; greenProgress = tempGreen; yellowProgress = tempYellow;
-  })
+  }
+  redProgress = tempRed; blueProgress = tempBlue; greenProgress = tempGreen; yellowProgress = tempYellow;
+
+  res.status(200).json({
+    //  Total nums of mission => red: 10 , blue: 7 , green: 12 , yellow: 9
+    redProgress: parseInt(redProgress),
+    blueProgress: parseInt(blueProgress),
+    greenProgress: parseInt(greenProgress),
+    yellowProgress: parseInt(yellowProgress)
+  });
+});
+
+router.post('/teamprogress', async (req, res) => {
   res.status(200).json({
     //  Total nums of mission => red: 10 , blue: 7 , green: 12 , yellow: 9
     redProgress: parseInt(redProgress),
@@ -76,7 +84,7 @@ router.put('/donemission/:id/:type', (req, res) => {
   }).on("data", (data) => {
     
     if (data.mId === reqId && !isFound) {
-      console.log(data);
+      // console.log(data);
       Team.findOne({ team:teamId}, (err, team) => {
         if (err) throw err;
         let temp = team.missions;
@@ -138,7 +146,7 @@ router.put('/donemission/:id/:type', (req, res) => {
           if (err) throw err;
           Team.findOne({ team: teamId }, (err, team) => {
             if (err) throw err;
-            res.status(200).json(team);
+            res.status(200).json({ team, isNew: (existed === -1 && prevDone !== -1) });
           })
         });
       });
@@ -155,7 +163,7 @@ router.put('/money/:id/:type', (req, res) => {
   let teamId = req.params.id;
   let reqType = req.params.type;
   let mId = req.body.mId;
-  console.log(mId);
+  // console.log(mId);
       Money.findOne({ mSerial: mId }, (err,money) => {
         if (err) throw err;
         if(money){

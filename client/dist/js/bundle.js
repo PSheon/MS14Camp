@@ -65068,7 +65068,7 @@
 	      // xhr.send();
 	      this.props.setSecret();
 	      this.props.getRoom();
-	      this.props.setTeamProgress();
+	      this.props.initTeamProgress();
 	      this.props.query('t01');
 	      this.props.setUser({ name: _Auth2.default.getUserNameFromCookie(), email: _Auth2.default.getUserEmailFromCookie() });
 	    }
@@ -66624,7 +66624,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.doMoney = exports.doneMission = exports.query = exports.addYellowProgress = exports.addGreenProgress = exports.addBlueProgress = exports.addRedProgress = exports.setTeamProgress = exports.getRoom = exports.setUser = exports.setSecret = undefined;
+	exports.doMoney = exports.doneMission = exports.query = exports.addYellowProgress = exports.addGreenProgress = exports.addBlueProgress = exports.addRedProgress = exports.setTeamProgress = exports.initTeamProgress = exports.getRoom = exports.setUser = exports.setSecret = undefined;
 
 	var _axios = __webpack_require__(676);
 
@@ -66696,6 +66696,28 @@
 	    }).then(function (response) {
 	      if (response.status === 200) {
 	        dispatch({ type: types.GET_ROOM, payload: response.data.room });
+	      }
+	    }).catch(function (error) {
+	      console.log(error);
+	    });
+	  };
+	};
+
+	var initTeamProgress = exports.initTeamProgress = function initTeamProgress() {
+	  return function (dispatch) {
+	    (0, _axios2.default)('/api/initteamprogress', {
+	      method: 'post',
+	      headers: {
+	        'Content-type': 'application/x-www-form-urlencoded',
+	        'Authorization': 'bearer ' + _Auth2.default.getToken()
+	      },
+	      responseType: 'json'
+	    }).then(function (response) {
+	      if (response.status === 200) {
+	        dispatch({ type: types.SET_RED_TEAM_PROGRESS, payload: response.data.redProgress });
+	        dispatch({ type: types.SET_BLUE_TEAM_PROGRESS, payload: response.data.blueProgress });
+	        dispatch({ type: types.SET_GREEN_TEAM_PROGRESS, payload: response.data.greenProgress });
+	        dispatch({ type: types.SET_YELLOW_TEAM_PROGRESS, payload: response.data.yellowProgress });
 	      }
 	    }).catch(function (error) {
 	      console.log(error);
@@ -66794,17 +66816,21 @@
 	      responseType: 'json'
 	    }).then(function (response) {
 	      if (response.status === 200) {
-	        switch (id[0]) {
-	          case 'R':
-	            dispatch({ type: types.ADD_RED_TEAM_PROGRESS, payload: 0 });break;
-	          case 'B':
-	            dispatch({ type: types.ADD_BLUE_TEAM_PROGRESS, payload: 0 });break;
-	          case 'G':
-	            dispatch({ type: types.ADD_GREEN_TEAM_PROGRESS, payload: 0 });break;
-	          case 'Y':
-	            dispatch({ type: types.ADD_YELLOW_TEAM_PROGRESS, payload: 0 });break;
+	        dispatch({ type: types.DONE_MISSION, payload: response.data.team });
+	        if (response.data.isNew) {
+	          switch (id[0]) {
+	            case 'R':
+	              dispatch({ type: types.BROADCAST_RED_TEAM_PROGRESS, payload: null });break;
+	            case 'B':
+	              dispatch({ type: types.BROADCAST_BLUE_TEAM_PROGRESS, payload: null });break;
+	            case 'G':
+	              dispatch({ type: types.BROADCAST_GREEN_TEAM_PROGRESS, payload: null });break;
+	            case 'Y':
+	              dispatch({ type: types.BROADCAST_YELLOW_TEAM_PROGRESS, payload: null });break;
+	          }
+	        } else {
+	          alert('Nooooooo~');
 	        }
-	        dispatch({ type: types.DONE_MISSION, payload: response.data });
 	      }
 	    }).catch(function (error) {
 	      console.log(error);
@@ -66860,6 +66886,11 @@
 	var ADD_BLUE_TEAM_PROGRESS = exports.ADD_BLUE_TEAM_PROGRESS = 'add_blue_team_progress';
 	var ADD_GREEN_TEAM_PROGRESS = exports.ADD_GREEN_TEAM_PROGRESS = 'add_green_team_progress';
 	var ADD_YELLOW_TEAM_PROGRESS = exports.ADD_YELLOW_TEAM_PROGRESS = 'add_yellow_team_progress';
+
+	var BROADCAST_RED_TEAM_PROGRESS = exports.BROADCAST_RED_TEAM_PROGRESS = 'broadcast_red_team_progress';
+	var BROADCAST_BLUE_TEAM_PROGRESS = exports.BROADCAST_BLUE_TEAM_PROGRESS = 'broadcast_blue_team_progress';
+	var BROADCAST_GREEN_TEAM_PROGRESS = exports.BROADCAST_GREEN_TEAM_PROGRESS = 'broadcast_green_team_progress';
+	var BROADCAST_YELLOW_TEAM_PROGRESS = exports.BROADCAST_YELLOW_TEAM_PROGRESS = 'broadcast_yellow_team_progress';
 
 	var SET_NPC = exports.SET_NPC = 'set_npc';
 
@@ -71571,8 +71602,7 @@
 	              mode: 'determinate',
 	              value: this.props.redMission,
 	              color: '#F44336'
-	            }),
-	            _react2.default.createElement(_RaisedButton2.default, { label: 'red', primary: true, onClick: this.handleClick })
+	            })
 	          )
 	        )
 	      );
@@ -71944,8 +71974,7 @@
 	              mode: 'determinate',
 	              value: this.props.blueMission,
 	              color: '#2196F3'
-	            }),
-	            _react2.default.createElement(_RaisedButton2.default, { label: 'blue', primary: true, onClick: this.handleClick })
+	            })
 	          )
 	        )
 	      );
@@ -72054,8 +72083,7 @@
 	              mode: 'determinate',
 	              value: this.props.yellowMission,
 	              color: '#FFF176'
-	            }),
-	            _react2.default.createElement(_RaisedButton2.default, { label: 'yellow', primary: true, onClick: this.handleClick })
+	            })
 	          )
 	        )
 	      );
@@ -72164,8 +72192,7 @@
 	              mode: 'determinate',
 	              value: this.props.greenMission,
 	              color: '#43A047'
-	            }),
-	            _react2.default.createElement(_RaisedButton2.default, { label: 'green', primary: true, onClick: this.handleClick })
+	            })
 	          )
 	        )
 	      );
@@ -94615,6 +94642,9 @@
 	    case _types.ADD_RED_TEAM_PROGRESS:
 	      socket.emit('redProgress', { redProgress: state + action.payload });
 	      return state + action.payload;
+	    case _types.BROADCAST_RED_TEAM_PROGRESS:
+	      socket.emit('redProgress', { redProgress: state + 1 });
+	      return state;
 	    default:
 	      return state;
 	  }
@@ -94650,6 +94680,9 @@
 	    case _types.ADD_BLUE_TEAM_PROGRESS:
 	      socket.emit('blueProgress', { blueProgress: state + action.payload });
 	      return state + action.payload;
+	    case _types.BROADCAST_BLUE_TEAM_PROGRESS:
+	      socket.emit('blueProgress', { blueProgress: state + 1 });
+	      return state;
 	    default:
 	      return state;
 	  }
@@ -94685,6 +94718,9 @@
 	    case _types.ADD_GREEN_TEAM_PROGRESS:
 	      socket.emit('greenProgress', { greenProgress: state + action.payload });
 	      return state + action.payload;
+	    case _types.BROADCAST_GREEN_TEAM_PROGRESS:
+	      socket.emit('greenProgress', { greenProgress: state + 1 });
+	      return state;
 	    default:
 	      return state;
 	  }
@@ -94720,6 +94756,9 @@
 	    case _types.ADD_YELLOW_TEAM_PROGRESS:
 	      socket.emit('yellowProgress', { yellowProgress: state + action.payload });
 	      return state + action.payload;
+	    case _types.BROADCAST_YELLOW_TEAM_PROGRESS:
+	      socket.emit('yellowProgress', { yellowProgress: state + 1 });
+	      return state;
 	    default:
 	      return state;
 	  }
