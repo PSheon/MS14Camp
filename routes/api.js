@@ -5,6 +5,7 @@ const fs = require('fs');
 const _ = require('lodash');
 const Team = require('mongoose').model('Team');
 const Money = require('mongoose').model('Money');
+const User = require('mongoose').model('User');
 
 const router = new express.Router();
 
@@ -194,14 +195,56 @@ router.put('/money/:id/:type', (req, res) => {
         }
       });
 });
-
-//
-router.get('/god/init/:id', (req, res) => {
+//init user
+router.put('/user/init', (req, res) => {
+  let email=`<${req.body.email}>`;
+  let csvStream = fs.createReadStream(path.resolve('./static/csv', 'internList.csv'));
+  let updateData={}
+  console.log(email);
+  csv.fromStream(csvStream, { headers: ['Id', 'name', 'email', 'gender', 'isGod'] })
+    .on("data", (data) => {
+      if (data.email === email) {
+        updateData={
+          gender:data.gender,
+          teamId:data.Id,
+          alMightyOnes:false,
+          isGod:data.isGod
+        }
+      }
+    }
+    ).on("end", () => {
+      console.log(updateData);
+      User.findOneAndUpdate({ email:req.body.email},updateData,(err, user) => {
+        if(err)throw err;
+        User.findOne({ email: req.body.email}, (err, user1) => {
+          res.status(200).json(user1);
+        })
+    });
+  });
+});
+//get user
+router.post('/user', (req, res) => {
+  let email =req.body.email;
+  User.findOne({email:email}, (err, user) => {
+    console.log(user);
+    if (err) throw err;
+    res.status(200).json(user);
+  });
+});
+//delete all user
+router.get('/godu/delete', (req, res) => {
+  User.remove({}, (err, user) => {
+    if (err) throw err;
+    res.status(200).json(user);
+  });
+});
+//init team
+router.get('/godt/init/:id', (req, res) => {
   let reqId = req.params.id;//teamId
   let reqLine = req.params.line;//Line 
   let csvStream = fs.createReadStream(path.resolve('./static/csv', 'internList.csv'));
-  let members = []
-  csv.fromStream(csvStream, { headers: ['Id', 'name', 'email', 'pwd', 'isCap'] })
+  let members = [];
+  csv.fromStream(csvStream, { headers: ['Id', 'name', 'email', 'gender', 'isGod'] })
     .on("data", (data) => {
       if (data.Id === reqId) {
         members.push(data);
@@ -218,14 +261,30 @@ router.get('/god/init/:id', (req, res) => {
 
       team.save((err) => {
         if (err) throw err;
-        Team.find({}, (err, team) => {
+        Team.findOne({ team: reqId }, (err, team) => {
           if (err) throw err;
           res.status(200).json(team);
         });
       });
     });
 });
-//add all
+//get all team
+router.get('/godt/query', (req, res) => {
+  Team.find({}, (err, team) => {
+    if (err) throw err;
+    res.status(200).json(team);
+  });
+});
+//del all team
+router.get('/godt/delete', (req, res) => {
+  Team.remove({}, (err, team) => {
+    if (err) throw err;
+    res.status(200).json(team);
+  });
+});
+
+
+//add all $$
 router.get('/godm/init', (req, res) => {
   let counter=0;
   let csvStream = fs.createReadStream(path.resolve('./static/csv', 'money.csv'));
@@ -250,14 +309,16 @@ router.get('/godm/init', (req, res) => {
       });
     });    
 });
-//get all
+
+
+//get all $$$
 router.get('/godm/query', (req, res) => {
   Money.find({}, (err, money) => {
     if (err) throw err;
     res.status(200).json(money);
   });
 });
-//clearAll
+//clearAll $$
 router.get('/godm/delete', (req, res) => {
   Money.remove({}, (err, money) => {
     if (err) throw err;

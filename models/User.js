@@ -10,7 +10,9 @@ const UserSchema = mongoose.Schema({
   name: String,
   teamId:String,
   gender:String,
-  AlMightyOnes:Boolean
+  alMightyOnes:Boolean,
+  room:Number,
+  isGod:Boolean
 });
 
 /**

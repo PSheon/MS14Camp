@@ -31,8 +31,12 @@ class BackPack extends Component {
             result:null,
         };
     }
+    
+    componentDidMount() {
+        this.props.query(this.props.user.teamId);
+    }
 
-   
+
     handleScan = (data) => {
         this.setState({
             result: data,
@@ -41,9 +45,7 @@ class BackPack extends Component {
         console.log(data);
         let valid =data.charAt(0);
         if(valid==='M'){
-            this.props.doMoney('t01', data, 'add');
-        }else{
-            console.log("拎阿罵卡好");
+            this.props.doMoney(this.props.user.teamId, data, 'add');
         }
     }
     handleError = (err) => {
@@ -178,8 +180,8 @@ class BackPack extends Component {
 }
 
 
-function mapStateToProps({ team }) {
-    return { team };
+function mapStateToProps({ team,user }) {
+    return { team,user };
 }
 
 export default connect(mapStateToProps, actions)(BackPack);

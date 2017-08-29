@@ -12,16 +12,11 @@ import ChatBotIcon from './ChatBot/ChatBotIcon.jsx';
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      completed: 20,
-      delay: 100,
-      result: 'No fucking result',
-    }; 
-    this.handleScan = this.handleScan.bind(this);
-    this.openImageDialog = this.openImageDialog.bind(this);
   }
   componentDidMount() {
     this.props.setTeamProgress();
+    this.props.getUserDetail(this.props.user.email);
+    this.props.query(this.props.user.teamId);
   }
   renderUser() {
     if (this.props.user) {
@@ -44,19 +39,7 @@ class Dashboard extends Component {
       );
     }
   }
-  handleScan(data) {
-    let msg = data.split(',');
-    this.setState({
-      result: data,
-    })
-    this.props.doneMission('t01', msg[0], msg[1]);
-  }
-  handleError(err) {
-    console.error(err)
-  }
-  openImageDialog() {
-    this.refs.qrReader1.openImageDialog()
-  }
+ 
 
   render() {
     return (

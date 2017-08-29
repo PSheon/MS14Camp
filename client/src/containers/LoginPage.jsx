@@ -71,7 +71,9 @@ class LoginPage extends Component {
         Auth.setUserNameToCookie(xhr.response.user.name);
         Auth.setUserEmailToCookie(xhr.response.user.email);
         this.props.setUser(xhr.response.user);
-
+        console.log(xhr.response.user.email);
+        this.props.initUser(xhr.response.user.email);
+        
 
         // change the current URL to /
         this.context.router.replace('/');

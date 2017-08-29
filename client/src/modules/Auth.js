@@ -11,7 +11,7 @@ class Auth {
   static removeUserNameFromCookie() {
     localStorage.removeItem('ms_user_name');
   }
-
+  
   static setUserEmailToCookie(email) {
     localStorage.setItem('ms_user_email', email);
   }

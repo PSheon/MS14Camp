@@ -120,7 +120,45 @@ export const addYellowProgress = (add_block) => dispatch => {
 
 
 //alex
+export const getUserDetail = (email) => dispatch => {
+  let emailData = queryString.stringify({ email: email });
+  axios('/api/user', {
+    method: 'post',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    data: emailData,
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      console.log(response.data)
+      dispatch({ type: types.GET_USER, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+}
 
+export const initUser = (email) => dispatch => {
+  let emailData = queryString.stringify({ email: email });
+  console.log(email);
+  axios(`/api/user/init`, {
+    method: 'put',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    data:emailData,
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.INIT_USER, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+}
 
 export const query = (teamId) => dispatch => {
   console.log(`api is call with ${teamId}`);
@@ -164,7 +202,7 @@ export const doneMission = (teamId, id, type) => dispatch => {
           case 'Y': dispatch({ type: types.BROADCAST_YELLOW_TEAM_PROGRESS, payload: null }); break;
         }
       } else {
-        alert('Nooooooo~')
+        alert('Nooooooo~');
       }
     } 
   }).catch(function (error) {

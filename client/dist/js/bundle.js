@@ -64869,9 +64869,7 @@
 	      // });
 	      // xhr.send();
 	      this.props.setSecret();
-	      this.props.getRoom();
 	      this.props.initTeamProgress();
-	      this.props.query('t01');
 	      this.props.setUser({ name: _Auth2.default.getUserNameFromCookie(), email: _Auth2.default.getUserEmailFromCookie() });
 	    }
 	  }, {
@@ -66426,7 +66424,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.doMoney = exports.doneMission = exports.query = exports.addYellowProgress = exports.addGreenProgress = exports.addBlueProgress = exports.addRedProgress = exports.setTeamProgress = exports.initTeamProgress = exports.getRoom = exports.setUser = exports.setSecret = undefined;
+	exports.doMoney = exports.doneMission = exports.query = exports.initUser = exports.getUserDetail = exports.addYellowProgress = exports.addGreenProgress = exports.addBlueProgress = exports.addRedProgress = exports.setTeamProgress = exports.initTeamProgress = exports.getRoom = exports.setUser = exports.setSecret = undefined;
 
 	var _axios = __webpack_require__(662);
 
@@ -66580,7 +66578,49 @@
 
 
 	//alex
+	var getUserDetail = exports.getUserDetail = function getUserDetail(email) {
+	  return function (dispatch) {
+	    var emailData = queryString.stringify({ email: email });
+	    (0, _axios2.default)('/api/user', {
+	      method: 'post',
+	      headers: {
+	        'Content-type': 'application/x-www-form-urlencoded',
+	        'Authorization': 'bearer ' + _Auth2.default.getToken()
+	      },
+	      data: emailData,
+	      responseType: 'json'
+	    }).then(function (response) {
+	      if (response.status === 200) {
+	        console.log(response.data);
+	        dispatch({ type: types.GET_USER, payload: response.data });
+	      }
+	    }).catch(function (error) {
+	      console.log(error);
+	    });
+	  };
+	};
 
+	var initUser = exports.initUser = function initUser(email) {
+	  return function (dispatch) {
+	    var emailData = queryString.stringify({ email: email });
+	    console.log(email);
+	    (0, _axios2.default)('/api/user/init', {
+	      method: 'put',
+	      headers: {
+	        'Content-type': 'application/x-www-form-urlencoded',
+	        'Authorization': 'bearer ' + _Auth2.default.getToken()
+	      },
+	      data: emailData,
+	      responseType: 'json'
+	    }).then(function (response) {
+	      if (response.status === 200) {
+	        dispatch({ type: types.INIT_USER, payload: response.data });
+	      }
+	    }).catch(function (error) {
+	      console.log(error);
+	    });
+	  };
+	};
 
 	var query = exports.query = function query(teamId) {
 	  return function (dispatch) {
@@ -66697,6 +66737,8 @@
 	var SET_NPC = exports.SET_NPC = 'set_npc';
 
 	var SET_USER = exports.SET_USER = 'set_user';
+	var GET_USER = exports.GET_USER = 'get_user';
+	var INIT_USER = exports.INIT_USER = 'init_user';
 
 /***/ }),
 /* 690 */
@@ -67066,22 +67108,15 @@
 	  function Dashboard(props) {
 	    _classCallCheck(this, Dashboard);
 
-	    var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
-
-	    _this.state = {
-	      completed: 20,
-	      delay: 100,
-	      result: 'No fucking result'
-	    };
-	    _this.handleScan = _this.handleScan.bind(_this);
-	    _this.openImageDialog = _this.openImageDialog.bind(_this);
-	    return _this;
+	    return _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
 	  }
 
 	  _createClass(Dashboard, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.props.setTeamProgress();
+	      this.props.getUserDetail(this.props.user.email);
+	      this.props.query(this.props.user.teamId);
 	    }
 	  }, {
 	    key: 'renderUser',
@@ -67123,25 +67158,6 @@
 	          )
 	        );
 	      }
-	    }
-	  }, {
-	    key: 'handleScan',
-	    value: function handleScan(data) {
-	      var msg = data.split(',');
-	      this.setState({
-	        result: data
-	      });
-	      this.props.doneMission('t01', msg[0], msg[1]);
-	    }
-	  }, {
-	    key: 'handleError',
-	    value: function handleError(err) {
-	      console.error(err);
-	    }
-	  }, {
-	    key: 'openImageDialog',
-	    value: function openImageDialog() {
-	      this.refs.qrReader1.openImageDialog();
 	    }
 	  }, {
 	    key: 'render',
@@ -82830,6 +82846,8 @@
 	          _Auth2.default.setUserNameToCookie(xhr.response.user.name);
 	          _Auth2.default.setUserEmailToCookie(xhr.response.user.email);
 	          _this2.props.setUser(xhr.response.user);
+	          console.log(xhr.response.user.email);
+	          _this2.props.initUser(xhr.response.user.email);
 
 	          // change the current URL to /
 	          _this2.context.router.replace('/');
@@ -84244,6 +84262,14 @@
 
 	var _SignUpForm2 = _interopRequireDefault(_SignUpForm);
 
+	var _reactRedux = __webpack_require__(184);
+
+	var _actions = __webpack_require__(688);
+
+	var actions = _interopRequireWildcard(_actions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -84307,7 +84333,6 @@
 	      xhr.addEventListener('load', function () {
 	        if (xhr.status === 200) {
 	          // success
-
 	          // change the component-container state
 	          _this2.setState({
 	            errors: {}
@@ -84372,8 +84397,7 @@
 	SignUpPage.contextTypes = {
 	  router: _react.PropTypes.object.isRequired
 	};
-
-	exports.default = SignUpPage;
+	exports.default = (0, _reactRedux.connect)(null, actions)(SignUpPage);
 
 /***/ }),
 /* 906 */
@@ -84581,14 +84605,10 @@
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            this.props.setSecret();
-	            this.props.getRoom();
-	            this.props.query('t01');
-	            this.props.setUser({ name: _Auth2.default.getUserNameFromCookie(), email: _Auth2.default.getUserEmailFromCookie() });
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-
 	            return _react2.default.createElement(_Npc2.default, null);
 	        }
 	    }]);
@@ -84792,9 +84812,7 @@
 	            var valid = data.charAt(0);
 	            if (valid !== 'M') {
 	                var msg = data.split(',');
-	                _this.props.doneMission('t01', msg[0], msg[1]);
-	            } else {
-	                console.log("拎阿罵卡好");
+	                _this.props.doneMission(_this.props.user.teamId, msg[0], msg[1]);
 	            }
 	        };
 
@@ -84809,12 +84827,17 @@
 	        _this.state = {
 	            completed: 20,
 	            delay: 100,
-	            result: 'No fuxxing result'
+	            result: 'No result'
 	        };
 	        return _this;
 	    }
 
 	    _createClass(Npc, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.props.query(this.props.user.teamId);
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var previewStyle = {
@@ -84880,9 +84903,10 @@
 	}(_react.Component);
 
 	function mapStateToProps(_ref) {
-	    var team = _ref.team;
+	    var team = _ref.team,
+	        user = _ref.user;
 
-	    return { team: team };
+	    return { team: team, user: user };
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, actions)(Npc);
@@ -84943,8 +84967,6 @@
 	    _createClass(BackPackPage, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            this.props.query('t01');
-	            this.props.setUser({ name: _Auth2.default.getUserNameFromCookie(), email: _Auth2.default.getUserEmailFromCookie() });
 	            //get money
 	            //set money add minus
 	            //get item
@@ -85047,9 +85069,7 @@
 	            console.log(data);
 	            var valid = data.charAt(0);
 	            if (valid === 'M') {
-	                _this.props.doMoney('t01', data, 'add');
-	            } else {
-	                console.log("拎阿罵卡好");
+	                _this.props.doMoney(_this.props.user.teamId, data, 'add');
 	            }
 	        };
 
@@ -85145,6 +85165,11 @@
 	    }
 
 	    _createClass(BackPack, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.props.query(this.props.user.teamId);
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var previewStyle = {
@@ -85223,9 +85248,10 @@
 	}(_react.Component);
 
 	function mapStateToProps(_ref) {
-	    var team = _ref.team;
+	    var team = _ref.team,
+	        user = _ref.user;
 
-	    return { team: team };
+	    return { team: team, user: user };
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, actions)(BackPack);
@@ -94742,6 +94768,8 @@
 	    value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	exports.default = function () {
 	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 	    var action = arguments[1];
@@ -94749,6 +94777,12 @@
 	    switch (action.type) {
 	        case _types.SET_USER:
 	            return action.payload;
+	        case _types.GET_USER:
+	            console.log(action.payload);
+	            return _extends({}, state, action.payload);
+	        case _types.INIT_USER:
+	            console.log(action.payload);
+	            return _extends({}, state, action.payload);
 	        default:
 	            return state;
 	    }
@@ -94758,7 +94792,12 @@
 
 	var initialState = {
 	    name: '勇者',
-	    email: 'sayan@maomii.com'
+	    email: 'sayan@maomii.com',
+	    isGod: false,
+	    alMightyOnes: false,
+	    room: -1,
+	    gender: '',
+	    teamId: ''
 	};
 
 /***/ }),

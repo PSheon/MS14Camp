@@ -55,8 +55,12 @@ class Npc extends Component {
         this.state = {
             completed: 20,
             delay: 100,
-            result: 'No fuxxing result'
+            result: 'No result'
         };
+    }
+    
+    componentDidMount() {
+        this.props.query(this.props.user.teamId);
     }
 
     renderMission=()=> {
@@ -111,9 +115,7 @@ class Npc extends Component {
         let valid = data.charAt(0);
         if (valid !== 'M') {
             let msg = data.split(',');
-            this.props.doneMission('t01', msg[0], msg[1]);
-        } else {
-            console.log("拎阿罵卡好");
+            this.props.doneMission(this.props.user.teamId, msg[0], msg[1]);
         }
     }
     handleError=(err)=> {
@@ -179,8 +181,8 @@ class Npc extends Component {
 }
 
 
-function mapStateToProps({ team }) {
-    return { team };
+function mapStateToProps({ team,user }) {
+    return { team,user };
 }
 
 export default connect(mapStateToProps, actions)(Npc);

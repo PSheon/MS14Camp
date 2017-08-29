@@ -10,12 +10,8 @@ import Npc from '../components/Npc/Npc.jsx';
 class NpcPage extends Component {
     componentDidMount() {
         this.props.setSecret();
-        this.props.getRoom();
-        this.props.query('t01');
-        this.props.setUser({ name: Auth.getUserNameFromCookie(), email: Auth.getUserEmailFromCookie() });
     }
     render() {
-
         return (<Npc />);
     }
 

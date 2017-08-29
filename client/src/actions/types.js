@@ -24,3 +24,5 @@ export const BROADCAST_YELLOW_TEAM_PROGRESS = 'broadcast_yellow_team_progress';
 export const SET_NPC = 'set_npc';
 
 export const SET_USER = 'set_user';
+export const GET_USER = 'get_user';
+export const INIT_USER = 'init_user';
