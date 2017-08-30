@@ -4,6 +4,7 @@ import QrReader from 'react-qr-reader';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
 
 import * as actions from '../actions';
+import Auth from '../modules/Auth';
 import NPCCard from './ChatBot/NPCCard.jsx';
 import MissionCard from './Mission/MissionCard.jsx';
 import ChatBotIcon from './ChatBot/ChatBotIcon.jsx';
@@ -14,8 +15,9 @@ class Dashboard extends Component {
     super(props);
   }
   componentDidMount() {
-    this.props.setTeamProgress();
-    this.props.getUserDetail(this.props.user.email);
+    // this.props.initTeamProgress(this.props.user.teamId);
+    // this.props.getUserDetail(this.props.user.email);
+    this.props.initUser(Auth.getUserEmailFromCookie());
     this.props.query(this.props.user.teamId);
   }
   renderUser() {

@@ -13,12 +13,10 @@ const initialState = {
 export default function (state = initialState , action) {
     switch (action.type) {
         case SET_USER:
-            return action.payload;
-        case GET_USER:
-          
-            return {...state,...action.payload};
+            return { ...state, ...action.payload };
+        // case GET_USER:
+        //     return {...state,...action.payload};
         case INIT_USER:
-           
             return { ...state, ...action.payload };
         default:
             return state;

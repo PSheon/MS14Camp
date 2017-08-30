@@ -36,9 +36,9 @@ export const setSecret = () => dispatch => {
   });
 }
 
-export const setUser = (userObj) => dispatch => {
-  dispatch({ type: types.SET_USER, payload: userObj });
-}
+// export const setUser = (userObj) => dispatch => {
+//   dispatch({ type: types.SET_USER, payload: userObj });
+// }
 
 export const getRoom = () => dispatch => {
   axios('/api/whatmyroom', {
@@ -57,8 +57,8 @@ export const getRoom = () => dispatch => {
   });
 }
 
-export const initTeamProgress = () => dispatch => {
-  axios('/api/initteamprogress', {
+export const initTeamProgress = (teamId) => dispatch => {
+  axios(`/api/initteamprogress/${teamId}`, {
     method: 'post',
     headers: {
       'Content-type': 'application/x-www-form-urlencoded',
@@ -66,6 +66,7 @@ export const initTeamProgress = () => dispatch => {
     },
     responseType: 'json'
   }).then((response) => {
+    console.log(`response is `, response)
     if (response.status === 200) {
       dispatch({ type: types.SET_RED_TEAM_PROGRESS, payload: response.data.redProgress });
       dispatch({ type: types.SET_BLUE_TEAM_PROGRESS, payload: response.data.blueProgress });
@@ -77,25 +78,25 @@ export const initTeamProgress = () => dispatch => {
   });
 }
 
-export const setTeamProgress = () => dispatch => {
-  axios('/api/teamprogress', {
-    method: 'post',
-    headers: {
-      'Content-type': 'application/x-www-form-urlencoded',
-      'Authorization': `bearer ${Auth.getToken()}`
-    },
-    responseType: 'json'
-  }).then((response) => {
-    if (response.status === 200) {
-      dispatch({ type: types.SET_RED_TEAM_PROGRESS, payload: response.data.redProgress });
-      dispatch({ type: types.SET_BLUE_TEAM_PROGRESS, payload: response.data.blueProgress });
-      dispatch({ type: types.SET_GREEN_TEAM_PROGRESS, payload: response.data.greenProgress });
-      dispatch({ type: types.SET_YELLOW_TEAM_PROGRESS, payload: response.data.yellowProgress });
-    }
-  }).catch(function (error) {
-    console.log(error);
-  });
-}
+// export const setTeamProgress = () => dispatch => {
+//   axios('/api/teamprogress', {
+//     method: 'post',
+//     headers: {
+//       'Content-type': 'application/x-www-form-urlencoded',
+//       'Authorization': `bearer ${Auth.getToken()}`
+//     },
+//     responseType: 'json'
+//   }).then((response) => {
+//     if (response.status === 200) {
+//       dispatch({ type: types.SET_RED_TEAM_PROGRESS, payload: response.data.redProgress });
+//       dispatch({ type: types.SET_BLUE_TEAM_PROGRESS, payload: response.data.blueProgress });
+//       dispatch({ type: types.SET_GREEN_TEAM_PROGRESS, payload: response.data.greenProgress });
+//       dispatch({ type: types.SET_YELLOW_TEAM_PROGRESS, payload: response.data.yellowProgress });
+//     }
+//   }).catch(function (error) {
+//     console.log(error);
+//   });
+// }
 
 export const addRedProgress = (add_block) => dispatch => {
   dispatch({ type: types.ADD_RED_TEAM_PROGRESS, payload: add_block });
@@ -120,25 +121,24 @@ export const addYellowProgress = (add_block) => dispatch => {
 
 
 //alex
-export const getUserDetail = (email) => dispatch => {
-  let emailData = queryString.stringify({ email: email });
-  axios('/api/user', {
-    method: 'post',
-    headers: {
-      'Content-type': 'application/x-www-form-urlencoded',
-      'Authorization': `bearer ${Auth.getToken()}`
-    },
-    data: emailData,
-    responseType: 'json'
-  }).then((response) => {
-    if (response.status === 200) {
-      dispatch({ type: types.GET_USER, payload: response.data });
-    }
-  }).catch(function (error) {
-    console.log(error);
-  });
-}
-
+// export const getUserDetail = (email) => dispatch => {
+//   let emailData = queryString.stringify({ email: email });
+//   axios('/api/user', {
+//     method: 'post',
+//     headers: {
+//       'Content-type': 'application/x-www-form-urlencoded',
+//       'Authorization': `bearer ${Auth.getToken()}`
+//     },
+//     data: emailData,
+//     responseType: 'json'
+//   }).then((response) => {
+//     if (response.status === 200) {
+//       dispatch({ type: types.GET_USER, payload: response.data });
+//     }
+//   }).catch(function (error) {
+//     console.log(error);
+//   });
+// }
 export const initUser = (email) => dispatch => {
   let emailData = queryString.stringify({ email: email });
   axios(`/api/user/init`, {

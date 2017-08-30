@@ -2,7 +2,6 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions';
-import { SET_USER } from '../actions/types';
 import Auth from '../modules/Auth';
 import LoginForm from '../components/AuthForm/LoginForm.jsx';
 
@@ -70,8 +69,8 @@ class LoginPage extends Component {
         // console.log(xhr.response.user);
         Auth.setUserNameToCookie(xhr.response.user.name);
         Auth.setUserEmailToCookie(xhr.response.user.email);
-        this.props.setUser(xhr.response.user);
-        console.log(xhr.response.user.email);
+        // this.props.setUser(xhr.response.user);
+        // console.log(xhr.response.user.email);
         this.props.initUser(xhr.response.user.email);
         
 

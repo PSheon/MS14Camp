@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 import Auth from '../modules/Auth';
 import * as actions from '../actions';
 import Dashboard from '../components/Dashboard.jsx';
-import GetRoom from '../components/GetRoom.jsx';
-
 
 class DashboardPage extends Component {
   componentDidMount() {
@@ -25,8 +23,9 @@ class DashboardPage extends Component {
     // });
     // xhr.send();
     this.props.setSecret();
-    this.props.initTeamProgress();
-    this.props.setUser({ name: Auth.getUserNameFromCookie(), email: Auth.getUserEmailFromCookie() });
+    // this.props.setUser({ name: Auth.getUserNameFromCookie(), email: Auth.getUserEmailFromCookie() });
+    this.props.initUser(Auth.getUserEmailFromCookie());
+    this.props.initTeamProgress(this.props.user.teamId);
   }
 
   render() {
@@ -34,7 +33,10 @@ class DashboardPage extends Component {
     // TODO: add time filter
     return (<Dashboard />);
   }
-
 }
 
-export default connect(null, actions)(DashboardPage);
+function mapStateToProps({ user }) {
+  return { user };
+}
+
+export default connect(mapStateToProps, actions)(DashboardPage);

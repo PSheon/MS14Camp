@@ -9,12 +9,6 @@ const User = require('mongoose').model('User');
 
 const router = new express.Router();
 
-/*
- * temp variables
- */
-let redProgress = 0; let blueProgress = 0; let greenProgress = 0; let yellowProgress = 0;
-
-
 router.get('/dashboard', (req, res) => {
   res.status(200).json({
     message: "You're authorized to see this secret message."
@@ -28,38 +22,40 @@ router.get('/whatmyroom', (req, res) => {
 });
 
 
-router.post('/initteamprogress', async(req, res) => {
-  const collections = await Team.find();
-  let missions = collections[0].missions;
+router.post('/initteamprogress/:teamid', async (req, res) => {
+  let teamId = req.params.teamid;
+  const collections = await Team.findOne({ team: teamId });
+  let missions = collections.missions || null;
   let tempRed = 0; let tempBlue = 0; let tempGreen = 0; let tempYellow = 0;
-  for (let mission of missions) {
-    switch (mission.mId[0]) {
-      case 'R': tempRed += 1; break;
-      case 'B': tempBlue += 1; break;
-      case 'G': tempGreen += 1; break;
-      case 'Y': tempYellow += 1; break;
+  if (missions != null) {
+    for (let mission of missions) {
+      switch (mission.mId[0]) {
+        case 'R': tempRed += 1; break;
+        case 'B': tempBlue += 1; break;
+        case 'G': tempGreen += 1; break;
+        case 'Y': tempYellow += 1; break;
+      }
     }
   }
-  redProgress = tempRed; blueProgress = tempBlue; greenProgress = tempGreen; yellowProgress = tempYellow;
 
   res.status(200).json({
     //  Total nums of mission => red: 10 , blue: 7 , green: 12 , yellow: 9
-    redProgress: parseInt(redProgress),
-    blueProgress: parseInt(blueProgress),
-    greenProgress: parseInt(greenProgress),
-    yellowProgress: parseInt(yellowProgress)
+    redProgress: parseInt(tempRed),
+    blueProgress: parseInt(tempBlue),
+    greenProgress: parseInt(tempGreen),
+    yellowProgress: parseInt(tempYellow)
   });
 });
 
-router.post('/teamprogress', async (req, res) => {
-  res.status(200).json({
-    //  Total nums of mission => red: 10 , blue: 7 , green: 12 , yellow: 9
-    redProgress: parseInt(redProgress),
-    blueProgress: parseInt(blueProgress),
-    greenProgress: parseInt(greenProgress),
-    yellowProgress: parseInt(yellowProgress)
-  });
-});
+// router.post('/teamprogress', async (req, res) => {
+//   res.status(200).json({
+//     //  Total nums of mission => red: 10 , blue: 7 , green: 12 , yellow: 9
+//     redProgress: parseInt(redProgress),
+//     blueProgress: parseInt(blueProgress),
+//     greenProgress: parseInt(greenProgress),
+//     yellowProgress: parseInt(yellowProgress)
+//   });
+// });
 
 //general query
 router.post('/query',(req,res)=>{
@@ -217,6 +213,7 @@ router.put('/user/init', (req, res) => {
       User.findOneAndUpdate({ email:req.body.email},updateData,(err, user) => {
         if(err)throw err;
         User.findOne({ email: req.body.email}, (err, user1) => {
+          // console.log(`user1 is `, user1);
           res.status(200).json(user1);
         })
     });
@@ -230,14 +227,14 @@ router.get('/user/all', (req, res) => {
   });
 });
 //get user
-router.post('/user', (req, res) => {
-  let email =req.body.email;
-  User.findOne({email:email}, (err, user) => {
+// router.post('/user', (req, res) => {
+//   let email =req.body.email;
+//   User.findOne({email:email}, (err, user) => {
     
-    if (err) throw err;
-    res.status(200).json(user);
-  });
-});
+//     if (err) throw err;
+//     res.status(200).json(user);
+//   });
+// });
 //delete all user
 router.get('/godu/delete', (req, res) => {
   User.remove({}, (err, user) => {

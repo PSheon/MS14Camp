@@ -33,7 +33,7 @@ class BackPack extends Component {
     }
     
     componentDidMount() {
-        this.props.getUserDetail(this.props.user.email);
+        // this.props.getUserDetail(this.props.user.email);
         this.props.query(this.props.user.teamId);
     }
 
