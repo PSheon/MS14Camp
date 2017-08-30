@@ -103,6 +103,3 @@ class lotsPickerPage  extends Component {
 };
 
 export default lotsPickerPage;
-
-
-
