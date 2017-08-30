@@ -31,20 +31,27 @@ class BackPack extends Component {
             result:null,
         };
     }
+    
+    componentDidMount() {
+        // this.props.getUserDetail(this.props.user.email);
+        this.props.query(this.props.user.teamId);
+    }
 
-   
+
     handleScan = (data) => {
         this.setState({
             result: data,
         })
         //如果不是ms開頭就給他錯誤
-        console.log(data);
-        let valid =data.charAt(0);
-        if(valid==='M'){
-            this.props.doMoney('t01', data, 'add');
+        if(!data){
+            let valid = data.charAt(0);
+            if (valid === 'M') {
+                this.props.doMoney(this.props.user.teamId, data, 'add');
+            }
         }else{
-            console.log("拎阿罵卡好");
+            alert(`invalid QR`);
         }
+      
     }
     handleError = (err) => {
         console.error(err)
@@ -178,8 +185,8 @@ class BackPack extends Component {
 }
 
 
-function mapStateToProps({ team }) {
-    return { team };
+function mapStateToProps({ team,user }) {
+    return { team,user };
 }
 
 export default connect(mapStateToProps, actions)(BackPack);

@@ -4,6 +4,7 @@ import QrReader from 'react-qr-reader';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
 
 import * as actions from '../actions';
+import Auth from '../modules/Auth';
 import NPCCard from './ChatBot/NPCCard.jsx';
 import MissionCard from './Mission/MissionCard.jsx';
 import ChatBotIcon from './ChatBot/ChatBotIcon.jsx';
@@ -12,16 +13,12 @@ import ChatBotIcon from './ChatBot/ChatBotIcon.jsx';
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      completed: 20,
-      delay: 100,
-      result: 'No fucking result',
-    }; 
-    this.handleScan = this.handleScan.bind(this);
-    this.openImageDialog = this.openImageDialog.bind(this);
   }
   componentDidMount() {
-    this.props.setTeamProgress();
+    // this.props.initTeamProgress(this.props.user.teamId);
+    // this.props.getUserDetail(this.props.user.email);
+    this.props.initUser(Auth.getUserEmailFromCookie());
+    this.props.query(this.props.user.teamId);
   }
   renderUser() {
     if (this.props.user) {
@@ -35,7 +32,6 @@ class Dashboard extends Component {
   }
   renderMission() {
     if (this.props.mission) {
-      console.log(this.props.mission)
       return (
         <div>
           <h1>{this.props.mission.mId}</h1>
@@ -44,34 +40,32 @@ class Dashboard extends Component {
       );
     }
   }
-  handleScan(data) {
-    let msg = data.split(',');
-    this.setState({
-      result: data,
-    })
-    this.props.doneMission('t01', msg[0], msg[1]);
-  }
-  handleError(err) {
-    console.error(err)
-  }
-  openImageDialog() {
-    this.refs.qrReader1.openImageDialog()
-  }
+ 
 
   render() {
-    const previewStyle = {
-      height: 240,
-      width: 320,
-    }
     return (
-      <div>
-          <h5>大會記分板</h5>
+      <div style={{
+        padding:'10%',
+        margin:'-10%',
+        'backgroundColor':'#e7e7e7'
+      }}>
           {/*<NPCCard />*/}
           <MissionCard />
           {/*this.props.secretData && <CardText style={{ fontSize: '16px', color: 'green' }}>{this.props.secretData}</CardText>*/}
           {/*this.props.room && <CardText style={{ fontSize: '16px', color: 'green' }}>{this.props.room}</CardText>*/}
       </div>
     )
+  }
+}
+const style = {
+  dinosaur: {
+    height: '40vh',
+    width: '100vw',
+    position: 'absolute',
+    right: '50%',
+    bottom: 0,
+    transform: 'translate(50%, 0%)',
+    verticalAlign: 'middle',
   }
 }
 

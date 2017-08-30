@@ -7,7 +7,12 @@ const UserSchema = mongoose.Schema({
     index: { unique: true }
   },
   password: String,
-  name: String
+  name: String,
+  teamId:String,
+  gender:String,
+  alMightyOnes:Boolean,
+  room:Number,
+  isGod:Boolean
 });
 
 /**

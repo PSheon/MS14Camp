@@ -55,8 +55,13 @@ class Npc extends Component {
         this.state = {
             completed: 20,
             delay: 100,
-            result: 'No fuxxing result'
+            result: 'No result'
         };
+    }
+    
+    componentDidMount() {
+        // this.props.getUserDetail(this.props.user.email);
+        this.props.query(this.props.user.teamId);
     }
 
     renderMission=()=> {
@@ -107,14 +112,18 @@ class Npc extends Component {
         this.setState({
             result: data,
         });
-        console.log(data);
-        let valid = data.charAt(0);
-        if (valid !== 'M') {
-            let msg = data.split(',');
-            this.props.doneMission('t01', msg[0], msg[1]);
-        } else {
-            console.log("拎阿罵卡好");
+        
+        
+        if(data){
+            let valid = data.charAt(0);
+            if (valid !== 'M') {
+                let msg = data.split(',');
+                this.props.doneMission(this.props.user.teamId, msg[0], msg[1]);
+            }
+        }else{
+            alert(`invalid QR`);
         }
+      
     }
     handleError=(err)=> {
         console.error(err)
@@ -179,8 +188,8 @@ class Npc extends Component {
 }
 
 
-function mapStateToProps({ team }) {
-    return { team };
+function mapStateToProps({ team,user }) {
+    return { team,user };
 }
 
 export default connect(mapStateToProps, actions)(Npc);

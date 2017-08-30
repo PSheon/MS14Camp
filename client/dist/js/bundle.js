@@ -65048,7 +65048,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var gameDay = (0, _moment2.default)("20170831", "YYYYMMDD").format('ll');
+	var gameDay = (0, _moment2.default)("20170830", "YYYYMMDD").format('ll');
 	var today = _moment2.default.utc().format('ll');
 
 	var DashboardPage = function (_Component) {
@@ -65078,10 +65078,9 @@
 	      // });
 	      // xhr.send();
 	      this.props.setSecret();
-	      this.props.getRoom();
-	      this.props.initTeamProgress();
-	      this.props.query('t01');
-	      this.props.setUser({ name: _Auth2.default.getUserNameFromCookie(), email: _Auth2.default.getUserEmailFromCookie() });
+	      // this.props.setUser({ name: Auth.getUserNameFromCookie(), email: Auth.getUserEmailFromCookie() });
+	      this.props.initUser(_Auth2.default.getUserEmailFromCookie());
+	      this.props.initTeamProgress(this.props.user.teamId);
 	    }
 	  }, {
 	    key: 'render',
@@ -65099,7 +65098,13 @@
 	  return DashboardPage;
 	}(_react.Component);
 
-	exports.default = (0, _reactRedux.connect)(null, actions)(DashboardPage);
+	function mapStateToProps(_ref) {
+	  var user = _ref.user;
+
+	  return { user: user };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, actions)(DashboardPage);
 
 /***/ }),
 /* 676 */
@@ -82439,7 +82444,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.doMoney = exports.doneMission = exports.query = exports.addYellowProgress = exports.addGreenProgress = exports.addBlueProgress = exports.addRedProgress = exports.setTeamProgress = exports.initTeamProgress = exports.getRoom = exports.setUser = exports.setSecret = undefined;
+	exports.doMoney = exports.doneMission = exports.query = exports.initUser = exports.addYellowProgress = exports.addGreenProgress = exports.addBlueProgress = exports.addRedProgress = exports.initTeamProgress = exports.getRoom = exports.setSecret = undefined;
 
 	var _axios = __webpack_require__(676);
 
@@ -82493,11 +82498,9 @@
 	  };
 	};
 
-	var setUser = exports.setUser = function setUser(userObj) {
-	  return function (dispatch) {
-	    dispatch({ type: types.SET_USER, payload: userObj });
-	  };
-	};
+	// export const setUser = (userObj) => dispatch => {
+	//   dispatch({ type: types.SET_USER, payload: userObj });
+	// }
 
 	var getRoom = exports.getRoom = function getRoom() {
 	  return function (dispatch) {
@@ -82518,9 +82521,9 @@
 	  };
 	};
 
-	var initTeamProgress = exports.initTeamProgress = function initTeamProgress() {
+	var initTeamProgress = exports.initTeamProgress = function initTeamProgress(teamId) {
 	  return function (dispatch) {
-	    (0, _axios2.default)('/api/initteamprogress', {
+	    (0, _axios2.default)('/api/initteamprogress/' + teamId, {
 	      method: 'post',
 	      headers: {
 	        'Content-type': 'application/x-www-form-urlencoded',
@@ -82528,6 +82531,7 @@
 	      },
 	      responseType: 'json'
 	    }).then(function (response) {
+	      console.log('response is ', response);
 	      if (response.status === 200) {
 	        dispatch({ type: types.SET_RED_TEAM_PROGRESS, payload: response.data.redProgress });
 	        dispatch({ type: types.SET_BLUE_TEAM_PROGRESS, payload: response.data.blueProgress });
@@ -82540,27 +82544,25 @@
 	  };
 	};
 
-	var setTeamProgress = exports.setTeamProgress = function setTeamProgress() {
-	  return function (dispatch) {
-	    (0, _axios2.default)('/api/teamprogress', {
-	      method: 'post',
-	      headers: {
-	        'Content-type': 'application/x-www-form-urlencoded',
-	        'Authorization': 'bearer ' + _Auth2.default.getToken()
-	      },
-	      responseType: 'json'
-	    }).then(function (response) {
-	      if (response.status === 200) {
-	        dispatch({ type: types.SET_RED_TEAM_PROGRESS, payload: response.data.redProgress });
-	        dispatch({ type: types.SET_BLUE_TEAM_PROGRESS, payload: response.data.blueProgress });
-	        dispatch({ type: types.SET_GREEN_TEAM_PROGRESS, payload: response.data.greenProgress });
-	        dispatch({ type: types.SET_YELLOW_TEAM_PROGRESS, payload: response.data.yellowProgress });
-	      }
-	    }).catch(function (error) {
-	      console.log(error);
-	    });
-	  };
-	};
+	// export const setTeamProgress = () => dispatch => {
+	//   axios('/api/teamprogress', {
+	//     method: 'post',
+	//     headers: {
+	//       'Content-type': 'application/x-www-form-urlencoded',
+	//       'Authorization': `bearer ${Auth.getToken()}`
+	//     },
+	//     responseType: 'json'
+	//   }).then((response) => {
+	//     if (response.status === 200) {
+	//       dispatch({ type: types.SET_RED_TEAM_PROGRESS, payload: response.data.redProgress });
+	//       dispatch({ type: types.SET_BLUE_TEAM_PROGRESS, payload: response.data.blueProgress });
+	//       dispatch({ type: types.SET_GREEN_TEAM_PROGRESS, payload: response.data.greenProgress });
+	//       dispatch({ type: types.SET_YELLOW_TEAM_PROGRESS, payload: response.data.yellowProgress });
+	//     }
+	//   }).catch(function (error) {
+	//     console.log(error);
+	//   });
+	// }
 
 	var addRedProgress = exports.addRedProgress = function addRedProgress(add_block) {
 	  return function (dispatch) {
@@ -82593,11 +82595,49 @@
 
 
 	//alex
+	// export const getUserDetail = (email) => dispatch => {
+	//   let emailData = queryString.stringify({ email: email });
+	//   axios('/api/user', {
+	//     method: 'post',
+	//     headers: {
+	//       'Content-type': 'application/x-www-form-urlencoded',
+	//       'Authorization': `bearer ${Auth.getToken()}`
+	//     },
+	//     data: emailData,
+	//     responseType: 'json'
+	//   }).then((response) => {
+	//     if (response.status === 200) {
+	//       dispatch({ type: types.GET_USER, payload: response.data });
+	//     }
+	//   }).catch(function (error) {
+	//     console.log(error);
+	//   });
+	// }
 
+	var initUser = exports.initUser = function initUser(email) {
+	  return function (dispatch) {
+	    var emailData = queryString.stringify({ email: email });
+	    (0, _axios2.default)('/api/user/init', {
+	      method: 'put',
+	      headers: {
+	        'Content-type': 'application/x-www-form-urlencoded',
+	        'Authorization': 'bearer ' + _Auth2.default.getToken()
+	      },
+	      data: emailData,
+	      responseType: 'json'
+	    }).then(function (response) {
+	      if (response.status === 200) {
+	        dispatch({ type: types.INIT_USER, payload: response.data });
+	      }
+	    }).catch(function (error) {
+	      console.log(error);
+	    });
+	  };
+	};
 
 	var query = exports.query = function query(teamId) {
 	  return function (dispatch) {
-	    console.log('api is call with ' + teamId);
+
 	    var team = queryString.stringify({ team: teamId });
 	    (0, _axios2.default)('/api/query', {
 	      method: 'post',
@@ -82620,7 +82660,7 @@
 	var doneMission = exports.doneMission = function doneMission(teamId, id, type) {
 	  return function (dispatch) {
 	    var team = queryString.stringify({ team: teamId });
-	    console.log(teamId + ' is calling api  with ' + id + ' with ' + type);
+
 	    (0, _axios2.default)('/api/donemission/' + id + '/' + type, {
 	      method: 'put',
 	      headers: {
@@ -82656,7 +82696,7 @@
 	var doMoney = exports.doMoney = function doMoney(teamId, id, type) {
 	  return function (dispatch) {
 	    var mId = queryString.stringify({ mId: id });
-	    console.log(id + '\'s money ' + mId + ' is ' + type + 'ed by api ');
+
 	    (0, _axios2.default)('/api/money/' + teamId + '/' + type, {
 	      method: 'put',
 	      headers: {
@@ -82710,6 +82750,8 @@
 	var SET_NPC = exports.SET_NPC = 'set_npc';
 
 	var SET_USER = exports.SET_USER = 'set_user';
+	var GET_USER = exports.GET_USER = 'get_user';
+	var INIT_USER = exports.INIT_USER = 'init_user';
 
 /***/ }),
 /* 821 */
@@ -83051,6 +83093,10 @@
 
 	var actions = _interopRequireWildcard(_actions);
 
+	var _Auth = __webpack_require__(553);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
 	var _NPCCard = __webpack_require__(838);
 
 	var _NPCCard2 = _interopRequireDefault(_NPCCard);
@@ -83079,22 +83125,16 @@
 	  function Dashboard(props) {
 	    _classCallCheck(this, Dashboard);
 
-	    var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
-
-	    _this.state = {
-	      completed: 20,
-	      delay: 100,
-	      result: 'No fucking result'
-	    };
-	    _this.handleScan = _this.handleScan.bind(_this);
-	    _this.openImageDialog = _this.openImageDialog.bind(_this);
-	    return _this;
+	    return _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
 	  }
 
 	  _createClass(Dashboard, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      this.props.setTeamProgress();
+	      // this.props.initTeamProgress(this.props.user.teamId);
+	      // this.props.getUserDetail(this.props.user.email);
+	      this.props.initUser(_Auth2.default.getUserEmailFromCookie());
+	      this.props.query(this.props.user.teamId);
 	    }
 	  }, {
 	    key: 'renderUser',
@@ -83120,7 +83160,6 @@
 	    key: 'renderMission',
 	    value: function renderMission() {
 	      if (this.props.mission) {
-	        console.log(this.props.mission);
 	        return _react2.default.createElement(
 	          'div',
 	          null,
@@ -83138,39 +83177,15 @@
 	      }
 	    }
 	  }, {
-	    key: 'handleScan',
-	    value: function handleScan(data) {
-	      var msg = data.split(',');
-	      this.setState({
-	        result: data
-	      });
-	      this.props.doneMission('t01', msg[0], msg[1]);
-	    }
-	  }, {
-	    key: 'handleError',
-	    value: function handleError(err) {
-	      console.error(err);
-	    }
-	  }, {
-	    key: 'openImageDialog',
-	    value: function openImageDialog() {
-	      this.refs.qrReader1.openImageDialog();
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var previewStyle = {
-	        height: 240,
-	        width: 320
-	      };
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'h5',
-	          null,
-	          '\u5927\u6703\u8A18\u5206\u677F'
-	        ),
+	        { style: {
+	            padding: '10%',
+	            margin: '-10%',
+	            'backgroundColor': '#e7e7e7'
+	          } },
 	        _react2.default.createElement(_MissionCard2.default, null)
 	      );
 	    }
@@ -83178,6 +83193,18 @@
 
 	  return Dashboard;
 	}(_react.Component);
+
+	var style = {
+	  dinosaur: {
+	    height: '40vh',
+	    width: '100vw',
+	    position: 'absolute',
+	    right: '50%',
+	    bottom: 0,
+	    transform: 'translate(50%, 0%)',
+	    verticalAlign: 'middle'
+	  }
+	};
 
 	function mapStateToProps(_ref) {
 	  var secretData = _ref.secretData,
@@ -87390,19 +87417,38 @@
 	        { className: 'col s12 m6' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'card red lighten-3' },
+	          { className: 'card  lighten-3' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'card-content white-text' },
+	            { className: 'card-content' },
 	            _react2.default.createElement(
-	              'span',
-	              { className: 'card-title' },
-	              '\u52C3\u6839\u5730\u9152\u7D05\u982D\u76D4'
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              "任務已經完成百分之" + Math.floor(this.props.redMission / 10 * 100) + "了"
+	              'div',
+	              { className: 'row', style: { margin: 0 } },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'card-title' },
+	                _react2.default.createElement('img', { style: { height: '25px', paddingRight: '15px', paddingTop: '5px' },
+	                  src: "https://firebasestorage.googleapis.com/v0/b/msseed14th.appspot.com/o/logo_helmet.svg?alt=media&token=6e85f8ed-1f6c-47bf-9dc2-5b9ab86f499e"
+	                }),
+	                '\u52C3\u6839\u5730\u9152\u7D05\u982D\u76D4'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'col s8 m8',
+	                  style: { padding: 0 } },
+	                '\u76EE\u524D\u9032\u5EA6'
+	              ),
+	              _react2.default.createElement(
+	                'h5',
+	                { className: 'col s4 m4',
+	                  style: {
+	                    margin: 0,
+	                    padding: 0,
+	                    color: '#ee6e73',
+	                    textAlign: 'right'
+	                  } },
+	                Math.floor(this.props.redMission / 10 * 100) + ' %'
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -87413,7 +87459,7 @@
 	              max: 10,
 	              mode: 'determinate',
 	              value: this.props.redMission,
-	              color: '#F44336'
+	              color: '#ee6e73'
 	            })
 	          )
 	        )
@@ -87762,19 +87808,38 @@
 	        { className: 'col s12 m6' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'card blue lighten-3' },
+	          { className: 'card lighten-3' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'card-content white-text' },
+	            { className: 'card-content' },
 	            _react2.default.createElement(
-	              'span',
-	              { className: 'card-title' },
-	              '\u9237\u85CD\u76D4\u7532'
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              "任務已經完成百分之" + Math.floor(this.props.blueMission / 7 * 100) + "了"
+	              'div',
+	              { className: 'row', style: { margin: 0 } },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'card-title' },
+	                _react2.default.createElement('img', { style: { height: '25px', paddingRight: '15px', paddingTop: '5px' },
+	                  src: "https://firebasestorage.googleapis.com/v0/b/msseed14th.appspot.com/o/logo_armor.svg?alt=media&token=ff52d988-940c-4604-b045-498ce363bf45"
+	                }),
+	                '\u9237\u85CD\u76D4\u7532'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'col s8 m8',
+	                  style: { padding: 0 } },
+	                '\u76EE\u524D\u9032\u5EA6'
+	              ),
+	              _react2.default.createElement(
+	                'h5',
+	                {
+	                  className: 'col s4 m4',
+	                  style: {
+	                    margin: 0,
+	                    padding: 0,
+	                    color: 'rgb(0, 188, 212)',
+	                    textAlign: 'right' } },
+	                Math.floor(this.props.blueMission / 7 * 100) + ' %'
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -87785,7 +87850,7 @@
 	              max: 7,
 	              mode: 'determinate',
 	              value: this.props.blueMission,
-	              color: '#2196F3'
+	              color: 'rgb(0, 188, 212)'
 	            })
 	          )
 	        )
@@ -87871,19 +87936,38 @@
 	        { className: 'col s12 m6' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'card yellow lighten-3' },
+	          { className: 'card lighten-3' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'card-content white-text' },
+	            { className: 'card-content' },
 	            _react2.default.createElement(
-	              'span',
-	              { className: 'card-title' },
-	              '\u8C61\u7259\u76FE\u724C'
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              "任務已經完成百分之" + Math.floor(this.props.yellowMission / 9 * 100) + "了"
+	              'div',
+	              { className: 'row', style: { margin: 0 } },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'card-title' },
+	                _react2.default.createElement('img', { style: { height: '25px', paddingRight: '15px', paddingTop: '5px' },
+	                  src: "https://firebasestorage.googleapis.com/v0/b/msseed14th.appspot.com/o/logo_shield.svg?alt=media&token=68b61170-d4ab-4ab2-bb02-15f18f3af120"
+	                }),
+	                '\u8C61\u7259\u76FE\u724C'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'col s8 m8',
+	                  style: { padding: 0 } },
+	                '\u76EE\u524D\u9032\u5EA6'
+	              ),
+	              _react2.default.createElement(
+	                'h5',
+	                { className: 'col s4 m4',
+	                  style: {
+	                    margin: 0,
+	                    padding: 0,
+	                    textAlign: 'right',
+	                    color: '#F9A825'
+	                  } },
+	                Math.floor(this.props.yellowMission / 9 * 100) + ' %'
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -87894,7 +87978,7 @@
 	              max: 9,
 	              mode: 'determinate',
 	              value: this.props.yellowMission,
-	              color: '#FFF176'
+	              color: '#F9A825'
 	            })
 	          )
 	        )
@@ -87980,19 +88064,38 @@
 	        { className: 'col s12 m6' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'card teal lighten-3' },
+	          { className: 'card lighten-3' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'card-content white-text' },
+	            { className: 'card-content' },
 	            _react2.default.createElement(
-	              'span',
-	              { className: 'card-title' },
-	              '\u7FE0\u7DA0\u5BF6\u528D'
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              null,
-	              "任務已經完成百分之" + Math.floor(this.props.greenMission / 12 * 100) + "了"
+	              'div',
+	              { className: 'row', style: { margin: 0 } },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'card-title' },
+	                _react2.default.createElement('img', { style: { height: '25px', paddingRight: '15px', paddingTop: '5px' },
+	                  src: "https://firebasestorage.googleapis.com/v0/b/msseed14th.appspot.com/o/logo_sword.svg?alt=media&token=fbd06ce5-09ec-4707-babd-3ae324224962"
+	                }),
+	                '\u7FE0\u7DA0\u5BF6\u528D'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'col s8 m8',
+	                  style: { padding: 0 } },
+	                '\u76EE\u524D\u9032\u5EA6'
+	              ),
+	              _react2.default.createElement(
+	                'h5',
+	                { className: 'col s4 m4',
+	                  style: {
+	                    margin: 0,
+	                    padding: 0,
+	                    textAlign: 'right',
+	                    color: '#7CB342'
+	                  } },
+	                Math.floor(this.props.greenMission / 12 * 100) + ' %'
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -88003,7 +88106,7 @@
 	              max: 12,
 	              mode: 'determinate',
 	              value: this.props.greenMission,
-	              color: '#43A047'
+	              color: '#7CB342'
 	            })
 	          )
 	        )
@@ -98687,8 +98790,6 @@
 
 	var actions = _interopRequireWildcard(_actions);
 
-	var _types = __webpack_require__(820);
-
 	var _Auth = __webpack_require__(553);
 
 	var _Auth2 = _interopRequireDefault(_Auth);
@@ -98780,7 +98881,9 @@
 	          // console.log(xhr.response.user);
 	          _Auth2.default.setUserNameToCookie(xhr.response.user.name);
 	          _Auth2.default.setUserEmailToCookie(xhr.response.user.email);
-	          _this2.props.setUser(xhr.response.user);
+	          // this.props.setUser(xhr.response.user);
+	          // console.log(xhr.response.user.email);
+	          _this2.props.initUser(xhr.response.user.email);
 
 	          // change the current URL to /
 	          _this2.context.router.replace('/');
@@ -100195,6 +100298,14 @@
 
 	var _SignUpForm2 = _interopRequireDefault(_SignUpForm);
 
+	var _reactRedux = __webpack_require__(184);
+
+	var _actions = __webpack_require__(819);
+
+	var actions = _interopRequireWildcard(_actions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -100258,7 +100369,6 @@
 	      xhr.addEventListener('load', function () {
 	        if (xhr.status === 200) {
 	          // success
-
 	          // change the component-container state
 	          _this2.setState({
 	            errors: {}
@@ -100323,8 +100433,7 @@
 	SignUpPage.contextTypes = {
 	  router: _react.PropTypes.object.isRequired
 	};
-
-	exports.default = SignUpPage;
+	exports.default = (0, _reactRedux.connect)(null, actions)(SignUpPage);
 
 /***/ }),
 /* 1037 */
@@ -100532,14 +100641,10 @@
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            this.props.setSecret();
-	            this.props.getRoom();
-	            this.props.query('t01');
-	            this.props.setUser({ name: _Auth2.default.getUserNameFromCookie(), email: _Auth2.default.getUserEmailFromCookie() });
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-
 	            return _react2.default.createElement(_Npc2.default, null);
 	        }
 	    }]);
@@ -100739,13 +100844,15 @@
 	            _this.setState({
 	                result: data
 	            });
-	            console.log(data);
-	            var valid = data.charAt(0);
-	            if (valid !== 'M') {
-	                var msg = data.split(',');
-	                _this.props.doneMission('t01', msg[0], msg[1]);
+
+	            if (data) {
+	                var valid = data.charAt(0);
+	                if (valid !== 'M') {
+	                    var msg = data.split(',');
+	                    _this.props.doneMission(_this.props.user.teamId, msg[0], msg[1]);
+	                }
 	            } else {
-	                console.log("拎阿罵卡好");
+	                alert('invalid QR');
 	            }
 	        };
 
@@ -100760,12 +100867,18 @@
 	        _this.state = {
 	            completed: 20,
 	            delay: 100,
-	            result: 'No fuxxing result'
+	            result: 'No result'
 	        };
 	        return _this;
 	    }
 
 	    _createClass(Npc, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            // this.props.getUserDetail(this.props.user.email);
+	            this.props.query(this.props.user.teamId);
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var previewStyle = {
@@ -100831,9 +100944,10 @@
 	}(_react.Component);
 
 	function mapStateToProps(_ref) {
-	    var team = _ref.team;
+	    var team = _ref.team,
+	        user = _ref.user;
 
-	    return { team: team };
+	    return { team: team, user: user };
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, actions)(Npc);
@@ -100894,8 +101008,6 @@
 	    _createClass(BackPackPage, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            this.props.query('t01');
-	            this.props.setUser({ name: _Auth2.default.getUserNameFromCookie(), email: _Auth2.default.getUserEmailFromCookie() });
 	            //get money
 	            //set money add minus
 	            //get item
@@ -100995,12 +101107,13 @@
 	                result: data
 	            });
 	            //如果不是ms開頭就給他錯誤
-	            console.log(data);
-	            var valid = data.charAt(0);
-	            if (valid === 'M') {
-	                _this.props.doMoney('t01', data, 'add');
+	            if (!data) {
+	                var valid = data.charAt(0);
+	                if (valid === 'M') {
+	                    _this.props.doMoney(_this.props.user.teamId, data, 'add');
+	                }
 	            } else {
-	                console.log("拎阿罵卡好");
+	                alert('invalid QR');
 	            }
 	        };
 
@@ -101096,6 +101209,12 @@
 	    }
 
 	    _createClass(BackPack, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            // this.props.getUserDetail(this.props.user.email);
+	            this.props.query(this.props.user.teamId);
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var previewStyle = {
@@ -101174,9 +101293,10 @@
 	}(_react.Component);
 
 	function mapStateToProps(_ref) {
-	    var team = _ref.team;
+	    var team = _ref.team,
+	        user = _ref.user;
 
-	    return { team: team };
+	    return { team: team, user: user };
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, actions)(BackPack);
@@ -110695,13 +110815,19 @@
 	    value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	exports.default = function () {
 	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 	    var action = arguments[1];
 
 	    switch (action.type) {
 	        case _types.SET_USER:
-	            return action.payload;
+	            return _extends({}, state, action.payload);
+	        // case GET_USER:
+	        //     return {...state,...action.payload};
+	        case _types.INIT_USER:
+	            return _extends({}, state, action.payload);
 	        default:
 	            return state;
 	    }
@@ -110711,7 +110837,12 @@
 
 	var initialState = {
 	    name: '勇者',
-	    email: 'sayan@maomii.com'
+	    email: 'sayan@maomii.com',
+	    isGod: false,
+	    alMightyOnes: false,
+	    room: -1,
+	    gender: '',
+	    teamId: ''
 	};
 
 /***/ }),

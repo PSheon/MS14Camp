@@ -7,7 +7,7 @@ import Auth from '../modules/Auth';
 import * as actions from '../actions';
 import Dashboard from '../components/Dashboard.jsx';
 import GetRoom from '../components/GetRoom.jsx';
-const gameDay = moment("20170831", "YYYYMMDD").format('ll')
+const gameDay = moment("20170830", "YYYYMMDD").format('ll')
 const today = moment.utc().format('ll')
 
 class DashboardPage extends Component {
@@ -27,10 +27,9 @@ class DashboardPage extends Component {
     // });
     // xhr.send();
     this.props.setSecret();
-    this.props.getRoom();
-    this.props.initTeamProgress();
-    this.props.query('t01');
-    this.props.setUser({ name: Auth.getUserNameFromCookie(), email: Auth.getUserEmailFromCookie() });
+    // this.props.setUser({ name: Auth.getUserNameFromCookie(), email: Auth.getUserEmailFromCookie() });
+    this.props.initUser(Auth.getUserEmailFromCookie());
+    this.props.initTeamProgress(this.props.user.teamId);
   }
 
   render() {
@@ -42,7 +41,10 @@ class DashboardPage extends Component {
       return (<GetRoom />);
     }
   }
-
 }
 
-export default connect(null, actions)(DashboardPage);
+function mapStateToProps({ user }) {
+  return { user };
+}
+
+export default connect(mapStateToProps, actions)(DashboardPage);

@@ -77,6 +77,7 @@ function validateLoginForm(payload) {
 
 router.post('/signup', (req, res, next) => {
   const validationResult = validateSignupForm(req.body);
+  
   if (!validationResult.success) {
     return res.status(400).json({
       success: false,
@@ -86,7 +87,7 @@ router.post('/signup', (req, res, next) => {
   }
 
 
-  return passport.authenticate('local-signup', (err) => {
+  return passport.authenticate('local-signup', (err, token) => {
     if (err) {
       if (err.name === 'MongoError' && err.code === 11000) {
         // the 11000 Mongo code is for a duplication email error

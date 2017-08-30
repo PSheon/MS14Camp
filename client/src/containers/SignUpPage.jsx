@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import SignUpForm from '../components/AuthForm/SignUpForm.jsx';
-
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 class SignUpPage extends Component {
 
@@ -47,7 +48,6 @@ class SignUpPage extends Component {
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
         // success
-
         // change the component-container state
         this.setState({
           errors: {}
@@ -106,5 +106,5 @@ class SignUpPage extends Component {
 SignUpPage.contextTypes = {
   router: PropTypes.object.isRequired
 };
+export default connect(null, actions)(SignUpPage);
 
-export default SignUpPage;
