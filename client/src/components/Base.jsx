@@ -51,9 +51,11 @@ class Base extends Component {
         </div>
       
         <footer style={{ minHeight: '10vh' }}>
-          <Link to="/logout">
-            <button className="waves-effect waves-light btn" style={{ width: '100vw', minHeight: '10vh', lineHeight: '10vh' }}>登出</button>
-          </Link>
+          {(today === gameDay) ? null : (
+            <Link to="/logout">
+              <button className="waves-effect waves-light btn" style={{ width: '100vw', minHeight: '10vh', lineHeight: '10vh' }}>登出</button>
+            </Link>
+          )}
         </footer>
           {(today === gameDay) ? (
           <Paper zDepth={1} style={{ position: 'fixed', bottom: 0, width: '100%' }}>

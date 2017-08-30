@@ -66,7 +66,7 @@ export const initTeamProgress = (teamId) => dispatch => {
     },
     responseType: 'json'
   }).then((response) => {
-    console.log(`response is `, response)
+    // console.log(`response is `, response)
     if (response.status === 200) {
       dispatch({ type: types.SET_RED_TEAM_PROGRESS, payload: response.data.redProgress });
       dispatch({ type: types.SET_BLUE_TEAM_PROGRESS, payload: response.data.blueProgress });

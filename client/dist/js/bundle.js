@@ -53637,7 +53637,7 @@
 	          _react2.default.createElement(
 	            'footer',
 	            { style: { minHeight: '10vh' } },
-	            _react2.default.createElement(
+	            today === gameDay ? null : _react2.default.createElement(
 	              _reactRouter.Link,
 	              { to: '/logout' },
 	              _react2.default.createElement(
@@ -57650,7 +57650,7 @@
 	  mongoURI: 'mongodb://admin:admin123@ds115583.mlab.com:15583/digit-dev',
 	  cookieKey: 'fvjdfnvonvcofunveuyhbciwenx',
 	  jwtSecret: 'afdsfvfdsgsdfsdf',
-	  gameDay: '20170831'
+	  gameDay: '20170830'
 	};
 
 
@@ -82401,7 +82401,7 @@
 	      },
 	      responseType: 'json'
 	    }).then(function (response) {
-	      console.log('response is ', response);
+	      // console.log(`response is `, response)
 	      if (response.status === 200) {
 	        dispatch({ type: types.SET_RED_TEAM_PROGRESS, payload: response.data.redProgress });
 	        dispatch({ type: types.SET_BLUE_TEAM_PROGRESS, payload: response.data.blueProgress });
