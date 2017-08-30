@@ -1,5 +1,5 @@
 
-import React ,{Component} from 'react';
+import React ,{ Component } from 'react';
 import {Link} from 'react-router';
 import { render } from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -68,28 +68,42 @@ const tilesData = [
 /**
  * A simple example of a scrollable `GridList` containing a [Subheader](/#/components/subheader).
  */
-const lotsPickerPage = () => (
-  <div style={styles.root}>
-    <GridList
-      cellHeight={180}
-      style={styles.gridList}
-    >
-      <Subheader>請選擇一張房間卡！</Subheader>
-      {tilesData.map((tile) => (
-        <Link to="/showroom">
-        <GridTile
-          key={tile.img}
-          title={tile.title}
-          subtitle={<span> <b>{tile.author}</b></span>}
-          actionIcon={<IconButton><PersonAdd color="white" /></IconButton>}
+class lotsPickerPage  extends Component {
+  constructor(props) {
+    super(props);
+
+    $(document).ready(function () {
+      $('.carousel').carousel();
+    });
+  }
+
+
+
+  render() {
+    return (
+      <div style={styles.root}>
+        <GridList
+          cellHeight={180}
+          style={styles.gridList}
         >
-          <img src={tile.img} />
-        </GridTile>
-        </Link>
-      ))}
-    </GridList>
-  </div>
-);
+          <Subheader>請選擇一張房間卡！</Subheader>
+          {tilesData.map((tile) => (
+            <Link to="/showroom">
+              <GridTile
+                key={tile.img}
+                title={tile.title}
+                subtitle={<span> <b>{tile.author}</b></span>}
+                actionIcon={<IconButton><PersonAdd color="white" /></IconButton>}
+              >
+                <img src={tile.img} />
+              </GridTile>
+            </Link>
+          ))}
+        </GridList>
+      </div>
+    )
+  }
+};
 
 export default lotsPickerPage;
 
