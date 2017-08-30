@@ -139,7 +139,6 @@ export const addYellowProgress = (add_block) => dispatch => {
 //     console.log(error);
 //   });
 // }
-
 export const initUser = (email) => dispatch => {
   let emailData = queryString.stringify({ email: email });
   axios(`/api/user/init`, {

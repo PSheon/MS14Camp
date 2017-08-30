@@ -82613,7 +82613,6 @@
 	//     console.log(error);
 	//   });
 	// }
-
 	var initUser = exports.initUser = function initUser(email) {
 	  return function (dispatch) {
 	    var emailData = queryString.stringify({ email: email });
