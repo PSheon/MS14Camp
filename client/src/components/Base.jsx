@@ -46,11 +46,15 @@ class Base extends Component {
 
         <MissionBroadcast />
 
-        <div className="container">
+        <div className={(today === gameDay) ? 'container' : ''}>
           {this.props.children}
         </div>
       
-        <footer style={{ minHeight: '10vh' }}></footer>
+        <footer style={{ minHeight: '10vh' }}>
+          <Link to="/logout">
+            <button className="waves-effect waves-light btn" style={{ width: '100vw', minHeight: '10vh', lineHeight: '10vh' }}>登出</button>
+          </Link>
+        </footer>
           {(today === gameDay) ? (
           <Paper zDepth={1} style={{ position: 'fixed', bottom: 0, width: '100%' }}>
             <BottomNavigation selectedIndex={this.state.selectedIndex}>

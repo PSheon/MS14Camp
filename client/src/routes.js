@@ -26,7 +26,11 @@ const routes = {
       getComponent: (location, callback) => {
         if (Auth.isUserAuthenticated()) {
           if (today !== gameDay) {
-            callback(null, GetRoom);
+            if (localStorage.getItem('ms_user_room_is_choice')) {
+              callback(null, ShowRoom);
+            } else {
+              callback(null, GetRoom);
+            }
           }
           callback(null, DashboardPage);
         } else {
@@ -50,6 +54,7 @@ const routes = {
         Auth.deauthenticateUser();
         Auth.removeUserNameFromCookie();
         Auth.removeUserEmailFromCookie();
+        // localStorage.removeItem('ms_user_room_is_choice');
 
         // change the current URL to /
         replace('/');

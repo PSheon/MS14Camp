@@ -50,6 +50,14 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+////// remember delete
+const path = require('path');
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'static', 'index.html'));
+});
+/////
+
+
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log('Server is running on http://localhost:5000 or http://127.0.0.1:5000');
