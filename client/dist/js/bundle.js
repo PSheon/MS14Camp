@@ -37657,7 +37657,11 @@
 	    getComponent: function getComponent(location, callback) {
 	      if (_Auth2.default.isUserAuthenticated()) {
 	        if (today !== gameDay) {
-	          callback(null, _GetRoom2.default);
+	          if (localStorage.getItem('ms_user_room_is_choice')) {
+	            callback(null, _ShowRoom2.default);
+	          } else {
+	            callback(null, _GetRoom2.default);
+	          }
 	        }
 	        callback(null, _DashboardPage2.default);
 	      } else {
@@ -37676,6 +37680,7 @@
 	      _Auth2.default.deauthenticateUser();
 	      _Auth2.default.removeUserNameFromCookie();
 	      _Auth2.default.removeUserEmailFromCookie();
+	      // localStorage.removeItem('ms_user_room_is_choice');
 
 	      // change the current URL to /
 	      replace('/');
@@ -53628,10 +53633,22 @@
 	          _react2.default.createElement(_MissionBroadcast2.default, null),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'container' },
+	            { className: today === gameDay ? 'container' : '' },
 	            this.props.children
 	          ),
-	          _react2.default.createElement('footer', { style: { minHeight: '10vh' } }),
+	          _react2.default.createElement(
+	            'footer',
+	            { style: { minHeight: '10vh' } },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/logout' },
+	              _react2.default.createElement(
+	                'button',
+	                { className: 'waves-effect waves-light btn', style: { width: '100vw', minHeight: '10vh', lineHeight: '10vh' } },
+	                '\u767B\u51FA'
+	              )
+	            )
+	          ),
 	          today === gameDay ? _react2.default.createElement(
 	            _Paper2.default,
 	            { zDepth: 1, style: { position: 'fixed', bottom: 0, width: '100%' } },
@@ -57635,7 +57652,7 @@
 	  mongoURI: 'mongodb://admin:admin123@ds115583.mlab.com:15583/digit-dev',
 	  cookieKey: 'fvjdfnvonvcofunveuyhbciwenx',
 	  jwtSecret: 'afdsfvfdsgsdfsdf',
-	  gameDay: '20170830'
+	  gameDay: '20170831'
 	};
 
 
@@ -101526,16 +101543,8 @@
 	      _this.setState({ expanded: false });
 	    };
 
-	    _this.handleRequestDelete = function () {
-	      alert('你沒資格排擠你室友！');
-	    };
-
-	    _this.handleTouchTap = function () {
-	      alert('對我有意見是嗎？');
-	    };
-
 	    _this.state = {
-	      expanded: false
+	      expanded: true
 	    };
 	    return _this;
 	  }
@@ -101543,68 +101552,50 @@
 	  _createClass(lotsResultPage, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+	      localStorage.setItem('ms_user_room_is_choice', true);
 	      (0, _reactTapEventPlugin2.default)();
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
-	        { style: styles.container },
+	        _Card.Card,
+	        { expanded: this.state.expanded, onExpandChange: this.handleExpandChange },
+	        _react2.default.createElement(_Card.CardHeader, {
+	          title: 'York',
+	          subtitle: 'H\u7D44',
+	          avatar: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/York.jpg',
+	          actAsExpander: true,
+	          showExpandableButton: true
+	        }),
 	        _react2.default.createElement(
-	          _MuiThemeProvider2.default,
-	          null,
+	          _Card.CardMedia,
+	          {
+	            expandable: true,
+	            overlay: _react2.default.createElement(_Card.CardTitle, { title: '\u6211\u5011\u7684\u4E3B\u5834', subtitle: '2017\u53F0\u5317\u4E16\u5927\u904B' })
+	          },
+	          _react2.default.createElement('img', { src: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/20881922_1549813065064725_7654877585521587816_n.jpg', alt: '' })
+	        ),
+	        _react2.default.createElement(_Card.CardTitle, { title: '\u8521\u5B97\u4F51', subtitle: 'Room 1703', expandable: true }),
+	        _react2.default.createElement(
+	          _Card.CardText,
+	          { expandable: true },
+	          '\u60A8\u7684\u623F\u9593\u5728\u7B2C\u4E09\u68DF\uFF0C1703\u623F\u5BE2\u5BA4\uFF0C\u4F60\u7684\u5BA4\u53CB\u5982\u4E0B\uFF1A',
 	          _react2.default.createElement(
-	            _Card.Card,
-	            { expanded: this.state.expanded, onExpandChange: this.handleExpandChange },
-	            _react2.default.createElement(_Card.CardHeader, {
-	              title: 'York',
-	              subtitle: 'H\u7D44',
-	              avatar: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/York.jpg',
-	              actAsExpander: true,
-	              showExpandableButton: true
-	            }),
-	            _react2.default.createElement(
-	              _Card.CardText,
-	              null,
-	              _react2.default.createElement(_Toggle2.default, {
-	                toggled: this.state.expanded,
-	                onToggle: this.handleToggle,
-	                labelPosition: 'right',
-	                label: '\u4F60\u7684\u623F\u9593\u7684\u7D50\u679C\u662F...'
-	              })
-	            ),
-	            _react2.default.createElement(
-	              _Card.CardMedia,
-	              {
-	                expandable: true,
-	                overlay: _react2.default.createElement(_Card.CardTitle, { title: '\u6211\u5011\u7684\u4E3B\u5834', subtitle: '2017\u53F0\u5317\u4E16\u5927\u904B' })
-	              },
-	              _react2.default.createElement('img', { src: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/20881922_1549813065064725_7654877585521587816_n.jpg', alt: '' })
-	            ),
-	            _react2.default.createElement(_Card.CardTitle, { title: '\u8521\u5B97\u4F51', subtitle: 'Room 1703', expandable: true }),
-	            _react2.default.createElement(
-	              _Card.CardText,
-	              { expandable: true },
-	              '\u60A8\u7684\u623F\u9593\u5728\u7B2C\u4E09\u68DF\uFF0C1703\u623F\u5BE2\u5BA4\uFF0C\u4F60\u7684\u5BA4\u53CB\u5982\u4E0B\uFF1A',
-	              _react2.default.createElement(
-	                _Chip2.default,
-	                {
-	                  onRequestDelete: this.handleRequestDelete,
-	                  onClick: this.handleTouchTap,
-	                  style: styles.chip
-	                },
-	                _react2.default.createElement(_Avatar2.default, { src: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/\u5BF6\u54E5.jpg' }),
-	                '\u9673\u5BF6\u6841'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              _Card.CardActions,
-	              null,
-	              _react2.default.createElement(_FlatButton2.default, { label: '\u6253\u958B\u623F\u5361', onClick: this.handleExpand }),
-	              _react2.default.createElement(_FlatButton2.default, { label: '\u95DC\u9589\u623F\u5361', onClick: this.handleReduce })
-	            )
+	            _Chip2.default,
+	            {
+	              onRequestDelete: this.handleRequestDelete,
+	              onClick: this.handleTouchTap
+	            },
+	            _react2.default.createElement(_Avatar2.default, { src: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/\u5BF6\u54E5.jpg' }),
+	            '\u9673\u5BF6\u6841'
 	          )
+	        ),
+	        _react2.default.createElement(
+	          _Card.CardActions,
+	          null,
+	          _react2.default.createElement(_FlatButton2.default, { label: '\u6253\u958B\u623F\u5361', onClick: this.handleExpand }),
+	          _react2.default.createElement(_FlatButton2.default, { label: '\u95DC\u9589\u623F\u5361', onClick: this.handleReduce })
 	        )
 	      );
 	    }
@@ -101612,20 +101603,6 @@
 
 	  return lotsResultPage;
 	}(_react.Component);
-
-	var styles = {
-	  container: {
-	    width: '100vw',
-	    height: 'calc(100vh - 121px)',
-	    display: 'flex',
-	    alignItems: 'center',
-	    justifyContent: 'center'
-
-	  },
-	  chip: {
-	    marginTop: '20px'
-	  }
-	};
 
 	var mapStateToProp = function mapStateToProp(state) {
 	  return state;
@@ -102473,6 +102450,10 @@
 
 	var _IconButton2 = _interopRequireDefault(_IconButton);
 
+	var _starBorder = __webpack_require__(1185);
+
+	var _starBorder2 = _interopRequireDefault(_starBorder);
+
 	var _Subheader = __webpack_require__(686);
 
 	var _Subheader2 = _interopRequireDefault(_Subheader);
@@ -102496,7 +102477,7 @@
 	    justifyContent: 'space-around'
 	  },
 	  gridList: {
-	    width: '100vw',
+	    width: 500,
 	    height: '100vh',
 	    overflowY: 'auto'
 	  }
@@ -102505,35 +102486,27 @@
 	var tilesData = [{
 	  img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/grace.jpg',
 	  title: '想跟Grace住',
-	  author: 'House1'
+	  featured: true
 	}, {
 	  img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/FB!.jpg',
-	  title: '我是聖結石',
-	  author: 'House2'
+	  title: '我是聖結石'
 	}, {
 	  img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/675fb9bf5d8f864bffc7ef982527eaf4265596cb/%E5%90%B3%E4%BA%A6%E5%87%A1.jpg',
-	  title: '我有freeStyle',
-	  author: 'House3'
-	}, {
-	  img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/675fb9bf5d8f864bffc7ef982527eaf4265596cb/%E5%AE%89%E5%A8%9C%E8%B2%9D%E7%88%BE.jpg',
-	  title: '想住厲陰宅',
-	  author: 'House4'
-	}, {
-	  img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/675fb9bf5d8f864bffc7ef982527eaf4265596cb/%E5%B8%A5%E5%93%A5.jpg',
-	  title: '想跟帥哥住',
-	  author: 'House5'
+	  title: '我有freeStyle'
 	}, {
 	  img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/675fb9bf5d8f864bffc7ef982527eaf4265596cb/%E7%A7%91p.jpg',
 	  title: '我想找柯P',
-	  author: 'House6'
+	  featured: true
+	}, {
+	  img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/675fb9bf5d8f864bffc7ef982527eaf4265596cb/%E5%B8%A5%E5%93%A5.jpg',
+	  title: '想跟帥哥住'
 	}, {
 	  img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/675fb9bf5d8f864bffc7ef982527eaf4265596cb/%E7%BE%8E%E5%A5%B3.jpeg',
-	  title: '想跟美女住',
-	  author: 'House7'
+	  title: '想跟美女住'
 	}, {
 	  img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/675fb9bf5d8f864bffc7ef982527eaf4265596cb/%E8%BF%AA%E5%A3%AB%E5%B0%BC.jpg',
 	  title: '我想住皇宮',
-	  author: 'House8'
+	  featured: true
 	}];
 
 	/**
@@ -102548,13 +102521,20 @@
 
 	    var _this = _possibleConstructorReturn(this, (lotsPickerPage.__proto__ || Object.getPrototypeOf(lotsPickerPage)).call(this, props));
 
-	    $(document).ready(function () {
-	      $('.carousel').carousel();
-	    });
+	    _this.state = {
+	      selectedIndex: 0
+	    };
+
+	    _this.select = _this.select.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(lotsPickerPage, [{
+	    key: 'select',
+	    value: function select(index) {
+	      this.setState({ selectedIndex: index });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -102563,41 +102543,32 @@
 	        _react2.default.createElement(
 	          _GridList.GridList,
 	          {
-	            cellHeight: 180,
+	            cols: 2,
+	            cellHeight: 200,
+	            padding: 1,
 	            style: styles.gridList
 	          },
-	          _react2.default.createElement(
-	            _Subheader2.default,
-	            null,
-	            '\u8ACB\u9078\u64C7\u4E00\u5F35\u623F\u9593\u5361\uFF01'
-	          ),
 	          tilesData.map(function (tile) {
 	            return _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/showroom' },
-	              _react2.default.createElement(
-	                _GridList.GridTile,
-	                {
-	                  key: tile.img,
-	                  title: tile.title,
-	                  subtitle: _react2.default.createElement(
-	                    'span',
-	                    null,
-	                    ' ',
-	                    _react2.default.createElement(
-	                      'b',
-	                      null,
-	                      tile.author
-	                    )
-	                  ),
-	                  actionIcon: _react2.default.createElement(
+	              _GridList.GridTile,
+	              {
+	                key: tile.img,
+	                title: tile.title,
+
+	                titleBackground: 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)',
+	                cols: tile.featured ? 2 : 1,
+	                rows: tile.featured ? 2 : 1,
+	                actionIcon: _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { to: '/showroom' },
+	                  _react2.default.createElement(
 	                    _IconButton2.default,
 	                    null,
 	                    _react2.default.createElement(_personAdd2.default, { color: 'white' })
 	                  )
-	                },
-	                _react2.default.createElement('img', { src: tile.img })
-	              )
+	                )
+	              },
+	              _react2.default.createElement('img', { src: tile.img })
 	            );
 	          })
 	        )
@@ -110953,6 +110924,43 @@
 	};
 
 	var _types = __webpack_require__(823);
+
+/***/ }),
+/* 1185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _pure = __webpack_require__(587);
+
+	var _pure2 = _interopRequireDefault(_pure);
+
+	var _SvgIcon = __webpack_require__(596);
+
+	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ToggleStarBorder = function ToggleStarBorder(props) {
+	  return _react2.default.createElement(
+	    _SvgIcon2.default,
+	    props,
+	    _react2.default.createElement('path', { d: 'M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z' })
+	  );
+	};
+	ToggleStarBorder = (0, _pure2.default)(ToggleStarBorder);
+	ToggleStarBorder.displayName = 'ToggleStarBorder';
+	ToggleStarBorder.muiName = 'SvgIcon';
+
+	exports.default = ToggleStarBorder;
 
 /***/ })
 /******/ ]);
