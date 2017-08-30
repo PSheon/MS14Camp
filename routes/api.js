@@ -222,6 +222,13 @@ router.put('/user/init', (req, res) => {
     });
   });
 });
+router.get('/user/all', (req, res) => {
+  User.find({}, (err, user) => {
+
+    if (err) throw err;
+    res.status(200).json(user);
+  });
+});
 //get user
 router.post('/user', (req, res) => {
   let email =req.body.email;
