@@ -2,8 +2,8 @@
 
 使用 `react-simple-chatbot` , `socket.io`, `react` 的解任務型APP
 
+[live Demo](https://agile-ridge-65560.herokuapp.com/)
 ---
-
 
 1. 安裝
 
