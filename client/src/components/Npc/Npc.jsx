@@ -45,13 +45,17 @@ const fromBoss = {
     marginBottom: '15px'
 }
 
+const previewStyle = {
+    height: '1px',
+    width: '1px',
+    marginLeft: 'auto',
+    marginRight: 'auto'
+}
 
 class Npc extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            completed: 20,
-            delay: 100,
             result: 'No result'
         };
     }
@@ -112,7 +116,6 @@ class Npc extends Component {
             result: data,
         });
         
-        
         if(data){
             let valid = data.charAt(0);
             if (valid !== 'M') {
@@ -135,12 +138,7 @@ class Npc extends Component {
 
 
     render() {
-        const previewStyle = {
-            height: '1px',
-            width: '1px',
-            marginLeft: 'auto',
-            marginRight: 'auto'
-        }
+       
         return (
             <div>
                 <div>

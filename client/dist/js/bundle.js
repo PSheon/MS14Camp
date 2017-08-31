@@ -99760,65 +99760,21 @@
 	    value: true
 	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _axios = __webpack_require__(782);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	var _reactRedux = __webpack_require__(184);
-
-	var _Auth = __webpack_require__(659);
-
-	var _Auth2 = _interopRequireDefault(_Auth);
-
-	var _actions = __webpack_require__(808);
-
-	var actions = _interopRequireWildcard(_actions);
 
 	var _Npc = __webpack_require__(1022);
 
 	var _Npc2 = _interopRequireDefault(_Npc);
 
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	var NpcPage = function NpcPage() {
+	    return _react2.default.createElement(_Npc2.default, null);
+	};
 
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var NpcPage = function (_Component) {
-	    _inherits(NpcPage, _Component);
-
-	    function NpcPage() {
-	        _classCallCheck(this, NpcPage);
-
-	        return _possibleConstructorReturn(this, (NpcPage.__proto__ || Object.getPrototypeOf(NpcPage)).apply(this, arguments));
-	    }
-
-	    _createClass(NpcPage, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            this.props.setSecret();
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(_Npc2.default, null);
-	        }
-	    }]);
-
-	    return NpcPage;
-	}(_react.Component);
-
-	exports.default = (0, _reactRedux.connect)(null, actions)(NpcPage);
+	exports.default = NpcPage;
 
 /***/ }),
 /* 1022 */
@@ -99904,6 +99860,13 @@
 	    lineHeight: '1.7',
 	    fontWeight: 'normal',
 	    marginBottom: '15px'
+	};
+
+	var previewStyle = {
+	    height: '1px',
+	    width: '1px',
+	    marginLeft: 'auto',
+	    marginRight: 'auto'
 	};
 
 	var Npc = function (_Component) {
@@ -100027,8 +99990,6 @@
 	        };
 
 	        _this.state = {
-	            completed: 20,
-	            delay: 100,
 	            result: 'No result'
 	        };
 	        return _this;
@@ -100043,12 +100004,7 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var previewStyle = {
-	                height: '1px',
-	                width: '1px',
-	                marginLeft: 'auto',
-	                marginRight: 'auto'
-	            };
+
 	            return _react2.default.createElement(
 	                'div',
 	                null,
