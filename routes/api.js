@@ -361,7 +361,7 @@ router.get('/godt/init/:id', (req, res) => {
   let reqLine = req.params.line;//Line 
   let csvStream = fs.createReadStream(path.resolve('./static/csv', 'internList.csv'));
   let members = [];
-  csv.fromStream(csvStream, { headers: ['Id', 'name', 'email', 'gender', 'isGod'] })
+  csv.fromStream(csvStream, { headers: ['Id', 'name', 'email', 'gender', 'isGod','isCap'] })
     .on("data", (data) => {
       if (data.Id === reqId) {
         members.push(data);
