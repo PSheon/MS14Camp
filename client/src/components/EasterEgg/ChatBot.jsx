@@ -33,8 +33,8 @@ class EasterEggChatBot extends Component {
         <ChatBot
           cache
           cacheName="rsc_cache_chatbot"
-          botDelay={300}
-          customDelay={300}
+          botDelay={600}
+          customDelay={600}
           headerTitle="被釋放的機器人"
           placeholder="說點什麼..."
           hideUserAvatar
