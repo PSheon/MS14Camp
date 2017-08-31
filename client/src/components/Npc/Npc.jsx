@@ -68,8 +68,8 @@ class Npc extends Component {
             return missionList.map((mission) => {
                 return (
                     <div key={mission.mId}>
-                    <h5>{mission.data.title}</h5>
-                    
+                        <h5 style={{ marginTop: '2.0rem' }}>{`${mission.mId} ${mission.data.title}`}</h5>
+              
                     <div className="right-align" >
                         <p style={people}>{mission.data.fromUs}</p>
                         <p style={fromUs}>{mission.data.ourDetail}</p>

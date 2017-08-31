@@ -99924,8 +99924,8 @@
 	                        { key: mission.mId },
 	                        _react2.default.createElement(
 	                            'h5',
-	                            null,
-	                            mission.data.title
+	                            { style: { marginTop: '2.0rem' } },
+	                            mission.mId + ' ' + mission.data.title
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',
