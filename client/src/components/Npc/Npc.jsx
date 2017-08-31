@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 import QrReader from 'react-qr-reader';
 import FontIcon from 'material-ui/FontIcon';
 import Paper from 'material-ui/Paper';
-import { Card, CardTitle, CardText } from 'material-ui/Card';
-import LinearProgress from 'material-ui/LinearProgress';
-import RaisedButton from 'material-ui/RaisedButton';
-import ActionAndroid from 'material-ui/svg-icons/action/android';
+import Divider from 'material-ui/Divider';
 
 import * as actions from '../../actions';
 
@@ -71,6 +68,8 @@ class Npc extends Component {
             return missionList.map((mission) => {
                 return (
                     <div key={mission.mId}>
+                    <h5>{mission.data.title}</h5>
+                    
                     <div className="right-align" >
                         <p style={people}>{mission.data.fromUs}</p>
                         <p style={fromUs}>{mission.data.ourDetail}</p>
@@ -101,7 +100,7 @@ class Npc extends Component {
                         <p>付出：{mission.data.paid || 0}元</p> :
                         null
                     }
-                    
+                    <Divider />
                     </div>
                 );
             });

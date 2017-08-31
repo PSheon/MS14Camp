@@ -99850,19 +99850,9 @@
 
 	var _Paper2 = _interopRequireDefault(_Paper);
 
-	var _Card = __webpack_require__(769);
+	var _Divider = __webpack_require__(667);
 
-	var _LinearProgress = __webpack_require__(833);
-
-	var _LinearProgress2 = _interopRequireDefault(_LinearProgress);
-
-	var _RaisedButton = __webpack_require__(828);
-
-	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
-
-	var _android = __webpack_require__(830);
-
-	var _android2 = _interopRequireDefault(_android);
+	var _Divider2 = _interopRequireDefault(_Divider);
 
 	var _actions = __webpack_require__(808);
 
@@ -99933,6 +99923,11 @@
 	                        'div',
 	                        { key: mission.mId },
 	                        _react2.default.createElement(
+	                            'h5',
+	                            null,
+	                            mission.data.title
+	                        ),
+	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'right-align' },
 	                            _react2.default.createElement(
@@ -100000,7 +99995,8 @@
 	                            '\u4ED8\u51FA\uFF1A',
 	                            mission.data.paid || 0,
 	                            '\u5143'
-	                        ) : null
+	                        ) : null,
+	                        _react2.default.createElement(_Divider2.default, null)
 	                    );
 	                });
 	            }
