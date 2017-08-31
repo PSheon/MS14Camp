@@ -100873,6 +100873,10 @@
 
 	var _reactRouter = __webpack_require__(379);
 
+	var _Dialog = __webpack_require__(1179);
+
+	var _Dialog2 = _interopRequireDefault(_Dialog);
+
 	var _reactTappable = __webpack_require__(1030);
 
 	var _reactTappable2 = _interopRequireDefault(_reactTappable);
@@ -100924,10 +100928,13 @@
 	    var _this = _possibleConstructorReturn(this, (Setting.__proto__ || Object.getPrototypeOf(Setting)).call(this, props));
 
 	    _this.state = {
-	      chatbotIsFound: false
+	      chatbotIsFound: false,
+	      open: false
 	    };
 
 	    _this.handlePressStar = _this.handlePressStar.bind(_this);
+	    _this.handleOpen = _this.handleOpen.bind(_this);
+	    _this.handleClose = _this.handleClose.bind(_this);
 	    return _this;
 	  }
 
@@ -100939,6 +100946,16 @@
 	          chatbotIsFound: true
 	        });
 	      }
+	    }
+	  }, {
+	    key: 'handleOpen',
+	    value: function handleOpen() {
+	      this.setState({ open: true });
+	    }
+	  }, {
+	    key: 'handleClose',
+	    value: function handleClose() {
+	      this.setState({ open: false });
 	    }
 	  }, {
 	    key: 'handlePressStar',
@@ -100958,13 +100975,150 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(
+	          _Dialog2.default,
+	          {
+	            title: '\u963F\u4F4E\u65AF\u6230\u968A',
+	            modal: false,
+	            open: this.state.open,
+	            onRequestClose: this.handleClose,
+	            autoScrollBodyContent: true
+	          },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'row' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col s12 m8 offset-m2 l6 offset-l3' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'card-panel grey lighten-5 z-depth-1' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'row valign-wrapper' },
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'col s12' },
+	                    _react2.default.createElement('img', { src: 'http://www.therangerproject.com/wp-content/uploads/2015/06/mmprtm.jpg', alt: '', className: 'responsive-img' })
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'row valign-wrapper' },
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'col s12' },
+	                    _react2.default.createElement(
+	                      'span',
+	                      { className: 'black-text' },
+	                      '\u963F\u6EF4\u65AF\u6230\u968A\u7684\u7531\u4F86\u662F\u56E0\u70BA\u6210\u54E1\u90FD\u662F RDAA \uFF0C\u5C0F\u5B78\u8001\u5E2B\u6709\u8AAA\u904E\u4EFB\u4F55\u6771\u897F\u7684\u8907\u6578\u90FD\u8981\u52A0\u4E0As\uFF0C\u4E09\u4F4D\u6210\u54E1\u90FD\u6C92\u6709\u5FD8\u8A18\u8001\u5E2B\u7684\u8A71\uFF0C\u6240\u4EE5\u6230\u968A\u5C31\u53EB\u505A RDs \u82F1\u6587\u5FF5\u4F5C\u963F\u4F4E\u65AF .... ( \u5427\uFF1F\uFF0C\u76EE\u524D\u6230\u968A\u7A69\u5B9A\u7F3A\u4EBA\u4E2D ...'
+	                    )
+	                  )
+	                )
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col s12 m8 offset-m2 l6 offset-l3' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'card-panel grey lighten-5 z-depth-1' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'row valign-wrapper' },
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'col s12' },
+	                    _react2.default.createElement('img', { src: 'data:image/jpeg;base64,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', alt: '', className: 'circle responsive-img' })
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'row valign-wrapper' },
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'col s12' },
+	                    _react2.default.createElement(
+	                      'span',
+	                      { className: 'black-text' },
+	                      '\u548C\u5E73\u548C\u6B63\u7FA9\u662F\u4ED6\u7684\u7406\u60F3\uFF0C\u6563\u64A5\u611B\u8207\u6B61\u6A02\u662F\u65E5\u5E38\uFF0C\u963F\u4F4E\u65AF\u6230\u968A\u7684\u8001\u5927-\u7D05\u6230\u58EB\uFF0C\u70BA\u4EBA\u4F4E\u8ABF\uFF0C\u5E73\u5E38\u4EE5\u8D99\u5B50\u69AE\u7684\u5F62\u8C61\u51FA\u73FE\u5728\u5927\u5BB6\u9762\u524D'
+	                    )
+	                  )
+	                )
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col s12 m8 offset-m2 l6 offset-l3' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'card-panel grey lighten-5 z-depth-1' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'row valign-wrapper' },
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'col s12' },
+	                    _react2.default.createElement('img', { src: 'https://s-media-cache-ak0.pinimg.com/originals/91/24/f3/9124f3caa942575320124c01cdbdb236.jpg', alt: '', className: 'circle responsive-img' })
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'row valign-wrapper' },
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'col s12' },
+	                    _react2.default.createElement(
+	                      'span',
+	                      { className: 'black-text' },
+	                      '\u963F\u4F4E\u65AF\u6230\u968A\u7684\u5C0F\u7F85\u645F1\u865F\uFF0C\u8DDF\u8457\u8001\u5927\u7D05\u6230\u58EB\u4E00\u9F4A\u7DAD\u8B77\u4E16\u754C\u548C\u5E73\uFF0C\u56E0\u70BA\u6700\u8FD1case\u5C11\u4E86\uFF0C\u9AD4\u91CD\u6B98\u6703\u76F4\u7DDA\u4E0A\u5347\uFF0C\u5E73\u5E38\u4EE5\u5BF6\u54E5\u7684\u5F62\u8C61\u51FA\u73FE\u5728\u5927\u5BB6\u9762\u524D'
+	                    )
+	                  )
+	                )
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col s12 m8 offset-m2 l6 offset-l3' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'card-panel grey lighten-5 z-depth-1' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'row valign-wrapper' },
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'col s12' },
+	                    _react2.default.createElement('img', { src: 'https://s-media-cache-ak0.pinimg.com/736x/03/cc/1d/03cc1dd310e989bac7ee5c5fe55c33f7--iron-man-suit-so-funny.jpg', alt: '', className: 'circle responsive-img' })
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'row valign-wrapper' },
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'col s12' },
+	                    _react2.default.createElement(
+	                      'span',
+	                      { className: 'black-text' },
+	                      '\u963F\u4F4E\u65AF\u6230\u968A\u7684\u5C0F\u7F85\u645F2\u865F\uFF0C\u4E00\u5FC3\u60F3\u505A\u597D\u4E8B\u7684\u908A\u7DE3\u963F\u5B85\uFF0C\u4E5F\u662F\u60F3\u6210\u70BA\u8D85\u7D1A\u82F1\u96C4\u7684\u4EBA\u7684\u932F\u8AA4\u793A\u7BC4\uFF0C\u5E73\u5E38\u4EE5Paul\u7684\u5F62\u8C61\u51FA\u73FE\u5728\u5927\u5BB6\u9762\u524D'
+	                    )
+	                  )
+	                )
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
 	          _List.List,
 	          null,
-	          _react2.default.createElement(_List.ListItem, { primaryText: '\u95DC\u65BC\u6211\u5011', leftIcon: _react2.default.createElement(
+	          _react2.default.createElement(_List.ListItem, { leftIcon: _react2.default.createElement(
 	              _reactTappable2.default,
 	              { onPress: this.handlePressStar },
 	              _react2.default.createElement(_grade2.default, null)
-	            ) }),
+	            ),
+	            primaryText: '\u95DC\u65BC\u6211\u5011',
+	            onClick: this.handleOpen
+	          }),
 	          _react2.default.createElement(_Divider2.default, null),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
@@ -111594,6 +111748,890 @@
 	};
 
 	var _types = __webpack_require__(809);
+
+/***/ }),
+/* 1179 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _Dialog = __webpack_require__(1180);
+
+	var _Dialog2 = _interopRequireDefault(_Dialog);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _Dialog2.default;
+
+/***/ }),
+/* 1180 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends2 = __webpack_require__(554);
+
+	var _extends3 = _interopRequireDefault(_extends2);
+
+	var _objectWithoutProperties2 = __webpack_require__(559);
+
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+	var _getPrototypeOf = __webpack_require__(363);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(361);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(366);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(370);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(371);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _simpleAssign = __webpack_require__(560);
+
+	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(37);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _reactEventListener = __webpack_require__(610);
+
+	var _reactEventListener2 = _interopRequireDefault(_reactEventListener);
+
+	var _keycode = __webpack_require__(569);
+
+	var _keycode2 = _interopRequireDefault(_keycode);
+
+	var _transitions = __webpack_require__(561);
+
+	var _transitions2 = _interopRequireDefault(_transitions);
+
+	var _Overlay = __webpack_require__(1181);
+
+	var _Overlay2 = _interopRequireDefault(_Overlay);
+
+	var _RenderToLayer = __webpack_require__(678);
+
+	var _RenderToLayer2 = _interopRequireDefault(_RenderToLayer);
+
+	var _Paper = __webpack_require__(583);
+
+	var _Paper2 = _interopRequireDefault(_Paper);
+
+	var _reactAddonsTransitionGroup = __webpack_require__(574);
+
+	var _reactAddonsTransitionGroup2 = _interopRequireDefault(_reactAddonsTransitionGroup);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TransitionItem = function (_Component) {
+	  (0, _inherits3.default)(TransitionItem, _Component);
+
+	  function TransitionItem() {
+	    var _ref;
+
+	    var _temp, _this, _ret;
+
+	    (0, _classCallCheck3.default)(this, TransitionItem);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = TransitionItem.__proto__ || (0, _getPrototypeOf2.default)(TransitionItem)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+	      style: {}
+	    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+	  }
+
+	  (0, _createClass3.default)(TransitionItem, [{
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      clearTimeout(this.enterTimeout);
+	      clearTimeout(this.leaveTimeout);
+	    }
+	  }, {
+	    key: 'componentWillEnter',
+	    value: function componentWillEnter(callback) {
+	      this.componentWillAppear(callback);
+	    }
+	  }, {
+	    key: 'componentWillAppear',
+	    value: function componentWillAppear(callback) {
+	      var spacing = this.context.muiTheme.baseTheme.spacing;
+
+	      this.setState({
+	        style: {
+	          opacity: 1,
+	          transform: 'translate(0, ' + spacing.desktopKeylineIncrement + 'px)'
+	        }
+	      });
+
+	      this.enterTimeout = setTimeout(callback, 450); // matches transition duration
+	    }
+	  }, {
+	    key: 'componentWillLeave',
+	    value: function componentWillLeave(callback) {
+	      this.setState({
+	        style: {
+	          opacity: 0,
+	          transform: 'translate(0, 0)'
+	        }
+	      });
+
+	      this.leaveTimeout = setTimeout(callback, 450); // matches transition duration
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          style = _props.style,
+	          children = _props.children,
+	          other = (0, _objectWithoutProperties3.default)(_props, ['style', 'children']);
+	      var prepareStyles = this.context.muiTheme.prepareStyles;
+
+
+	      return _react2.default.createElement(
+	        'div',
+	        (0, _extends3.default)({}, other, { style: prepareStyles((0, _simpleAssign2.default)({}, this.state.style, style)) }),
+	        children
+	      );
+	    }
+	  }]);
+	  return TransitionItem;
+	}(_react.Component);
+
+	TransitionItem.contextTypes = {
+	  muiTheme: _react.PropTypes.object.isRequired
+	};
+	process.env.NODE_ENV !== "production" ? TransitionItem.propTypes = {
+	  children: _react.PropTypes.node,
+	  style: _react.PropTypes.object
+	} : void 0;
+
+
+	function getStyles(props, context) {
+	  var autoScrollBodyContent = props.autoScrollBodyContent,
+	      open = props.open;
+	  var _context$muiTheme = context.muiTheme,
+	      _context$muiTheme$bas = _context$muiTheme.baseTheme,
+	      spacing = _context$muiTheme$bas.spacing,
+	      palette = _context$muiTheme$bas.palette,
+	      dialog = _context$muiTheme.dialog,
+	      zIndex = _context$muiTheme.zIndex;
+
+
+	  var gutter = spacing.desktopGutter;
+	  var borderScroll = '1px solid ' + palette.borderColor;
+
+	  return {
+	    root: {
+	      position: 'fixed',
+	      boxSizing: 'border-box',
+	      WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated)
+	      zIndex: zIndex.dialog,
+	      top: 0,
+	      left: open ? 0 : -10000,
+	      width: '100%',
+	      height: '100%',
+	      transition: open ? _transitions2.default.easeOut('0ms', 'left', '0ms') : _transitions2.default.easeOut('0ms', 'left', '450ms')
+	    },
+	    content: {
+	      boxSizing: 'border-box',
+	      WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated)
+	      transition: _transitions2.default.easeOut(),
+	      position: 'relative',
+	      width: '75%',
+	      maxWidth: spacing.desktopKeylineIncrement * 12,
+	      margin: '0 auto',
+	      zIndex: zIndex.dialog
+	    },
+	    actionsContainer: {
+	      boxSizing: 'border-box',
+	      WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated)
+	      padding: 8,
+	      width: '100%',
+	      textAlign: 'right',
+	      marginTop: autoScrollBodyContent ? -1 : 0,
+	      borderTop: autoScrollBodyContent ? borderScroll : 'none'
+	    },
+	    overlay: {
+	      zIndex: zIndex.dialogOverlay
+	    },
+	    title: {
+	      margin: 0,
+	      padding: gutter + 'px ' + gutter + 'px 20px ' + gutter + 'px',
+	      color: palette.textColor,
+	      fontSize: dialog.titleFontSize,
+	      lineHeight: '32px',
+	      fontWeight: 400,
+	      marginBottom: autoScrollBodyContent ? -1 : 0,
+	      borderBottom: autoScrollBodyContent ? borderScroll : 'none'
+	    },
+	    body: {
+	      fontSize: dialog.bodyFontSize,
+	      color: dialog.bodyColor,
+	      padding: (props.title ? 0 : gutter) + 'px ' + gutter + 'px ' + gutter + 'px',
+	      boxSizing: 'border-box',
+	      overflowY: autoScrollBodyContent ? 'auto' : 'hidden'
+	    }
+	  };
+	}
+
+	var DialogInline = function (_Component2) {
+	  (0, _inherits3.default)(DialogInline, _Component2);
+
+	  function DialogInline() {
+	    var _ref2;
+
+	    var _temp2, _this2, _ret2;
+
+	    (0, _classCallCheck3.default)(this, DialogInline);
+
+	    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+	      args[_key2] = arguments[_key2];
+	    }
+
+	    return _ret2 = (_temp2 = (_this2 = (0, _possibleConstructorReturn3.default)(this, (_ref2 = DialogInline.__proto__ || (0, _getPrototypeOf2.default)(DialogInline)).call.apply(_ref2, [this].concat(args))), _this2), _this2.handleTouchTapOverlay = function () {
+	      _this2.requestClose(false);
+	    }, _this2.handleKeyUp = function (event) {
+	      if ((0, _keycode2.default)(event) === 'esc') {
+	        _this2.requestClose(false);
+	      }
+	    }, _this2.handleResize = function () {
+	      _this2.positionDialog();
+	    }, _temp2), (0, _possibleConstructorReturn3.default)(_this2, _ret2);
+	  }
+
+	  (0, _createClass3.default)(DialogInline, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.positionDialog();
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      this.positionDialog();
+	    }
+	  }, {
+	    key: 'positionDialog',
+	    value: function positionDialog() {
+	      var _props2 = this.props,
+	          actions = _props2.actions,
+	          autoDetectWindowHeight = _props2.autoDetectWindowHeight,
+	          autoScrollBodyContent = _props2.autoScrollBodyContent,
+	          bodyStyle = _props2.bodyStyle,
+	          open = _props2.open,
+	          repositionOnUpdate = _props2.repositionOnUpdate,
+	          title = _props2.title;
+
+
+	      if (!open) {
+	        return;
+	      }
+
+	      var clientHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+	      var container = _reactDom2.default.findDOMNode(this);
+	      var dialogWindow = _reactDom2.default.findDOMNode(this.refs.dialogWindow);
+	      var dialogContent = _reactDom2.default.findDOMNode(this.refs.dialogContent);
+	      var minPaddingTop = 16;
+
+	      // Reset the height in case the window was resized.
+	      dialogWindow.style.height = '';
+	      dialogContent.style.height = '';
+
+	      var dialogWindowHeight = dialogWindow.offsetHeight;
+	      var paddingTop = (clientHeight - dialogWindowHeight) / 2 - 64;
+	      if (paddingTop < minPaddingTop) paddingTop = minPaddingTop;
+
+	      // Vertically center the dialog window, but make sure it doesn't
+	      // transition to that position.
+	      if (repositionOnUpdate || !container.style.paddingTop) {
+	        container.style.paddingTop = paddingTop + 'px';
+	      }
+
+	      // Force a height if the dialog is taller than clientHeight
+	      if (autoDetectWindowHeight || autoScrollBodyContent) {
+	        var styles = getStyles(this.props, this.context);
+	        styles.body = (0, _simpleAssign2.default)(styles.body, bodyStyle);
+	        var maxDialogContentHeight = clientHeight - 2 * 64;
+
+	        if (title) maxDialogContentHeight -= dialogContent.previousSibling.offsetHeight;
+
+	        if (_react2.default.Children.count(actions)) {
+	          maxDialogContentHeight -= dialogContent.nextSibling.offsetHeight;
+	        }
+
+	        dialogContent.style.maxHeight = maxDialogContentHeight + 'px';
+	      }
+	    }
+	  }, {
+	    key: 'requestClose',
+	    value: function requestClose(buttonClicked) {
+	      if (!buttonClicked && this.props.modal) {
+	        return;
+	      }
+
+	      if (this.props.onRequestClose) {
+	        this.props.onRequestClose(!!buttonClicked);
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props3 = this.props,
+	          actions = _props3.actions,
+	          actionsContainerClassName = _props3.actionsContainerClassName,
+	          actionsContainerStyle = _props3.actionsContainerStyle,
+	          bodyClassName = _props3.bodyClassName,
+	          bodyStyle = _props3.bodyStyle,
+	          children = _props3.children,
+	          className = _props3.className,
+	          contentClassName = _props3.contentClassName,
+	          contentStyle = _props3.contentStyle,
+	          overlayClassName = _props3.overlayClassName,
+	          overlayStyle = _props3.overlayStyle,
+	          open = _props3.open,
+	          titleClassName = _props3.titleClassName,
+	          titleStyle = _props3.titleStyle,
+	          title = _props3.title,
+	          style = _props3.style;
+	      var prepareStyles = this.context.muiTheme.prepareStyles;
+
+	      var styles = getStyles(this.props, this.context);
+
+	      styles.root = (0, _simpleAssign2.default)(styles.root, style);
+	      styles.content = (0, _simpleAssign2.default)(styles.content, contentStyle);
+	      styles.body = (0, _simpleAssign2.default)(styles.body, bodyStyle);
+	      styles.actionsContainer = (0, _simpleAssign2.default)(styles.actionsContainer, actionsContainerStyle);
+	      styles.overlay = (0, _simpleAssign2.default)(styles.overlay, overlayStyle);
+	      styles.title = (0, _simpleAssign2.default)(styles.title, titleStyle);
+
+	      var actionsContainer = _react2.default.Children.count(actions) > 0 && _react2.default.createElement(
+	        'div',
+	        { className: actionsContainerClassName, style: prepareStyles(styles.actionsContainer) },
+	        _react2.default.Children.toArray(actions)
+	      );
+
+	      var titleElement = title;
+	      if (_react2.default.isValidElement(title)) {
+	        titleElement = _react2.default.cloneElement(title, {
+	          className: title.props.className || titleClassName,
+	          style: prepareStyles((0, _simpleAssign2.default)(styles.title, title.props.style))
+	        });
+	      } else if (typeof title === 'string') {
+	        titleElement = _react2.default.createElement(
+	          'h3',
+	          { className: titleClassName, style: prepareStyles(styles.title) },
+	          title
+	        );
+	      }
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: className, style: prepareStyles(styles.root) },
+	        open && _react2.default.createElement(_reactEventListener2.default, {
+	          target: 'window',
+	          onKeyUp: this.handleKeyUp,
+	          onResize: this.handleResize
+	        }),
+	        _react2.default.createElement(
+	          _reactAddonsTransitionGroup2.default,
+	          {
+	            component: 'div',
+	            ref: 'dialogWindow',
+	            transitionAppear: true,
+	            transitionAppearTimeout: 450,
+	            transitionEnter: true,
+	            transitionEnterTimeout: 450
+	          },
+	          open && _react2.default.createElement(
+	            TransitionItem,
+	            {
+	              className: contentClassName,
+	              style: styles.content
+	            },
+	            _react2.default.createElement(
+	              _Paper2.default,
+	              { zDepth: 4 },
+	              titleElement,
+	              _react2.default.createElement(
+	                'div',
+	                {
+	                  ref: 'dialogContent',
+	                  className: bodyClassName,
+	                  style: prepareStyles(styles.body)
+	                },
+	                children
+	              ),
+	              actionsContainer
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(_Overlay2.default, {
+	          show: open,
+	          className: overlayClassName,
+	          style: styles.overlay,
+	          onTouchTap: this.handleTouchTapOverlay
+	        })
+	      );
+	    }
+	  }]);
+	  return DialogInline;
+	}(_react.Component);
+
+	DialogInline.contextTypes = {
+	  muiTheme: _react.PropTypes.object.isRequired
+	};
+	process.env.NODE_ENV !== "production" ? DialogInline.propTypes = {
+	  actions: _react.PropTypes.node,
+	  actionsContainerClassName: _react.PropTypes.string,
+	  actionsContainerStyle: _react.PropTypes.object,
+	  autoDetectWindowHeight: _react.PropTypes.bool,
+	  autoScrollBodyContent: _react.PropTypes.bool,
+	  bodyClassName: _react.PropTypes.string,
+	  bodyStyle: _react.PropTypes.object,
+	  children: _react.PropTypes.node,
+	  className: _react.PropTypes.string,
+	  contentClassName: _react.PropTypes.string,
+	  contentStyle: _react.PropTypes.object,
+	  modal: _react.PropTypes.bool,
+	  onRequestClose: _react.PropTypes.func,
+	  open: _react.PropTypes.bool.isRequired,
+	  overlayClassName: _react.PropTypes.string,
+	  overlayStyle: _react.PropTypes.object,
+	  repositionOnUpdate: _react.PropTypes.bool,
+	  style: _react.PropTypes.object,
+	  title: _react.PropTypes.node,
+	  titleClassName: _react.PropTypes.string,
+	  titleStyle: _react.PropTypes.object
+	} : void 0;
+
+	var Dialog = function (_Component3) {
+	  (0, _inherits3.default)(Dialog, _Component3);
+
+	  function Dialog() {
+	    var _ref3;
+
+	    var _temp3, _this3, _ret3;
+
+	    (0, _classCallCheck3.default)(this, Dialog);
+
+	    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+	      args[_key3] = arguments[_key3];
+	    }
+
+	    return _ret3 = (_temp3 = (_this3 = (0, _possibleConstructorReturn3.default)(this, (_ref3 = Dialog.__proto__ || (0, _getPrototypeOf2.default)(Dialog)).call.apply(_ref3, [this].concat(args))), _this3), _this3.renderLayer = function () {
+	      return _react2.default.createElement(DialogInline, _this3.props);
+	    }, _temp3), (0, _possibleConstructorReturn3.default)(_this3, _ret3);
+	  }
+
+	  (0, _createClass3.default)(Dialog, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(_RenderToLayer2.default, { render: this.renderLayer, open: true, useLayerForClickAway: false });
+	    }
+	  }]);
+	  return Dialog;
+	}(_react.Component);
+
+	Dialog.contextTypes = {
+	  muiTheme: _react.PropTypes.object.isRequired
+	};
+	Dialog.defaultProps = {
+	  autoDetectWindowHeight: true,
+	  autoScrollBodyContent: false,
+	  modal: false,
+	  repositionOnUpdate: true
+	};
+	process.env.NODE_ENV !== "production" ? Dialog.propTypes = {
+	  /**
+	   * Action buttons to display below the Dialog content (`children`).
+	   * This property accepts either a React element, or an array of React elements.
+	   */
+	  actions: _react.PropTypes.node,
+	  /**
+	   * The `className` to add to the actions container's root element.
+	   */
+	  actionsContainerClassName: _react.PropTypes.string,
+	  /**
+	   * Overrides the inline-styles of the actions container's root element.
+	   */
+	  actionsContainerStyle: _react.PropTypes.object,
+	  /**
+	   * If set to true, the height of the `Dialog` will be auto detected. A max height
+	   * will be enforced so that the content does not extend beyond the viewport.
+	   */
+	  autoDetectWindowHeight: _react.PropTypes.bool,
+	  /**
+	   * If set to true, the body content of the `Dialog` will be scrollable.
+	   */
+	  autoScrollBodyContent: _react.PropTypes.bool,
+	  /**
+	   * The `className` to add to the content's root element under the title.
+	   */
+	  bodyClassName: _react.PropTypes.string,
+	  /**
+	   * Overrides the inline-styles of the content's root element under the title.
+	   */
+	  bodyStyle: _react.PropTypes.object,
+	  /**
+	   * The contents of the `Dialog`.
+	   */
+	  children: _react.PropTypes.node,
+	  /**
+	   * The css class name of the root element.
+	   */
+	  className: _react.PropTypes.string,
+	  /**
+	   * The `className` to add to the content container.
+	   */
+	  contentClassName: _react.PropTypes.string,
+	  /**
+	   * Overrides the inline-styles of the content container.
+	   */
+	  contentStyle: _react.PropTypes.object,
+	  /**
+	   * Force the user to use one of the actions in the `Dialog`.
+	   * Clicking outside the `Dialog` will not trigger the `onRequestClose`.
+	   */
+	  modal: _react.PropTypes.bool,
+	  /**
+	   * Fired when the `Dialog` is requested to be closed by a click outside the `Dialog` or on the buttons.
+	   *
+	   * @param {bool} buttonClicked Determines whether a button click triggered this request.
+	   */
+	  onRequestClose: _react.PropTypes.func,
+	  /**
+	   * Controls whether the Dialog is opened or not.
+	   */
+	  open: _react.PropTypes.bool.isRequired,
+	  /**
+	   * The `className` to add to the `Overlay` component that is rendered behind the `Dialog`.
+	   */
+	  overlayClassName: _react.PropTypes.string,
+	  /**
+	   * Overrides the inline-styles of the `Overlay` component that is rendered behind the `Dialog`.
+	   */
+	  overlayStyle: _react.PropTypes.object,
+	  /**
+	   * Determines whether the `Dialog` should be repositioned when it's contents are updated.
+	   */
+	  repositionOnUpdate: _react.PropTypes.bool,
+	  /**
+	   * Override the inline-styles of the root element.
+	   */
+	  style: _react.PropTypes.object,
+	  /**
+	   * The title to display on the `Dialog`. Could be number, string, element or an array containing these types.
+	   */
+	  title: _react.PropTypes.node,
+	  /**
+	   * The `className` to add to the title's root container element.
+	   */
+	  titleClassName: _react.PropTypes.string,
+	  /**
+	   * Overrides the inline-styles of the title's root container element.
+	   */
+	  titleStyle: _react.PropTypes.object
+	} : void 0;
+	exports.default = Dialog;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+/* 1181 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends2 = __webpack_require__(554);
+
+	var _extends3 = _interopRequireDefault(_extends2);
+
+	var _objectWithoutProperties2 = __webpack_require__(559);
+
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+	var _getPrototypeOf = __webpack_require__(363);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(361);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(366);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(370);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(371);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _simpleAssign = __webpack_require__(560);
+
+	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _transitions = __webpack_require__(561);
+
+	var _transitions2 = _interopRequireDefault(_transitions);
+
+	var _AutoLockScrolling = __webpack_require__(1182);
+
+	var _AutoLockScrolling2 = _interopRequireDefault(_AutoLockScrolling);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function getStyles(props, context) {
+	  var overlay = context.muiTheme.overlay;
+
+
+	  var style = {
+	    root: {
+	      position: 'fixed',
+	      height: '100%',
+	      width: '100%',
+	      top: 0,
+	      left: '-100%',
+	      opacity: 0,
+	      backgroundColor: overlay.backgroundColor,
+	      WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', // Remove mobile color flashing (deprecated)
+
+	      // Two ways to promote overlay to its own render layer
+	      willChange: 'opacity',
+	      transform: 'translateZ(0)',
+
+	      transition: props.transitionEnabled && _transitions2.default.easeOut('0ms', 'left', '400ms') + ', ' + _transitions2.default.easeOut('400ms', 'opacity')
+	    }
+	  };
+
+	  if (props.show) {
+	    (0, _simpleAssign2.default)(style.root, {
+	      left: 0,
+	      opacity: 1,
+	      transition: _transitions2.default.easeOut('0ms', 'left') + ', ' + _transitions2.default.easeOut('400ms', 'opacity')
+	    });
+	  }
+
+	  return style;
+	}
+
+	var Overlay = function (_Component) {
+	  (0, _inherits3.default)(Overlay, _Component);
+
+	  function Overlay() {
+	    (0, _classCallCheck3.default)(this, Overlay);
+	    return (0, _possibleConstructorReturn3.default)(this, (Overlay.__proto__ || (0, _getPrototypeOf2.default)(Overlay)).apply(this, arguments));
+	  }
+
+	  (0, _createClass3.default)(Overlay, [{
+	    key: 'setOpacity',
+	    value: function setOpacity(opacity) {
+	      this.refs.overlay.style.opacity = opacity;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          autoLockScrolling = _props.autoLockScrolling,
+	          show = _props.show,
+	          style = _props.style,
+	          transitionEnabled = _props.transitionEnabled,
+	          other = (0, _objectWithoutProperties3.default)(_props, ['autoLockScrolling', 'show', 'style', 'transitionEnabled']);
+	      var prepareStyles = this.context.muiTheme.prepareStyles;
+
+	      var styles = getStyles(this.props, this.context);
+
+	      return _react2.default.createElement(
+	        'div',
+	        (0, _extends3.default)({}, other, { ref: 'overlay', style: prepareStyles((0, _simpleAssign2.default)(styles.root, style)) }),
+	        autoLockScrolling && _react2.default.createElement(_AutoLockScrolling2.default, { lock: show })
+	      );
+	    }
+	  }]);
+	  return Overlay;
+	}(_react.Component);
+
+	Overlay.defaultProps = {
+	  autoLockScrolling: true,
+	  style: {},
+	  transitionEnabled: true
+	};
+	Overlay.contextTypes = {
+	  muiTheme: _react.PropTypes.object.isRequired
+	};
+	process.env.NODE_ENV !== "production" ? Overlay.propTypes = {
+	  autoLockScrolling: _react.PropTypes.bool,
+	  show: _react.PropTypes.bool.isRequired,
+	  /**
+	   * Override the inline-styles of the root element.
+	   */
+	  style: _react.PropTypes.object,
+	  transitionEnabled: _react.PropTypes.bool
+	} : void 0;
+	exports.default = Overlay;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+/* 1182 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _getPrototypeOf = __webpack_require__(363);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(361);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(366);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(370);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(371);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _react = __webpack_require__(1);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var originalBodyOverflow = null;
+	var lockingCounter = 0;
+
+	var AutoLockScrolling = function (_Component) {
+	  (0, _inherits3.default)(AutoLockScrolling, _Component);
+
+	  function AutoLockScrolling() {
+	    var _ref;
+
+	    var _temp, _this, _ret;
+
+	    (0, _classCallCheck3.default)(this, AutoLockScrolling);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = AutoLockScrolling.__proto__ || (0, _getPrototypeOf2.default)(AutoLockScrolling)).call.apply(_ref, [this].concat(args))), _this), _this.locked = false, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+	  }
+
+	  (0, _createClass3.default)(AutoLockScrolling, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (this.props.lock === true) {
+	        this.preventScrolling();
+	      }
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      if (this.props.lock !== nextProps.lock) {
+	        if (nextProps.lock) {
+	          this.preventScrolling();
+	        } else {
+	          this.allowScrolling();
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.allowScrolling();
+	    }
+
+	    // force to only lock/unlock once
+
+	  }, {
+	    key: 'preventScrolling',
+	    value: function preventScrolling() {
+	      if (this.locked === true) {
+	        return;
+	      }
+
+	      lockingCounter = lockingCounter + 1;
+	      this.locked = true;
+
+	      // only lock the first time the component is mounted.
+	      if (lockingCounter === 1) {
+	        var body = document.getElementsByTagName('body')[0];
+	        originalBodyOverflow = body.style.overflow;
+	        body.style.overflow = 'hidden';
+	      }
+	    }
+	  }, {
+	    key: 'allowScrolling',
+	    value: function allowScrolling() {
+	      if (this.locked === true) {
+	        lockingCounter = lockingCounter - 1;
+	        this.locked = false;
+	      }
+
+	      if (lockingCounter === 0 && originalBodyOverflow !== null) {
+	        var body = document.getElementsByTagName('body')[0];
+	        body.style.overflow = originalBodyOverflow || '';
+	        originalBodyOverflow = null;
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return null;
+	    }
+	  }]);
+	  return AutoLockScrolling;
+	}(_react.Component);
+
+	process.env.NODE_ENV !== "production" ? AutoLockScrolling.propTypes = {
+	  lock: _react.PropTypes.bool.isRequired
+	} : void 0;
+	exports.default = AutoLockScrolling;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ })
 /******/ ]);
