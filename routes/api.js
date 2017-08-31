@@ -28,14 +28,16 @@ router.get('/makeroom', (req, res) => {
         let internData={
           id:data.Id,
           name:data.name,
-          gender:data.gender
+          gender:data.gender,
+          email:data.email
         }
         male.push(internData);
       } else if (data.gender === 'F' && data.isCap !== 'true'){
         let internData = {
           id: data.Id,
           name: data.name,
-          gender: data.gender
+          gender: data.gender,
+          email: data.email
         }
         female.push(internData);
       }      
@@ -101,15 +103,16 @@ router.get('/makeroom', (req, res) => {
       console.log(rooms.length);
       //console.log(female);
     });
-  Room.find({}, (err,room) => {
+  Room.find({}, (err,allRoom) => {
     if (err) throw err;
-    res.status(200).json(room);
+    res.status(200).json(allRoom);
   });
 });
 
 router.post('/whatmyroom', (req, res) => {
-  let name = req.body.name;
-  Room.findOne({'member.name': req.body.name}, (err, room) => {
+  let email = `<${req.body.email}>`;
+  console.log(email);
+  Room.findOne({'member.email':email}, (err, room) => {
     if (err) throw err;
     console.log(room);
     res.status(200).json(room);

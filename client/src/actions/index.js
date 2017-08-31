@@ -40,15 +40,15 @@ export const setSecret = () => dispatch => {
 //   dispatch({ type: types.SET_USER, payload: userObj });
 // }
 
-export const getRoom = (name) => dispatch => {
-  let nameData = queryString.stringify({ name: name });
+export const getRoom = (email) => dispatch => {
+  let emailData = queryString.stringify({ email: email });
   axios('/api/whatmyroom', {
     method: 'post',
     headers: {
       'Content-type': 'application/x-www-form-urlencoded',
       'Authorization': `bearer ${Auth.getToken()}`
     },
-    data:nameData,
+    data:emailData,
     responseType: 'json'
   }).then((response) => {
     if (response.status === 200) {

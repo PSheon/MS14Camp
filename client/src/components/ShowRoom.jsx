@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import Auth from '../modules/Auth';
 //import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
 import Avatar from 'material-ui/Avatar';
@@ -21,9 +22,9 @@ class lotsResultPage extends Component {
     };
   }
   componentDidMount() {
-    this.props.getRoom('陳寶桁');
-    console.log(this.props.user);
-    console.log(this.props.room);
+    this.props.initUser(Auth.getUserEmailFromCookie(), () => {
+      this.props.getRoom(this.props.user.email);
+    });
     localStorage.setItem('ms_user_room_is_choice', true);
   }
   handleExpandChange = (expanded) => {
@@ -41,12 +42,30 @@ class lotsResultPage extends Component {
   handleReduce = () => {
       this.setState({expanded: false});
   };
+  renderCard=()=>{
+    if(this.props.room){
+      let members = this.props.room.member;
+        return members.map((member) => {
+          return (
+           
+          <Chip key={member.name}
+                onRequestDelete={this.handleRequestDelete}
+              >
+                <Avatar src="https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/寶哥.jpg" />
+                {member.name}
+          </Chip>
+            
+          )
+        });
+    }
+  }
+
   render() {
     return (
       <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
         <CardHeader
-          title="York"
-          subtitle="H組"
+          title={this.props.user.name}
+          subtitle={this.props.user.tId}
           avatar="https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/York.jpg"
           actAsExpander={true}
           showExpandableButton={true}
@@ -57,16 +76,11 @@ class lotsResultPage extends Component {
         >
           <img src="https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/20881922_1549813065064725_7654877585521587816_n.jpg" alt="" />
         </CardMedia>
-        <CardTitle title="蔡宗佑" subtitle="Room 1703" expandable={true} />
+        <CardTitle title={this.props.user.name} subtitle={this.props.room ? `${this.props.room.id}號房` :`正在努力幫你挑房間`} expandable={true} />
         <CardText expandable={true}>
-          您的房間在第三棟，1703房寢室，你的室友如下：
-              <Chip
-            onRequestDelete={this.handleRequestDelete}
-            onClick={this.handleTouchTap}
-          >
-            <Avatar src="https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/寶哥.jpg" />
-            陳寶桁
-              </Chip>
+          {this.props.room ? 
+            `您的房間在第三棟，${this.props.room.id}房寢室，你的室友如下:`:`正在努力幫你挑房間`}
+        {this.renderCard()}
         </CardText>
         <CardActions>
           <FlatButton label="打開房卡" onClick={this.handleExpand} />
