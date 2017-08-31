@@ -42,13 +42,12 @@ class BackPack extends Component {
         })
         //如果不是ms開頭就給他錯誤
         if(data){
-            console.log(data);
             let valid = data.charAt(0);
             if (valid === 'M') {
                 this.props.doMoney(this.props.user.teamId, data, 'add');
             }
         }else{
-            alert(`${this.state.result}`);
+            alert(`invalid QR`);
         }
       
     }

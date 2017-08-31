@@ -203,7 +203,7 @@ export const doneMission = (teamId, id, type) => dispatch => {
           case 'Y': dispatch({ type: types.BROADCAST_YELLOW_TEAM_PROGRESS, payload: null }); break;
         }
       } else {
-        Materialize.toast('任務已經解過了喔!', 3000)
+        Materialize.toast('任務已經解過了喔!', 3000);
       }
     } 
   }).catch(function (error) {
@@ -213,7 +213,6 @@ export const doneMission = (teamId, id, type) => dispatch => {
 
 export const doMoney = (teamId, id, type) => dispatch => {
   let mId= queryString.stringify({mId:id});
-  console.log(`doing money`)
   axios(`/api/money/${teamId}/${type}`, {
     method: 'put',
     headers: {
