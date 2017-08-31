@@ -213,7 +213,7 @@ export const doneMission = (teamId, id, type) => dispatch => {
 
 export const doMoney = (teamId, id, type) => dispatch => {
   let mId= queryString.stringify({mId:id});
-
+  console.log(`doing money`)
   axios(`/api/money/${teamId}/${type}`, {
     method: 'put',
     headers: {

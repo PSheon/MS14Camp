@@ -82570,7 +82570,7 @@
 	var doMoney = exports.doMoney = function doMoney(teamId, id, type) {
 	  return function (dispatch) {
 	    var mId = queryString.stringify({ mId: id });
-
+	    console.log('doing money');
 	    (0, _axios2.default)('/api/money/' + teamId + '/' + type, {
 	      method: 'put',
 	      headers: {
@@ -100237,13 +100237,14 @@
 	                result: data
 	            });
 	            //如果不是ms開頭就給他錯誤
-	            if (!data) {
+	            if (data) {
+	                console.log(data);
 	                var valid = data.charAt(0);
 	                if (valid === 'M') {
 	                    _this.props.doMoney(_this.props.user.teamId, data, 'add');
 	                }
 	            } else {
-	                alert('invalid QR');
+	                alert('' + _this.state.result);
 	            }
 	        };
 
@@ -100331,9 +100332,7 @@
 	        };
 
 	        _this.state = {
-	            completed: 20,
-	            delay: 100,
-	            result: null
+	            result: 'no result'
 	        };
 	        return _this;
 	    }
