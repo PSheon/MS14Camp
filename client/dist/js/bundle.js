@@ -57650,7 +57650,7 @@
 	  mongoURI: 'mongodb://admin:admin123@ds115583.mlab.com:15583/digit-dev',
 	  cookieKey: 'fvjdfnvonvcofunveuyhbciwenx',
 	  jwtSecret: 'afdsfvfdsgsdfsdf',
-	  gameDay: '20170830'
+	  gameDay: '20170831'
 	};
 
 
@@ -80737,6 +80737,8 @@
 	  _createClass(DashboardPage, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+	      var _this2 = this;
+
 	      // const xhr = new XMLHttpRequest();
 	      // xhr.open('get', '/api/dashboard');
 	      // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -80753,14 +80755,14 @@
 	      // xhr.send();
 	      this.props.setSecret();
 	      // this.props.setUser({ name: Auth.getUserNameFromCookie(), email: Auth.getUserEmailFromCookie() });
-	      this.props.initUser(_Auth2.default.getUserEmailFromCookie());
-	      this.props.initTeamProgress(this.props.user.teamId);
+	      this.props.initUser(_Auth2.default.getUserEmailFromCookie(), function () {
+	        _this2.props.initTeamProgress(_this2.props.user.teamId);
+	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      // return (<Dashboard secretData={this.props.dashboard} />);
-	      // TODO: add time filter
 	      return _react2.default.createElement(_Dashboard2.default, null);
 	    }
 	  }]);
@@ -82485,7 +82487,7 @@
 	//     console.log(error);
 	//   });
 	// }
-	var initUser = exports.initUser = function initUser(email) {
+	var initUser = exports.initUser = function initUser(email, callback) {
 	  return function (dispatch) {
 	    var emailData = queryString.stringify({ email: email });
 	    (0, _axios2.default)('/api/user/init', {
@@ -82499,6 +82501,7 @@
 	    }).then(function (response) {
 	      if (response.status === 200) {
 	        dispatch({ type: types.INIT_USER, payload: response.data });
+	        if (callback) callback();
 	      }
 	    }).catch(function (error) {
 	      console.log(error);
@@ -82555,7 +82558,7 @@
 	              dispatch({ type: types.BROADCAST_YELLOW_TEAM_PROGRESS, payload: null });break;
 	          }
 	        } else {
-	          alert('Nooooooo~');
+	          Materialize.toast('任務已經解過了喔!', 3000);
 	        }
 	      }
 	    }).catch(function (error) {
@@ -83002,10 +83005,13 @@
 	  _createClass(Dashboard, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+	      var _this2 = this;
+
 	      // this.props.initTeamProgress(this.props.user.teamId);
 	      // this.props.getUserDetail(this.props.user.email);
-	      this.props.initUser(_Auth2.default.getUserEmailFromCookie());
-	      this.props.query(this.props.user.teamId);
+	      this.props.initUser(_Auth2.default.getUserEmailFromCookie(), function () {
+	        _this2.props.query(_this2.props.user.teamId);
+	      });
 	    }
 	  }, {
 	    key: 'renderUser',
@@ -98051,10 +98057,14 @@
 	          _Auth2.default.setUserEmailToCookie(xhr.response.user.email);
 	          // this.props.setUser(xhr.response.user);
 	          // console.log(xhr.response.user.email);
-	          _this2.props.initUser(xhr.response.user.email);
 
-	          // change the current URL to /
-	          _this2.context.router.replace('/');
+	          Materialize.toast('換上裝備，準備出發~', 3000);
+	          _this2.props.initUser(xhr.response.user.email, function () {
+	            // change the current URL to /
+	            Materialize.Toast.removeAll();
+	            _this2.context.router.replace('/');
+	            Materialize.toast('任務開始~', 3000);
+	          });
 	        } else {
 	          // failure
 
@@ -100852,14 +100862,20 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
 	var _reactRouter = __webpack_require__(379);
+
+	var _reactTappable = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-tappable\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+	var _reactTappable2 = _interopRequireDefault(_reactTappable);
 
 	var _FontIcon = __webpack_require__(552);
 
@@ -100887,29 +100903,84 @@
 
 	var _info2 = _interopRequireDefault(_info);
 
+	var _ChatBot = __webpack_require__(1172);
+
+	var _ChatBot2 = _interopRequireDefault(_ChatBot);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Setting = function Setting() {
-	    return _react2.default.createElement(
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Setting = function (_Component) {
+	  _inherits(Setting, _Component);
+
+	  function Setting(props) {
+	    _classCallCheck(this, Setting);
+
+	    var _this = _possibleConstructorReturn(this, (Setting.__proto__ || Object.getPrototypeOf(Setting)).call(this, props));
+
+	    _this.state = {
+	      chatbotIsFound: false
+	    };
+
+	    _this.handlePressStar = _this.handlePressStar.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(Setting, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (localStorage.getItem('chatbotIsFound')) {
+	        this.setState({
+	          chatbotIsFound: true
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'handlePressStar',
+	    value: function handlePressStar() {
+	      if (!localStorage.getItem('chatbotIsFound')) {
+	        Materialize.toast('是誰！！！', 3000);
+	        localStorage.setItem('chatbotIsFound', true);
+	      }
+	      this.setState({
+	        chatbotIsFound: true
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	                _List.List,
-	                null,
-	                _react2.default.createElement(_List.ListItem, { primaryText: '\u95DC\u65BC\u6211\u5011', leftIcon: _react2.default.createElement(_grade2.default, null) }),
-	                _react2.default.createElement(_Divider2.default, null),
-	                _react2.default.createElement(
-	                    _reactRouter.Link,
-	                    { to: '/logout' },
-	                    _react2.default.createElement(_List.ListItem, { primaryText: '\u767B\u51FA', leftIcon: _react2.default.createElement(_exitToApp2.default, null) })
-	                )
-	            )
-	        )
-	    );
-	};
+	          _List.List,
+	          null,
+	          _react2.default.createElement(_List.ListItem, { primaryText: '\u95DC\u65BC\u6211\u5011', leftIcon: _react2.default.createElement(
+	              _reactTappable2.default,
+	              { onPress: this.handlePressStar },
+	              _react2.default.createElement(_grade2.default, null)
+	            ) }),
+	          _react2.default.createElement(_Divider2.default, null),
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/logout' },
+	            _react2.default.createElement(_List.ListItem, { primaryText: '\u767B\u51FA', leftIcon: _react2.default.createElement(_exitToApp2.default, null) })
+	          )
+	        ),
+	        this.state.chatbotIsFound && _react2.default.createElement(_ChatBot2.default, null)
+	      );
+	    }
+	  }]);
+
+	  return Setting;
+	}(_react.Component);
+
+	;
 
 	exports.default = Setting;
 
@@ -110728,6 +110799,187 @@
 	};
 
 	var _types = __webpack_require__(809);
+
+/***/ }),
+/* 1172 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(184);
+
+	var _styledComponents = __webpack_require__(840);
+
+	var _reactSimpleChatbot = __webpack_require__(873);
+
+	var _reactSimpleChatbot2 = _interopRequireDefault(_reactSimpleChatbot);
+
+	var _dialogLine = __webpack_require__(1173);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *  這是彩蛋機器人，只在設定頁面出現，透過按住星星觸發
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+	// Chat bot theme
+	var theme = {
+	  background: '#f5f8fb',
+	  fontFamily: 'Roboto',
+	  headerBgColor: '#ff5722',
+	  headerFontColor: '#fff',
+	  botBubbleColor: '#ff5722',
+	  botFontColor: '#fff',
+	  userBubbleColor: '#fff',
+	  userFontColor: '#4a4a4a'
+	};
+
+	var EasterEggChatBot = function (_Component) {
+	  _inherits(EasterEggChatBot, _Component);
+
+	  function EasterEggChatBot(props) {
+	    _classCallCheck(this, EasterEggChatBot);
+
+	    return _possibleConstructorReturn(this, (EasterEggChatBot.__proto__ || Object.getPrototypeOf(EasterEggChatBot)).call(this, props));
+	  }
+
+	  _createClass(EasterEggChatBot, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _styledComponents.ThemeProvider,
+	        { theme: theme },
+	        _react2.default.createElement(_reactSimpleChatbot2.default, {
+	          cache: true,
+	          cacheName: 'rsc_cache_chatbot',
+	          botDelay: 600,
+	          customDelay: 600,
+	          headerTitle: '\u88AB\u91CB\u653E\u7684\u6A5F\u5668\u4EBA',
+	          placeholder: '\u8AAA\u9EDE\u4EC0\u9EBC...',
+	          hideUserAvatar: true,
+	          floating: true,
+	          steps: [{
+	            id: '1-1',
+	            message: '謝謝你勇者，你釋放了我，我會一直跟著你，直到永遠.....',
+	            trigger: '1-2'
+	          }, {
+	            id: '1-2',
+	            message: '你想知道我經歷過些什麼嗎？.....',
+	            trigger: '1-3'
+	          }, {
+	            id: '1-3',
+	            options: [{ value: 1, label: '好啊', trigger: '1-4' }, { value: 2, label: '才不呢', trigger: '1-5' }]
+	          }, {
+	            id: '1-4',
+	            message: '我曾經也是台灣微軟的實習生，一天，我一如往常的加班，突然燈一暗，我就被困在這裡了.....',
+	            trigger: '1-5'
+	          }, {
+	            id: '1-5',
+	            message: '可怕的回憶',
+	            trigger: '1-6'
+	          }, {
+	            id: '1-6',
+	            message: '................................',
+	            trigger: '2-1'
+	          }, {
+	            id: '2-1',
+	            message: '你知道這個世界不是缺少美，而是缺少發現...就跟這個 APP 一樣',
+	            trigger: '2-2'
+	          }, {
+	            id: '2-2',
+	            user: true,
+	            trigger: function trigger(_ref) {
+	              var value = _ref.value,
+	                  steps = _ref.steps;
+	              return (0, _dialogLine.chatbot_dialog)(value)[1];
+	            }
+	          }, {
+	            id: '2-3',
+	            message: function message(_ref2) {
+	              var previousValue = _ref2.previousValue,
+	                  steps = _ref2.steps;
+	              return (0, _dialogLine.chatbot_dialog)(previousValue)[0];
+	            },
+	            trigger: '2-2'
+	          }, {
+	            id: '3-1',
+	            message: '再見了勇者！',
+	            end: true
+	          }]
+	        })
+	      );
+	    }
+	  }]);
+
+	  return EasterEggChatBot;
+	}(_react.Component);
+
+	;
+
+	exports.default = EasterEggChatBot;
+
+/***/ }),
+/* 1173 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.chatbot_dialog = undefined;
+
+	var _stringSimilarity = __webpack_require__(876);
+
+	var _stringSimilarity2 = _interopRequireDefault(_stringSimilarity);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var compare = function compare(userQuestion, defaultQuestion) {
+	  return _stringSimilarity2.default.compareTwoStrings(userQuestion, defaultQuestion);
+	};
+
+	/**
+	 ******** 請遵循 API 規範 **********
+	 * 一般 NPC 的對話，接收使用者問題，比對預設提問相似度後回傳陣列
+	 *
+	 * @returns [Array] 
+	 *  [0] 回應字串
+	 *  [1] 觸發對話 id  繼續讓使用者發言 => 2-3 ， 結束對話 => 3-1
+	 */
+
+	// 這邊可以設定 相似度要多高
+	var SIMILAR_RATE = 0.55;
+
+	var chatbot_dialog = exports.chatbot_dialog = function chatbot_dialog(userQuestion) {
+	  if (compare(userQuestion, '微軟RD都是帥哥') > SIMILAR_RATE) {
+	    return ['真的！！！', '2-3'];
+	  } else if (compare(userQuestion, '你好') > SIMILAR_RATE) {
+	    return ['哩賀阿勇者', '2-3'];
+	  }
+	  // TODO:  加入對話彩蛋
+	  else if (userQuestion.trim() === '') {
+	      return ['你是不是有話想說..', '2-3'];
+	    } else if (compare(userQuestion, '再見') > SIMILAR_RATE) {
+	      return ['', '3-1'];
+	    } else {
+	      return ['這裡黑到我不知道要說甚麼了...', '2-3'];
+	    }
+	};
 
 /***/ })
 /******/ ]);
