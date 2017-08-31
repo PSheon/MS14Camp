@@ -57652,7 +57652,7 @@
 	  mongoURI: 'mongodb://admin:admin123@ds115583.mlab.com:15583/digit-dev',
 	  cookieKey: 'fvjdfnvonvcofunveuyhbciwenx',
 	  jwtSecret: 'afdsfvfdsgsdfsdf',
-	  gameDay: '20170830'
+	  gameDay: '20170831'
 	};
 
 
@@ -80939,6 +80939,8 @@
 	  _createClass(DashboardPage, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+	      var _this2 = this;
+
 	      // const xhr = new XMLHttpRequest();
 	      // xhr.open('get', '/api/dashboard');
 	      // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -80955,14 +80957,14 @@
 	      // xhr.send();
 	      this.props.setSecret();
 	      // this.props.setUser({ name: Auth.getUserNameFromCookie(), email: Auth.getUserEmailFromCookie() });
-	      this.props.initUser(_Auth2.default.getUserEmailFromCookie());
-	      this.props.initTeamProgress(this.props.user.teamId);
+	      this.props.initUser(_Auth2.default.getUserEmailFromCookie(), function () {
+	        _this2.props.initTeamProgress(_this2.props.user.teamId);
+	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      // return (<Dashboard secretData={this.props.dashboard} />);
-	      // TODO: add time filter
 	      return _react2.default.createElement(_Dashboard2.default, null);
 	    }
 	  }]);
@@ -82685,7 +82687,7 @@
 	//     console.log(error);
 	//   });
 	// }
-	var initUser = exports.initUser = function initUser(email) {
+	var initUser = exports.initUser = function initUser(email, callback) {
 	  return function (dispatch) {
 	    var emailData = queryString.stringify({ email: email });
 	    (0, _axios2.default)('/api/user/init', {
@@ -82699,6 +82701,7 @@
 	    }).then(function (response) {
 	      if (response.status === 200) {
 	        dispatch({ type: types.INIT_USER, payload: response.data });
+	        if (callback) callback();
 	      }
 	    }).catch(function (error) {
 	      console.log(error);
@@ -82755,7 +82758,7 @@
 	              dispatch({ type: types.BROADCAST_YELLOW_TEAM_PROGRESS, payload: null });break;
 	          }
 	        } else {
-	          alert('Nooooooo~');
+	          Materialize.toast('任務已經解過了喔!', 3000);
 	        }
 	      }
 	    }).catch(function (error) {
@@ -83202,10 +83205,13 @@
 	  _createClass(Dashboard, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+	      var _this2 = this;
+
 	      // this.props.initTeamProgress(this.props.user.teamId);
 	      // this.props.getUserDetail(this.props.user.email);
-	      this.props.initUser(_Auth2.default.getUserEmailFromCookie());
-	      this.props.query(this.props.user.teamId);
+	      this.props.initUser(_Auth2.default.getUserEmailFromCookie(), function () {
+	        _this2.props.query(_this2.props.user.teamId);
+	      });
 	    }
 	  }, {
 	    key: 'renderUser',
@@ -98241,10 +98247,14 @@
 	          _Auth2.default.setUserEmailToCookie(xhr.response.user.email);
 	          // this.props.setUser(xhr.response.user);
 	          // console.log(xhr.response.user.email);
-	          _this2.props.initUser(xhr.response.user.email);
 
-	          // change the current URL to /
-	          _this2.context.router.replace('/');
+	          Materialize.toast('換上裝備，準備出發~', 3000);
+	          _this2.props.initUser(xhr.response.user.email, function () {
+	            // change the current URL to /
+	            Materialize.Toast.removeAll();
+	            _this2.context.router.replace('/');
+	            Materialize.toast('任務開始~', 3000);
+	          });
 	        } else {
 	          // failure
 

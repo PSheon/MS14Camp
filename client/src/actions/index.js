@@ -139,7 +139,7 @@ export const addYellowProgress = (add_block) => dispatch => {
 //     console.log(error);
 //   });
 // }
-export const initUser = (email) => dispatch => {
+export const initUser = (email, callback) => dispatch => {
   let emailData = queryString.stringify({ email: email });
   axios(`/api/user/init`, {
     method: 'put',
@@ -152,6 +152,7 @@ export const initUser = (email) => dispatch => {
   }).then((response) => {
     if (response.status === 200) {
       dispatch({ type: types.INIT_USER, payload: response.data });
+      if (callback) callback();
     }
   }).catch(function (error) {
     console.log(error);
@@ -200,7 +201,7 @@ export const doneMission = (teamId, id, type) => dispatch => {
           case 'Y': dispatch({ type: types.BROADCAST_YELLOW_TEAM_PROGRESS, payload: null }); break;
         }
       } else {
-        alert('Nooooooo~');
+        Materialize.toast('任務已經解過了喔!', 3000)
       }
     } 
   }).catch(function (error) {

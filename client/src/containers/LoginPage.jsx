@@ -71,11 +71,14 @@ class LoginPage extends Component {
         Auth.setUserEmailToCookie(xhr.response.user.email);
         // this.props.setUser(xhr.response.user);
         // console.log(xhr.response.user.email);
-        this.props.initUser(xhr.response.user.email);
         
-
-        // change the current URL to /
-        this.context.router.replace('/');
+        Materialize.toast('換上裝備，準備出發~', 3000);
+        this.props.initUser(xhr.response.user.email, () => {
+          // change the current URL to /
+          Materialize.Toast.removeAll();
+          this.context.router.replace('/');
+          Materialize.toast('任務開始~', 3000);
+        });
       } else {
         // failure
 

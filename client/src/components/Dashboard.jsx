@@ -17,8 +17,9 @@ class Dashboard extends Component {
   componentDidMount() {
     // this.props.initTeamProgress(this.props.user.teamId);
     // this.props.getUserDetail(this.props.user.email);
-    this.props.initUser(Auth.getUserEmailFromCookie());
-    this.props.query(this.props.user.teamId);
+    this.props.initUser(Auth.getUserEmailFromCookie(), () => {
+      this.props.query(this.props.user.teamId);
+    });
   }
   renderUser() {
     if (this.props.user) {
