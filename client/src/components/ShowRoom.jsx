@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+//import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
 import Avatar from 'material-ui/Avatar';
 import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
 import Chip from 'material-ui/Chip';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+//import injectTapEventPlugin from 'react-tap-event-plugin';
 
 var height = window.screen.height;
 var weight = window.screen.weight;
@@ -19,8 +21,10 @@ class lotsResultPage extends Component {
     };
   }
   componentDidMount() {
+    this.props.getRoom('陳寶桁');
+    console.log(this.props.user);
+    console.log(this.props.room);
     localStorage.setItem('ms_user_room_is_choice', true);
-    injectTapEventPlugin();
   }
   handleExpandChange = (expanded) => {
     this.setState({expanded: expanded});
@@ -73,10 +77,10 @@ class lotsResultPage extends Component {
   }
 }
 
-const mapStateToProp = (state) => {
-	return state
+function mapStateToProps({ room, user }) {
+  return { room, user};
 }
-export default lotsResultPage;
+export default connect(mapStateToProps, actions)(lotsResultPage);
 // export default connect(mapStateToProp,{
 //   userInfoAction:actions.userInfo,
 // })(landingPage)

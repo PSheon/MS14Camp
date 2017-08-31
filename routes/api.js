@@ -6,6 +6,7 @@ const _ = require('lodash');
 const Team = require('mongoose').model('Team');
 const Money = require('mongoose').model('Money');
 const User = require('mongoose').model('User');
+const Room = require('mongoose').model('Room');
 
 const router = new express.Router();
 
@@ -15,15 +16,124 @@ router.get('/dashboard', (req, res) => {
   });
 });
 
-router.get('/whatmyroom', (req, res) => {
-  res.status(200).json({
-    room: `You're live in Number ${Math.floor((Math.random() * 10) + 1)}.`
+router.get('/makeroom', (req, res) => {
+  //csv divide gender
+  let csvStream = fs.createReadStream(path.resolve('./static/csv', 'internList.csv'));
+  let male =[];
+  let female=[];
+  let rooms=[];
+  csv.fromStream(csvStream, { headers: ['Id', 'name', 'email', 'gender', 'isGod','isCap'] })
+    .on("data", (data) => {
+      if (data.gender==='M'&&data.isCap!=='true') {
+        let internData={
+          id:data.Id,
+          name:data.name,
+          gender:data.gender
+        }
+        male.push(internData);
+      } else if (data.gender === 'F' && data.isCap !== 'true'){
+        let internData = {
+          id: data.Id,
+          name: data.name,
+          gender: data.gender
+        }
+        female.push(internData);
+      }      
+    }
+    ).on("end", () => {
+      //console.log(female.length);
+      //console.log(male.length);
+      let number2 = parseInt(Math.random() * male.length);
+      //console.log(number2);
+      let mLotTimes = [
+        { id: '130', number: 7, member:[]}, { id: '807', number: 7, member:[]}, 
+        { id: '808', number: 7, member:[]}, { id: '809', number: 7, member:[]}
+      ];
+      let fLotTimes = [
+        { id: '107', number: 4, member: [] }, { id: '109', number: 4, member: [] }, { id: '110', number: 4, member: [] }, { id: '112', number: 4, member: [] }, { id: '113', number: 4, member: [] },
+        { id: '126', number: 5, member: [] }, { id: '127', number: 5, member: [] }, { id: '128', number: 5, member: [] }, { id: '129', number: 5, member: [] }, { id: '115', number: 5, member: [] },
+        { id: '116', number: 6, member: [] }];
+      mLotTimes.forEach((times)=>{
+        //console.log(times.number);
+        for(let i=0;i<times.number;i++){
+          let number= parseInt(_.random(0,male.length-1));
+          //console.log(number);
+          if(male[number]){
+            //console.log(male[number]);
+            times.member.push(male[number]);
+            male.splice(number, 1);
+          }  
+          //console.log(male.length);
+        }
+        //mlab save here
+        let room = new Room({
+          id: times.id,
+          name: '房間',
+          member: times.member
+        });
+        room.save((err) => {
+          if (err) throw err;
+        });
+      });
+      fLotTimes.forEach((times) => {
+        //console.log(times.number);
+        for (let i = 0; i < times.number; i++) {
+          let number = parseInt(_.random(0, female.length - 1));
+          //console.log(number);
+          if (female[number]) {
+            //console.log(female[number]);
+            times.member.push(female[number]);
+            female.splice(number, 1);
+          }
+        }
+
+        //mlab save here
+        console.log(times);
+        let room=new Room({
+          id:times.id,
+          name:'房間',
+          member:times.member
+        });
+        room.save((err) => {
+          if (err) throw err;
+        });
+      });
+      console.log(rooms.length);
+      //console.log(female);
+    });
+  Room.find({}, (err,room) => {
+    if (err) throw err;
+    res.status(200).json(room);
   });
+});
+
+router.post('/whatmyroom', (req, res) => {
+  let name = req.body.name;
+  Room.findOne({'member.name': req.body.name}, (err, room) => {
+    if (err) throw err;
+    console.log(room);
+    res.status(200).json(room);
+  })
+})
+
+router.get('/godr/room',(req,res)=>{
+  Room.find({},(err,room)=>{
+    if (err) throw err;
+    res.status(200).json(room);
+  })
+});
+
+router.get('/godr/delroom', (req, res) => {
+  Room.remove({}, (err, room) => {
+    if (err) throw err;
+    res.status(200).json(room);
+  })
 });
 
 
 router.post('/initteamprogress/:teamid', async (req, res) => {
   let teamId = req.params.teamid;
+
   const collections = await Team.findOne({ team: teamId });
   let missions = collections.missions || null;
   let tempRed = 0; let tempBlue = 0; let tempGreen = 0; let tempYellow = 0;
@@ -197,7 +307,7 @@ router.put('/user/init', (req, res) => {
   let csvStream = fs.createReadStream(path.resolve('./static/csv', 'internList.csv'));
   let updateData={}
  
-  csv.fromStream(csvStream, { headers: ['Id', 'name', 'email', 'gender', 'isGod'] })
+  csv.fromStream(csvStream, { headers: ['Id', 'name', 'email', 'gender', 'isGod','isCap'] })
     .on("data", (data) => {
       if (data.email === email) {
         updateData={

@@ -40,17 +40,19 @@ export const setSecret = () => dispatch => {
 //   dispatch({ type: types.SET_USER, payload: userObj });
 // }
 
-export const getRoom = () => dispatch => {
+export const getRoom = (name) => dispatch => {
+  let nameData = queryString.stringify({ name: name });
   axios('/api/whatmyroom', {
-    method: 'get',
+    method: 'post',
     headers: {
       'Content-type': 'application/x-www-form-urlencoded',
       'Authorization': `bearer ${Auth.getToken()}`
     },
+    data:nameData,
     responseType: 'json'
   }).then((response) => {
     if (response.status === 200) {
-      dispatch({ type: types.GET_ROOM, payload: response.data.room });
+      dispatch({ type: types.GET_ROOM, payload: response.data });
     }
   }).catch(function (error) {
     console.log(error);

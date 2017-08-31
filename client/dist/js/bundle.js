@@ -57650,7 +57650,7 @@
 	  mongoURI: 'mongodb://admin:admin123@ds115583.mlab.com:15583/digit-dev',
 	  cookieKey: 'fvjdfnvonvcofunveuyhbciwenx',
 	  jwtSecret: 'afdsfvfdsgsdfsdf',
-	  gameDay: '20170831'
+	  gameDay: '20170830'
 	};
 
 
@@ -82372,18 +82372,20 @@
 	//   dispatch({ type: types.SET_USER, payload: userObj });
 	// }
 
-	var getRoom = exports.getRoom = function getRoom() {
+	var getRoom = exports.getRoom = function getRoom(name) {
 	  return function (dispatch) {
+	    var nameData = queryString.stringify({ name: name });
 	    (0, _axios2.default)('/api/whatmyroom', {
-	      method: 'get',
+	      method: 'post',
 	      headers: {
 	        'Content-type': 'application/x-www-form-urlencoded',
 	        'Authorization': 'bearer ' + _Auth2.default.getToken()
 	      },
+	      data: nameData,
 	      responseType: 'json'
 	    }).then(function (response) {
 	      if (response.status === 200) {
-	        dispatch({ type: types.GET_ROOM, payload: response.data.room });
+	        dispatch({ type: types.GET_ROOM, payload: response.data });
 	      }
 	    }).catch(function (error) {
 	      console.log(error);
@@ -101242,9 +101244,11 @@
 
 	var _reactDom = __webpack_require__(37);
 
-	var _MuiThemeProvider = __webpack_require__(362);
+	var _reactRedux = __webpack_require__(184);
 
-	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
+	var _actions = __webpack_require__(808);
+
+	var actions = _interopRequireWildcard(_actions);
 
 	var _Card = __webpack_require__(769);
 
@@ -101264,9 +101268,7 @@
 
 	var _Chip2 = _interopRequireDefault(_Chip);
 
-	var _reactTapEventPlugin = __webpack_require__(225);
-
-	var _reactTapEventPlugin2 = _interopRequireDefault(_reactTapEventPlugin);
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -101275,6 +101277,10 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	//import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+
+	//import injectTapEventPlugin from 'react-tap-event-plugin';
 
 	var height = window.screen.height;
 	var weight = window.screen.weight;
@@ -101312,8 +101318,10 @@
 	  _createClass(lotsResultPage, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+	      this.props.getRoom('陳寶桁');
+	      console.log(this.props.user);
+	      console.log(this.props.room);
 	      localStorage.setItem('ms_user_room_is_choice', true);
-	      (0, _reactTapEventPlugin2.default)();
 	    }
 	  }, {
 	    key: 'render',
@@ -101364,10 +101372,13 @@
 	  return lotsResultPage;
 	}(_react.Component);
 
-	var mapStateToProp = function mapStateToProp(state) {
-	  return state;
-	};
-	exports.default = lotsResultPage;
+	function mapStateToProps(_ref) {
+	  var room = _ref.room,
+	      user = _ref.user;
+
+	  return { room: room, user: user };
+	}
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, actions)(lotsResultPage);
 	// export default connect(mapStateToProp,{
 	//   userInfoAction:actions.userInfo,
 	// })(landingPage)
@@ -102200,10 +102211,6 @@
 
 	var _reactDom = __webpack_require__(37);
 
-	var _MuiThemeProvider = __webpack_require__(362);
-
-	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
-
 	var _GridList = __webpack_require__(1040);
 
 	var _IconButton = __webpack_require__(663);
@@ -102229,6 +102236,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	//import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 
 	var styles = {
 	  root: {
