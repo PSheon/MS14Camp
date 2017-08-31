@@ -87843,7 +87843,7 @@
 	                    textAlign: 'right',
 	                    color: '#F9A825'
 	                  } },
-	                Math.floor(this.props.yellowMission / 9 * 100) + ' %'
+	                Math.floor(this.props.yellowMission / 10 * 100) + ' %'
 	              )
 	            )
 	          ),

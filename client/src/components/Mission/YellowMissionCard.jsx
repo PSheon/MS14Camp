@@ -36,7 +36,7 @@ class YellowMissionCard extends Component {
                 padding: 0,
                 textAlign: 'right',
                 color:'#F9A825'
-              }}>{`${Math.floor(this.props.yellowMission / 9 * 100)} %`}</h5>
+              }}>{`${Math.floor(this.props.yellowMission / 10 * 100)} %`}</h5>
           </div>
           </div>
           <div className="card-action">
