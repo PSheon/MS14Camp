@@ -23,9 +23,8 @@ class DashboardPage extends Component {
     // });
     // xhr.send();
     this.props.setSecret();
-    // this.props.setUser({ name: Auth.getUserNameFromCookie(), email: Auth.getUserEmailFromCookie() });
     this.props.initUser(Auth.getUserEmailFromCookie(), () => {
-      this.props.initTeamProgress(this.props.user.teamId);
+      this.props.initTeamProgress();
     });
   }
 

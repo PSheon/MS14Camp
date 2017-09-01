@@ -51,20 +51,20 @@ const fromBoss = {
 
 class Npc extends Component {
     constructor(props) {
-        super(props);
-        this.state = {
-            completed: 20,
-            delay: 100,
-            result: 'No result'
-        };
+      super(props);
+      this.state = {
+        completed: 20,
+        delay: 100,
+        result: '沒有結果，就像台灣薪資問題'
+      };
     }
     
     componentDidMount() {
-        // this.props.getUserDetail(this.props.user.email);
-        this.props.query(this.props.user.teamId);
+      // this.props.getUserDetail(this.props.user.email);
+      this.props.query(this.props.user.teamId);
     }
 
-    renderMission=()=> {
+    renderMission = () => {
         if (this.props.team) {
             let missionList=this.props.team.missions;
             
@@ -110,26 +110,26 @@ class Npc extends Component {
     }
     handleScan=(data)=> {
         this.setState({
-            result: data,
+          result: data,
         });
         
         
         if(data){
-            let valid = data.charAt(0);
-            if (valid !== 'M') {
-                let msg = data.split(',');
-                this.props.doneMission(this.props.user.teamId, msg[0], msg[1]);
-            }
+          let valid = data.charAt(0);
+          if (valid !== 'M') {
+            let msg = data.split(',');
+            this.props.doneMission(this.props.user.teamId, msg[0], msg[1]);
+          }
         }else{
-            alert(`invalid QR`);
+          alert(`invalid QR`);
         }
       
     }
     handleError=(err)=> {
-        console.error(err)
+      console.error(err)
     }
     openImageDialog=()=> {
-        this.refs.qrReader1.openImageDialog()
+      this.refs.qrReader1.openImageDialog();
     }
 
 
@@ -137,10 +137,10 @@ class Npc extends Component {
 
     render() {
         const previewStyle = {
-            height: '1px',
-            width: '1px',
-            marginLeft: 'auto',
-            marginRight: 'auto'
+          height: '1px',
+          width: '1px',
+          marginLeft: 'auto',
+          marginRight: 'auto'
         }
         return (
             <div>
@@ -188,8 +188,8 @@ class Npc extends Component {
 }
 
 
-function mapStateToProps({ team,user }) {
-    return { team,user };
+function mapStateToProps({ team, user }) {
+  return { team, user };
 }
 
 export default connect(mapStateToProps, actions)(Npc);

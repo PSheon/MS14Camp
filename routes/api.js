@@ -22,22 +22,48 @@ router.get('/whatmyroom', (req, res) => {
 });
 
 
-router.post('/initteamprogress/:teamid', async (req, res) => {
-  let teamId = req.params.teamid;
-  const collections = await Team.findOne({ team: teamId });
-  let missions = collections.missions || null;
+// router.post('/initteamprogress/:teamid', async (req, res) => {
+//   let teamId = req.params.teamid;
+//   const collections = await Team.findOne({ team: teamId });
+//   let missions = collections.missions || null;
+//   let tempRed = 0; let tempBlue = 0; let tempGreen = 0; let tempYellow = 0;
+//   if (missions != null) {
+//     for (let mission of missions) {
+//       switch (mission.mId[0]) {
+//         case 'R': tempRed += 1; break;
+//         case 'B': tempBlue += 1; break;
+//         case 'G': tempGreen += 1; break;
+//         case 'Y': tempYellow += 1; break;
+//       }
+//     }
+//   }
+
+//   res.status(200).json({
+//     //  Total nums of mission => red: 10 , blue: 7 , green: 12 , yellow: 9
+//     redProgress: parseInt(tempRed),
+//     blueProgress: parseInt(tempBlue),
+//     greenProgress: parseInt(tempGreen),
+//     yellowProgress: parseInt(tempYellow)
+//   });
+// });
+router.post('/initteamprogress', async (req, res) => {
+  // let teamId = req.params.teamid;
   let tempRed = 0; let tempBlue = 0; let tempGreen = 0; let tempYellow = 0;
-  if (missions != null) {
-    for (let mission of missions) {
-      switch (mission.mId[0]) {
-        case 'R': tempRed += 1; break;
-        case 'B': tempBlue += 1; break;
-        case 'G': tempGreen += 1; break;
-        case 'Y': tempYellow += 1; break;
+  const collections = await Team.find();
+  
+  for (let collection of collections) {
+    let missions = collection.missions || null;
+    if (missions != null) {
+      for (let mission of missions) {
+        switch (mission.mId[0]) {
+          case 'R': tempRed += 1; break;
+          case 'B': tempBlue += 1; break;
+          case 'G': tempGreen += 1; break;
+          case 'Y': tempYellow += 1; break;
+        }
       }
     }
   }
-
   res.status(200).json({
     //  Total nums of mission => red: 10 , blue: 7 , green: 12 , yellow: 9
     redProgress: parseInt(tempRed),
@@ -154,6 +180,7 @@ router.put('/donemission/:id/:type', (req, res) => {
       if (!isFound) res.json({ err: 'mission not found!' });
     });
 });
+
 //money
 router.put('/money/:id/:type', (req, res) => {
 
@@ -163,15 +190,15 @@ router.put('/money/:id/:type', (req, res) => {
   
       Money.findOne({ mSerial: mId }, (err,money) => {
         if (err) throw err;
-        if(money){
+        if (money) {
           let moneyTemp=0;
           Team.findOne({ team: teamId }, (err, team) => {
             if (err) throw err;
             if (reqType === 'add'&&!money.isExpired) {
               moneyTemp = team.money + money.amount;
-            }else if(reqType === 'minus' && !money.isExpired){
+            } else if (reqType === 'minus' && !money.isExpired){
               moneyTemp = team.money - money.amount;
-            }else{
+            } else {
               moneyTemp=team.money;
             }
 
@@ -220,14 +247,6 @@ router.put('/user/init', (req, res) => {
   });
 });
 //get user
-// router.post('/user', (req, res) => {
-//   let email =req.body.email;
-//   User.findOne({email:email}, (err, user) => {
-    
-//     if (err) throw err;
-//     res.status(200).json(user);
-//   });
-// });
 //delete all user
 router.get('/godu/delete', (req, res) => {
   User.remove({}, (err, user) => {

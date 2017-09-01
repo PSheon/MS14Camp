@@ -28,6 +28,7 @@ export const chatbot_dialog = userQuestion => {
     return ['你是不是有話想說..', '2-3'];
   }
   else if (compare(userQuestion, '再見') > SIMILAR_RATE) {
+    localStorage.removeItem('chatbotIsFound');
     return ['', '3-1'];
   } 
   else {
