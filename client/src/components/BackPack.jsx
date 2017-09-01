@@ -22,13 +22,10 @@ const money={
 
 class BackPack extends Component {
     constructor(props) {
-      super(props);
-
-      this.state = {
-        completed: 20,
-        delay: 100,
-        result:null,
-      };
+        super(props);
+        this.state = {
+            result:'no result'
+        };
     }
     
     componentDidMount() {
@@ -42,7 +39,7 @@ class BackPack extends Component {
             result: data,
         })
         //如果不是ms開頭就給他錯誤
-        if(!data){
+        if(data){
             let valid = data.charAt(0);
             if (valid === 'M') {
                 this.props.doMoney(this.props.user.teamId, data, 'add');

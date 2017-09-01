@@ -4,6 +4,8 @@ export const GET_MONEY = 'get_money';
 export const GET_INFO = 'get_info';
 export const DONE_MISSION = 'done_mission';
 export const DO_MONEY = 'do_money';
+export const GET_ERR = 'get_err';
+
 
 // progress
 export const SET_RED_TEAM_PROGRESS = 'set_red_team_progress';

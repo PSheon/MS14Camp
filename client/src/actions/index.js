@@ -40,17 +40,19 @@ export const setSecret = () => dispatch => {
 //   dispatch({ type: types.SET_USER, payload: userObj });
 // }
 
-export const getRoom = () => dispatch => {
+export const getRoom = (email) => dispatch => {
+  let emailData = queryString.stringify({ email: email });
   axios('/api/whatmyroom', {
-    method: 'get',
+    method: 'post',
     headers: {
       'Content-type': 'application/x-www-form-urlencoded',
       'Authorization': `bearer ${Auth.getToken()}`
     },
+    data:emailData,
     responseType: 'json'
   }).then((response) => {
     if (response.status === 200) {
-      dispatch({ type: types.GET_ROOM, payload: response.data.room });
+      dispatch({ type: types.GET_ROOM, payload: response.data });
     }
   }).catch((error) => {
     console.log(error);
@@ -207,7 +209,6 @@ export const doneMission = (teamId, id, type) => dispatch => {
 
 export const doMoney = (teamId, id, type) => dispatch => {
   let mId= queryString.stringify({mId:id});
-
   axios(`/api/money/${teamId}/${type}`, {
     method: 'put',
     headers: {
