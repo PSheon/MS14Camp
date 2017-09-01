@@ -14,8 +14,8 @@ import Divider from 'material-ui/Divider';
 
 //import injectTapEventPlugin from 'react-tap-event-plugin';
 
-var height = window.screen.height;
-var weight = window.screen.weight;
+let height = window.screen.height;
+let weight = window.screen.weight;
 
 class lotsResultPage extends Component {
   constructor(prop) {

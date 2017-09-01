@@ -24,7 +24,6 @@ export const BROADCAST_BLUE_TEAM_PROGRESS = 'broadcast_blue_team_progress';
 export const BROADCAST_GREEN_TEAM_PROGRESS = 'broadcast_green_team_progress';
 export const BROADCAST_YELLOW_TEAM_PROGRESS = 'broadcast_yellow_team_progress';
 
-export const SET_NPC = 'set_npc';
 
 export const SET_USER = 'set_user';
 export const GET_USER = 'get_user';

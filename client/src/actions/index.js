@@ -54,13 +54,34 @@ export const getRoom = (email) => dispatch => {
     if (response.status === 200) {
       dispatch({ type: types.GET_ROOM, payload: response.data });
     }
-  }).catch(function (error) {
+  }).catch((error) => {
     console.log(error);
   });
 }
 
-export const initTeamProgress = (teamId) => dispatch => {
-  axios(`/api/initteamprogress/${teamId}`, {
+// export const initTeamProgress = (teamId) => dispatch => {
+//   axios(`/api/initteamprogress/${teamId}`, {
+//     method: 'post',
+//     headers: {
+//       'Content-type': 'application/x-www-form-urlencoded',
+//       'Authorization': `bearer ${Auth.getToken()}`
+//     },
+//     responseType: 'json'
+//   }).then((response) => {
+//     // console.log(`response is `, response)
+//     if (response.status === 200) {
+//       dispatch({ type: types.SET_RED_TEAM_PROGRESS, payload: response.data.redProgress });
+//       dispatch({ type: types.SET_BLUE_TEAM_PROGRESS, payload: response.data.blueProgress });
+//       dispatch({ type: types.SET_GREEN_TEAM_PROGRESS, payload: response.data.greenProgress });
+//       dispatch({ type: types.SET_YELLOW_TEAM_PROGRESS, payload: response.data.yellowProgress });
+//     }
+//   }).catch(function (error) {
+//     console.log(error);
+//   });
+// }
+
+export const initTeamProgress = () => dispatch => {
+  axios('/api/initteamprogress', {
     method: 'post',
     headers: {
       'Content-type': 'application/x-www-form-urlencoded',
@@ -116,31 +137,7 @@ export const addYellowProgress = (add_block) => dispatch => {
   dispatch({ type: types.ADD_YELLOW_TEAM_PROGRESS, payload: add_block });
 }
 
-// change npc
-// export const setNpc = (npc_name) => dispatch => {
-//   dispatch({ type: types.SET_NPC, payload: npc_name });
-// }
-
-
 //alex
-// export const getUserDetail = (email) => dispatch => {
-//   let emailData = queryString.stringify({ email: email });
-//   axios('/api/user', {
-//     method: 'post',
-//     headers: {
-//       'Content-type': 'application/x-www-form-urlencoded',
-//       'Authorization': `bearer ${Auth.getToken()}`
-//     },
-//     data: emailData,
-//     responseType: 'json'
-//   }).then((response) => {
-//     if (response.status === 200) {
-//       dispatch({ type: types.GET_USER, payload: response.data });
-//     }
-//   }).catch(function (error) {
-//     console.log(error);
-//   });
-// }
 export const initUser = (email, callback) => dispatch => {
   let emailData = queryString.stringify({ email: email });
   axios(`/api/user/init`, {
@@ -162,7 +159,6 @@ export const initUser = (email, callback) => dispatch => {
 }
 
 export const query = (teamId) => dispatch => {
- 
   let team = queryString.stringify({ team: teamId });
   axios(`/api/query`, {
     method: 'post',
@@ -203,7 +199,7 @@ export const doneMission = (teamId, id, type) => dispatch => {
           case 'Y': dispatch({ type: types.BROADCAST_YELLOW_TEAM_PROGRESS, payload: null }); break;
         }
       } else {
-        Materialize.toast('任務已經解過了喔!', 3000);
+        Materialize.toast('騎士，這個任務不能解!', 3000)
       }
     } 
   }).catch(function (error) {

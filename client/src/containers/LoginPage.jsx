@@ -7,10 +7,6 @@ import LoginForm from '../components/AuthForm/LoginForm.jsx';
 
 
 class LoginPage extends Component {
-
-  /**
-   * Class constructor.
-   */
   constructor(props, context) {
     super(props, context);
 
@@ -58,6 +54,7 @@ class LoginPage extends Component {
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
         // success
+        Materialize.toast('換上裝備，準備出發~', 3000);
 
         // change the component-container state
         this.setState({
@@ -71,8 +68,8 @@ class LoginPage extends Component {
         Auth.setUserEmailToCookie(xhr.response.user.email);
         // this.props.setUser(xhr.response.user);
         // console.log(xhr.response.user.email);
-        
-        Materialize.toast('換上裝備，準備出發~', 3000);
+
+
         this.props.initUser(xhr.response.user.email, () => {
           // change the current URL to /
           //this.props.findGod(xhr.response.user.email);

@@ -17,10 +17,8 @@ const inputWrapper= {
   width: '100%'
 }
 const money={
-    width:'95%'
+  width:'95%'
 }
-
-
 
 class BackPack extends Component {
     constructor(props) {
@@ -31,8 +29,8 @@ class BackPack extends Component {
     }
     
     componentDidMount() {
-        // this.props.getUserDetail(this.props.user.email);
-        this.props.query(this.props.user.teamId);
+      // this.props.getUserDetail(this.props.user.email);
+      this.props.query(this.props.user.teamId);
     }
 
 
@@ -183,8 +181,8 @@ class BackPack extends Component {
 }
 
 
-function mapStateToProps({ team,user }) {
-    return { team,user };
+function mapStateToProps({ team, user }) {
+    return { team, user };
 }
 
 export default connect(mapStateToProps, actions)(BackPack);

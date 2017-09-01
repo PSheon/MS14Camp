@@ -13,7 +13,6 @@ import Basket from 'material-ui/svg-icons/action/shopping-basket';
 import keys from '../../../config/keys';
 import MissionBroadcast from './Mission/MissionBroadcast.jsx';
 import Auth from '../modules/Auth';
-import NavBar from './navBar.jsx';
 
 const gameDay = moment(keys.gameDay, "YYYYMMDD").format('ll')
 const today = moment.utc().format('ll')
