@@ -16,7 +16,7 @@ export default combineReducers({
   blueMission: blueMissionReducer,
   greenMission: greenMissionReducer,
   yellowMission : yellowMissionReducer,
-  npcName: npcReducer,
+  //npcName: npcReducer,
   secretData: secretDataReducer,
   room: roomReducer,
   form: reduxForm,

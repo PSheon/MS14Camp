@@ -9,8 +9,7 @@ import YellowMissionCard from './YellowMissionCard.jsx';
 import GreenMissionCard from './GreenMissionCard.jsx';
 
 class MissionCard extends Component {
-
-
+  
   render() {
     return (
       <div className="row">

@@ -104896,7 +104896,7 @@
 	  blueMission: _blueMissionReducer2.default,
 	  greenMission: _greenMissionReducer2.default,
 	  yellowMission: _yellowMissionReducer2.default,
-	  npcName: _npcReducer2.default,
+	  //npcName: npcReducer,
 	  secretData: _secretDataReducer2.default,
 	  room: _roomReducer2.default,
 	  form: _reduxForm.reducer,
