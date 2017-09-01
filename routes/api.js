@@ -186,6 +186,7 @@ router.put('/donemission/:id/:type', (req, res) => {
   let reqType = req.params.type;
   let teamId = req.body.team;
   //加入前一個任務的檢查
+  console.log(teamId);
 
   csv.fromStream(csvStream, {
     headers: [
