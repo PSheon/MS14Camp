@@ -5,6 +5,7 @@ export const GET_INFO = 'get_info';
 export const DONE_MISSION = 'done_mission';
 export const DO_MONEY = 'do_money';
 export const GET_ERR = 'get_err';
+export const FIND_GOD='find_god';
 
 
 // progress

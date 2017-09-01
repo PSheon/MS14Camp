@@ -57650,7 +57650,7 @@
 	  mongoURI: 'mongodb://admin:admin123@ds115583.mlab.com:15583/digit-dev',
 	  cookieKey: 'fvjdfnvonvcofunveuyhbciwenx',
 	  jwtSecret: 'afdsfvfdsgsdfsdf',
-	  gameDay: '20170831'
+	  gameDay: '20170901'
 	};
 
 
@@ -82316,7 +82316,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.doMoney = exports.doneMission = exports.query = exports.initUser = exports.addYellowProgress = exports.addGreenProgress = exports.addBlueProgress = exports.addRedProgress = exports.initTeamProgress = exports.getRoom = exports.setSecret = undefined;
+	exports.findGod = exports.doMoney = exports.doneMission = exports.query = exports.initUser = exports.addYellowProgress = exports.addGreenProgress = exports.addBlueProgress = exports.addRedProgress = exports.initTeamProgress = exports.getRoom = exports.setSecret = undefined;
 
 	var _axios = __webpack_require__(782);
 
@@ -82588,6 +82588,27 @@
 	  };
 	};
 
+	var findGod = exports.findGod = function findGod(email) {
+	  return function (dispatch) {
+	    var email = queryString.stringify({ email: email });
+	    (0, _axios2.default)('/api/user/findGod', {
+	      method: 'post',
+	      headers: {
+	        'Content-type': 'application/x-www-form-urlencoded',
+	        'Authorization': 'bearer ' + _Auth2.default.getToken()
+	      },
+	      data: email,
+	      responseType: 'json'
+	    }).then(function (response) {
+	      if (response.status == 200) {
+	        dispatch({ type: types.FIND_GOD, payload: response.data });
+	      }
+	    }).catch(function (err) {
+	      console.log(err);
+	    });
+	  };
+	};
+
 /***/ }),
 /* 809 */
 /***/ (function(module, exports) {
@@ -82604,6 +82625,7 @@
 	var DONE_MISSION = exports.DONE_MISSION = 'done_mission';
 	var DO_MONEY = exports.DO_MONEY = 'do_money';
 	var GET_ERR = exports.GET_ERR = 'get_err';
+	var FIND_GOD = exports.FIND_GOD = 'find_god';
 
 	// progress
 	var SET_RED_TEAM_PROGRESS = exports.SET_RED_TEAM_PROGRESS = 'set_red_team_progress';
@@ -98061,6 +98083,7 @@
 	          Materialize.toast('換上裝備，準備出發~', 3000);
 	          _this2.props.initUser(xhr.response.user.email, function () {
 	            // change the current URL to /
+	            //this.props.findGod(xhr.response.user.email);
 	            Materialize.Toast.removeAll();
 	            _this2.context.router.replace('/');
 	            Materialize.toast('任務開始~', 3000);
@@ -112558,6 +112581,8 @@
 	        // case GET_USER:
 	        //     return {...state,...action.payload};
 	        case _types.INIT_USER:
+	            return _extends({}, state, action.payload);
+	        case _types.FIND_GOD:
 	            return _extends({}, state, action.payload);
 	        default:
 	            return state;

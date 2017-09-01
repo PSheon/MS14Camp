@@ -442,4 +442,38 @@ router.get('/godm/delete', (req, res) => {
   });
 });
 
+
+//set almighty ones
+router.put('/user/findGod', (req, res) => {
+      let nameOfGod = req.body.email;
+      if (nameOfGod==='alMightyOnes@god.com'){
+        User.findOneAndUpdate({ email:nameOfGod },{alMightyOnes:true}, (err, user) => {
+          if (err) throw err;
+        });
+      }else{
+        User.findOneAndUpdate({ email: nameOfGod }, { alMightyOnes: false }, (err,user) => {
+          if (err) throw err;
+        });
+      }
+      User.findOne({ email: req.body.email }, (err, user) => {
+        // console.log(`user1 is `, user1);
+        res.status(200).json(user);
+      })
+});
+//for backend only
+router.post('/admin', (req, res) => {
+  let email=req.body.email;
+  if(email==='alMightyOnes@god.com'){
+    User.findOne({ email: req.body.email }, (err, user) => {
+      // console.log(`user1 is `, user1);
+      res.status(200).json(user);
+    });
+  }else{
+    User.findOne({ email: req.body.email }, (err, user) => {
+      // console.log(`user1 is `, user1);
+      res.status(200).json(user);
+    })
+  }
+});
+
 module.exports = router;

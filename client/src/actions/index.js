@@ -229,3 +229,22 @@ export const doMoney = (teamId, id, type) => dispatch => {
     console.log(error);
   });
 }
+
+export const findGod=(email)=>dispatch=>{
+  let email=queryString.stringify({email:email});
+  axios(`/api/user/findGod`,{
+    method: 'post',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    data: email,
+    responseType: 'json'
+  }).then((response)=>{
+    if(response.status==200){
+      dispatch({type:types.FIND_GOD,payload:response.data});
+    }
+  }).catch((err)=>{
+    console.log(err);
+  });
+}
