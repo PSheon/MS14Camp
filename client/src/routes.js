@@ -26,15 +26,11 @@ const routes = {
       getComponent: (location, callback) => {
         if (Auth.isUserAuthenticated()) {
           if (today !== gameDay) {
-            if (localStorage.getItem('ms_user_room_is_choice')) {
-              callback(null, ShowRoom);
-            } else {
               callback(null, GetRoom);
-            }
           }
-          callback(null, DashboardPage);
+              callback(null, DashboardPage);
         } else {
-          callback(null, SignUpPage);
+              callback(null, SignUpPage);
         }
       }
     },

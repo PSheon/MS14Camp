@@ -17,43 +17,31 @@ const styles = {
   },
   gridList: {
     width: 500,
-    height: '100vh',
+    height: '90vh',
     overflowY: 'auto',
+    marginBottom:'10vh'
   },
 };
 
 const tilesData = [
   {
-    img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/grace.jpg',
-    title: '想跟Grace住',
+    img: 'https://firebasestorage.googleapis.com/v0/b/msseed14th.appspot.com/o/cCkIzMB.jpg?alt=media&token=f04da375-a2b4-4ce2-b4df-561a64aae87f',
+    title: '無敵海景第一排套房',
     featured: true,
   },
   {
     img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/FB!.jpg',
-    title: '我是聖結石',
+    title: '經濟房',
   },
   {
     img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/675fb9bf5d8f864bffc7ef982527eaf4265596cb/%E5%90%B3%E4%BA%A6%E5%87%A1.jpg',
-    title: '我有freeStyle',
+    title: '宗痛套房',
   },
   {
     img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/675fb9bf5d8f864bffc7ef982527eaf4265596cb/%E7%A7%91p.jpg',
-    title: '我想找柯P',
+    title: '背山面海風水好套房',
     featured: true,
-  },
-  {
-    img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/675fb9bf5d8f864bffc7ef982527eaf4265596cb/%E5%B8%A5%E5%93%A5.jpg',
-    title: '想跟帥哥住',
-  },
-  {
-    img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/675fb9bf5d8f864bffc7ef982527eaf4265596cb/%E7%BE%8E%E5%A5%B3.jpeg',
-    title: '想跟美女住',
-  },
-  {
-    img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/675fb9bf5d8f864bffc7ef982527eaf4265596cb/%E8%BF%AA%E5%A3%AB%E5%B0%BC.jpg',
-    title: '我想住皇宮',
-    featured: true,
-  },
+  }
 ];
 
 /**
