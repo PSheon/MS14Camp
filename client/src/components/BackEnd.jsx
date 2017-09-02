@@ -143,7 +143,7 @@ class BackEnd extends Component {
         return (
             <div style={{
                 marginTop:'10px',
-                marginBottom:'15vh'
+                marginBottom:'10vh'
             }}>    
                 <Card>
                     <CardHeader

@@ -27,7 +27,7 @@ class Base extends Component {
       currentEmail:currentEmail
     };
   
-    console.log(this.state.currentEmail !== 'alMightyOnes@god.com');
+    //console.log(this.state.currentEmail !== 'alMightyOnes@god.com');
   }
  
   select = (index, name) => this.setState({ selectedIndex: index, selectedName: name });
