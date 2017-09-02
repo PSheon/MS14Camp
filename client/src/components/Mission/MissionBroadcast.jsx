@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Snackbar from 'material-ui/Snackbar';
 import io from 'socket.io-client';
 
-import actions from '../../actions';
+import * as actions from '../../actions';
 
 const socket = io();
 
@@ -29,6 +29,7 @@ class MissionBroadcast extends Component {
         message,
         open: true,
       });
+      this.props.initTeamProgress();
     });
 
     this.handleActionTouchTap = this.handleActionTouchTap.bind(this);
