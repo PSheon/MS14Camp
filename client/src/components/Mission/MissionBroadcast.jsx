@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Snackbar from 'material-ui/Snackbar';
 import io from 'socket.io-client';
 
+import actions from '../../actions';
+
 const socket = io();
 
 class MissionBroadcast extends Component {
@@ -69,4 +71,4 @@ class MissionBroadcast extends Component {
   }
 }
 
-export default MissionBroadcast;
+export default connect(null, actions)(MissionBroadcast);

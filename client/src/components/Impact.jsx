@@ -20,7 +20,7 @@ class About extends Component {
                 <div className="row">
                     <div className="col s12 m8 offset-m2 l6 offset-l3">
                         <h3>微軟新精神 im</h3>
-                        <div className="card-panel grey lighten-5 z-depth-1">
+                        <div className="card-panel red accent-2 white-text z-depth-1">
                             <div className="row valign-wrapper">
                                 <div className="col s12">
                                     <h3>Passion</h3>
@@ -28,7 +28,7 @@ class About extends Component {
                             </div>
                             <div className="row valign-wrapper">
                                 <div className="col s12">
-                                    <span className="black-text">
+                                    <span className="white-text">
                                         for our work, our customers and our partners
                                     </span>
                                 </div>
@@ -37,7 +37,7 @@ class About extends Component {
                     </div>
 
                     <div className="col s12 m8 offset-m2 l6 offset-l3">
-                        <div className="card-panel grey lighten-5 z-depth-1">
+                        <div className="card-panel green accent-2 white-text z-depth-1">
                             <div className="row valign-wrapper">
                                 <div className="col s12">
                                     <h3>Aspiration </h3>
@@ -45,7 +45,7 @@ class About extends Component {
                             </div>
                             <div className="row valign-wrapper">
                                 <div className="col s12">
-                                    <span className="black-text"> 
+                                    <span className="white-text"> 
                                     to achieve more for Taiwan, for Microsoft and for ourselves
                                     </span>
                                 </div>
@@ -54,7 +54,7 @@ class About extends Component {
                     </div>
 
                     <div className="col s12 m8 offset-m2 l6 offset-l3">
-                        <div className="card-panel grey lighten-5 z-depth-1">
+                        <div className="card-panel blue accent-2 white-text z-depth-1">
                             <div className="row valign-wrapper">
                                 <div className="col s12">
                                     <h3>Collaboration</h3>
@@ -62,7 +62,7 @@ class About extends Component {
                             </div>
                             <div className="row valign-wrapper">
                                 <div className="col s12">
-                                    <span className="black-text">
+                                    <span className="white-text">
                                       at the heart of the new model, orchestration across scenarios
                                     </span>
                                 </div>
@@ -71,7 +71,7 @@ class About extends Component {
                     </div>
 
                     <div className="col s12 m8 offset-m2 l6 offset-l3">
-                        <div className="card-panel grey lighten-5 z-depth-1">
+                        <div className="card-panel yellow accent-3 white-text z-depth-1">
                             <div className="row valign-wrapper">
                                 <div className="col s12">
                                     <h3>Trust</h3>
@@ -79,7 +79,7 @@ class About extends Component {
                             </div>
                             <div className="row valign-wrapper">
                                 <div className="col s12">
-                                    <span className="black-text">
+                                    <span className="white-text">
                                         each other and build trust across the organization
                                     </span>
                                 </div>

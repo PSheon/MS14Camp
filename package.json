@@ -11,7 +11,7 @@
     "server": "nodemon index.js",
     "bundle": "webpack",
     "dev": "concurrently \"yarn server\" \"yarn bundle\"",
-    "start": "NODE_ENV=production node index.js"
+    "start": "node index.js"
   },
   "author": "Paul",
   "license": "ISC",

@@ -123,18 +123,22 @@ export const initTeamProgress = () => dispatch => {
 
 export const addRedProgress = (add_block) => dispatch => {
   dispatch({ type: types.ADD_RED_TEAM_PROGRESS, payload: add_block });
+  dispatch({ type: types.BROADCAST_RED_TEAM_PROGRESS, payload: null });
 }
 
 export const addBlueProgress = ( add_block ) => dispatch => {
   dispatch({ type: types.ADD_BLUE_TEAM_PROGRESS, payload: add_block });
+  dispatch({ type: types.BROADCAST_BLUE_TEAM_PROGRESS, payload: null });
 }
 
 export const addGreenProgress = (add_block) => dispatch => {
   dispatch({ type: types.ADD_GREEN_TEAM_PROGRESS, payload: add_block });
+  dispatch({ type: types.BROADCAST_GREEN_TEAM_PROGRESS, payload: null });
 }
 
 export const addYellowProgress = (add_block) => dispatch => {
   dispatch({ type: types.ADD_YELLOW_TEAM_PROGRESS, payload: add_block });
+  dispatch({ type: types.BROADCAST_YELLOW_TEAM_PROGRESS, payload: null });
 }
 
 //alex
