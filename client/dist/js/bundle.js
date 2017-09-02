@@ -57754,7 +57754,6 @@
 	        case 'yellow':
 	          Color = '#FFF176';break;
 	      };
-	      _this.props.initTeamProgress();
 	      _this.setState({
 	        bgColor: Color,
 	        message: message,

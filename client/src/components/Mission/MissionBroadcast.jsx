@@ -24,7 +24,6 @@ class MissionBroadcast extends Component {
         case 'green': Color = '#43A047'; break;
         case 'yellow': Color = '#FFF176'; break;
       };
-      this.props.initTeamProgress();
       this.setState({
         bgColor: Color,
         message,
