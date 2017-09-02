@@ -87530,7 +87530,7 @@
 	                    null,
 	                    _react2.default.createElement(
 	                        'div',
-	                        { style: { paddingTop: '15px', paddingBottom: '40px' } },
+	                        { style: { paddingTop: '15px', paddingBottom: '99px' } },
 	                        this.renderMission()
 	                    ),
 	                    _react2.default.createElement(_reactQrReader2.default, {
