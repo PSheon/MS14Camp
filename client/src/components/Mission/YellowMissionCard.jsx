@@ -15,6 +15,7 @@ class YellowMissionCard extends Component {
 
   handleClick() {
     this.props.addYellowProgress(1);
+    this.props.initTeamProgress();
   }
 
   render() {

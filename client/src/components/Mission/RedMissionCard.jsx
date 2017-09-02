@@ -15,6 +15,7 @@ class RedMissionCard extends Component {
 
   handleClick() {
     this.props.addRedProgress(1);
+    this.props.initTeamProgress();
   }
 
   render() {

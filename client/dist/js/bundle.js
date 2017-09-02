@@ -57648,7 +57648,7 @@
 	  mongoURI: 'mongodb://admin:admin123@ds115583.mlab.com:15583/digit-dev',
 	  cookieKey: 'fvjdfnvonvcofunveuyhbciwenx',
 	  jwtSecret: 'afdsfvfdsgsdfsdf',
-	  gameDay: '20170901'
+	  gameDay: '20170902'
 	};
 
 
@@ -74753,6 +74753,7 @@
 	    key: 'handleClick',
 	    value: function handleClick() {
 	      this.props.addRedProgress(1);
+	      this.props.initTeamProgress();
 	    }
 	  }, {
 	    key: 'render',
@@ -75144,6 +75145,7 @@
 	    key: 'handleClick',
 	    value: function handleClick() {
 	      this.props.addBlueProgress(1);
+	      this.props.initTeamProgress();
 	    }
 	  }, {
 	    key: 'render',
@@ -75272,6 +75274,7 @@
 	    key: 'handleClick',
 	    value: function handleClick() {
 	      this.props.addYellowProgress(1);
+	      this.props.initTeamProgress();
 	    }
 	  }, {
 	    key: 'render',
@@ -75400,6 +75403,7 @@
 	    key: 'handleClick',
 	    value: function handleClick() {
 	      this.props.addGreenProgress(1);
+	      this.props.initTeamProgress();
 	    }
 	  }, {
 	    key: 'render',
