@@ -142,7 +142,7 @@ class Npc extends Component {
         return (
             <div>
                 <div>
-                <div style={{ paddingTop: '15px', paddingBottom: '40px' }}>
+                <div style={{ paddingTop: '15px', paddingBottom: '99px' }}>
                 {this.renderMission()}
                 </div>
 

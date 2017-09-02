@@ -66393,7 +66393,7 @@
 	var initTeam = exports.initTeam = function initTeam() {
 	  return function (dispatch) {
 	    for (var i = 1; i <= 9; i++) {
-	      console.log(i);
+	      //console.log(i);
 	      (0, _axios2.default)('/api/godt/init/t0' + i, {
 	        method: 'get',
 	        headers: {
@@ -75386,9 +75386,7 @@
 	  _createClass(BlueMissionCard, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      socket.on('news', function (data) {
-	        console.log(data);
-	      });
+	      socket.on('news', function (data) {});
 	    }
 	  }, {
 	    key: 'handleClick',
@@ -87731,7 +87729,7 @@
 	                    null,
 	                    _react2.default.createElement(
 	                        'div',
-	                        { style: { paddingTop: '15px', paddingBottom: '40px' } },
+	                        { style: { paddingTop: '15px', paddingBottom: '99px' } },
 	                        this.renderMission()
 	                    ),
 	                    _react2.default.createElement(_reactQrReader2.default, {

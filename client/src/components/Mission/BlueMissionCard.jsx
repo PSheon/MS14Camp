@@ -17,7 +17,7 @@ class BlueMissionCard extends Component {
 
   componentDidMount() {
     socket.on('news', (data) => {
-      console.log(data);
+      
     });
   }
 

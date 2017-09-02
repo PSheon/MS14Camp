@@ -108,10 +108,10 @@ router.get('/makeroom', (req, res) => {
 
 router.post('/whatmyroom', (req, res) => {
   let email = `<${req.body.email}>`;
-  console.log(email);
+  //console.log(email);
   Room.findOne({'member.email':email}, (err, room) => {
     if (err) throw err;
-    console.log(room);
+    //console.log(room);
     res.status(200).json(room);
   })
 })
@@ -210,7 +210,7 @@ router.put('/donemission/:id/:type', (req, res) => {
   let reqType = req.params.type;
   let teamId = req.body.team;
   //加入前一個任務的檢查
-  console.log(teamId);
+  //console.log(teamId);
 
   csv.fromStream(csvStream, {
     headers: [
@@ -346,7 +346,6 @@ router.put('/user/init', (req, res) => {
           isGod:data.isGod
         }
       } else if (email =="<alMightyOnes@god.com>"){
-        // password => imthegod
         updateData = {
           gender: 'GOD',
           teamId: -1,
