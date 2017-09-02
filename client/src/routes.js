@@ -28,7 +28,8 @@ const routes = {
       path: '/',
       getComponent: (location, callback) => {
         if (Auth.isUserAuthenticated()) {
-          if (today !== gameDay) {
+            let currentEmail=Auth.getUserEmailFromCookie();
+            if (today !== gameDay && currentEmail !=='alMightyOnes@god.com') {
               callback(null, GetRoom);
           }
               callback(null, DashboardPage);

@@ -20,12 +20,18 @@ const today = moment.utc().format('ll')
 class Base extends Component {
   constructor(props) {
     super(props);
+    let currentEmail = Auth.getUserEmailFromCookie();
     this.state = {
       selectedIndex: 0,
-      selectedName: '首頁'
+      selectedName: '首頁',
+      currentEmail:currentEmail
     };
+  
+    console.log(this.state.currentEmail !== 'alMightyOnes@god.com');
   }
+ 
   select = (index, name) => this.setState({ selectedIndex: index, selectedName: name });
+
   render(){
     return (
       <div>
@@ -42,7 +48,7 @@ class Base extends Component {
                 </div>
               </nav>
           </div>
-
+          {/*missionbroadcasting*/}
         <MissionBroadcast />
 
         <div className={(today === gameDay) ? 'container' : ''}>
@@ -50,13 +56,13 @@ class Base extends Component {
         </div>
       
         <footer style={{ position:'fixed',bottom:0,left:0,minHeight: '10vh' }}>
-          {(today === gameDay) ? null : (
+              {(today === gameDay || this.state.currentEmail === 'alMightyOnes@god.com') ? null : (
             <Link to="/logout">
               <button className="waves-effect waves-light btn" style={{ width: '100vw', minHeight: '10vh', lineHeight: '10vh' }}>登出</button>
             </Link>
           )}
         </footer>
-          {(today === gameDay) ? (
+        {(today === gameDay || this.state.currentEmail === 'alMightyOnes@god.com') ? (
           <Paper zDepth={1} style={{ position: 'fixed', bottom: 0, width: '100%' }}>
             <BottomNavigation selectedIndex={this.state.selectedIndex}>
               <IndexLink to="/" >
