@@ -70071,7 +70071,7 @@
 	var initTeam = exports.initTeam = function initTeam() {
 	  return function (dispatch) {
 	    for (var i = 1; i <= 9; i++) {
-	      console.log(i);
+	      //console.log(i);
 	      (0, _axios2.default)('/api/godt/init/t0' + i, {
 	        method: 'get',
 	        headers: {
@@ -75175,9 +75175,7 @@
 	  _createClass(BlueMissionCard, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      socket.on('news', function (data) {
-	        console.log(data);
-	      });
+	      socket.on('news', function (data) {});
 	    }
 	  }, {
 	    key: 'handleClick',

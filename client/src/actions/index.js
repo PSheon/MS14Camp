@@ -402,7 +402,7 @@ export const delTeam = () => dispatch => {
 
 export const initTeam = () => dispatch => {
   for(let i=1;i<=9;i++){
-    console.log(i);
+    //console.log(i);
     axios(`/api/godt/init/t0${i}`, {
       method: 'get',
       headers: {
