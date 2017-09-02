@@ -49,7 +49,7 @@ class Base extends Component {
           {this.props.children}
         </div>
       
-        <footer style={{ minHeight: '10vh' }}>
+        <footer style={{ position:'fixed',bottom:0,left:0,minHeight: '10vh' }}>
           {(today === gameDay) ? null : (
             <Link to="/logout">
               <button className="waves-effect waves-light btn" style={{ width: '100vw', minHeight: '10vh', lineHeight: '10vh' }}>登出</button>

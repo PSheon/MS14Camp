@@ -15,7 +15,7 @@ class GreenMissionCard extends Component {
 
   handleClick() {
     this.props.addGreenProgress(1);
-    this.props.initTeamProgress();
+    
   }
 
   render() {

@@ -11,6 +11,9 @@ import SettingPage from './containers/SettingPage.jsx';
 import Auth from './modules/Auth';
 import ShowRoom from './components/ShowRoom.jsx';
 import GetRoom from './components/GetRoom.jsx';
+import BackEndPage from './containers/BackEndPage.jsx';
+import AboutPage from './containers/AboutPage.jsx';
+import ImpactPage from './containers/ImpactPage.jsx';
 import keys from '../../config/keys';
 
 const gameDay = moment(keys.gameDay, "YYYYMMDD").format('ll')
@@ -26,15 +29,11 @@ const routes = {
       getComponent: (location, callback) => {
         if (Auth.isUserAuthenticated()) {
           if (today !== gameDay) {
-            if (localStorage.getItem('ms_user_room_is_choice')) {
-              callback(null, ShowRoom);
-            } else {
               callback(null, GetRoom);
-            }
           }
-          callback(null, DashboardPage);
+              callback(null, DashboardPage);
         } else {
-          callback(null, SignUpPage);
+              callback(null, SignUpPage);
         }
       }
     },
@@ -47,6 +46,10 @@ const routes = {
     {
       path: '/signup',
       component: SignUpPage
+    },
+    {
+      path: '/admin',
+      component: BackEndPage
     },
     {
       path: '/logout',
@@ -65,12 +68,20 @@ const routes = {
       component: NpcPage
     },
     {
+      path: '/about',
+      component: AboutPage
+    },
+    {
       path: '/backpack',
       component: BackPackPage
     },
     {
       path: '/setting',
       component: SettingPage
+    },
+    {
+      path: '/impact',
+      component: ImpactPage
     },
     {
       path: '/showroom',

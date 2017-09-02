@@ -1,4 +1,4 @@
-import { SET_USER ,GET_USER,INIT_USER} from '../actions/types';
+import { SET_USER ,GET_USER,INIT_USER,FIND_GOD} from '../actions/types';
 
 const initialState = {
     name: '勇者',
@@ -17,6 +17,8 @@ export default function (state = initialState , action) {
         // case GET_USER:
         //     return {...state,...action.payload};
         case INIT_USER:
+            return { ...state, ...action.payload };
+        case FIND_GOD:
             return { ...state, ...action.payload };
         default:
             return state;

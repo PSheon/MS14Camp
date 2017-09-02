@@ -123,18 +123,22 @@ export const initTeamProgress = () => dispatch => {
 
 export const addRedProgress = (add_block) => dispatch => {
   dispatch({ type: types.ADD_RED_TEAM_PROGRESS, payload: add_block });
+  dispatch({ type: types.BROADCAST_RED_TEAM_PROGRESS, payload: null });
 }
 
 export const addBlueProgress = ( add_block ) => dispatch => {
   dispatch({ type: types.ADD_BLUE_TEAM_PROGRESS, payload: add_block });
+  dispatch({ type: types.BROADCAST_BLUE_TEAM_PROGRESS, payload: null });
 }
 
 export const addGreenProgress = (add_block) => dispatch => {
   dispatch({ type: types.ADD_GREEN_TEAM_PROGRESS, payload: add_block });
+  dispatch({ type: types.BROADCAST_GREEN_TEAM_PROGRESS, payload: null });
 }
 
 export const addYellowProgress = (add_block) => dispatch => {
   dispatch({ type: types.ADD_YELLOW_TEAM_PROGRESS, payload: add_block });
+  dispatch({ type: types.BROADCAST_YELLOW_TEAM_PROGRESS, payload: null });
 }
 
 //alex
@@ -225,3 +229,197 @@ export const doMoney = (teamId, id, type) => dispatch => {
     console.log(error);
   });
 }
+
+//bacl end util
+
+//get room 
+export const makeRoom=()=>dispatch=>{
+  axios(`/api/makeroom`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.MAKE_ROOM, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+export const delRoom = () => dispatch => {
+  axios(`/api/godr/delroom`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.DEL_ROOM, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+export const queryRoom = () => dispatch => {
+  axios(`/api/godr/room`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.QUERY_ROOM, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+export const queryUser = () => dispatch => {
+  axios(`/api/user/all`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.QUERY_USER, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+export const delUser = () => dispatch => {
+  axios(`/api/godu/delete`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.DEL_USER, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+export const addMoney = () => dispatch => {
+  axios(`/api/godm/init`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.ADD_MONEY, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+export const delMoney = () => dispatch => {
+  axios(`/api/godm/delete`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.DEL_MONEY, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+export const queryMoney = () => dispatch => {
+  axios(`/api/godm/query`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.QUERY_MONEY, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+
+export const queryTeam = () => dispatch => {
+  axios(`/api/godt/query`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.QUERY_TEAM, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+export const delTeam = () => dispatch => {
+  axios(`/api/godt/delete`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.DEL_TEAM, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+export const initTeam = () => dispatch => {
+  for(let i=1;i<=9;i++){
+    console.log(i);
+    axios(`/api/godt/init/t0${i}`, {
+      method: 'get',
+      headers: {
+        'Content-type': 'application/x-www-form-urlencoded',
+        'Authorization': `bearer ${Auth.getToken()}`
+      },
+      responseType: 'json'
+    }).then((response) => {
+      if (response.status === 200) {
+        dispatch({ type: types.INIT_TEAM, payload: response.data });
+      }
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
+} 

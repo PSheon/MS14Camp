@@ -5,8 +5,16 @@ export const GET_INFO = 'get_info';
 export const DONE_MISSION = 'done_mission';
 export const DO_MONEY = 'do_money';
 export const GET_ERR = 'get_err';
-
-
+export const MAKE_ROOM= 'make_room';
+export const DEL_ROOM ='del_room';
+export const QUERY_ROOM = 'query_room';
+export const QUERY_USER = 'query_user';
+export const DEL_USER = 'del_user';
+export const ADD_MONEY = 'add_money';
+export const DEL_MONEY = 'del_money';
+export const QUERY_MONEY = 'query_money';
+export const QUERY_TEAM = 'query_team';
+export const INIT_TEAM = 'init_team';
 // progress
 export const SET_RED_TEAM_PROGRESS = 'set_red_team_progress';
 export const SET_BLUE_TEAM_PROGRESS = 'set_blue_team_progress';

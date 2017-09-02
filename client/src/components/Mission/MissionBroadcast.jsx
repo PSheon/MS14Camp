@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Snackbar from 'material-ui/Snackbar';
 import io from 'socket.io-client';
 
+import actions from '../../actions';
+
 const socket = io();
 
 class MissionBroadcast extends Component {
@@ -22,6 +24,7 @@ class MissionBroadcast extends Component {
         case 'green': Color = '#43A047'; break;
         case 'yellow': Color = '#FFF176'; break;
       };
+      this.props.initTeamProgress();
       this.setState({
         bgColor: Color,
         message,
@@ -69,4 +72,4 @@ class MissionBroadcast extends Component {
   }
 }
 
-export default MissionBroadcast;
+export default connect(null, actions)(MissionBroadcast);
