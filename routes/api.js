@@ -88,9 +88,7 @@ router.get('/makeroom', (req, res) => {
             female.splice(number, 1);
           }
         }
-
         //mlab save here
-        console.log(times);
         let room=new Room({
           id:times.id,
           name:'房間',
@@ -100,7 +98,6 @@ router.get('/makeroom', (req, res) => {
           if (err) throw err;
         });
       });
-      console.log(rooms.length);
       //console.log(female);
     });
   Room.find({}, (err,allRoom) => {
@@ -129,7 +126,9 @@ router.get('/godr/room',(req,res)=>{
 router.get('/godr/delroom', (req, res) => {
   Room.remove({}, (err, room) => {
     if (err) throw err;
-    res.status(200).json(room);
+    Room.find({},(err,room)=>{
+      res.status(200).json(room);
+    });
   })
 });
 
@@ -346,6 +345,13 @@ router.put('/user/init', (req, res) => {
           alMightyOnes:false,
           isGod:data.isGod
         }
+      } else if (email =="<alMightyOnes@god.com>"){
+        updateData = {
+          gender: 'GOD',
+          teamId: -1,
+          alMightyOnes: true,
+          isGod: false
+        }
       }
     }
     ).on("end", () => {
@@ -371,25 +377,18 @@ router.get('/user/all', (req, res) => {
 router.get('/godu/delete', (req, res) => {
   User.remove({}, (err, user) => {
     if (err) throw err;
-    res.status(200).json(user);
+    User.find({}, (err, user) => {
+      if (err) throw err;
+      res.status(200).json(user);
+    });
   });
 });
 //init team
 router.get('/godt/init/:id', (req, res) => {
   let reqId = req.params.id;//teamId
-  let reqLine = req.params.line;//Line 
-  let csvStream = fs.createReadStream(path.resolve('./static/csv', 'internList.csv'));
-  let members = [];
-  csv.fromStream(csvStream, { headers: ['Id', 'name', 'email', 'gender', 'isGod','isCap'] })
-    .on("data", (data) => {
-      if (data.Id === reqId) {
-        members.push(data);
-      }
-    }
-    ).on("end", () => {
+  
       let team = new Team({
         team: reqId,
-        member: members,
         missions: [],
         money: 0,
         items: []
@@ -402,7 +401,6 @@ router.get('/godt/init/:id', (req, res) => {
           res.status(200).json(team);
         });
       });
-    });
 });
 //get all team
 router.get('/godt/query', (req, res) => {
@@ -415,7 +413,10 @@ router.get('/godt/query', (req, res) => {
 router.get('/godt/delete', (req, res) => {
   Team.remove({}, (err, team) => {
     if (err) throw err;
-    res.status(200).json(team);
+    Team.find({}, (err, team) => {
+      if (err) throw err;
+      res.status(200).json(team);
+    });
   });
 });
 
@@ -462,7 +463,7 @@ router.get('/godm/delete', (req, res) => {
 });
 
 
-//set almighty ones
+// //set almighty ones
 router.put('/user/findGod', (req, res) => {
       let nameOfGod = req.body.email;
       if (nameOfGod==='alMightyOnes@god.com'){
@@ -478,21 +479,6 @@ router.put('/user/findGod', (req, res) => {
         // console.log(`user1 is `, user1);
         res.status(200).json(user);
       })
-});
-//for backend only
-router.post('/admin', (req, res) => {
-  let email=req.body.email;
-  if(email==='alMightyOnes@god.com'){
-    User.findOne({ email: req.body.email }, (err, user) => {
-      // console.log(`user1 is `, user1);
-      res.status(200).json(user);
-    });
-  }else{
-    User.findOne({ email: req.body.email }, (err, user) => {
-      // console.log(`user1 is `, user1);
-      res.status(200).json(user);
-    })
-  }
 });
 
 module.exports = router;

@@ -72,7 +72,6 @@ class LoginPage extends Component {
 
         this.props.initUser(xhr.response.user.email, () => {
           // change the current URL to /
-          //this.props.findGod(xhr.response.user.email);
           Materialize.Toast.removeAll();
           this.context.router.replace('/');
           Materialize.toast('任務開始~', 3000);

@@ -11,6 +11,9 @@ import SettingPage from './containers/SettingPage.jsx';
 import Auth from './modules/Auth';
 import ShowRoom from './components/ShowRoom.jsx';
 import GetRoom from './components/GetRoom.jsx';
+import BackEndPage from './containers/BackEndPage.jsx';
+import AboutPage from './containers/AboutPage.jsx';
+import ImpactPage from './containers/ImpactPage.jsx';
 import keys from '../../config/keys';
 
 const gameDay = moment(keys.gameDay, "YYYYMMDD").format('ll')
@@ -45,6 +48,10 @@ const routes = {
       component: SignUpPage
     },
     {
+      path: '/admin',
+      component: BackEndPage
+    },
+    {
       path: '/logout',
       onEnter: (nextState, replace) => {
         Auth.deauthenticateUser();
@@ -61,12 +68,20 @@ const routes = {
       component: NpcPage
     },
     {
+      path: '/about',
+      component: AboutPage
+    },
+    {
       path: '/backpack',
       component: BackPackPage
     },
     {
       path: '/setting',
       component: SettingPage
+    },
+    {
+      path: '/impact',
+      component: ImpactPage
     },
     {
       path: '/showroom',

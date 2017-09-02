@@ -30,15 +30,15 @@ const tilesData = [
     featured: true,
   },
   {
-    img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/master/FB!.jpg',
+    img: 'https://firebasestorage.googleapis.com/v0/b/msseed14th.appspot.com/o/162f000588ca3a5debbe.jpeg?alt=media&token=c26ed34c-a4ab-452e-a317-02e1f8e15f50',
     title: '經濟房',
   },
   {
-    img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/675fb9bf5d8f864bffc7ef982527eaf4265596cb/%E5%90%B3%E4%BA%A6%E5%87%A1.jpg',
+    img: 'https://firebasestorage.googleapis.com/v0/b/msseed14th.appspot.com/o/ahslobby.w710.h473.jpg?alt=media&token=056cc788-65c0-47ce-b20d-2b80e0ff4e28',
     title: '宗痛套房',
   },
   {
-    img: 'https://raw.githubusercontent.com/ChaoTzuJung/pictureAll/675fb9bf5d8f864bffc7ef982527eaf4265596cb/%E7%A7%91p.jpg',
+    img: 'https://firebasestorage.googleapis.com/v0/b/msseed14th.appspot.com/o/1369820117-2650633775.jpg?alt=media&token=16c8da41-e040-4ef1-9972-16d59a6e29fb',
     title: '背山面海風水好套房',
     featured: true,
   }

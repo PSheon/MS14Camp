@@ -226,21 +226,196 @@ export const doMoney = (teamId, id, type) => dispatch => {
   });
 }
 
-export const findGod=(email)=>dispatch=>{
-  let email=queryString.stringify({email:email});
-  axios(`/api/user/findGod`,{
-    method: 'post',
+//bacl end util
+
+//get room 
+export const makeRoom=()=>dispatch=>{
+  axios(`/api/makeroom`, {
+    method: 'get',
     headers: {
       'Content-type': 'application/x-www-form-urlencoded',
       'Authorization': `bearer ${Auth.getToken()}`
     },
-    data: email,
     responseType: 'json'
-  }).then((response)=>{
-    if(response.status==200){
-      dispatch({type:types.FIND_GOD,payload:response.data});
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.MAKE_ROOM, payload: response.data });
     }
-  }).catch((err)=>{
-    console.log(err);
+  }).catch(function (error) {
+    console.log(error);
   });
-}
+} 
+
+export const delRoom = () => dispatch => {
+  axios(`/api/godr/delroom`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.DEL_ROOM, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+export const queryRoom = () => dispatch => {
+  axios(`/api/godr/room`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.QUERY_ROOM, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+export const queryUser = () => dispatch => {
+  axios(`/api/user/all`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.QUERY_USER, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+export const delUser = () => dispatch => {
+  axios(`/api/godu/delete`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.DEL_USER, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+export const addMoney = () => dispatch => {
+  axios(`/api/godm/init`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.ADD_MONEY, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+export const delMoney = () => dispatch => {
+  axios(`/api/godm/delete`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.DEL_MONEY, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+export const queryMoney = () => dispatch => {
+  axios(`/api/godm/query`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.QUERY_MONEY, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+
+export const queryTeam = () => dispatch => {
+  axios(`/api/godt/query`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.QUERY_TEAM, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+export const delTeam = () => dispatch => {
+  axios(`/api/godt/delete`, {
+    method: 'get',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': `bearer ${Auth.getToken()}`
+    },
+    responseType: 'json'
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({ type: types.DEL_TEAM, payload: response.data });
+    }
+  }).catch(function (error) {
+    console.log(error);
+  });
+} 
+
+export const initTeam = () => dispatch => {
+  for(let i=1;i<=9;i++){
+    console.log(i);
+    axios(`/api/godt/init/t0${i}`, {
+      method: 'get',
+      headers: {
+        'Content-type': 'application/x-www-form-urlencoded',
+        'Authorization': `bearer ${Auth.getToken()}`
+      },
+      responseType: 'json'
+    }).then((response) => {
+      if (response.status === 200) {
+        dispatch({ type: types.INIT_TEAM, payload: response.data });
+      }
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
+} 
