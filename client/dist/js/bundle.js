@@ -37668,7 +37668,8 @@
 	    path: '/',
 	    getComponent: function getComponent(location, callback) {
 	      if (_Auth2.default.isUserAuthenticated()) {
-	        if (today !== gameDay) {
+	        var currentEmail = _Auth2.default.getUserEmailFromCookie();
+	        if (today !== gameDay && currentEmail !== 'alMightyOnes@god.com') {
 	          callback(null, _GetRoom2.default);
 	        }
 	        callback(null, _DashboardPage2.default);
@@ -53604,10 +53605,14 @@
 	      return _this.setState({ selectedIndex: index, selectedName: name });
 	    };
 
+	    var currentEmail = _Auth2.default.getUserEmailFromCookie();
 	    _this.state = {
 	      selectedIndex: 0,
-	      selectedName: '首頁'
+	      selectedName: '首頁',
+	      currentEmail: currentEmail
 	    };
+
+	    console.log(_this.state.currentEmail !== 'alMightyOnes@god.com');
 	    return _this;
 	  }
 
@@ -53652,7 +53657,7 @@
 	          _react2.default.createElement(
 	            'footer',
 	            { style: { position: 'fixed', bottom: 0, left: 0, minHeight: '10vh' } },
-	            today === gameDay ? null : _react2.default.createElement(
+	            today === gameDay || this.state.currentEmail === 'alMightyOnes@god.com' ? null : _react2.default.createElement(
 	              _reactRouter.Link,
 	              { to: '/logout' },
 	              _react2.default.createElement(
@@ -53662,7 +53667,7 @@
 	              )
 	            )
 	          ),
-	          today === gameDay ? _react2.default.createElement(
+	          today === gameDay || this.state.currentEmail === 'alMightyOnes@god.com' ? _react2.default.createElement(
 	            _Paper2.default,
 	            { zDepth: 1, style: { position: 'fixed', bottom: 0, width: '100%' } },
 	            _react2.default.createElement(
@@ -57665,7 +57670,7 @@
 	  mongoURI: 'mongodb://admin:admin123@ds115583.mlab.com:15583/digit-dev',
 	  cookieKey: 'fvjdfnvonvcofunveuyhbciwenx',
 	  jwtSecret: 'afdsfvfdsgsdfsdf',
-	  gameDay: '20170902'
+	  gameDay: '20170903'
 	};
 
 
